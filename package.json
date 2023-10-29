@@ -1,0 +1,19 @@
+{
+  "name": "toefl-modder-2",
+  "version": "1.0.0",
+  "description": "a word learning app",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "\"Electron\"",
+    "\"SQLite\"",
+    "\"Word\""
+  ],
+  "author": "Tesla_Tank",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^27.0.2"
+  }
+}
