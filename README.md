@@ -20,5 +20,7 @@
 
 ### Requirements
 npm init
+
 npm install electron --save-dev
-nom install elceljs
+
+np m install exceljs
