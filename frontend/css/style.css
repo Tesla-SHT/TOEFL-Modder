@@ -33,7 +33,7 @@ body {
 
 .main-menu:hover,
 nav.main-menu.expanded {
-    width: 250px;
+    width: max(10%,120px);
     overflow: visible;
 }
 
@@ -60,7 +60,7 @@ nav.main-menu.expanded {
 .main-menu li {
     position: relative;
     display: block;
-    width: 250px;
+    width: max(10%,120px);
 }
 
 .main-menu li>a {
@@ -75,7 +75,7 @@ nav.main-menu.expanded {
     -webkit-transform: translateZ(0) scale(1, 1);
     -webkit-transition: all .1s linear;
     transition: all .1s linear;
-
+    width:99%;
 }
 
 .main-menu .nav-icon {
@@ -92,7 +92,8 @@ nav.main-menu.expanded {
     position: relative;
     display: table-cell;
     vertical-align: middle;
-    width: 190px;
+    
+    width: max(10%,120px);
     font-family: 'Titillium Web', sans-serif;
 }
 

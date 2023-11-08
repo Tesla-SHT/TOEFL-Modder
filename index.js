@@ -1,6 +1,7 @@
-const { app, BrowserWindow, globalShortcut} = require('electron');
+const { app, BrowserWindow, globalShortcut } = require('electron');
 const path = require('path');
-
+const fs = require('fs');
+const ExcelJS = require('exceljs');
 let mainWindow;
 let appIcon;
 
@@ -10,13 +11,15 @@ function createWindow() {
     height: 600,
     webPreferences: {
       nodeIntegration: true,
-    },
+      enableRemoteModule: true,
+      contextIsolation: false,
+    }
   });
   mainWindow.setMenu(null);
   mainWindow.loadFile('index.html');
   globalShortcut.register('CommandOrControl+Shift+I', () => {
     mainWindow.webContents.openDevTools();
-  }); 
+  });
   globalShortcut.register('CommandOrControl+R', () => {
     mainWindow.reload();
   });
