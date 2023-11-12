@@ -19,8 +19,14 @@
   - 训练大语言模型，通过导入网络中的文本或音频来反向生成托福听力、阅读、写作的题目。如听力是先将音频转为文本，然后按照阅读的方式进行训练；写作提炼出文章的主题并给用户描述背景，让其进行陈述。（由于托福更注重做题的速度而非思维的深度，所以其题目用AI生成是具有可行性的） 
 
 ### Requirements
-npm init
 
-npm install electron --save-dev
+1. Open one cmd window:
 
-np m install exceljs
+   		- npm install
+
+   		- npm run dev
+
+2. Open another cmd window:
+
+   - npm start
+
