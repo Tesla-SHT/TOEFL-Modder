@@ -37,7 +37,7 @@ const newNote = () => {
 const keyword = ref('')
 
 // 监听搜索框输入，搜索便签
-watch(keyword, async function() {
+watch(keyword, async function () {
     notesData.value = []
     if (keyword.value == '') {
         notesData.value = JSON.parse(JSON.stringify(completeData))
@@ -57,7 +57,8 @@ watch(keyword, async function() {
         <NotesList class="notes-list" :data="notesData" @selected="selected"></NotesList>
         <div class="mask"></div>
         <Search class="search-bar" placeholder="搜索..." v-model="keyword"></Search>
-        <RoundButton class="new-note-button" icon="add" color="#fcc000" selectedColor="#d4a827" iconColor="white" size="50" @click="newNote"></RoundButton>
+        <RoundButton class="new-note-button" icon="add" color="#fcc000" selectedColor="#d4a827" iconColor="white" size="50"
+            @click="newNote"></RoundButton>
     </div>
 </template>
 
@@ -68,6 +69,7 @@ watch(keyword, async function() {
     top: 50px;
     position: absolute;
 }
+
 .mask {
     position: absolute;
     left: 200px;
@@ -76,6 +78,7 @@ watch(keyword, async function() {
     height: 65px;
     background-color: #f9f9f9;
 }
+
 .placeholder {
     margin-top: 0px;
     height: 65px;
@@ -85,5 +88,4 @@ watch(keyword, async function() {
     position: absolute;
     right: 25px;
     bottom: 25px;
-}
-</style>
+}</style>

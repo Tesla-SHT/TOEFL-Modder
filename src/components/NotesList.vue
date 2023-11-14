@@ -1,6 +1,9 @@
 <script setup>
 import Icon from './Icon.vue'
+import { ref, onMounted, watch } from 'vue';
+import { useSettings } from '/src/composables/settings'; // Assuming you have a composable for settings
 
+const settings = useSettings(); // Use the composable to get the settings
 const { data, clicked } = defineProps(['data', 'clicked'])
 </script>
 
@@ -11,6 +14,8 @@ const { data, clicked } = defineProps(['data', 'clicked'])
             <p class="content">{{ item.content }}</p>
             <Icon class="delete-icon" name="delete" color="black" selectedColor="#cc0000"></Icon>
         </div>
+    </div>
+    <div class="content" :style="{ fontSize: `${settings.fontSize}px` }">
     </div>
 </template>
 
@@ -53,12 +58,15 @@ const { data, clicked } = defineProps(['data', 'clicked'])
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
 .content {
     margin-top: 6px;
     margin-left: 15px;
     margin-right: 50px;
 }
-.title, .content {
+
+.title,
+.content {
     display: block;
     word-break: keep-all;
     white-space: nowrap;
