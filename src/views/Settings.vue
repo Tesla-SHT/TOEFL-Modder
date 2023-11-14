@@ -1,18 +1,22 @@
-<!-- 设置界面还没开始写 -->
-<script setup>
-import { ref, watch } from 'vue';
-
-const fontSize = ref(14); // Default font size
-
-</script>
-
+<!-- Setting.vue -->
 <template>
-    <div>
-      <label for="fontSize">Font Size:</label>
-      <input type="number" v-model="fontSize" id="fontSize" />
-      
-    </div>
-  </template>
-  
-<style scoped>
-</style>
+  <div>
+    <label>字号设置：</label>
+    <input type="number" v-model="fontSize" @input="updateFontSize" />
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      fontSize: this.$store.state.fontSize
+    }
+  },
+  methods: {
+    updateFontSize() {
+      this.$store.commit('setFontSize', this.fontSize)
+    }
+  }
+}
+</script>

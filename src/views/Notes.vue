@@ -53,10 +53,14 @@ watch(keyword, async function () {
 
 <template>
     <div class="container">
+
         <div class="placeholder"></div>
         <NotesList class="notes-list" :data="notesData" @selected="selected"></NotesList>
         <div class="mask"></div>
         <Search class="search-bar" placeholder="搜索..." v-model="keyword"></Search>
+        <div>
+            <p :style="{ fontSize: $store.state.fontSize + 'px' }">示例文本</p>
+        </div>
         <RoundButton class="new-note-button" icon="add" color="#fcc000" selectedColor="#d4a827" iconColor="white" size="50"
             @click="newNote"></RoundButton>
     </div>
@@ -88,4 +92,5 @@ watch(keyword, async function () {
     position: absolute;
     right: 25px;
     bottom: 25px;
-}</style>
+}
+</style>
