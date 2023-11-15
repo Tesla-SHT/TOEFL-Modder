@@ -3,6 +3,7 @@
   <div>
     <label>字号设置：</label>
     <input type="number" v-model="fontSize" @input="updateFontSize" />
+    <n-button>naive-ui</n-button>
   </div>
 </template>
 
