@@ -22,9 +22,9 @@ const back = () => {
 
 const save = () => {
     if (index == -1) { // 路径为-1则表示新建便签
-        $data.insertOne({...note})
+        $data.insertOne({ ...note })
     } else {
-        $data.updateOne(index, {...note})
+        $data.updateOne(index, { ...note })
     }
     router.back()
 }
@@ -32,16 +32,14 @@ const save = () => {
 
 <template>
     <div class="container">
-        <div class="title-container">
-            <input class="title" v-model="note.title" placeholder="输入标题..." />
-        </div>
-        <div class="content-container">
-            <textarea class="content" v-model="note.content"></textarea>
-        </div>
-        <div class="button-container">
-            <button class="button-left" id="cancel" @click="back">取消</button>
-            <button class="button-right" id="save" @click="save">保存</button>
-        </div>
+        <n-card class="WordCard" hoverable>
+            <div>
+
+            </div> 
+            <n-collapse-transition :show="true">
+                感知度，方法论，组合拳，引爆点，点线面，精细化，差异化，平台化，结构化，影响力，耦合性，便捷性，一致性，端到端，短平快，护城河，体验感，颗粒度
+            </n-collapse-transition>
+        </n-card>
     </div>
 </template>
 
@@ -50,7 +48,16 @@ const save = () => {
     overflow-y: hidden;
 }
 
-.title-container {
+.WordCard {
+    width: 90%;
+    height: 80%;
+    margin: 5% 5%;
+    border-radius: 10px;
+    background-color: white;
+
+}
+
+/*.title-container {
     margin-top: 5px;
     margin-left: 0px;
     margin-right: 0px;
@@ -128,5 +135,5 @@ button {
 }
 #save:hover {
     background-color: #d4a827;
-}
+}*/
 </style>

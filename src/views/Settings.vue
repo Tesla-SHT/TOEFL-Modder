@@ -1,19 +1,8 @@
 <!-- Setting.vue -->
-<template>
-  <div>
-    <div class="container">
-      <label>字号设置：</label>
-      <n-input-number v-model:value="fontSize" @input="updateFontSize">
-        <template #suffix>
-          %
-        </template>
-      </n-input-number>
-    </div>
-    <n-button>naive-ui</n-button>
-  </div>
-</template>
 
 <script>
+import Adjustzoom from '../components/Adjustzoom.vue'
+
 export default {
   Setup() {
     return {
@@ -29,6 +18,22 @@ export default {
     updateFontSize() {
       this.$store.commit('setFontSize', this.fontSize)
     }
+  },
+  components:{
+    Adjustzoom
   }
 }
 </script>
+
+<template>
+  <div class="container">
+    <label>字号设置：</label>
+    <n-input-number v-model:value="fontSize" @input="updateFontSize">
+      <template #suffix>
+        %
+      </template>
+    </n-input-number>
+  </div>
+  <n-button>naive-ui</n-button>
+  <Adjustzoom></Adjustzoom>
+</template>
