@@ -6,7 +6,9 @@ import Navigator from './components/Navigator.vue'
 import Icon from './components/Icon.vue'
 
 const router = useRouter()
-
+const back = () => {
+  router.back()
+}
 const pages = reactive([
   {
     name: '便签',
@@ -33,6 +35,8 @@ const changePage = (pageIndex) => {
 const closeWindow = () => {
   $app.close()
 }
+
+
 </script>
 
 <template>
@@ -42,6 +46,10 @@ const closeWindow = () => {
       <Navigator class="navigator" :pages="pages" :defaultIndex="defaultIndex" @selected="changePage"></Navigator>
     </div>
     <div class="status-bar">
+      <svg class="backicon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" style="height:1.5em;width:3em;margin-top:15px;
+  -webkit-app-region: no-drag;" @click="back">
+        <path d="M11.67 3.87L9.9 2.1L0 12l9.9 9.9l1.77-1.77L3.54 12z" fill="currentColor"></path>
+      </svg>
       <Icon class="close-button" name="close" color="black" selectedColor="red" @click="closeWindow"></Icon>
     </div>
     <div class="content-panel">
@@ -51,6 +59,9 @@ const closeWindow = () => {
 </template>
 
 <style scoped>
+.backicon:hover path{
+  fill: #70d3f4;
+}
 .container {
   display: inline;
   background-color: white;
@@ -67,6 +78,7 @@ const closeWindow = () => {
   -webkit-app-region: drag;
   /* 允许用户进行窗口拖动 */
 }
+
 .app-title {
   height: 49px;
 
@@ -77,6 +89,7 @@ const closeWindow = () => {
 
   color: black;
 }
+
 .navigator {
   -webkit-app-region: no-drag;
   /* 禁止拖动 */
@@ -106,6 +119,7 @@ const closeWindow = () => {
 
   -webkit-app-region: drag;
 }
+
 .close-button {
   width: 23px;
   height: 23px;

@@ -33,11 +33,10 @@ const save = () => {
 <template>
     <div class="container">
         <n-card class="WordCard" hoverable>
-            <div>
-
-            </div> 
+            <div style="z-index:10000;display:flex;position:relative">
+            </div>
             <n-collapse-transition :show="true">
-                感知度，方法论，组合拳，引爆点，点线面，精细化，差异化，平台化，结构化，影响力，耦合性，便捷性，一致性，端到端，短平快，护城河，体验感，颗粒度
+
             </n-collapse-transition>
         </n-card>
     </div>
