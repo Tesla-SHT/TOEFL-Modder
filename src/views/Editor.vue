@@ -33,11 +33,62 @@ const save = () => {
 <template>
     <div class="container">
         <n-card class="WordCard" hoverable>
-            <div style="z-index:10000;display:flex;position:relative">
+            <div class="word-title">
+                <h1>Word</h1>
             </div>
-            <n-collapse-transition :show="true">
+            <br>
+            <n-divider />
+            <br>
+            <div class="word-content">
+                <n-grid cols="1 300:2 500:3" :x-gap="12" :y-gap="16">
+                    <n-gi>
+                        <n-button size="large" strong secondary >
+                            Defaultddddddd
+                        </n-button>
+                    </n-gi>
+                    <n-gi>
+                        <n-button size="large" strong secondary >
+                            Defaultddddddd
+                        </n-button>
+                    </n-gi>
+                    <n-gi>
+                        <n-button size="large" strong secondary >
+                            Defaultddddddd
+                        </n-button>
+                    </n-gi>
+                    <n-gi>
+                        <n-button size="large" strong secondary >
+                            Defaultddddddd
+                        </n-button>
+                    </n-gi>
+                    <n-gi>
+                        <n-button size="large" strong secondary >
+                            Defaultddddddd
+                        </n-button>
+                    </n-gi>
+                    <n-gi>
+                        <n-button size="large" strong secondary >
+                            Defaultddddddd
+                        </n-button>
+                    </n-gi>
+                    <n-gi>
+                        <n-button size="large" strong secondary >
+                            Defaultddddddd
+                        </n-button>
+                    </n-gi>
+                    <n-gi>
+                        <n-button size="large" strong secondary >
+                            Defaultddddddd
+                        </n-button>
+                    </n-gi>
+                    <n-gi>
+                        <n-button size="large" strong secondary >
+                            Defaultddddddd
+                        </n-button>
+                    </n-gi>
+                </n-grid>
 
-            </n-collapse-transition>
+            </div>
         </n-card>
     </div>
 </template>
@@ -56,6 +107,34 @@ const save = () => {
 
 }
 
+.word-title {
+    width: 100%;
+    height: 10%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 23px;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background-color: white;
+
+}
+.word-content{
+    width: 100%;
+    margin: auto;
+    padding: 0;
+    text-align: center;
+    font-size: 23px;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background-color: white;
+    overflow-y: hidden;
+    vertical-align: middle;
+}
 /*.title-container {
     margin-top: 5px;
     margin-left: 0px;

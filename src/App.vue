@@ -42,11 +42,12 @@ const closeWindow = () => {
 <template>
   <div class="container">
     <div class="side-panel">
-      <h1 class="app-title" style="margin-bottom:38px">TOEFL &nbsp; Modder</h1>
+      <h1 class="app-title" style="margin-bottom:70px">TOEFL &nbsp; Modder</h1>
       <Navigator class="navigator" :pages="pages" :defaultIndex="defaultIndex" @selected="changePage"></Navigator>
     </div>
     <div class="status-bar">
-      <svg class="backicon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" style="height:1.5em;width:3em;margin-top:15px;
+      <svg class="backicon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 24 24" style="height:1.5em;width:3em;margin-top:15px;
   -webkit-app-region: no-drag;" @click="back">
         <path d="M11.67 3.87L9.9 2.1L0 12l9.9 9.9l1.77-1.77L3.54 12z" fill="currentColor"></path>
       </svg>
@@ -59,9 +60,10 @@ const closeWindow = () => {
 </template>
 
 <style scoped>
-.backicon:hover path{
+.backicon:hover path {
   fill: #70d3f4;
 }
+
 .container {
   display: inline;
   background-color: white;

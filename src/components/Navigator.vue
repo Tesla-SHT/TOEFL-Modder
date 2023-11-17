@@ -38,7 +38,7 @@ const changeIndex = (index) => {
 }
 .item {
     margin: 5px;
-
+    margin-top:10px;
     height: 40px;
 
     border-radius: 7px;

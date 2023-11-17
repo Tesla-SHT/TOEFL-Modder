@@ -15,6 +15,7 @@ import {
     NCollapseTransition,
     NIcon
 } from 'naive-ui';
+import { largerSize } from 'naive-ui/es/_utils';
 
 const naive = create({
     components:
@@ -31,7 +32,9 @@ const naive = create({
             NCollapseTransition,NIcon],
     setup() {
         return {
-            fontSize: this.$store.state.fontSize
+            fontSize: this.$store.state.fontSize,
+            large,tiny,small,medium,largeSize,smallSize,mediumSize
+            
         };
     }
 })
