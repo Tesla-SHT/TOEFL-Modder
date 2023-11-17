@@ -62,7 +62,7 @@ const save = () => {
     height: 50px;
 
     text-align: center;
-    font-size: 100px;
+    font-size:23px;
     font-weight: bold;
 
     border: none;
