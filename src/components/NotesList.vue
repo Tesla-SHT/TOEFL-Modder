@@ -15,8 +15,6 @@ const { data, clicked } = defineProps(['data', 'clicked'])
             <Icon class="delete-icon" name="delete" color="black" selectedColor="#cc0000"></Icon>
         </div>
     </div>
-    <div class="content" :style="{ fontSize: `${settings.fontSize}px` }">
-    </div>
 </template>
 
 <style scoped>
