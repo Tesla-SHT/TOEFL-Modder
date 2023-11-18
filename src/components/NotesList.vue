@@ -11,7 +11,8 @@ const { data, clicked } = defineProps(['data', 'clicked'])
     <div class="container">
         <div class="item" v-for="item, index in data" @click="$emit('selected', $event, index)">
             <div class="title">{{ item.title }}</div>
-            <p class="content">{{ item.content }}</p>
+            <p class="learn-day">{{ item.day }}</p>
+            <p class="learn-word">{{ item.content }}</p>
             <Icon class="delete-icon" name="delete" color="black" selectedColor="#cc0000"></Icon>
         </div>
     </div>

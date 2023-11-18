@@ -1,1 +1,18 @@
-[{"title":"d","content":"d"},{"title":"b","content":"b"}]
+[
+    {
+        "title": "College Vocabulary",
+        "content": "You have learnt for ? days, ? words unlearned, ? words unreviewed"
+    },
+    {
+        "title": "GRE Warm-up",
+        "content": "You have learnt for ? days, ? words unlearned, ? words unreviewed"
+    },
+    {
+        "title": "TOEFL Vocabulary",
+        "content": "You have learnt for ? days, ? words unlearned, ? words unreviewed"
+    },
+    {
+        "title": "GRE Vocabulary",
+        "content": "You have learnt for ? days, ? words unlearned, ? words unreviewed"
+    }
+]
