@@ -25,8 +25,10 @@
    		- npm install
 
    		- npm run dev
-
 2. Open another cmd window:
 
-   - npm start
+   		- npm start
+
+### Weekly Journal
+[Link to our journal in Notion](https://www.notion.so/77f99992c04b4985bba37d818bcd17b7?v=5ca4aee77cf440c0b3d5acf09f4c8a8a)
 
