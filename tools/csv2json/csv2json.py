@@ -39,12 +39,23 @@ for line in range(1,len(lines)):
     while i <len(l_str)-1:
         i+=1
         if l_str[i]=='"':
-            if i+1<len(l_str) and l_str[i+1]=='"':
-                txt[ind]+='\"'
-                i+=1
+            j=i
+            while j+1<len(l_str) and l_str[j+1]=='"':
+                j+=1
+            if(flag):
+                if (j-i)%2==1:
+                    for tmp in range(int((j-i+1)/2)):txt[ind]+='\\"'
+                else:
+                    for tmp in range(int((j-i)/2)):txt[ind]+='\\"'
+                    flag=False
             else:
-                flag=not flag
-                continue
+                if (j-i)%2==1:
+                    for tmp in range(int((j-i-1)/2)):txt[ind]+='\\"'
+                else:
+                    for tmp in range(int((j-i)/2)):txt[ind]+='\\"'
+                    flag=True
+            i=j
+            continue
         if l_str[i]==',' and not (flag):
                 ind+=1
                 txt.append('')
