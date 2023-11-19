@@ -9,11 +9,18 @@ const { data, clicked } = defineProps(['data', 'clicked'])
 
 <template>
     <div class="container">
-        <div class="item" v-for="item, index in data" @click="$emit('selected', $event, index)">
-            <div class="title">{{ item.title }}</div>
-            <p class="learn-day">{{ item.day }}</p>
-            <p class="learn-word">{{ item.content }}</p>
-            <Icon class="delete-icon" name="delete" color="black" selectedColor="#cc0000"></Icon>
+        <div class="item" v-for="item, index in data" @click="$emit('selected', $event, index, item.title)">
+            <n-layout has-sider class="wordlist">
+                <n-layout-sider :width="230" content-style="margin:24px;padding-left:24px;background-color:transparent">
+
+                    <div class="title">{{ item.title }}</div>
+                </n-layout-sider>
+                <n-layout style="margin-top:20px">
+                    <p class="learn-day">{{ item.learnday }}</p>
+                    <p class="learn-word">{{ item.learnword }}</p>
+                    <Icon class="delete-icon" name="delete" color="black" selectedColor="#cc0000"></Icon>
+                </n-layout>
+            </n-layout>
         </div>
     </div>
 </template>
@@ -21,16 +28,17 @@ const { data, clicked } = defineProps(['data', 'clicked'])
 <style scoped>
 .item {
     position: relative;
-    height: 70px;
     margin: 15px 15px;
     background-color: white;
     border-radius: 10px;
     overflow: hidden;
     transition: 0.1s;
 }
-
-.item:hover {
-    background-color: #faedc7;
+.item{
+    border:1px solid transparent;
+}
+.item:hover{
+    border: 1px solid rgb(255, 192, 1)
 }
 
 /* 设定列表第一项与上方距离 */
@@ -44,9 +52,9 @@ const { data, clicked } = defineProps(['data', 'clicked'])
 }
 
 .title {
-    margin-top: 10px;
+    margin-top: 0px;
     margin-left: 15px;
-    margin-right: 50px;
+    margin-right: 0px;
 
     font-size: 18px;
     font-weight: 600;
@@ -71,6 +79,16 @@ const { data, clicked } = defineProps(['data', 'clicked'])
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.learn-word {
+    margin: 0;
+    margin-left: 15px;
+}
+
+.learn-day {
+    margin: 0;
+    margin-left: 15px;
 }
 
 .delete-icon {

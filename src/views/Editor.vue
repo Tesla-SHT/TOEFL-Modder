@@ -1,32 +1,69 @@
-<script setup>
-import { reactive, onMounted, toRefs } from 'vue'
+<script>
+import { reactive, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-const route = useRoute()
-const router = useRouter()
+export default {
+  setup() {
+    const route = useRoute()
+    const router = useRouter()
 
-const index = route.params.index
+    const index = route.params.index
 
-const note = reactive({ title: '', content: '' })
+    const note = reactive({ title: '', content: '' })
+    const wordsData = reactive([])
 
-onMounted(async function () {
-    if (index == -1) return
-    const data = (await $data.getNotes())[index]
-    note.title = data.title
-    note.content = data.content
-})
+    onMounted(async function () {
+      if (index === -1) return
+      const data = (await $data.getNotes())[index]
+      note.title = data.title
+      try {
+        const response = await fetch(`../../words/${note.title}.json`)
+        const jsonData = await response.json()
+        wordsData.push(...jsonData)
+      } catch (error) {
+        console.error(error)
+      }
+    })
 
-const back = () => {
-    router.back()
-}
+    let currentWordIndex = 0
 
-const save = () => {
-    if (index == -1) { // 路径为-1则表示新建便签
-        $data.insertOne({ ...note })
-    } else {
-        $data.updateOne(index, { ...note })
+    function showCurrentWord() {
+      if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
+        return wordsData[currentWordIndex].Words
+      }
+      return ''
     }
-    router.back()
+
+    function showCurrentDefinition() {
+        console.log(currentWordIndex);
+      if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
+        return wordsData[currentWordIndex].Definitions
+      }
+      return ''
+    }
+
+    function showCurrentExample() {
+      if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
+        return wordsData[currentWordIndex].Example
+      }
+      return ''
+    }
+
+    function showNextWord() {
+      currentWordIndex++;
+      note.content = showCurrentWord();
+    }
+
+    const currentWord = computed(() => showCurrentWord())
+
+    return {
+      note,
+      currentWord,
+      currentDefinition: showCurrentDefinition(),
+      currentExample: showCurrentExample(),
+      showNextWord
+    }
+  }
 }
 </script>
 
@@ -34,17 +71,28 @@ const save = () => {
     <div class="container">
         <n-card class="WordCard" hoverable>
             <div class="icon-bar">
-                <svg class="collect-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 12 12"
-                    style="height:1.5em;width:1.5em">
-                    <g >
+                <svg class="collect-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 0 12 12">
+                    <g fill="none">
                         <path
-                            d="M5.283 1.546a.8.8 0 0 1 1.435 0L7.83 3.798l2.486.361a.8.8 0 0 1 .443 1.365L8.96 7.277l.425 2.476a.8.8 0 0 1-1.16.844L6 9.427l-2.224 1.17a.8.8 0 0 1-1.16-.844l.424-2.476l-1.799-1.753a.8.8 0 0 1 .444-1.365l2.486-.36l1.111-2.253zm.718.806l-.98 1.983a.8.8 0 0 1-.601.438l-2.19.318l1.585 1.544a.8.8 0 0 1 .23.708l-.374 2.18l1.958-1.03a.8.8 0 0 1 .744 0l1.958 1.03l-.374-2.18a.8.8 0 0 1 .23-.708L9.771 5.09l-2.189-.318a.8.8 0 0 1-.602-.438L6 2.352z"
+                            d="M5.283 1.546a.8.8 0 0 1 1.435 0L7.83 3.798l2.486.361a.8.8 0 0 1 .443 1.365L8.96 7.277l.425 2.476a.8.8 0 0 1-1.16.844L6 9.427l-2.224 1.17a.8.8 0 0 1-1.16-.844l.424-2.476l-1.799-1.753a.8.8 0 0 1 .444-1.365l2.486-.36l1.111-2.253z"
+                            fill="currentColor"></path>
+                    </g>
+                </svg>
+                <svg class="kill-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 0 24 24">
+                    <g>
+                        <path
+                            d="M21.5 6a1 1 0 0 1-.883.993L20.5 7h-.845l-1.231 12.52A2.75 2.75 0 0 1 15.687 22H8.313a2.75 2.75 0 0 1-2.737-2.48L4.345 7H3.5a1 1 0 0 1 0-2h5a3.5 3.5 0 1 1 7 0h5a1 1 0 0 1 1 1zm-7.25 3.25a.75.75 0 0 0-.743.648L13.5 10v7l.007.102a.75.75 0 0 0 1.486 0L15 17v-7l-.007-.102a.75.75 0 0 0-.743-.648zm-4.5 0a.75.75 0 0 0-.743.648L9 10v7l.007.102a.75.75 0 0 0 1.486 0L10.5 17v-7l-.007-.102a.75.75 0 0 0-.743-.648zM12 3.5A1.5 1.5 0 0 0 10.5 5h3A1.5 1.5 0 0 0 12 3.5z"
                             fill="currentColor"></path>
                     </g>
                 </svg>
             </div>
             <div class="word-title">
-                <h1>Word</h1>
+                <h1>{{ note.content }}</h1>
+    <p>{{ currentDefinition }}</p>
+    <p>{{ currentExample }}</p>
+    <button @click="showNextWord">Next Word</button>
             </div>
             <br>
             <n-divider />
@@ -119,7 +167,7 @@ const save = () => {
 
 .word-title {
     width: 100%;
-    height: 10%;
+    height: 50%;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -146,12 +194,30 @@ const save = () => {
     overflow-y: hidden;
     vertical-align: middle;
 }
-.icon-bar{
-    height:1.5em;
+
+.icon-bar {
+    height: 1.5em;
 }
-collect-icon:hover g{
-    fill: #faedc7;
+
+.collect-icon {
+    height: 1.5em;
+    width: 1.5em;
 }
+
+.collect-icon:hover path {
+    fill: #ece093 !important;
+}
+
+.kill-icon {
+    float: right;
+    height: 1.5em;
+    width: 1.5em;
+}
+
+.kill-icon:hover path {
+    fill: #18a058 !important;
+}
+
 /*.title-container {
     margin-top: 5px;
     margin-left: 0px;

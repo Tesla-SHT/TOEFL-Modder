@@ -2,7 +2,7 @@ import sys
 f_name=sys.argv[1]
 #input('csv file name (without extension):')
 i_file=open(f_name,'r',encoding='utf8')
-o_file=open(f_name[:-4]+'.json','w')
+o_file=open(f_name[:-4]+'.json','w',encoding='utf8')
 lines=i_file.readlines()
 l_str=lines[0].replace('\ufeff','')
 l_str=l_str[:-2]

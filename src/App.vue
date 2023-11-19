@@ -61,7 +61,7 @@ const closeWindow = () => {
 
 <style scoped>
 .backicon:hover path {
-  fill: #70d3f4;
+  fill: #6cc6e4;
 }
 
 .container {
