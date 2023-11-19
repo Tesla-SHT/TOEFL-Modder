@@ -3,67 +3,65 @@ import { reactive, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 export default {
-  setup() {
-    const route = useRoute()
-    const router = useRouter()
+    setup() {
+        const route = useRoute()
+        const router = useRouter()
 
-    const index = route.params.index
+        const index = route.params.index
 
-    const note = reactive({ title: '', content: '' })
-    const wordsData = reactive([])
+        const note = reactive({ title: '', content: '', definition: '', example: '' })
+        const wordsData = reactive([])
 
-    onMounted(async function () {
-      if (index === -1) return
-      const data = (await $data.getNotes())[index]
-      note.title = data.title
-      try {
-        const response = await fetch(`../../words/${note.title}.json`)
-        const jsonData = await response.json()
-        wordsData.push(...jsonData)
-      } catch (error) {
-        console.error(error)
-      }
-    })
+        onMounted(async function () {
+            if (index === -1) return
+            const data = (await $data.getNotes())[index]
+            note.title = data.title
+            try {
+                const response = await fetch(`../../words/${note.title}.json`)
+                const jsonData = await response.json()
+                wordsData.push(...jsonData)
+                showNextWord() // 显示第一个单词
+            } catch (error) {
+                console.error(error)
+            }
+        })
 
-    let currentWordIndex = 0
+        let currentWordIndex = 0
 
-    function showCurrentWord() {
-      if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
-        return wordsData[currentWordIndex].Words
-      }
-      return ''
+        function showCurrentWord() {
+            if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
+                return wordsData[currentWordIndex].Words
+            }
+            return ''
+        }
+
+        function showCurrentDefinition() {
+            console.log(currentWordIndex);
+            if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
+                return wordsData[currentWordIndex].Definitions
+            }
+            return ''
+        }
+
+        function showCurrentExample() {
+            if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
+                return wordsData[currentWordIndex].Example
+            }
+            return ''
+        }
+
+        function showNextWord() {
+            currentWordIndex++;
+            note.content = showCurrentWord();
+            note.definition = showCurrentDefinition();
+            note.example = showCurrentExample();
+        }
+ 
+        return {
+            note,
+            showNextWord
+        }
     }
-
-    function showCurrentDefinition() {
-        console.log(currentWordIndex);
-      if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
-        return wordsData[currentWordIndex].Definitions
-      }
-      return ''
-    }
-
-    function showCurrentExample() {
-      if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
-        return wordsData[currentWordIndex].Example
-      }
-      return ''
-    }
-
-    function showNextWord() {
-      currentWordIndex++;
-      note.content = showCurrentWord();
-    }
-
-    const currentWord = computed(() => showCurrentWord())
-
-    return {
-      note,
-      currentWord,
-      currentDefinition: showCurrentDefinition(),
-      currentExample: showCurrentExample(),
-      showNextWord
-    }
-  }
 }
 </script>
 
@@ -90,9 +88,9 @@ export default {
             </div>
             <div class="word-title">
                 <h1>{{ note.content }}</h1>
-    <p>{{ currentDefinition }}</p>
-    <p>{{ currentExample }}</p>
-    <button @click="showNextWord">Next Word</button>
+                <p>{{ note.definition }}</p>
+                <p>{{ note.example }}</p>
+                <button @click="showNextWord">Next Word</button>
             </div>
             <br>
             <n-divider />
@@ -171,7 +169,6 @@ export default {
     margin: 0;
     padding: 0;
     text-align: center;
-    font-size: 23px;
     font-weight: bold;
     border: none;
     outline: none;
