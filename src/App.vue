@@ -11,17 +11,22 @@ const back = () => {
 }
 const pages = reactive([
   {
-    name: '便签',
+    name: 'Books',
     icon: 'pencil',
     path: '/'
   },
   {
-    name: '设置',
+    name: 'Progress',
+    icon: 'progress',
+    path: '/progress'
+  },
+  {
+    name: 'Setting',
     icon: 'setting',
     path: '/settings'
   },
   {
-    name: '关于',
+    name: 'About',
     icon: 'info',
     path: '/about'
   }

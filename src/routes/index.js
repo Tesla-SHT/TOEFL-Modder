@@ -1,9 +1,14 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 const routes = [
     {
-        name: 'notes',
+        name: 'books',
         path: '/',
-        component: () => import('../views/Notes.vue'),
+        component: () => import('../views/Books.vue'),
+    },
+    {
+        name: 'progress',
+        path: '/progress',
+        component: () => import('../views/Progress.vue'),
     },
     {
         name: 'settings',
@@ -16,9 +21,9 @@ const routes = [
         component: () => import('../views/About.vue'),
     },
     {
-        name: 'editor',
+        name: 'recite',
         path: '/editor/:index',
-        component: () => import('../views/Editor.vue')
+        component: () => import('../views/Recite.vue')
     }
 ];
 
