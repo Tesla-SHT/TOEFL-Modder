@@ -11,6 +11,13 @@ if (!fs.existsSync(NOTE_PATH)) {
 
 const getNotesData = () => JSON.parse(fs.readFileSync(NOTE_PATH))
 
+const COLLECT_PATH = path.join(__dirname, './data/collection.json')
+
+if (!fs.existsSync(COLLECT_PATH)) {
+    fs.writeFileSync(COLLECT_PATH, '[]')
+}
+const getCollectionData = () => JSON.parse(fs.readFileSync(COLLECT_PATH))
+
 const createWindow = () => {
     const win = new BrowserWindow({
         width: 900,
@@ -39,19 +46,32 @@ const createWindow = () => {
         notesData.unshift(data)
         fs.writeFileSync(NOTE_PATH, JSON.stringify(notesData))
     })
-
     ipcMain.on('update-note', (event, index, data) => {
         let notesData = getNotesData()
         notesData[index] = data
         fs.writeFileSync(NOTE_PATH, JSON.stringify(notesData))
     })
-
     ipcMain.on('delete-note', (event, index) => {
         let notesData = getNotesData()
         notesData.splice(index, 1)
         fs.writeFileSync(NOTE_PATH, JSON.stringify(notesData))
     })
 
+    ipcMain.handle('get-collection-data', () => getCollectionData())
+    ipcMain.on('add-to-collection', (event, word) => {
+        let collectionData = getCollectionData()
+        collectionData.push(word)
+        fs.writeFileSync(COLLECT_PATH, JSON.stringify(collectionData))
+    })
+    ipcMain.on('delete-from-collection', (event, word) => {
+        let collectionData = getCollectionData()
+        const index = collectionData.indexOf(word)
+        if (index !== -1) {
+            collectionData.splice(index, 1)
+            fs.writeFileSync(COLLECT_PATH, JSON.stringify(collectionData))
+        }
+    })
+    
     ipcMain.on('window-close', () => {
         win.close()
     })

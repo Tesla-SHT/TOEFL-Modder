@@ -23,3 +23,13 @@ contextBridge.exposeInMainWorld('$data', {
       ipcRenderer.send('insert-note', data)
     }
 })
+
+contextBridge.exposeInMainWorld('$collect', {
+  getCollectionList: () => ipcRenderer.invoke('get-collection-data'),
+  addToCollection(word) {
+    ipcRenderer.send('add-to-collection', word)
+  },
+  deleteFromCollection(word) {
+    ipcRenderer.send('delete-from-collection', word)
+  }
+})

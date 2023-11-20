@@ -11,23 +11,33 @@ export default {
 
         const note = reactive({ title: '', content: '', definition: '', example: '' })
         const wordsData = reactive([])
+        let collection = []
 
         onMounted(async function () {
             if (index === -1) return
             const data = (await $data.getNotes())[index]
             note.title = data.title
             try {
-                const response = await fetch(`../../words/${note.title}.json`)
-                const jsonData = await response.json()
-                wordsData.push(...jsonData)
-                showNextWord() // 显示第一个单词
+                const response = await fetch(`../../data/dicts/${note.title}.json`);
+                const jsonData = await response.json();
+                await $collect.getCollectionList().then(result => {
+                    ExposeCollection(result)
+                });
+                wordsData.push(...jsonData);
+                showNextWord(); // 显示第一个单词
             } catch (error) {
                 console.error(error)
             }
+
+
         })
 
         let currentWordIndex = 0
-
+        let collectflag = false
+        function ExposeCollection(result) {
+            collection = result
+        }
+        console.log(collection)
         function showCurrentWord() {
             if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
                 return wordsData[currentWordIndex].Words
@@ -36,7 +46,7 @@ export default {
         }
 
         function showCurrentDefinition() {
-            console.log(currentWordIndex);
+            // console.log(currentWordIndex);
             if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
                 return wordsData[currentWordIndex].Definitions
             }
@@ -55,42 +65,96 @@ export default {
             note.content = showCurrentWord();
             note.definition = showCurrentDefinition();
             note.example = showCurrentExample();
+            collectflag = false;
+            console.log(collection);
+            for (let i = 0; i < collection.length; i++) {
+                if (collection[i] == note.content) {
+                    console.log("check" + collectflag);
+                    collectflag = true;
+                    break;
+                }
+            }
         }
- 
         return {
             note,
-            showNextWord
+            currentWordIndex,
+            showNextWord,
+            collectflag
+        }
+    },
+    data() {
+        return {
+            collecting: this.collectflag, // Flag to track if the collect button is being clicked
+            deleting: false // Flag to track if the delete button is being clicked
+        }
+    },
+    methods: {
+        collectWord(event, word) {
+
+            console.log("collectWord")
+            if (!this.collecting) {
+                console.log("add to collection")
+                this.collecting = true
+                $collect.addToCollection(word)
+            }
+            else {
+                console.log("delete from collection")
+                this.collecting = false
+                $collect.deleteFromCollection(word)
+            }
+        },
+        deleteWord(event, word) {
+            if (!this.deleting) {
+                this.deleting = true
+                $collect.deleteFromCollection(word)
+            }
+            else {
+                this.deleting = false
+                $collect.addToCollection(word)
+            }
+        },
+        refreshIcon(event) {
+            this.collecting = this.collectflag
+            console.log(this.collecting)
+            this.deleting = false
         }
     }
 }
+
 </script>
 
 <template>
     <div class="container">
         <n-card class="WordCard" hoverable>
             <div class="icon-bar">
-                <svg class="collect-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                    viewBox="0 0 12 12">
-                    <g fill="none">
-                        <path
-                            d="M5.283 1.546a.8.8 0 0 1 1.435 0L7.83 3.798l2.486.361a.8.8 0 0 1 .443 1.365L8.96 7.277l.425 2.476a.8.8 0 0 1-1.16.844L6 9.427l-2.224 1.17a.8.8 0 0 1-1.16-.844l.424-2.476l-1.799-1.753a.8.8 0 0 1 .444-1.365l2.486-.36l1.111-2.253z"
-                            fill="currentColor"></path>
-                    </g>
-                </svg>
-                <svg class="kill-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                    viewBox="0 0 24 24">
-                    <g>
-                        <path
-                            d="M21.5 6a1 1 0 0 1-.883.993L20.5 7h-.845l-1.231 12.52A2.75 2.75 0 0 1 15.687 22H8.313a2.75 2.75 0 0 1-2.737-2.48L4.345 7H3.5a1 1 0 0 1 0-2h5a3.5 3.5 0 1 1 7 0h5a1 1 0 0 1 1 1zm-7.25 3.25a.75.75 0 0 0-.743.648L13.5 10v7l.007.102a.75.75 0 0 0 1.486 0L15 17v-7l-.007-.102a.75.75 0 0 0-.743-.648zm-4.5 0a.75.75 0 0 0-.743.648L9 10v7l.007.102a.75.75 0 0 0 1.486 0L10.5 17v-7l-.007-.102a.75.75 0 0 0-.743-.648zM12 3.5A1.5 1.5 0 0 0 10.5 5h3A1.5 1.5 0 0 0 12 3.5z"
-                            fill="currentColor"></path>
-                    </g>
-                </svg>
+                <button :class="{ 'highlighted': collecting }" class="icon-button"
+                    @click="collectWord(event, note.content)">
+                    <svg class="collect-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 12 12">
+                        <g fill="none">
+                            <path
+                                d="M5.283 1.546a.8.8 0 0 1 1.435 0L7.83 3.798l2.486.361a.8.8 0 0 1 .443 1.365L8.96 7.277l.425 2.476a.8.8 0 0 1-1.16.844L6 9.427l-2.224 1.17a.8.8 0 0 1-1.16-.844l.424-2.476l-1.799-1.753a.8.8 0 0 1 .444-1.365l2.486-.36l1.111-2.253z"
+                                fill="currentColor"></path>
+                        </g>
+                    </svg>
+                </button>
+                <button :class="{ 'highlighted': deleting }" class="icon-button" @click="deleteWord(event, note.content)"
+                    style="float: right;">
+                    <svg class="kill-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 0 24 24">
+                        <g>
+                            <path
+                                d="M21.5 6a1 1 0 0 1-.883.993L20.5 7h-.845l-1.231 12.52A2.75 2.75 0 0 1 15.687 22H8.313a2.75 2.75 0 0 1-2.737-2.48L4.345 7H3.5a1 1 0 0 1 0-2h5a3.5 3.5 0 1 1 7 0h5a1 1 0 0 1 1 1zm-7.25 3.25a.75.75 0 0 0-.743.648L13.5 10v7l.007.102a.75.75 0 0 0 1.486 0L15 17v-7l-.007-.102a.75.75 0 0 0-.743-.648zm-4.5 0a.75.75 0 0 0-.743.648L9 10v7l.007.102a.75.75 0 0 0 1.486 0L10.5 17v-7l-.007-.102a.75.75 0 0 0-.743-.648zM12 3.5A1.5 1.5 0 0 0 10.5 5h3A1.5 1.5 0 0 0 12 3.5z"
+                                fill="currentColor" @selected="DeleteSelect(event)"></path>
+                        </g>
+                    </svg>
+                </button>
             </div>
             <div class="word-title">
                 <h1>{{ note.content }}</h1>
                 <p>{{ note.definition }}</p>
                 <p>{{ note.example }}</p>
-                <button @click="showNextWord">Next Word</button>
+                <button @click="showNextWord(); refreshIcon(event)">Next Word</button>
             </div>
             <br>
             <n-divider />
@@ -196,9 +260,18 @@ export default {
     height: 1.5em;
 }
 
+.icon-button {
+    border: 0;
+    background-color: transparent;
+}
+
 .collect-icon {
     height: 1.5em;
     width: 1.5em;
+}
+
+button.highlighted .collect-icon path {
+    fill: #ece093 !important;
 }
 
 .collect-icon:hover path {
@@ -211,7 +284,7 @@ export default {
     width: 1.5em;
 }
 
-.kill-icon:hover path {
+button.highlighted .kill-icon:hover path {
     fill: #18a058 !important;
 }
 

@@ -36,6 +36,6 @@ routes directory: This directory likely contains the routing configuration for t
 
 store directory: This directory likely contains the Vuex store configuration for state management in the application. The store.js file may define the store modules and their state, mutations, actions, and getters.
 
-views directory: This directory contains the Vue components that represent different pages or views of the application, such as About.vue (Introduction of this software), Editor.vue (Word recitation page), Notes.vue (Word books page), and Settings.vue(adjustable setting of the software). If the user clicks one book in Notes.vue, then it will link to the Editor.vue and display the corresponding words. These components define the content and functionality of each page. 
+views directory: This directory contains the Vue components that represent different pages or views of the application, such as About.vue (Introduction of this software), Recite.vue (Word recitation page), Books.vue (Word books page), and Settings.vue(adjustable setting of the software). If the user clicks one book in Books.vue then it will link to the Recite.vue and display the corresponding words. These components define the content and functionality of each page. 
 
 Please note that this explanation is based on the provided directory tree, and the exact functionality of each file may vary depending on the specific implementation and code inside them [5] [6].
