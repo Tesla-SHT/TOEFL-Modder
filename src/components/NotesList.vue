@@ -11,7 +11,7 @@ const { data, clicked } = defineProps(['data', 'clicked'])
     <div class="container">
         <div class="item" v-for="item, index in data" @click="$emit('selected', $event, index, item.title)">
             <n-layout has-sider class="wordlist">
-                <n-layout-sider :width="230" content-style="margin:24px;padding-left:24px;background-color:transparent">
+                <n-layout-sider :width="230" content-style="padding:24px 24px 24px 0;background-color:transparent">
 
                     <div class="title">{{ item.title }}</div>
                 </n-layout-sider>
