@@ -1,3 +1,5 @@
+
+import {useMessage} from 'naive-ui'
 import {
     // create naive ui
     create,
@@ -13,9 +15,13 @@ import {
     NGridItem,
     NDivider,
     NCollapseTransition,
-    NIcon
+    NIcon,
+    NSpace,
+    NStatistic,
+    NNumberAnimation,
+    NCalendar
 } from 'naive-ui';
-import { largerSize } from 'naive-ui/es/_utils';
+import { useThemeClass } from 'naive-ui/es/_mixins';
 
 const naive = create({
     components:
@@ -29,12 +35,17 @@ const naive = create({
             NGrid,
             NGridItem,
             NDivider,
-            NCollapseTransition,NIcon],
+            NCollapseTransition,
+            NIcon,
+            NSpace,
+            NStatistic,
+            NNumberAnimation,
+            NCalendar],
     setup() {
         return {
             fontSize: this.$store.state.fontSize,
-            large,tiny,small,medium,largeSize,smallSize,mediumSize
-            
+            large, tiny, small, medium, largeSize, smallSize, mediumSize
+
         };
     }
 })

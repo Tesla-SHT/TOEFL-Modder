@@ -33,3 +33,13 @@ contextBridge.exposeInMainWorld('$collect', {
     ipcRenderer.send('delete-from-collection', word)
   }
 })
+
+contextBridge.exposeInMainWorld('$delete', {
+  getBinList: () => ipcRenderer.invoke('get-bin-data'),
+  addToBin(word) {
+    ipcRenderer.send('add-to-bin', word)
+  },
+  deleteFromBin(word) {
+    ipcRenderer.send('delete-from-bin', word)
+  }
+})

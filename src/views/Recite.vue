@@ -1,9 +1,9 @@
 <script>
-import { reactive, onMounted, computed } from 'vue'
+import { reactive, onMounted, ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-
 export default {
     setup() {
+        
         const route = useRoute()
         const router = useRouter()
 
@@ -11,8 +11,9 @@ export default {
 
         const note = reactive({ title: '', content: '', definition: '', example: '' })
         const wordsData = reactive([])
+        const options = ref([]);
         let collection = []
-
+        let bin = []
         onMounted(async function () {
             if (index === -1) return
             const data = (await $data.getNotes())[index]
@@ -23,6 +24,10 @@ export default {
                 await $collect.getCollectionList().then(result => {
                     ExposeCollection(result)
                 });
+                await $delete.getBinList().then(result => {
+                    ExposeBin(result)
+                });
+
                 wordsData.push(...jsonData);
                 showNextWord(); // 显示第一个单词
             } catch (error) {
@@ -33,11 +38,17 @@ export default {
         })
 
         let currentWordIndex = 0
+
         let collectflag = false
         function ExposeCollection(result) {
             collection = result
         }
-        console.log(collection)
+
+        let deleteflag = false
+        function ExposeBin(result) {
+            bin = result
+        }
+        //console.log(collection)
         function showCurrentWord() {
             if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
                 return wordsData[currentWordIndex].Words
@@ -61,25 +72,49 @@ export default {
         }
 
         function showNextWord() {
-            currentWordIndex++;
-            note.content = showCurrentWord();
-            note.definition = showCurrentDefinition();
-            note.example = showCurrentExample();
+            deleteflag = false;
+            while (!deleteflag) {
+                currentWordIndex++;
+                note.content = showCurrentWord();
+                note.definition = showCurrentDefinition();
+                note.example = showCurrentExample();
+                deleteflag = true
+                for (let i = 0; i < bin.length; i++) {
+                    if (bin[i] == note.content) {
+                        deleteflag = false;
+                        break;
+                    }
+                }
+            }
             collectflag = false;
-            console.log(collection);
+            //console.log(collection);
             for (let i = 0; i < collection.length; i++) {
                 if (collection[i] == note.content) {
-                    console.log("check" + collectflag);
+                    //console.log("check" + collectflag);
                     collectflag = true;
                     break;
                 }
-            }
+            }      // Generate options
+            const allOptions = wordsData.map(word => word.Definitions).flat();
+            const randomOptions = getRandomElements(allOptions, 6);
+            const randomIndex = Math.floor(Math.random() * randomOptions.length);
+            randomOptions[randomIndex] = note.definition;
+            const correctIndex = randomIndex;
+            options.value = randomOptions;
         }
+
+        function getRandomElements(array, count) {
+            const shuffled = array.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
         return {
             note,
             currentWordIndex,
             showNextWord,
-            collectflag
+            collectflag,
+            deleteflag,
+            options
         }
     },
     data() {
@@ -92,7 +127,7 @@ export default {
     },
     computed: {
         audioLink() {
-            console.log( this.audioBaseUrl + this.audioword)
+            //console.log( this.audioBaseUrl + this.audioword)
             return this.audioBaseUrl + this.audioword
         }
     },
@@ -104,7 +139,7 @@ export default {
         },
         collectWord(event, word) {
 
-            console.log("collectWord")
+            //console.log("collectWord")
             if (!this.collecting) {
                 console.log("add to collection")
                 this.collecting = true
@@ -119,14 +154,16 @@ export default {
         deleteWord(event, word) {
             if (!this.deleting) {
                 this.deleting = true
-                $collect.deleteFromCollection(word)
+                $delete.addToBin(word)
+                console.log("delete " + this.deleting)
             }
             else {
                 this.deleting = false
-                $collect.addToCollection(word)
+                $delete.deleteFromBin(word)
             }
         },
         refreshIcon(event) {
+            console.log(this.collection)
             this.collecting = this.collectflag
             console.log(this.collecting)
             this.deleting = false
@@ -140,8 +177,7 @@ export default {
     <div class="container">
         <n-card class="WordCard" hoverable>
             <div class="icon-bar">
-                <button :class="{ 'highlighted': collecting }" class="icon-button"
-                    @click="collectWord(event, note.content)">
+                <button :class="{ 'collected': collecting }" class="icon-button" @click="collectWord(event, note.content)">
                     <svg class="collect-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                         viewBox="0 0 12 12">
                         <g fill="none">
@@ -151,14 +187,14 @@ export default {
                         </g>
                     </svg>
                 </button>
-                <button :class="{ 'highlighted': deleting }" class="icon-button" @click="deleteWord(event, note.content)"
+                <button :class="{ 'deleted': deleting }" class="icon-button" @click="deleteWord(event, note.content)"
                     style="float: right;">
                     <svg class="kill-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                         viewBox="0 0 24 24">
                         <g>
                             <path
                                 d="M21.5 6a1 1 0 0 1-.883.993L20.5 7h-.845l-1.231 12.52A2.75 2.75 0 0 1 15.687 22H8.313a2.75 2.75 0 0 1-2.737-2.48L4.345 7H3.5a1 1 0 0 1 0-2h5a3.5 3.5 0 1 1 7 0h5a1 1 0 0 1 1 1zm-7.25 3.25a.75.75 0 0 0-.743.648L13.5 10v7l.007.102a.75.75 0 0 0 1.486 0L15 17v-7l-.007-.102a.75.75 0 0 0-.743-.648zm-4.5 0a.75.75 0 0 0-.743.648L9 10v7l.007.102a.75.75 0 0 0 1.486 0L10.5 17v-7l-.007-.102a.75.75 0 0 0-.743-.648zM12 3.5A1.5 1.5 0 0 0 10.5 5h3A1.5 1.5 0 0 0 12 3.5z"
-                                fill="currentColor" @selected="DeleteSelect(event)"></path>
+                                fill="currentColor"></path>
                         </g>
                     </svg>
                 </button>
@@ -177,58 +213,17 @@ export default {
                     <audio ref="audioPlayer" :src="audioLink"></audio>
                 </div>
 
-                <p>{{ note.definition }}</p>
-                <p>{{ note.example }}</p>
+                <!--<p>{{ note.definition }}</p>
+                <p>{{ note.example }}</p>-->
                 <button @click="showNextWord(); refreshIcon(event)">Next Word</button>
             </div>
             <br>
             <n-divider />
-            <br>
             <div class="word-content">
-                <n-grid cols="1 300:2 500:3" :x-gap="12" :y-gap="16">
-                    <n-gi>
-                        <n-button size="large" strong secondary>
-                            Defaultddddddd
-                        </n-button>
-                    </n-gi>
-                    <n-gi>
-                        <n-button size="large" strong secondary>
-                            Defaultddddddd
-                        </n-button>
-                    </n-gi>
-                    <n-gi>
-                        <n-button size="large" strong secondary>
-                            Defaultddddddd
-                        </n-button>
-                    </n-gi>
-                    <n-gi>
-                        <n-button size="large" strong secondary>
-                            Defaultddddddd
-                        </n-button>
-                    </n-gi>
-                    <n-gi>
-                        <n-button size="large" strong secondary>
-                            Defaultddddddd
-                        </n-button>
-                    </n-gi>
-                    <n-gi>
-                        <n-button size="large" strong secondary>
-                            Defaultddddddd
-                        </n-button>
-                    </n-gi>
-                    <n-gi>
-                        <n-button size="large" strong secondary>
-                            Defaultddddddd
-                        </n-button>
-                    </n-gi>
-                    <n-gi>
-                        <n-button size="large" strong secondary>
-                            Defaultddddddd
-                        </n-button>
-                    </n-gi>
-                    <n-gi>
-                        <n-button size="large" strong secondary>
-                            Defaultddddddd
+                <n-grid cols="1 500:2" :x-gap="12" :y-gap="16">
+                    <n-gi v-for="option in options" :key="option">
+                        <n-button class="word-option" @click="checkAnswer(option)" size="large" strong secondary>
+                            {{ option }}
                         </n-button>
                     </n-gi>
                 </n-grid>
@@ -254,7 +249,7 @@ export default {
 
 .word-title {
     width: 100%;
-    height: 50%;
+    height: 20%;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -281,6 +276,16 @@ export default {
     vertical-align: middle;
 }
 
+.word-option {
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow: auto;
+    white-space: normal;
+    overflow-wrap: break-word;
+    border-radius: 10px;
+    height: 50px;
+}
+
 .icon-bar {
     height: 1.5em;
 }
@@ -295,7 +300,7 @@ export default {
     width: 1.5em;
 }
 
-button.highlighted .collect-icon path {
+button.collected .collect-icon path {
     fill: #ece093 !important;
 }
 
@@ -309,7 +314,11 @@ button.highlighted .collect-icon path {
     width: 1.5em;
 }
 
-button.highlighted .kill-icon:hover path {
+button.deleted .kill-icon path {
+    fill: #18a058 !important;
+}
+
+.kill-icon:hover path {
     fill: #18a058 !important;
 }
 
