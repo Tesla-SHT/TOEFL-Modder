@@ -5,20 +5,42 @@ import { useSettings } from '/src/composables/settings'; // Assuming you have a 
 
 const settings = useSettings(); // Use the composable to get the settings
 const { data, clicked } = defineProps(['data', 'clicked'])
-</script>
 
+const time = ref(0); // Define time as a reactive ref
+function updateday(event, tdata, index) {
+    const timedata = Object.values(tdata);
+    console.log(timedata[0]);
+    const currenttime = new Date();
+    time.value = currenttime.toLocaleDateString();
+    let flag = 0;
+    for (let i = 0; i < timedata.length; i++) {
+        console.log(timedata[i])
+        if (timedata[i] === time.value) {
+            console.log("已经有了");
+            flag = 1;
+            break;
+        }
+    }
+    if (!flag) {
+        $data.updateTime(index, time.value);
+    }
+}
+</script>
 <template>
-    <div class="container">
-        <div class="item" v-for="item, index in data" @click="$emit('selected', $event, index, item.title)">
+    <div class="container"><!-- -->
+        <div class="item" v-for="item, index in data"
+            @click="$emit('selected', $event, index, item.title);
+            updateday(event, item.time ,index)">
             <n-layout has-sider class="wordlist">
                 <n-layout-sider :width="230" content-style="padding:24px 24px 24px 0;background-color:transparent">
 
                     <div class="title">{{ item.title }}</div>
                 </n-layout-sider>
                 <n-layout style="margin-top:20px">
-                    <p class="learn-day">{{ item.learnday }}</p>
+                    <p class="learn-day">{{ "You have learnt " + item.learnday + " days, " + item.learnword + " words, " }}
+                    </p>
                     <p class="learn-word">{{ item.learnword }}</p>
-                    <Icon class="delete-icon" name="delete" color="black" selectedColor="#cc0000"></Icon>
+                    <!--<Icon class="delete-icon" name="delete" color="black" selectedColor="#cc0000"></Icon>-->
                 </n-layout>
             </n-layout>
         </div>
@@ -34,10 +56,12 @@ const { data, clicked } = defineProps(['data', 'clicked'])
     overflow: hidden;
     transition: 0.1s;
 }
-.item{
-    border:1px solid transparent;
+
+.item {
+    border: 1px solid transparent;
 }
-.item:hover{
+
+.item:hover {
     border: 1px solid rgb(255, 192, 1)
 }
 
@@ -81,15 +105,11 @@ const { data, clicked } = defineProps(['data', 'clicked'])
     text-overflow: ellipsis;
 }
 
-.learn-word {
+.learn-word, .learn-day{
     margin: 0;
     margin-left: 15px;
 }
 
-.learn-day {
-    margin: 0;
-    margin-left: 15px;
-}
 
 .delete-icon {
     position: absolute;

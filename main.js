@@ -18,7 +18,6 @@ if (!fs.existsSync(COLLECT_PATH)) {
 else {
     // 判断内容是否为空
     const fileContent = fs.readFileSync(COLLECT_PATH, 'utf8');
-    console.log(fileContent.trim());
     if (fileContent.trim() === '') {
         fs.writeFileSync(COLLECT_PATH, '[]');
     }
@@ -61,6 +60,13 @@ const createWindow = () => {
     })
 
     //本来就有的，作模板用
+    ipcMain.on('update-time', (event, index, time) => {
+        let notesData = getNotesData();
+        notesData[index].time.push(time)
+        notesData[index].learnday +=1;
+        fs.writeFileSync(NOTE_PATH, JSON.stringify(notesData))
+        
+    })
     ipcMain.handle('get-notes-data', () => getNotesData())
     ipcMain.on('insert-note', (event, data) => {
         let notesData = getNotesData()

@@ -3,7 +3,7 @@ import { reactive, onMounted, ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 export default {
     setup() {
-        
+
         const route = useRoute()
         const router = useRouter()
 
@@ -21,6 +21,7 @@ export default {
             try {
                 const response = await fetch(`../../data/dicts/${note.title}.json`);
                 const jsonData = await response.json();
+                wordsData.push(...jsonData);
                 await $collect.getCollectionList().then(result => {
                     ExposeCollection(result)
                 });
@@ -28,7 +29,6 @@ export default {
                     ExposeBin(result)
                 });
 
-                wordsData.push(...jsonData);
                 showNextWord(); // 显示第一个单词
             } catch (error) {
                 console.error(error)
@@ -36,7 +36,6 @@ export default {
 
 
         })
-
         let currentWordIndex = 0
 
         let collectflag = false

@@ -12,6 +12,9 @@ contextBridge.exposeInMainWorld('$app', {
 })
 
 contextBridge.exposeInMainWorld('$data', {
+    updateTime(index, time){
+      ipcRenderer.send('update-time', index, time)
+    },
     getNotes: () => ipcRenderer.invoke('get-notes-data'),
     updateOne(index, data) {
       ipcRenderer.send('update-note', index, data)
