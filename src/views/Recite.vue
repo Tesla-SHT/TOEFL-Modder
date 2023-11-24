@@ -69,7 +69,7 @@ export default {
             }
             return ''
         }
-
+        let correctIndex = 0;
         function showNextWord() {
             deleteflag = false;
             while (!deleteflag) {
@@ -98,7 +98,6 @@ export default {
             const randomOptions = getRandomElements(allOptions, 6);
             const randomIndex = Math.floor(Math.random() * randomOptions.length);
             randomOptions[randomIndex] = note.definition;
-            const correctIndex = randomIndex;
             options.value = randomOptions;
         }
 
@@ -113,7 +112,7 @@ export default {
             showNextWord,
             collectflag,
             deleteflag,
-            options
+            options,
         }
     },
     data() {
@@ -162,10 +161,81 @@ export default {
             }
         },
         refreshIcon(event) {
+
+            const choice = document.getElementsByClassName('word-choice');
+            choice[0].classList.remove('conceal');
+            choice[0].classList.add('reveal');
+
+            const detail = document.getElementsByClassName('word-detail');
+            detail[0].classList.remove('reveal');
+            detail[0].classList.add('conceal');
             console.log(this.collection)
             this.collecting = this.collectflag
             console.log(this.collecting)
             this.deleting = false
+        },
+        checkAnswer(event, correct, answer) {
+            if (correct === answer) {
+                this.$nextTick(() => {
+                    const buttons = document.getElementsByClassName('word-option');
+                    for (let i = 0; i < buttons.length; i++) {
+                        if (buttons[i].textContent === correct) {
+                            buttons[i].classList.add('correct');
+                        }
+                    }
+                    setTimeout(() => {
+                        // Replace the buttons with the word's definition and example
+                        // Implement your logic here
+                        const choice = document.getElementsByClassName('word-choice');
+                        //console.log(choice);
+                        choice[0].classList.remove('reveal')
+                        choice[0].classList.add('conceal');
+                        const detail = document.getElementsByClassName('word-detail');
+                        detail[0].classList.remove('conceal');
+                        detail[0].classList.add('reveal');
+                        // Reset the button's class to remove the color highlighting
+                        const buttons = document.getElementsByClassName('word-option');
+                        for (let i = 0; i < buttons.length; i++) {
+                            buttons[i].classList.remove('correct');
+                            buttons[i].classList.remove('incorrect');
+                        }
+                    }, 2000);
+                })
+            }
+            else {
+                // Set the button's class to 'incorrect' to change the border color to red
+                this.$nextTick(() => {
+                    const buttons = document.getElementsByClassName('word-option');
+                    //console.log(buttons);
+                    for (let i = 0; i < buttons.length; i++) {
+                        if (buttons[i].textContent === answer) {
+                            buttons[i].classList.add('incorrect');
+                        }
+                        if (buttons[i].textContent === correct) {
+                            buttons[i].classList.add('correct');
+                        }
+                    }
+
+                    setTimeout(() => {
+                        // Replace the buttons with the word's definition and example
+                        // Implement your logic here
+                        const choice = document.getElementsByClassName('word-choice');
+                        //console.log(choice[0]);
+                        //增加display:none
+                        choice[0].classList.remove('reveal')
+                        choice[0].classList.add('conceal');
+                        const detail = document.getElementsByClassName('word-detail');
+                        detail[0].classList.remove('conceal');
+                        detail[0].classList.add('reveal');
+                        // Reset the button's class to remove the color highlighting
+                        const buttons = document.getElementsByClassName('word-option');
+                        for (let i = 0; i < buttons.length; i++) {
+                            buttons[i].classList.remove('correct');
+                            buttons[i].classList.remove('incorrect');
+                        }
+                    }, 1000);
+                });
+            }
         }
     }
 }
@@ -214,19 +284,25 @@ export default {
 
                 <!--<p>{{ note.definition }}</p>
                 <p>{{ note.example }}</p>-->
-                <button @click="showNextWord(); refreshIcon(event)">Next Word</button>
             </div>
             <br>
             <n-divider />
             <div class="word-content">
-                <n-grid cols="1 500:2" :x-gap="12" :y-gap="16">
-                    <n-gi v-for="option in options" :key="option">
-                        <n-button class="word-option" @click="checkAnswer(option)" size="large" strong secondary>
-                            {{ option }}
-                        </n-button>
-                    </n-gi>
-                </n-grid>
-
+                <div class="word-choice">
+                    <n-grid cols="1 500:2" :x-gap="12" :y-gap="16">
+                        <n-gi v-for="option in options" :key="option">
+                            <n-button class="word-option" @click="checkAnswer(event, note.definition, option)" size="large"
+                                strong secondary>
+                                {{ option }}
+                            </n-button>
+                        </n-gi>
+                    </n-grid>
+                </div>
+                <div class="word-detail">
+                    <p style="font-size:16px">{{ note.definition }}</p>
+                    <p style="font-size:14px">{{ note.example }}</p>
+                    <button @click="showNextWord(); refreshIcon(event)">Next Word</button>
+                </div>
             </div>
         </n-card>
     </div>
@@ -319,6 +395,30 @@ button.deleted .kill-icon path {
 
 .kill-icon:hover path {
     fill: #18a058 !important;
+}
+
+.word-choice {
+    display: block;
+}
+
+.word-detail {
+    display: none;
+}
+
+.correct {
+    border: #18a058 2px solid;
+}
+
+.incorrect {
+    border: #ff0000 2px solid;
+}
+
+.conceal {
+    display: none;
+}
+
+.reveal {
+    display: block
 }
 
 /*.title-container {
