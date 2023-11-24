@@ -24,15 +24,28 @@
                 <path d="M0.118 963.552v60.33h60.33z" fill="#656D78" p-id="1384"></path>
             </svg>
         </div>
-        <h1 class="title">随心便签</h1>
-        <p class="description">by Azite</p>
+        <div class="about-container">
+            <p class="description">Expand your vocabulary with TOEFL-modder, a word recitation software designed to help
+                you improve your English skills.</p>
+            <div class="team-info">
+                <h2 class="team-title">Development Team</h2>
+                <ul class="team-members">
+                    <li>John Doe - Frontend Developer</li>
+                    <li>Jane Smith - Backend Developer</li>
+                    <li>Michael Johnson - UI/UX Designer</li>
+                </ul>
+            </div>
+            <p class="copyright">© 2022 TOEFL-modder. All rights reserved.</p>
+            <p class="contact">Contact us: example@example.com</p>
+        </div>
+
     </div>
 </template>
 
 <style scoped>
 .icon-container {
     text-align: center;
-    margin-top: 70px;
+    margin-top: 20px;
 }
 
 .icon {
@@ -49,6 +62,42 @@
 }
 
 .description {
+    font-size:12px;
     text-align: center;
 }
+
+
+.about-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+.team-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.team-members {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.team-members li {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.contact {
+    font-size: 14px;
+}
+
+/* Add more styles as needed */
 </style>
