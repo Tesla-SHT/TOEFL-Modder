@@ -22,8 +22,10 @@ for line in range(0,len(lines)):
                 txt+='\\"'
                 continue
             txt+=l_w[ind][i]
-        o_str+=label[ind]+':"'+txt+'",'
-    o_str+='},'
+        o_str+=label[ind]+':"'+txt+'"'
+        if ind<3-1:o_str+=','
+    o_str+='}'
+    if line<len(lines)-1:o_str+=','
 o_str+=']'
 #print(o_str)
 o_file.write(o_str)
