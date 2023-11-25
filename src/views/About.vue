@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <div>
+    <div style="height:100%">
         <div class="icon-container">
             <svg t="1672459372819" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
                 p-id="1377" width="85" height="85">
@@ -29,16 +29,29 @@
                 you improve your English skills.</p>
             <div class="team-info">
                 <h2 class="team-title">Development Team</h2>
-                <ul class="team-members">
-                    <li>John Doe - Frontend Developer</li>
-                    <li>Jane Smith - Backend Developer</li>
-                    <li>Michael Johnson - UI/UX Designer</li>
-                </ul>
+                <n-grid x-gap="12" cols="5" >
+                    <n-grid-item>
+                        <div>沈皓天</div>
+                    </n-grid-item>
+                    <n-grid-item>
+                        <div>姜林楚</div>
+                    </n-grid-item>
+                    <n-grid-item>
+                        <div>蔡贺丞</div>
+                    </n-grid-item>
+                    <n-grid-item>
+                        <div>胡烁怡</div>
+                    </n-grid-item>
+                    <n-grid-item>
+                        <div>翁歌华</div>
+                    </n-grid-item>
+                </n-grid>
             </div>
-            <p class="copyright">© 2022 TOEFL-modder. All rights reserved.</p>
-            <p class="contact">Contact us: example@example.com</p>
+            <p class="contact">Contact us: <a href="https://github.com/Tesla-SHT/TOEFL-Modder" target="_blank">Github</a> </p>
         </div>
-
+        <footer style="font-size:12px;bottom:0;margin-top:auto">
+            <p class="copyright">© 2023 TOEFL-Modder. All rights reserved.</p>
+        </footer>
     </div>
 </template>
 
@@ -62,7 +75,7 @@
 }
 
 .description {
-    font-size:12px;
+    font-size: 14px;
     text-align: center;
 }
 
@@ -70,6 +83,7 @@
 .about-container {
     text-align: center;
     padding: 20px;
+    align-items: center;
 }
 
 .title {
@@ -95,9 +109,8 @@
     margin-bottom: 5px;
 }
 
-.contact {
-    font-size: 14px;
+.copyright{
+    text-align: center;
 }
-
 /* Add more styles as needed */
 </style>

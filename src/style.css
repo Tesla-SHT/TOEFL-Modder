@@ -33,3 +33,10 @@ body {
 input::-webkit-search-cancel-button {
   display: none;
 }
+a:hover {
+  color:#fbe9b3
+}
+a {
+  color:#d4a827;
+  text-decoration: none;
+}

@@ -19,7 +19,7 @@ import {
     NSpace,
     NStatistic,
     NNumberAnimation,
-    NCalendar
+    NCalendar,
 } from 'naive-ui';
 import { useThemeClass } from 'naive-ui/es/_mixins';
 
