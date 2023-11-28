@@ -7,9 +7,8 @@ const settings = useSettings(); // Use the composable to get the settings
 const { data, clicked } = defineProps(['data', 'clicked'])
 
 const time = ref(0); // Define time as a reactive ref
-function updateday(event, tdata, index) {
+function updateday(event, tdata, index, title) {
     const timedata = Object.values(tdata);
-    console.log(timedata[0]);
     const currenttime = new Date();
     time.value = currenttime.toLocaleDateString();
     let flag = 0;
@@ -24,13 +23,13 @@ function updateday(event, tdata, index) {
     if (!flag) {
         $data.updateTime(index, time.value);
     }
+    $data.createReview(index, title);
 }
 </script>
 <template>
     <div class="container"><!-- -->
-        <div class="item" v-for="item, index in data"
-            @click="$emit('selected', $event, index, item.title);
-            updateday(event, item.time ,index)">
+        <div class="item" v-for="item, index in data" @click="$emit('selected', $event, index, item.title);
+        updateday(event, item.time, index, item.title)">
             <n-layout has-sider class="wordlist">
                 <n-layout-sider :width="230" content-style="padding:24px 24px 24px 0;background-color:transparent">
 
@@ -105,7 +104,8 @@ function updateday(event, tdata, index) {
     text-overflow: ellipsis;
 }
 
-.learn-word, .learn-day{
+.learn-word,
+.learn-day {
     margin: 0;
     margin-left: 15px;
 }

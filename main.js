@@ -11,7 +11,7 @@ const getNotesData = () => JSON.parse(fs.readFileSync(NOTE_PATH))
 
 const COLLECT_PATH = path.join(__dirname, './data/collection.json')
 
-//改成判断是否有collection.json这个文件而不   是判断是否有这个路径
+//改成判断是否有collection.json这个文件而不是判断是否有这个路径
 if (!fs.existsSync(COLLECT_PATH)) {
     fs.writeFileSync(COLLECT_PATH, '[]')
 }
@@ -32,7 +32,6 @@ else {
     // 判断内容是否为空
     const fileContent = fs.readFileSync(DELETE_PATH, 'utf8');
     if (fileContent.trim() === '') {
-        console.log('true empty');
         fs.writeFileSync(DELETE_PATH, '[]');
     }
 }
@@ -63,12 +62,28 @@ const createWindow = () => {
     ipcMain.on('update-time', (event, index, time) => {
         let notesData = getNotesData();
         notesData[index].time.push(time)
-        notesData[index].learnday +=1;
+        notesData[index].learnday += 1;
         fs.writeFileSync(NOTE_PATH, JSON.stringify(notesData))
-        
+
+    })
+    ipcMain.on('create-review', (event, title) => {
+
+        const REVIEW_PATH = path.join(__dirname, './data/review/'+title+'.json');
+        fs.writeFileSync(path.join(__dirname,'./data/review/test.json'),REVIEW_PATH);
+        //改成判断是否有collection.json这个文件而不是判断是否有这个路径
+        if (!fs.existsSync(REVIEW_PATH)) {
+            fs.writeFileSync(REVIEW_PATH, '[]');
+        }
+        else {
+            // 判断内容是否为空
+            const fileContent = fs.readFileSync(REVIEW_PATH, 'utf8');
+            if (fileContent.trim() === '') {
+                fs.writeFileSync(REVIEW_PATH, '[]');
+            }
+        }
     })
     ipcMain.handle('get-notes-data', () => getNotesData())
-    ipcMain.on('insert-note', (event, data) => {
+    /*ipcMain.on('insert-note', (event, data) => {
         let notesData = getNotesData()
         notesData.unshift(data)
         fs.writeFileSync(NOTE_PATH, JSON.stringify(notesData))
@@ -82,7 +97,7 @@ const createWindow = () => {
         let notesData = getNotesData()
         notesData.splice(index, 1)
         fs.writeFileSync(NOTE_PATH, JSON.stringify(notesData))
-    })
+    })*/
     //Collection
     ipcMain.handle('get-collection-data', () => getCollectionData())
     ipcMain.on('add-to-collection', (event, word) => {

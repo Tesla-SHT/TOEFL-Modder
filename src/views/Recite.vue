@@ -19,9 +19,11 @@ export default {
             const data = (await $data.getNotes())[index]
             note.title = data.title
             try {
+                //get wordbook's words
                 const response = await fetch(`../../data/dicts/${note.title}.json`);
                 const jsonData = await response.json();
                 wordsData.push(...jsonData);
+                //get reviewing words
                 await $collect.getCollectionList().then(result => {
                     ExposeCollection(result)
                 });
