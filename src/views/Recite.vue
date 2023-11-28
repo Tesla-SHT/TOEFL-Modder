@@ -11,6 +11,7 @@ export default {
 
         const note = reactive({ title: '', content: '', definition: '', example: '' })
         const wordsData = reactive([])
+        let wordnumber =0;
         const options = ref([]);
         let collection = []
         let bin = []
@@ -23,6 +24,7 @@ export default {
                 const response = await fetch(`../../data/dicts/${note.title}.json`);
                 const jsonData = await response.json();
                 wordsData.push(...jsonData);
+                wordnumber = (await $setting.getSettingData()).wordnumber;
                 //get reviewing words
                 await $collect.getCollectionList().then(result => {
                     ExposeCollection(result)
@@ -72,11 +74,11 @@ export default {
             return ''
         }
         let correctIndex = 0;
-        function showNextWord(Number) {
+        function showNextWord() {
             setTimeout(() => {
-                console.log(Number);
-                if (correctIndex >= Number) {
-                    console.log(Number);
+                console.log(wordnumber);
+                if (correctIndex >= wordnumber) {
+                    console.log(wordnumber);
                     correctIndex = 8;
                 }
                 deleteflag = false;

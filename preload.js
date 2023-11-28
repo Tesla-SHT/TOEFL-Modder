@@ -51,7 +51,7 @@ contextBridge.exposeInMainWorld('$delete', {
 })
 
 contextBridge.exposeInMainWorld('$setting', {
-  getWordNumber: () => ipcRenderer.invoke('get-word-number'),
+  getSettingData: () => ipcRenderer.invoke('get-setting-data'),
   updateWordNumber(number) {
     ipcRenderer.send('update-word-number', number)
   }

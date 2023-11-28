@@ -1,14 +1,18 @@
 <!-- Setting.vue -->
-
 <script>
 export default {
-  data() {
+  setup(){
+    const settingData = $setting.getSettingData()
+    console.log(settingData)
+    const wordNumber = settingData.wordnumber;
+    console.log(wordNumber);
     return {
-      wordNumber: $setting.getWordNumber()
+      wordNumber
     }
   },
   methods: {
     updateWordNumber() {
+      console.log(this.wordNumber)
       $setting.updateWordNumber(this.wordNumber)
     }
   }
