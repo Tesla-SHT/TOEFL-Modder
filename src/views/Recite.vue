@@ -1,6 +1,6 @@
 <script>
 import { reactive, onMounted, ref, computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router' 
 export default {
     setup() {
 
@@ -11,7 +11,7 @@ export default {
 
         const note = reactive({ title: '', content: '', definition: '', example: '' })
         const wordsData = reactive([])
-        let wordnumber =0;
+        let wordnumber = 0;
         const options = ref([]);
         let collection = []
         let bin = []
@@ -73,13 +73,12 @@ export default {
             }
             return ''
         }
-        let correctIndex = 0;
         function showNextWord() {
             setTimeout(() => {
-                console.log(wordnumber);
-                if (correctIndex >= wordnumber) {
+                console.log(wordnumber,currentWordIndex);
+                if (currentWordIndex >= wordnumber) {
                     console.log(wordnumber);
-                    correctIndex = 8;
+                    router.back()
                 }
                 deleteflag = false;
                 while (!deleteflag) {
@@ -323,8 +322,8 @@ export default {
                     <n-h6 prefix="bar" :type="isAnswerCorrect() ? 'success' : 'error'">
                         {{ note.example }}
                     </n-h6>
-                    <n-button @click="showNextWord($store.state.wordNumber); refreshIcon(event)" :type="isAnswerCorrect() ? 'success' : 'error'"
-                        dashed>Next Word</n-button>
+                    <n-button @click="showNextWord($store.state.wordNumber); refreshIcon(event)"
+                        :type="isAnswerCorrect() ? 'success' : 'error'" dashed>Next Word</n-button>
 
                 </div>
             </div>

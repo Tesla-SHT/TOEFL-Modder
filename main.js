@@ -142,9 +142,8 @@ const createWindow = () => {
     ipcMain.handle('get-setting-data', () => getSettingData())
     ipcMain.on('update-word-number', (event, number) => {
         let settingData = getSettingData()
-        fs.writeFileSync(SETTING_PATH, JSON.stringify(settingData.wordnumber))
         settingData.wordnumber = number
-        //fs.writeFileSync(SETTING_PATH, JSON.stringify(settingData))
+        fs.writeFileSync(SETTING_PATH, JSON.stringify(settingData))
     })
     ipcMain.on('window-close', () => {
         win.close()

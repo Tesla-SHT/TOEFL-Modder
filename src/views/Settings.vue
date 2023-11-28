@@ -1,17 +1,13 @@
 <!-- Setting.vue -->
 <script>
 export default {
-  setup(){
-    const settingData = $setting.getSettingData()
-    console.log(settingData)
-    const wordNumber = settingData.wordnumber;
-    console.log(wordNumber);
+  data(){
     return {
-      wordNumber
+      wordNumber: 50
     }
   },
   methods: {
-    updateWordNumber() {
+    updateWordNumber(event) {
       console.log(this.wordNumber)
       $setting.updateWordNumber(this.wordNumber)
     }
@@ -28,7 +24,7 @@ export default {
       </n-gi>
       <n-gi :span="4">
         <n-slider v-model:value="wordNumber" :min="10" :max="200" :step="10" style="padding-top:9px"
-          @click="updateWordNumber" />
+          @click="updateWordNumber(event)" />
       </n-gi>
     </n-grid>
   </n-card>
