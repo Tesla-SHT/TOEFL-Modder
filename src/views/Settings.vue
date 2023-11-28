@@ -1,39 +1,36 @@
 <!-- Setting.vue -->
 
 <script>
-import Adjustzoom from '../components/Adjustzoom.vue'
-
 export default {
-  Setup() {
-    return {
-      fontSize: this.$store.state.fontSize
-    }
-  },
   data() {
     return {
-      fontSize: this.$store.state.fontSize
+      wordNumber: $setting.getWordNumber()
     }
   },
   methods: {
-    updateFontSize() {
-      this.$store.commit('setFontSize', this.fontSize)
+    updateWordNumber() {
+      $setting.updateWordNumber(this.wordNumber)
     }
-  },
-  components:{
-    Adjustzoom
   }
+
 }
 </script>
 
 <template>
-  <div class="container">
-    <label>字号设置：</label>
-    <n-input-number v-model:value="fontSize" @input="updateFontSize">
-      <template #suffix>
-        %
-      </template>
-    </n-input-number>
-  </div>
-  <n-button>naive-ui</n-button>
-  <Adjustzoom></Adjustzoom>
+  <n-card style="margin:5% 3%;width:94%">
+    <n-grid :cols="6">
+      <n-gi :span="2">
+        <h4>Word Number</h4>
+      </n-gi>
+      <n-gi :span="4">
+        <n-slider v-model:value="wordNumber" :min="10" :max="200" :step="10" style="padding-top:9px"
+          @click="updateWordNumber" />
+      </n-gi>
+    </n-grid>
+  </n-card>
 </template>
+<style>
+h4 {
+  margin: 0;
+}
+</style>

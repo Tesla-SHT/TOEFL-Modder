@@ -68,8 +68,8 @@ const createWindow = () => {
     })
     ipcMain.on('create-review', (event, title) => {
 
-        const REVIEW_PATH = path.join(__dirname, './data/review/'+title+'.json');
-        fs.writeFileSync(path.join(__dirname,'./data/review/test.json'),REVIEW_PATH);
+        const REVIEW_PATH = path.join(__dirname, './data/review/' + title + '.json');
+        fs.writeFileSync(path.join(__dirname, './data/review/test.json'), REVIEW_PATH);
         //改成判断是否有collection.json这个文件而不是判断是否有这个路径
         if (!fs.existsSync(REVIEW_PATH)) {
             fs.writeFileSync(REVIEW_PATH, '[]');
@@ -128,6 +128,8 @@ const createWindow = () => {
             fs.writeFileSync(DELETE_PATH, JSON.stringify(binData))
         }
     })
+    //Settiing
+    ipcMain.on('get-word-number', (event) => { })
 
     ipcMain.on('window-close', () => {
         win.close()

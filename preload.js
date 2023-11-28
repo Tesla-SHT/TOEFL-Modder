@@ -49,3 +49,10 @@ contextBridge.exposeInMainWorld('$delete', {
     ipcRenderer.send('delete-from-bin', word)
   }
 })
+
+contextBridge.exposeInMainWorld('$setting', {
+  getWordNumber: () => ipcRenderer.invoke('get-word-number'),
+  updateWordNumber(number) {
+    ipcRenderer.send('update-word-number', number)
+  }
+})
