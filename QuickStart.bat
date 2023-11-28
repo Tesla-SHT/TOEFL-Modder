@@ -5,8 +5,8 @@ start cmd /k "cd /d %~dp0 && npm install && npm run dev"
 
 REM 等待 npm run dev 完成
 :WAIT_DEV
-timeout /t 1
-tasklist /FI "WINDOWTITLE eq Administrator: npm run dev" | findstr /i "cmd.exe" >nul
+timeout /t 3
+tasklist /FI "WINDOWTITLE eq Administrator: npm install" | findstr /i "cmd.exe" >nul
 if not errorlevel 1 (
     goto WAIT_DEV
 )
