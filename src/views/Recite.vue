@@ -1,6 +1,6 @@
 <script>
 import { reactive, onMounted, ref, computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router' 
+import { useRoute, useRouter } from 'vue-router'
 export default {
     setup() {
 
@@ -36,15 +36,16 @@ export default {
                     ExposeBin(result)
                 });
 
+
+                wordnumberRemain = wordnumber;
+                for (let i = 0; i < wordsData.length; i++) {wordArrange.push(i);}
+                wordArrange = getRandomElements(wordArrange, wordArrange.length);//arrange shuffle
+                wordArrange.push(-1);//end of arrange
+                showNextWord(); // 显示第一个单词
+
             } catch (error) {
                 console.error(error)
             }
-
-            wordnumberRemain = wordnumber;
-            for (let i = 0; i < wordsData.length; i++) wordArrange.add(i);
-            let wordArrange = getRandomElements(wordArrange, wordArrange.length);//arrange shuffle
-            wordArrange.add(-1);//end of arrange
-            showNextWord(); // 显示第一个单词
 
         })
         let currentWordIndex = 0
@@ -62,7 +63,7 @@ export default {
         //console.log(collection)
         function showCurrentWord() {
             //if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
-                return wordsData[currentWordIndex].Words
+            return wordsData[currentWordIndex].Words
             //}
             //return ''
         }
@@ -70,21 +71,21 @@ export default {
         function showCurrentDefinition() {
             // console.log(currentWordIndex);
             //if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
-                return wordsData[currentWordIndex].Definitions
+            return wordsData[currentWordIndex].Definitions
             //}
             //return ''
         }
 
         function showCurrentExample() {
             //if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
-                return wordsData[currentWordIndex].Example
+            return wordsData[currentWordIndex].Example
             //}
             //return ''
         }
         function showNextWord() {
             setTimeout(() => {
-                console.log(wordnumber,wordnumberRemain);
-                if (wordnumberRemain<=0) {
+                console.log(wordnumber, wordnumberRemain);
+                if (wordnumberRemain <= 0) {
                     console.log(wordnumber);
                     router.back();
                     wordnumberRemain = wordnumber;
