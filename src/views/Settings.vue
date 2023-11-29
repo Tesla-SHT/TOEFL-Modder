@@ -1,15 +1,21 @@
 <!-- Setting.vue -->
 <script>
+import { defineComponent, ref } from "vue";
 export default {
 
-  Setup() {
-    const checkedValueRef = ref(null);
+  setup() {
+    const checkedValueRef1 = ref(null);
+    const checkedValueRef2 = ref(null);
 
     return {
       disabled: ref(true),
-      checkedValue: checkedValueRef,
-      handleChange(e) {
-        checkedValueRef.value = e.target.value;
+      checkedAccent: checkedValueRef1,
+      checkedSequence: checkedValueRef2,
+      handleAccent(e) {
+        checkedValueRef1.value = e.target.value;
+      },
+      handleSequence(e) {
+        checkedValueRef2.value = e.target.value;
       }
     };
   },
@@ -41,8 +47,7 @@ export default {
           @click="updateWordNumber(event)" />
       </n-gi>
     </n-grid>
-  </n-card>
-  <n-card style="margin:5% 3%;width:94%">
+    <br>
     <n-grid :cols="6">
       <n-gi :span="2">
         <h4>Reviewing Word Number</h4>
@@ -52,36 +57,37 @@ export default {
           @click="updateWordNumber(event)" />
       </n-gi>
     </n-grid>
-  </n-card>
-  <n-card style="margin:5% 3%;width:94%">
+    <br>
     <n-grid :cols="6">
       <n-gi :span="2">
         <h4>Pronunciation</h4>
       </n-gi>
       <n-gi :span="4">
-        <n-radio :checked="checkedValue === 'Definitely Maybe'" value="Definitely Maybe" name="basic-demo"
-          @change="handleChange">
-          American Accent
-        </n-radio>
-        <n-radio :checked="checkedValue === 'Be Here Now'" value="Be Here Now" name="basic-demo" @change="handleChange">
-          British Accent
-        </n-radio>
+        <n-space>
+          <n-radio :checked="checkedAccent=== 'American Accent'" value="American Accent" name="basic-demo"
+            @change="handleAccent">
+            American Accent
+          </n-radio>
+          <n-radio :checked="checkedAccent === 'English Accent'" value="English Accent" name="basic-demo"
+            @change="handleAccent">
+            English Accent
+          </n-radio></n-space>
       </n-gi>
     </n-grid>
-  </n-card>
-  <n-card style="margin:5% 3%;width:94%">
+    <br>
     <n-grid :cols="6">
       <n-gi :span="2">
         <h4>Word Order</h4>
       </n-gi>
       <n-gi :span="4">
-        <n-radio :checked="checkedValue === 'Definitely Maybe'" value="Definitely Maybe" name="basic-demo"
-          @change="handleChange">
-          Alphabet Sequence
-        </n-radio>
-        <n-radio :checked="checkedValue === 'Be Here Now'" value="Be Here Now" name="basic-demo" @change="handleChange">
-          Shuffled
-        </n-radio>
+        <n-space>
+          <n-radio :checked="checkedSequence === 'Alphabet Sequence'" value="Alphabet Sequence" name="basic-demo"
+            @change="handleSequence">
+            Alphabet Sequence
+          </n-radio>
+          <n-radio :checked="checkedSequence === 'Shuffled'" value="Shuffled" name="basic-demo" @change="handleSequence">
+            Shuffled
+          </n-radio></n-space>
       </n-gi>
     </n-grid>
   </n-card>
@@ -104,5 +110,4 @@ export default {
 h4 {
   margin: 0;
 }
-
 </style>
