@@ -36,7 +36,6 @@ export default {
                     ExposeBin(result)
                 });
 
-                showNextWord(); // 显示第一个单词
             } catch (error) {
                 console.error(error)
             }
@@ -45,6 +44,7 @@ export default {
             for (let i = 0; i < wordsData.length; i++) wordArrange.add(i);
             let wordArrange = getRandomElements(wordArrange, wordArrange.length);//arrange shuffle
             wordArrange.add(-1);//end of arrange
+            showNextWord(); // 显示第一个单词
 
         })
         let currentWordIndex = 0
