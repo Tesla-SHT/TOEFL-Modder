@@ -1,0 +1,955 @@
+﻿1@zwitterion@n. 两性离子
+2@zoonotic@adj. 动物传染病的
+3@zonation@n. 成带；动植物的生物地理学的地带分布；带状配列
+4@yolky@adj. 蛋黄的；（英）有羊毛脂的；油腻的
+5@xylem@n. 木质部
+6@Xenopus laevi@
+7@Xenopus@n. 非洲爪蟾蜍
+8@xanthophyll@n. 叶黄素
+9@womb@n. 子宫；发源地 vt. 容纳
+10@wiggly@adj. 扭动的；左右摇摆的；起波的；蠕动的
+11@waitress@n. 女服务员；女侍者 vi. 做女服务生
+12@voracious@adj. 狼吞虎咽的；贪婪的；贪吃的；求知欲强的
+13@viviparity@n. 胎生；母体发芽
+14@vitreous@adj. 玻璃的；玻璃状的；玻璃似的
+15@viscous@adj. 粘性的；黏的
+16@visceral@adj. 发自肺腑的；内脏的
+17@virion@n. 病毒(成熟)粒子,毒粒,病毒体
+18@virgin@adj. 处女的；纯洁的；未经利用的，处于原始状态的 n. 处女
+19@vinculin@黏着斑蛋白
+20@vimentin@n. [生]波形蛋白
+21@villus@n. [解]绒毛；[植]长茸毛
+22@vicinity@n. 邻近，附近；近处
+23@veterinary@adj. (为医治)动物(尤指家禽家畜)疾病的;兽医的 n. 兽医
+24@vestigial@adj. 残留的; 残余的; 退化的
+25@vertice@
+26@vertex@n. 顶点；头顶；天顶
+27@vertebrae@n. [解]椎骨
+28@ventricle@n. 室,脑室,心室
+29@ventral@adj. 腹部的；腹侧的 n. 腹鳍
+30@vascular cambium@
+31@vanillin@n. [化]香草醛
+32@uterine@adj. [解]子宫的；同母异父的
+33@urchin@n. 顽童，淘气鬼；海胆；刺猥
+34@uranic@adj. 星学的；天的；铀矿的
+35@uracil@n. [生化]尿嘧啶
+36@unwholesome@adj. 不卫生的, 有害身心健康的 看上去不健康的
+37@unpronounceable@adj. 不能发音的；不易正确发音的
+38@uniformity@n. 一致;单调;无差异;无变化
+39@unification@n. 统一,联合,一致
+40@undershoot@v. 飞机未达预定点着陆；脱靶
+41@ulcer@n. 溃疡；腐烂物；道德败坏
+42@tyrosine@n. 酪氨酸
+43@tunicate@adj. 有被囊的；有被膜的 n. 被囊类动物
+44@tungsten@n. 钨（一种金属元素）
+45@tundra@n. 苔原；冻原；冻土地带
+46@tryptophan@n. [化]色氨酸
+47@truffle@n. [植]块菌；松露；松露巧克力糖
+48@trophectoderm@n. 滋养外胚层
+49@trithioacetone@三聚硫酮
+50@triploblastic@adj. [动]三胚层的
+51@transuranium@n. 铀后元素 adj. 铀后的
+52@transpiration@n. 植物的蒸腾（作用）；蒸发；〈医〉不自觉性出汗
+53@tracheal@adj. 气管的；导管的
+54@tosylate@n. 甲苯磺酸盐
+55@torque@n. 转矩，扭矩；项圈，金属领圈
+56@toroidal@adj. 超环面的；环形的 n. 曲面（圆环）
+57@tonne@n. 公吨（1，000公斤，等于metric ton）
+58@tong@n. 钳,煤钳,堂,帮会 v. 用钳子钳起
+59@toluene@n. [化]甲苯
+60@titration@n. 滴定
+61@thyroid@n. [解]甲状腺；甲状软骨；甲状腺剂 adj. [解]甲状腺的；盾状的
+62@thymus@n. [解]胸腺
+63@thylakoid@n. [植]类囊体
+64@thorax@n. 胸，胸膛；胸腔
+65@thoracic@adj. [解]胸的；胸廓的
+66@thixotropic@adj. 触变的,具有触变作用的;摇溶的
+67@thiols@n. 硫醇（等于mercaptan）
+68@thiol@n. [化]硫醇
+69@tetrahedron@n. 四面体
+70@tether@n. 系绳；系链；界限；（能力、财力、忍耐等的）极限 v. 练栓；拘束
+71@testosterone@n. 睾丸激素
+72@testament@n. 证明；自白；[律]遗嘱；圣约 n. 圣经旧约；圣经新约
+73@termolecular@adj. 三分子的
+74@termite@n. 白蚁
+75@tensile@adj. [物]拉力的；可伸长的；可拉长的
+76@tendon@n. 腱
+77@telomere@n. [生]端粒
+78@telolecithal@adj. 端卵黄的
+79@tectonic@adj. 构造的；建筑的；[地]地壳构造上的
+80@tease@vt. 取笑；梳理；戏弄；欺负；强求；使起毛 n. 戏弄；爱纠缠的小孩；挑逗者；卖弄风骚的女孩
+81@taxonomist@n. 分类学者
+82@tautomerize@v. [化](使)发生互变(异构)现象
+83@tautochrone@n. 等时曲线(等时降落轨迹)
+84@tassel@n. 缨；穗；流苏 vt. 用流苏装饰；摘下…穗
+85@tartaric@adj. 似酒石的；酒石的；含有酒石的
+86@taproot@n. [植]主根；直根
+87@tadpole@n. 蝌蚪
+88@tactile@adj. 触觉的，有触觉的；能触知的
+89@tabulate@adj. 平板状的；有平面的 vt. 使成平面；把…制成表格
+90@systole@n. 心脏收缩
+91@synthase@n. 合酶
+92@synovial@adj. 滑液的；分泌滑液的
+93@synonymous@adj. 同义的；暗示的
+94@syncytial@多核体的
+95@synapse@n. 突触
+96@symposium@n. 讨论会, 专题报告
+97@symport@n. 同向转移
+98@sympatry@n. 分布区重叠；同域分布；共存性
+99@surfactant@n. 〈化〉表面活性剂；表面活化物质 adj. 〈化〉表面活化剂的
+100@superfluous@adj. 过多的; 过剩的; 多余的
+101@superficial@adj. 表面(上)的; 表皮的 肤浅的, 浅薄的; 缺乏深度的
+102@succinct@adj. 简洁的；简明的；紧身的
+103@succession@n. 连续 连续不断的人[事物] 继承, 继任; 继承权
+104@substratum@n. 底层,下层
+105@styrofoam@n. 泡沫聚苯乙烯
+106@styrene@n. [化]苯乙烯，苏合香烯
+107@striped@adj. 有条纹的；有斑纹的 v. 被剥去（strip的过去分词）
+108@stringency@n. 紧迫；严厉；(货币)银根紧
+109@streak@n. 条纹，线条；倾向 vi. 飞跑，疾驶；加上条纹
+110@stratospheric@adj. 同温层的
+111@strata@n. 层；地层；阶层
+112@stomodeum@n. 口道，口凹形容词:   stomodeal
+113@stomata@n. 口；气孔
+114@stochastic@adj. 随机的
+115@stitch@n. 针脚，线迹；一针 vt. 缝，缝合
+116@stipulate@vt. (尤指在协议或建议中)规定, 约定, 讲明(条件等)
+117@steroids@n. 甾体；类固醇（steroid的复数形式）
+118@steroid@n. [化]类固醇；甾族化合物
+119@sterility@n. 不毛;不孕 内容贫乏 不结果实
+120@stereoisomerism@n. 立体异构现象(立体异构)
+121@stench@n. 恶臭；臭气 vt. 使…散发恶臭
+122@static@adj. 静态的；静力的；[物]静电的 n. [物]静电；静电干扰
+123@stamen@n. [植]雄蕊
+124@stalactite@n. 钟乳石
+125@stagnate@vi. 停滞, 不流动, 不发展
+126@staggering@adj. 难以置信的;令人震惊的 adv. 难以置信地;令人震惊地
+127@squint@vi. 斜视；患斜视；倾向 n. 看
+128@squamous@adj. 鳞状的；有鳞的；鳞部的（等于squamosa，squamose）
+129@sprawl@vi. 蔓延；伸开手足躺；无计划地扩展 vt. 懒散地伸开；使蔓生
+130@spleen@n. 脾；脾气；怒气
+131@spirochete@n. 螺旋菌
+132@spinach@n. 菠菜
+133@spermatozoon@n. 精虫；精子
+134@spatula@n. [医]压舌板；（调和、涂抹用）抹刀，小铲
+135@sovation@
+136@somites@n. 体节（somite的复数）
+137@somite@n. 体节
+138@solvation@n. 溶化作用；溶化剂
+139@snapshot@n. 快照，快相；急射，速射；简单印象 vt. 给…拍快照
+140@slough@n. 蜕下的皮（或壳）；绝境；泥沼；腐肉 vt. 使陷入泥沼；抛弃
+141@sledge@vt. 用雪橇搬运；乘雪橇；用大锤打 vi. 用大锤打；猛击；乘雪橇
+142@skunk@n. 臭鼬；臭鼬毛皮；[俚]讨厌鬼；[俚]卑鄙的人 vt. 使惨败；欺骗
+143@sinoatrial@adj. [解]窦房的
+144@shampoo@n. 洗发；洗发精 vt. 洗发
+145@sexism@n. （针对女性的）性别歧视；男性至上主义
+146@sessile@adj. 无柄的；固着的
+147@serotonin@n. 血清素
+148@sericin@n. 丝胶
+149@sequentially@adv. 继续地,从而
+150@sentinel@n. 哨兵 vt. 守卫，放哨
+151@senescence@n. 衰老；老年期
+152@semicolon@n. 分号
+153@semelparity@n. 终生一胎
+154@seeping@n. [石油]渗入作用；渗出 v. 渗出（seep的ing形式）
+155@sea squirt@n. [动]海鞘
+156@scrutinize@vt. 仔细检查,详审
+157@scribble@n. 潦草写成的东西；潦草的写法；杂文 vt. 乱写；滥写；潦草地书写
+158@sclerenchyma@n. [植]厚壁组织
+159@scalar@adj. 数量的；标量的；梯状的，分等级的 n. 数量；标量
+160@samarium@n. 钐（一种稀有金属元素）
+161@saltatory conduction@
+162@salamander@n. 火蜥蜴,火怪,耐火的人
+163@sac@n. [生物]液囊；囊
+164@rudimentary@adj. 基本的；初步的；未充分发展的
+165@riveting@adj. 吸引人的 n. 铆接
+166@rim@n. 边，边缘；轮辋；圆圈 vi. 作…的边，装边于
+167@rigorous@adj. 严格的，严厉的；严酷的；严密的
+168@rib@n. 肋骨；排骨；肋状物 vt. [口]戏弄；装肋于
+169@retrieve@vt. 重新得到；恢复；检索 vi. 找回猎物
+170@retinopathy@n. 视网膜病
+171@resolve@vt. 解决；决定；表决；分解 vi. 决定；分解 n. 决心；坚决
+172@reptile@adj. 爬虫类的；卑鄙的 n. 爬行动物；卑鄙的人
+173@renin@n. 肾素；高血压蛋白原酶
+174@reiterate@
+175@reinvigorate@vt. 使再振作,使复兴
+176@regress@vi. 逆行，倒退；复归 n. 退回；回归
+177@regioselectivity@n. 区域选择性
+178@refinery@n. 精炼厂；提炼厂；冶炼厂
+179@redeem@vt. 赎回；补偿；挽回；恢复；履行；兑换
+180@recursively@
+181@reconciliation@n. 和解, 调和; 一致; 勉强接受 (争吵等的)止息; 和解
+182@reciprocal@adj. 互相给予的; 互惠的; 相互的
+183@recessive@adj. 后退的；逆行的；隐性遗传的 n. [遗传学]隐性基因；隐性性状
+184@recede@vi. 后退；减弱 vt. 归还
+185@rebellion@n. 叛乱；反抗；谋反；不服从
+186@reassuringly@adv. 安慰地
+187@quadratic@adj. 二次的 n. 二次方程式；二次方程式论
+188@pupal@adj. [昆]蛹的
+189@pupa@n. 蛹
+190@pungent@adj. 刺激性的；苦痛的；辛辣的；尖刻的
+191@puncture@vt. 刺穿；揭穿；削弱 vi. 被刺穿；被戳破
+192@punctate@adj. 有小点的，点状的
+193@pulpy@adj. 果肉状的；泥状的；纸浆状的
+194@puberty@n. 青春期；开花期
+195@Pseudogenes@
+196@pseudoallelism@拟等位性
+197@proximity@n. 接近, 附近
+198@proverbial@adj. 谚语的；谚语式的；众所周知的
+199@prototypical@
+200@protist@n. 原生生物
+201@proteolytic@adj. 解朊作用的；蛋白水解作用
+202@proteolysis@n. 蛋白质水解
+203@proteoglycan@n. [生化]蛋白聚糖；蛋白多糖
+204@prosthetic@adj. 假体的；修复术的；非朊基的
+205@propranolol@n. 心得安(一种β-受体阻滞剂,用于治疗心律不齐、心绞痛等)
+206@propagation@n. 繁殖;增殖 宣传;波及 遗传
+207@propagate@v. 繁殖；增殖；传播；传送
+208@pronuclei@
+209@prometamorphosis@n. 前变态
+210@projectile@n. 发射体；抛射物（尤指子弹、炮弹） adj. 发射的；向前开进的；〈动物学〉（触角）可伸出的
+211@progesterone@n. 孕酮,黄体酮
+212@progeria@n. 儿童的早衰症；[医]早衰，早老
+213@progeny@n. 后裔；子孙；成果
+214@pristine@adj. 原始的，古时的；纯朴的
+215@primordium@n. [胚]原基；原始细胞
+216@primates@n. 灵长类
+217@preoccupation@n. 全神贯注，入神；关注的事物；抢先占据；当务之急；成见
+218@preliminary@adj. 初步的；预备的；开始的 n. 初步行动；准备；初步措施
+219@preformationism@先成说,预成论
+220@prefigure@vt. 预示,预兆 n. 预示,预兆;预想 adj. 预示的,预兆的
+221@predominantly@adv. 占主导地位地;占优势地;显著地
+222@precursor@n. 先驱;先行者;先兆,前兆 初期形式
+223@preclude@vt. 妨碍；排除；阻止
+224@precipitously@adv. 陡峭地;陡然地,出乎意料地
+225@potency@n. 威力, 力量;权力;效力, 效能 (男人的)性交能力
+226@postmitotic@adj. (细胞)有丝分裂期后的
+227@posterior@adj. (在时间；次序上)较后的 n. 臀部
+228@portray@vt. 描绘；扮演
+229@polystyrene@n. 聚苯乙烯
+230@polyploidy@n. 多倍性
+231@polygynous@adj. 一夫多妻的,多雌蕊的
+232@polygon@n. [数]多边形；多角形物体
+233@polarimetry@n. 旋光测定法(偏振测定法；测极化术)
+234@plummet@n. 铅锤，坠子 vi. 垂直落下
+235@plectin@网蛋白
+236@plausible@adj. 貌似真实的，貌似有理的；貌似可信的，花言巧语的
+237@platelet@n. 血小板；薄片
+238@plakophilin@
+239@plakoglobin@a compartment of desomosome
+240@placental@adj. 胎盘的；胎座的 n. 有胎盘哺乳动物
+241@placenta@n. 胎盘；胎座
+242@pituitary@n. (脑)垂体
+243@pitch@vi. 投掷；倾斜；坠落；搭帐篷 vt. 投；定位于；掷；用沥青涂；扎营；向前倾跌
+244@pit@n. 深坑；矿井；陷阱；（英国剧场的）正厅后排；（物体或人体表面上的）凹陷；正厅后排的观众 vt. 窖藏；使竞争；使凹下；去…之核；使留疤痕
+245@pipeline@n. 管道；传递途径；输油管
+246@pineal@adj. [解]松果腺的；松球状的 n. 松果体
+247@phytoplankton@n. 浮游生物
+248@phytohemagglutinin@n. 植物血球凝集素
+249@phylogenetics@n. 系统发生学
+250@phylogenetic@adj. 系统发生的,动植物种类史的
+251@phyla@n. 类群（ 	phylum的复数）
+252@photophosphorylation@n. 光(合)磷酸化(作用)
+253@phosphorescence@n. [化]磷光；磷光现象
+254@phosphatase@n. [生化]磷酸酶
+255@phlox@n. 草夹竹桃属植物
+256@phloem@n. [植]筛部，韧皮部
+257@pheromone@n. 信息素
+258@phenylalanine@n. 苯基丙氨酸
+259@phenolphthalein@n. 酚酞
+260@phenol@n. [化]石碳酸，苯酚
+261@pharynx@n. [解]咽
+262@Petri dish@n. 有盖培养皿
+263@petiole@n. 叶柄；柄部
+264@pertain@vi. 关于；从属；适合
+265@perpetuate@vt. 使永存;使人记住不忘
+266@peroxide@n. 过氧化物；过氧化氢 vt. 以过氧化氢漂白；以过氧化物处理
+267@permanganate@n. 高锰酸
+268@perinuclear@adj. [生](细胞)核周的
+269@perimeter@n. 周边;周围;边缘
+270@perforated@adj. 穿孔的；凿孔的
+271@perennial@adj. 经常出现的;长期的;持久的 adv. 经常出现地;长期地;持久地
+272@perchloric@adj. [化]高氯的
+273@peptidoglycan@n. [生化]肽聚糖
+274@pentacene@n. 戊省(并五苯)
+275@pendant@n. 下垂物，垂饰
+276@peculiar@adj. 特殊的；罕见的；奇怪的；独特的 n. 特权；特有财产
+277@pecten@n. [生]梳膜；梳状突起
+278@pathological@adj. 病理学的
+279@patchy@adj. 斑驳的 不完整的 部分尚好的
+280@partition@n. 分开, 分割 分割物, 隔墙 vt. 分开, 隔开
+281@parthenogenetic@adj. 单性生殖
+282@parsimony@n. 异常俭省,极度节俭 吝啬,小气
+283@parietal@adj. 〈美〉学院生活的,体壁的,腔壁的,顶骨的
+284@parenchyma@n. [解剖]实质；软细胞组织
+285@paraxial@adj. 轴旁的
+286@paratope@n. 抗体结合部位,抗体决定簇
+287@parasitic@adj. 寄生的；由寄生虫引起的；靠他人为生的
+288@parasegment@副体节
+289@parametrization@n. 参数化法
+290@parameter@n. (限定性的)因素, 特性, 界限 〈物〉〈数〉参量, 参数
+291@parallelogram@n. 平行四边形
+292@parallelepiped@n. 平行六面体
+293@paracetamol@n. [药]扑热息痛
+294@paraboloid@n. 抛物面
+295@pancreatic@adj. 胰腺的
+296@palytoxin@n. (尤指用以应付章鱼攻击的)水螅毒素
+297@palladium@n. 钯 Palladium希腊智慧女神帕拉斯(Pallas)的神像
+298@paleontology@n. 古生物学
+299@paleontological@
+300@oxymercuration@羟汞化
+301@oxyacid@n. 含氧酸；含氧之酸类
+302@ovulation@n. [生]排卵；产卵作用
+303@ovoviviparous@adj. 卵胎生的
+304@ovipositor@n. 产卵管
+305@oviparous@n. 卵生的
+306@oviparity@n. [动]卵生
+307@overt@adj. 明显的；公然的；[律]蓄意的
+308@ovary@n. [植]子房；[解]卵巢
+309@ovarie@
+310@oval@adj. 卵形的；椭圆的 n. 椭圆形；卵形
+311@osteoblast@n. 造骨细胞
+312@osmolarity@n. 同渗容摩
+313@orthogonal@adj. 直角的,直交的
+314@ornate@adj. 华丽的；装饰的；（文体）绚丽的
+315@organometallic@adj. 有机金属的
+316@organogenesis@n. [生]器官发生；器官形成
+317@ore@n. 矿石；矿
+318@orchid@n. 兰花；淡紫色；兰科植物 adj. 淡紫色的
+319@opsin@n. [生化]视蛋白
+320@oocyte@n. [生]卵母细胞
+321@oleander@n. 夹竹桃（产于欧洲）
+322@octant@n. 八分仪；八分圆；成45°视角的位置
+323@obtuse@adj. 钝的；不尖的；钝角的；愚钝的
+324@observable@adj.观察得到的; 应遵守的; 应庆祝的
+325@nuclide@n. [物]核素
+326@nucleus@n. 核，核心；原子核
+327@nucleosome@n. [生]核小体
+328@nucleon@n. [植][化]核子
+329@nucleolus@n. 核；细胞核；核仁
+330@nucleoid@n. [生]病毒核心；类核
+331@nuclear fission@[物]核裂变；原子核分裂
+332@notorious@adj. 臭名昭著的
+333@notochord@n. 脊索
+334@norepinephrine@n. 降肾上腺素；去甲肾上腺素
+335@nomenclature@n. 命名法；术语
+336@nodal@adj. 节的；节似的；[医]结的
+337@nocturnal@adj. 在夜间的；（指生物）夜间活动的
+338@nitrous@adj. 氮的；硝石的；含氮的
+339@nitrite@n. [化]亚硝酸盐
+340@nitrate@n. 硝酸盐 vt. 用硝酸处理
+341@nicotinic@adj. 烟碱酸的；尼古丁的
+342@nickel@n. 镍；镍币；五分镍币 vt. 镀镍于
+343@newt@n. 蝾螈；笨蛋；新手
+344@neurulation@n. 神经胚形成
+345@neurula@n. 神经轴胚
+346@neurotransmitter@n. 神经传递素
+347@neurosis@n. 神经症；神经衰弱症
+348@neuroepithelial@adj. [生]神经上皮的；由神经上皮组成的；得自(或来自)神经上皮的
+349@neuroblast@n. [生]成神经细胞
+350@neural crest@
+351@nephropathy@n. 肾病
+352@nematode@adj. 线虫类的 n. 线虫，线虫类
+353@nectar@n. 花蜜；甘露；[希神]神酒；任何美味的饮料
+354@nebulin@伴肌动蛋白
+355@Neanderthalensis@
+356@nausea@n. 恶心，晕船；极端的憎恶
+357@nasty@adj. 下流的；肮脏的；脾气不好的；险恶的 n. 令人不快的事物
+358@nascent@adj. 初期的；新生的；萌芽的；未成熟的
+359@naphthalene@n. 萘(球),卫生球
+360@myriad@adj. 无数的；种种的 n. 无数，极大数量；无数的人或物
+361@myraid@
+362@myosin@n. 肌浆球蛋白；阻凝蛋白
+363@myoblast@n. [生]成肌细胞
+364@myeloma@n. 骨髓瘤
+365@myelin@n. [生化]髓磷脂（等于myeline）
+366@mutagenize@vt.  [生]诱变； 以诱变剂诱致 ... 突变； 诱变处理
+367@mustard@n. 芥菜；芥末；深黄色；强烈的兴趣
+368@MUSCONE@n. [化]麝香酮
+369@multiplicity@n. 多样性
+370@multinucleate@adj. 复核的
+371@mucus@n. 粘液；黏液
+372@mouthparts@口器
+373@motile@adj. [生]能动的；显示活力的 n. 运动型
+374@moth@n. 蛾；蛀虫
+375@mosaic@adj. 摩西的；拼成的；嵌花式的 n. 马赛克；镶嵌细工；镶嵌
+376@morula@n. [动]桑椹胚
+377@morphological@adj. 形态学的
+378@morphogenetic@形态发生的,地貌成因的,地貌发生的,形态形成的
+379@morphogenesis@n. 地貌形成；形态发生
+380@morphogen@n. 成形素
+381@monatomic@adj. 单原子的
+382@moisturizer@n. 润肤膏
+383@mitotic@adj. 间接核分裂的；有丝分裂的
+384@mitosis@n. [化]间接核分裂，有丝分裂
+385@mitogenic@adj. [生]有丝分裂的；引起有丝分裂的
+386@mitigate@vt. 使缓和，使减轻 vi. 减轻，缓和下来
+387@mislaid@vt. 放错，遗失
+388@misery@n. 痛苦，悲惨；不幸；穷困；苦恼
+389@miscellaneous@adj. 多方面的；各种的；性质混杂的 n. 杂货；杂项
+390@miosis@n. （生殖细胞的）成熟分裂；减数分裂；瞳孔缩小
+391@minute@n. 片刻，一会儿；分，分钟；备忘录，笔记；会议记录 vt. 将…记录下来
+392@miniature@adj. 小型的, 微小的 n. 微型复制品, 微小模型 微型画, 微型人像画
+393@midgut@n. [解]中肠
+394@microvillus@n. [生]微绒毛；微小突起物
+395@microinjection@n. (在显微镜下进行的)显微注射
+396@microbial@adj. 微生物的；由细菌引起的
+397@micelle@n. 胶束；微团
+398@methionine@n. [化]蛋氨酸
+399@methanal@n. 甲醛
+400@methamphetamine@n. [药]甲基苯丙胺；脱氧麻黄碱（中枢兴奋药）
+401@metazoan@adj. 后生动物的；多细胞动物的 n. 后生动物；多细胞动物
+402@metazoa@n. [动]后生动物；复细胞动物
+403@metapopulation@集合种群
+404@metamorphosis@n. 变形(尤指从蛹变为昆虫) (性格、环境等的)改变
+405@metamorphose@vt. 使变形,使变质 vi. 变形; 变质
+406@metalloid@adj. 像金属的；非金属的；类似金属性的 n. 非金属；类似金属；两性金属
+407@metallic@adj. 金属的，含金属的
+408@mesonephric@
+409@mesodermal@
+410@mesoderm@n. 中胚叶；中胚层
+411@mesenchyme@n. 间叶细胞
+412@mesenchymal@adj. 间叶细胞的,由间叶细胞组成的,间叶细胞样的
+413@meroblastic@adj. 不全裂的
+414@meristem@n. 分生组织；分裂组织
+415@menstruation@n. 月经;行经;月经期间
+416@menstrual@adj. 月经的
+417@melanoma@n. [医]黑素瘤；胎记瘤
+418@melanocyte@n. [医]黑素细胞
+419@meiotic@adj. 减数分裂的
+420@medulla@n. [医]髓质
+421@meager@adj. 贫乏的；瘦的 n. 兆
+422@meadows@n. 草地；草甸（meadow的复数）
+423@mauveine@苯胺紫;木槿紫
+424@marrow@n. 髓，骨髓；精华；活力
+425@manifesto@n. 宣言
+426@malignant@adj. 有恶意的；恶性的；有害的
+427@malformed@adj. 难看的,畸形的
+428@maize@adj. 黄色的，玉米色的 n. 玉米；黄色，玉米色
+429@magnetite@n. 磁铁矿
+430@maghemite@n. 磁赤铁矿
+431@lymphocyte@n. (出现在血液、淋巴液中的)淋巴球,淋巴细胞
+432@lure@n. 诱惑物；诱惑；饵 vt. 引诱；诱惑
+433@lugubrious@adj. 悲哀的;阴郁的
+434@longitudinal@adj. 经度的,纵向的
+435@locomotion@n. 移动；运动；旅行
+436@liverwort@n. 【植】地钱（生长于潮湿地面，水中或树干上的苔纲的一种苔藓或同节体的隐花植物）
+437@lipopolysaccharide@n. 脂多糖
+438@linoleic@n. [化]亚麻油酸
+439@Linnaean@adj. 林奈的（瑞典博物学家）；林奈式动植物分类法的
+440@lineage@n. 血统；家系，世系
+441@limonene@n. 柠檬油精；[化]柠檬烯
+442@lignin@n. [生化]木质素
+443@lethal@adj. 致命的，致死的 n. 致死因子
+444@lesion@n. 损害；身体上的伤害；[医]机能障碍
+445@leptotene@n. (细胞分裂中的)细线期
+446@lemmatize@vt. 把按屈折变化形式进行归类
+447@lek@n. 列克（阿尔巴尼亚的货币单位）；鸟类繁殖期飞至求偶场地炫耀 vi. 鸟类在繁殖地炫耀求偶
+448@lateral@adj. 侧面的，横向的 n. 侧部；边音
+449@larval@adj. 幼虫状态的；幼虫的；潜在的；隐蔽的
+450@larva@n. 幼体，幼虫
+451@laminin@n. 层粘连蛋白
+452@lamellipodia@板状伪足
+453@Lagrange@n. 拉格朗日（法国著名数学家，力学家）
+454@kink@n. 扭结；奇想；蜷缩 vi. 扭结
+455@kinetochore@n. [生]动粒；着丝粒；着丝点
+456@keratinous@adj. 角质
+457@keratinocyte@n. 角化细胞
+458@keratin@n. 角蛋白；角素，角质
+459@karyotype@n. 染色体组型
+460@juxtapose@vt. 把…并列,把…并置;把…放在另一个旁边
+461@iteroparity@反复生殖
+462@iterate@vt. 反复说；重复；重做；[计]迭代
+463@isotropy@n. 各向同性；无向性；均质性
+464@isotropic@adj. 等方性的
+465@isothermal@adj. 等温的；等温线的 n. 等温线
+466@isomerization@n. 异构化作用
+467@isoleucine@n. 异亮氨酸
+468@isolecithal@adj. 均卵黄的
+469@isochoric@adj. 等容的(等体积的)
+470@isobaric@adj. 同重元素的；表示等压的 n. 等压线
+471@involution@n. 卷绕，回旋；退化；错乱，错综复杂；对合；卷入，内卷
+472@involute@adj. 纷乱的；错综复杂的；[植]内卷的 n. [数]渐伸线
+473@inventory@n. 详细目录, 存货清单
+474@invagination@n. 入鞘；反折处；凹入部分；[医]肠套叠
+475@invaginate@v. 收进鞘中,套进内部
+476@intuit@vt. 由直觉知道 vi. 凭直觉知道
+477@intricately@adv. 杂乱地;复杂地 难懂地
+478@intravital@adj. [生]活体的
+479@intraspecific competition@
+480@intimately@adv. 熟悉地;亲密地,亲切地 私下地,秘密地 谙熟地;详尽地
+481@intertwine@vt. & vi. 缠结在一起
+482@interstitial@adj. 空隙的,裂缝的,形成空隙的
+483@internode@n. 节间(波腹)
+484@intercalation@n. 插入；[医]插语症；设置（闰日、闰月等）
+485@integral@adj. 构成整体所必需的
+486@institutional@adj. 机构的；慈善机构的；制度上的；制度的
+487@insidious@adj. 隐伏的；暗中为害的；阴险的；诱人上当的；（疾病等）不知不觉恶化的
+488@innervate@vt. 使受神经支配,促使(器官、肌肉等的)活动
+489@ingenuity@n. 足智多谋, 心灵手巧
+490@inflorescence@n. 花；[植]花序；开花
+491@inflammatory@adj. 煽动性的；发炎的；炎症的
+492@infinitesimal@adj. 极微小的 adv. 无限小地
+493@infamous@adj. 无耻的；声名狼藉的；邪恶的；不名誉的
+494@indispensable@adj. 必不可少的, 必需的 n. 不可缺少之物
+495@indention@n. (尤指印刷或书写中的)首行缩进(缩格)
+496@incremental@adj. 增加的
+497@incision@n. 切开；切口；雕刻，切割
+498@incipient@adj. 开始的,初期的
+499@in conjunction with@连同，共同, 与…协力
+500@implicate@vt. 牵连, 涉及
+501@implementation@n. 贯彻，执行
+502@impede@vt. 阻止；妨碍；阻碍
+503@imago@n. 成虫；无意识的意象
+504@imaginal disk@
+505@imaginal disc@
+506@imaginal@adj. 成虫的
+507@illicit@adj. 违法的；不正当的
+508@hypotonic@adj. [化]低渗的；[医]张力减退的
+509@hypothalamus@n. 丘脑下部
+510@hypotensive@adj. 血压过低的
+511@hypoosmotic@
+512@hypochlorous acid@次氯酸
+513@hypoblast@n. [生]内胚层；下胚层
+514@hylaea@n. 热带雨林
+515@hydrothermal@adj. 水热作用的；热液的
+516@hydrogenation@n. 氢化作用
+517@hydroboration@n. [化]硼氢化反应(或作用)
+518@hydra@n. 难以根除之祸害；[动]水螅；[希神]九头蛇
+519@hyaluronic acids@玻尿酸；透明质酸
+520@hunchback@n. 驼背;驼背者
+521@humpback@n. 驼背；座头鲸
+522@humoral@adj. 体液的；温性的；由体液引起的
+523@homozygous@adj. 同型结合的；纯合子的
+524@homoplasy@n. 类似,同形
+525@homoplasies@
+526@homeotic@
+527@homeosis@n. 异位同型形成
+528@holometabolous@adj. [昆]完全变态的；全变形的
+529@holoblastic@adj. 全裂的副 词:   holoblastically
+530@histone@n. 组蛋白
+531@hindlimb@n. 后肢
+532@hindgut@n. 尾肠；后肠
+533@hindbrain@n. [解]后脑
+534@hierarchical@adj. 分等级的
+535@heterochromatic@adj. 包含不同颜色的
+536@hermaphrodite@n. 具有两性者；阴阳人；两性体 adj. 雌雄同体的
+537@herbivore@n. 食草动物
+538@herbicide@n. 灭草剂
+539@herbarium@n. 腊叶集,干燥标本集
+540@herbaceous@adj. 草本的
+541@heparin@n. ［生化］肝素（用于防治血栓形成等）；肝磷脂
+542@hemizygous@adj. [生]半合子的
+543@hemisphere@n. 半球
+544@hematite@n. [矿]赤铁矿
+545@hedgehog@n. 刺猬
+546@halteres@
+547@haltere@n. 缰绳；笼头；平衡棒
+548@halter@n. 绞索；缰绳 vt. 给…套上缰绳；束缚
+549@gypsy@n. 吉卜赛人；吉卜赛语；像吉布赛的人；歌舞剧中的歌舞队员 adj. 象吉卜赛人的；吉卜赛人的；[口]无照的
+550@gymnosperm@n. 裸子植物
+551@gut feeling@
+552@grotesquely@adv. 奇异地,荒诞地
+553@gravel@n. 砂砾；碎石 vt. 用碎石铺；使船搁浅在沙滩上；使困惑
+554@grappling@n. 小锚；爪钩
+555@granule@n. 小粒；微粒
+556@gorilla@n. [动]大猩猩
+557@gonadotropin@n. 促性腺激素
+558@gonad@n. [解剖学]生殖腺；[解剖学]性腺
+559@gnu@n. 角马；牛羚
+560@glycosaminoglycan@n. 黏多糖
+561@glycoprotein@n. 糖蛋白类；醣蛋白
+562@glycogen@n. 糖原；动物淀粉
+563@glycine@n. 氨基乙酸；甘氨酸
+564@glycerol@n. 甘油；丙三醇
+565@gluconeogenesis@n. 糖质新生
+566@glucagon@n. [生化]胰增血糖素；胰高血糖素；高血糖因子
+567@globin@n. 球蛋白，珠朊
+568@glial@adj. 神经胶质的
+569@gill@n. 腮；菌褶；（山谷中的）沟壑，峡流；及耳（容量单位） vi. 被刺网捕住
+570@germ plasm@[生]种质；胚质；生殖细胞的细胞质；遗传物质
+571@germ cell@n. [生]生殖细胞；胚细胞
+572@genitalia@n. 生殖器(尤指外阴部)
+573@generic@adj. 一般的；属的；类的；非商标的
+574@gazelle@n. 小羚羊；瞪羚 vi. 似瞪羚般跳跃
+575@gauge@n. 计量器；标准尺寸；容量规格 vt. 估计；测量；给…定规格
+576@gastrulation@[医]原肠胚形成
+577@gastrula@n. [医]原肠胚；胚囊
+578@gastric@adj. 胃的；胃部的
+579@ganglion@n. [医]神经节；腱鞘囊肿
+580@gametogenesis@n. [生] 配子形成；配子发育
+581@gallstone@n. 胆(结)石
+582@gallic acid@没食子酸，五倍子酸
+583@futile@adj. 无用的；没有出息的；琐细的；不重要的；无效的
+584@furrow@n. 犁沟；皱纹；车辙 vt. 犁；耕；弄绉
+585@furan@n. [化]呋喃；氧杂茂
+586@frontispiece@n. (书籍的)卷首插画；主立面
+587@frenzied@adj. 狂乱的；激怒的；疯狂的 v. 使狂乱（frenzy的过去式）
+588@Frankenstein@n. 作法自毙的人,毁灭创造者自己之物
+589@foul@adj. 邪恶的；污秽的；犯规的；淤塞的 vt. 弄脏；犯规；淤塞；缠住，妨害
+590@formate@n. 甲酸盐；蚁酸盐
+591@formaldehyde@n. 甲醛
+592@forbearance@n. 节制；克制；容忍；〈法律〉债务偿还期的延展
+593@foolhardy@adj. 莽撞的;有勇无谋的
+594@follicle@n. 小囊；滤泡；卵泡
+595@foe@n. 敌人；反对者；危害物
+596@fluidity@n. 流质；流动性；易变性
+597@floral@adj. 用花制作的；饰以花卉图案的
+598@flimsy@adj. 脆弱的；浅薄的；易损坏的；不周密的 n. 薄纸；复写纸；打字纸
+599@flavonoid@n. 类黄酮
+600@flatter@v. 向…谄媚，奉承，讨好；自认为，自以为是；使显得更漂亮
+601@flagellum@n. [生]鞭毛；鞭状体
+602@fixative@adj. 定色的；固定的；防挥发的 n. 固定剂；定色剂；定影剂
+603@filopodia@n. 丝状伪足
+604@filamentous@adj. 纤维所成的；细丝状的；如丝的
+605@fibrous@adj. 纤维的，纤维性的；纤维状的
+606@fibronectin@纤维连接蛋白
+607@fibroblast@n. 纤维组织母细胞；成纤维细胞
+608@fern@n. 蕨类植物；蕨
+609@fecundity@n. 多产；富饶；肥沃 产卵力；生殖力；结实性
+610@facultative@adj. 特许的
+611@extraterrestrial@adj. 地球(或其大气圈)外的；行星际的 n. 外星人
+612@extrapolation@n. 推断 外推(法)
+613@extensor@n. 伸肌
+614@exodus@n. 大批的离去
+615@exocyclic@adj. 环外的(不在环上的)
+616@exergonic@adj. 放出能的
+617@excrement@n. 排泄物(粪便)
+618@ewe@n. 母羊
+619@evocative@adj. 引起…记忆的, 唤起…感情的
+620@evasive@adj. 逃避的；托辞的；推托的
+621@evacuation@n. 撤空;撤离;撤退;疏散 排泄;排泄物
+622@eudicot@
+623@euchromatin@n. 常染色质（染色体的一部分）
+624@ethanal@n. [化]乙醛
+625@estuary@n. 河口；江口
+626@estuarine@adj. 入海的；在入海口形成的
+627@estrogen@n. 雌性激素
+628@esophagus@n. 食道
+629@erroneous@adj. 〈正〉错误的, 不正确的
+630@errata@n. 勘误表；正误表（erratum的复数）
+631@ermine@n. 貂；貂的白毛皮
+632@erect@vt. 使竖立；建造；安装 adj. 竖立的；笔直的；因性刺激而勃起的
+633@equilateral@adj. 等边的；等面的
+634@epithelium@n. 上皮；上皮细胞
+635@epistemology@n. 认识论
+636@epistasis@n. [生]上位；异位显性；（液体表面的）薄膜
+637@epigenesis@n. 后成,渐成说,外成外力变质
+638@epiboly@n. 外包
+639@epiblast@n. [生]外胚层；上胚层
+640@ephemeral@adj. 短暂的；朝生暮死的 n. 生存极短时间的事物
+641@ependymal@adj. [解]室管膜的
+642@eosinophil@n. 嗜酸粒细胞 adj. 嗜酸粒的
+643@enumeration@n. 计数;列举 细目
+644@endothelia@
+645@endosymbiosis@n. [生]内共生
+646@endorphin@n. [化]脑内啡
+647@endemic@adj. 风土的；地方性的 n. 地方病
+648@enantiomer@n. 对映(结构)体
+649@emulsifier@n. 乳化剂
+650@empirical@adj. 以观察或实验为依据的
+651@embryology@n. 胚胎学
+652@embryogenesis@n. 胚胎发生(形成)
+653@elucidation@n. 阐明；说明
+654@ellipsoid@n. 椭圆体
+655@eligible@adj. 合格的，合适的；符合条件的；有资格当选的 n. 合格者；适任者；有资格者
+656@electrodeposit@v. 电沉积 n. 电沉淀物
+657@elastin@n. 弹性蛋白
+658@ectotherm@n. 冷血动物,变温动物
+659@ectopia@n. [医]异位（器官等的位置异常，通常是先天性的）
+660@ectoderm@n. [生]外胚层，外细胞层
+661@dyestuff@n. 染料，着色剂
+662@ductile@adj. 易教导的；易延展的；柔软的
+663@dreadful@adj. 可怕的；糟透的，令人不快的
+664@dorsal mesoderm@
+665@dorsal@adj. 背的，背侧的；背部的
+666@domineering@adj. 刚愎自用、喜欢支配别人的
+667@domestication@n. 驯养；教化
+668@dodecyl@n. 十二烷基
+669@distal@adj. [解]末梢的，末端的
+670@dissolution@n. 破裂；瓦解；解体；解散；溶解
+671@dissipative@adj. 消耗的,浪费的,放荡的
+672@disseminate@vt. 散布, 传播
+673@dispensable@adj. 非必需的,可省去的
+674@disparlure@n. 雌舞毒蛾引诱剂,环氧十九烷
+675@disintegrate@vt. & vi. (使)破裂〔分裂, 粉碎〕;(使)崩溃
+676@disheartened@adj. 沮丧的
+677@discrepancy@n. 差异, 不符合(之处); 不一致(之处)
+678@discoidal@adj. 铁饼状的,平圆形的
+679@dipterans@
+680@diol@n. [化]二醇
+681@dimorphism@n. 同种二形,二态性
+682@dimorphic@adj. 二态的
+683@dietary@n. 规定的食物；饮食的规定 adj. 饮食的，饭食的
+684@diatom@n. [植]硅藻
+685@diastole@n. 心脏舒张；心脏舒张期；延长音节
+686@diagonal@adj. 对角线的；斜纹的；斜的 n. 对角线；斜线
+687@diacylglycerol@n. 甘油二酯
+688@diabatic@adj. 透热的
+689@detrimental@adj. 有害的 n. 有害的人或事
+690@detergent@n. 洗涤剂
+691@deter@vt. 制止，阻止；使打消念头
+692@desmin@n. 肌间线蛋白
+693@descend@vi. 下降；下来；遗传；屈尊；下去 vt. 下去；沿…向下
+694@dermis@n. 皮肤，真皮
+695@depleted@adj. 废弃的；贫化的；耗尽的 v. 使减少；弄空；耗尽…的资源（deplete的过去分词）
+696@denticle@n. [医]小齿；齿状装饰
+697@demography@n. 人口统计学
+698@deluge@n. 洪水；暴雨；泛滥 vt. 使泛滥；压倒
+699@delineate@vt. 勾画,描述
+700@delimiter@n. 定界符
+701@delamination@n. 分层,分叶
+702@dejection@n. 沮丧；[医]排泄(物)
+703@defy@vt. 藐视；公然反抗；挑衅；使落空；经受住；顶住；抗住  n. 挑战；对抗
+704@declaration@n. 宣布, 宣告, 声明 申报(单)
+705@debilitate@vt.  使 ... 衰弱
+706@cytosolic@
+707@cylinder@n. 汽缸；圆筒；圆柱状物；柱面
+708@cyclopropene@n. 环丙烯
+709@cyclo-oxygenase@环加氧酶
+710@cyclobutane@n. 环丁烷
+711@cycloalkane@n. 环烷
+712@cyclical@adj. 周期的，循环的
+713@cyanohydrin@n. 氰醇
+714@cyanide@n. [化]氰化物
+715@cuticle@n. 表皮；[动][植]角质层；[解]护膜
+716@curl@vt. 使…卷曲；使卷起来 vi. 卷曲；盘绕
+717@cultivar@n. 培育植物；栽培变种
+718@crosslink@vt. 横向连接(交叉藕合；交联)
+719@crisp@adj. 脆的；易碎的；新鲜的 vt. 使发脆；使卷曲
+720@cringe@vi. 畏缩；觉得尴尬不安或难为情；阿谀，奉承 n. 畏缩；阿谀，奉承
+721@crevice@n. 裂缝；裂隙
+722@crest@n. 冠；山顶；顶饰；波峰 vi. 到达绝顶；形成浪峰
+723@crescent@n. 新月；新月状物；伊斯兰教的标记；土耳其的新月形国徽 adj. 新月形的；逐渐增加的
+724@crenulate@adj. 细圆齿状的,小圆齿状的
+725@cranial@adj. 头盖的
+726@counterpart@n. 与对方地位相当的人, 与另一方作用相当的物
+727@counterions@抗衡离子,抗平衡离子
+728@cotyledon@n. 子叶
+729@corticotropin@n. [生化]促肾上腺皮质激素；亲皮质素
+730@cortical@adj. [生]皮质的；皮层的；外皮的
+731@cortex@n. 皮质；树皮；果皮
+732@corroborate@vt. 证实,支持(某种说法、信仰、理论等) n. 确证者;确证物
+733@corpus luteum@[医]黄体；[药]黄体素
+734@corollary@n. [数］系理；推论
+735@corkscrew@n. 拔塞钻；螺丝锥 v. 作螺旋状的前进；强硬地拉出；探听 adj. 拔钻形的
+736@cork cambium@
+737@cork@n. 软木；软木塞，软木制品 vt. 用软木塞塞住；抑制，堵住
+738@copulation@n. 交尾；交配；连结
+739@convection@n. 传送,对流
+740@contractile@adj. 会缩的,有收缩性的
+741@contour@n. 轮廓；周线；等高线；电路；概要 vt. 画轮廓；画等高线
+742@continent@n. 大陆；洲；(the Continent)欧洲大陆
+743@contentious@adj. 容易引起争论的,好争论的
+744@constrictor@n. 大蟒；括约肌；压缩器
+745@constriction@n. 压缩;紧压的感觉;束紧 压缩物;阻塞物
+746@console@v. 安慰，安抚，抚慰 n. 操纵台，控制台，仪表板
+747@conscious@adj. 意识到的
+748@conjecture@n. 推测；猜想 vi. 推测；揣摩
+749@congenital@adj. 先天的,天生的
+750@confocal@adj. 共焦的；同焦点的
+751@concise@adj. 简明的，简洁的
+752@conceive@vt. 构思；持有；以为；怀孕 vi. 怀孕；设想；考虑
+753@complexion@n. 面色；肤色；情况；局面 vt. 使增添色彩
+754@compensation@n. 补偿[赔偿]物, 补偿[赔偿]金
+755@commutative@adj. 互相的；交替的；交换的
+756@commentary@n. 实况报道；现场解说；评论；注释
+757@colchicine@n. 秋水仙碱，秋水仙素（用番红花作原料而制成的植物盐基）
+758@cohesive@adj. 有结合力的；紧密结合的；有粘着力的
+759@coenocyte@n. 多核细胞,多核体形容词:   coenocytic
+760@coed@adj. 男女同校的 n. 男女同校的学生
+761@clutter@n. 杂乱，混乱 vt. 使凌乱；胡乱地填满
+762@clutch@vt. 抓住；抓牢 vi. 企图抓住；踩离合器 n. 抓住；爪子；离合器；紧要关头 n. 一窝鸡（蛋）；一群 adj. 关键的；致胜的
+763@clonally@adv. 同源细胞地；无性繁殖系地
+764@climax@n. 高潮；顶点；层进法；极点
+765@cleavage@n. [医]卵裂；[矿]解理；劈开，分裂
+766@clathrin@n. 网格蛋白
+767@clamp@n. 夹子；螺丝钳 vt. 夹住；强加；压制
+768@citrate@n. 柠檬酸盐
+769@circadian@adj. 昼夜节奏的,生理节奏的 (即大约每天一次的)
+770@ciliated@adj. 有纤毛的
+771@cichlid@n. 棘鳍类热带淡水鱼；丽鱼科鱼 adj. 丽鱼科的
+772@chronological@adj. 按时间的前后顺序排列的 adv. 按时间的前后顺序排列地
+773@chordae@n. [解]索；带；腱（等于chorda）
+774@chondroblast@n. 成软骨细胞
+775@cholinergic@adj. 类胆碱(功)能的
+776@choanoflagellates@
+777@chlorophyll@n. 叶绿素
+778@chloroform@n. [化]氯仿；三氯甲烷 vt. 用氯仿麻醉
+779@chi-square@n. 卡方
+780@chiasmata@交叉
+781@charismatic@adj. 有魅力的
+782@cetacean@adj. 鲸类的；鲸鱼的 n. 鲸鱼；鲸类动物
+783@cerebrum@n. [解]大脑
+784@cerebrospinal@adj. 脑脊髓的
+785@cereal@n. 谷类食品；谷类，谷物；谷类植物 adj. 谷类的；谷类制成的
+786@centrosome@n. 中心小体
+787@centromere@n. 〈生〉着丝点；着丝粒
+788@centrolecithal@adj. 中黄的
+789@centripetal@adj. 向心(力)的 adv. 向心地
+790@centriole@n. [生]细胞中心粒；中心体
+791@centrality@n. 中心,中央,向心性,集中性
+792@ceaseless@adj.  不停的;(好像)无休止的;不断的
+793@cavitation@n. 涡凹；[航空]气穴现象；[医]成洞
+794@caudal@adj. 近尾部的，尾部的
+795@caterpillar@n. 毛虫 履带
+796@catenin@连环
+797@catenary@n. 悬链线；链状物；链 adj. 悬链线的；垂曲线的
+798@Caspase@
+799@cartilaginous@adj. 软骨的；软骨质的
+800@cartilage@n. 软骨
+801@Cartesian@adj. 笛卡尔的；笛卡尔哲学的 n. 笛卡尔信徒
+802@carotenoid@n. 类胡罗卜素
+803@carcinogenesis@n. 癌病变, 致癌作用
+804@carbonyl@n. 碳酰；羰基（含有羰基的金属化合物）
+805@carboniferous@n. 石炭纪；石炭层 adj. 含碳或煤的；石炭纪的
+806@carbanion@n. 负碳离子
+807@caramel@n. 焦糖；焦糖糖果；饴糖
+808@capsule@n. [医]胶囊；[航]太空舱；[植]蒴果；小容器 adj. 压缩的；概要的
+809@capillary@n. 毛细管 adj. 毛状的；毛细管的
+810@canonical@adj. 依教规的；圣典的；权威的；牧师的
+811@cane@n. 手杖；细长的茎；藤条 vt. 以杖击；以藤编制的
+812@cambium@n. 形成层；新生组织
+813@cam@凸轮；计算机辅助制造；电脑辅助制造
+814@calorimeter@n. 量热计
+815@cadherin@钙黏着蛋白
+816@cactus@n. [植]仙人掌
+817@by and large@大体上，总的来说
+818@butadiene@n. 丁二烯
+819@buoyant@adj. 有浮力的；轻快的；上涨的
+820@bullfrog@n. 菜蛙；牛蛙
+821@buckminsterfullerene@富勒烯
+822@buckle@vi. 扣住；变弯曲 vt. 扣住；使弯曲
+823@bucket@n. 【C】水桶；（机器上的）桶装物；大量 vi. 颠簸行进；下倾盆大雨 vt. 装在桶里
+824@bruise@n. 擦伤；挫伤；青肿 vt. 使受瘀伤；使受挫伤
+825@brood@vt. 沉思；孵 n. 一伙；一窝
+826@bristle@n. 猪鬃；刚毛 vi. 发怒；竖起
+827@brachistochrone@n. 最速落径(捷线)
+828@bossy@adj. 专横的；浮雕装饰的；爱指挥他人的 n. 母牛；牛犊
+829@bony@adj. 骨的；多骨的；似骨的；瘦骨嶙峋的
+830@bolt@n. 门闩；螺栓；一卷布；弩箭 v. （突然）逃离；闩住；狼吞虎咽；用螺栓固定 adv. 挺直地
+831@boa@n. 蟒蛇；女用围巾；[经]蟒形联合浮动汇率
+832@blende@n. 闪锌矿；褐色闪光矿物
+833@blebs@
+834@blatant@adj. 明目张胆的；炫耀的；公然的；喧闹的
+835@blastula@n. [生]囊胚，囊胚泡
+836@blastopore@胚孔,原口
+837@blastomere@n. 分裂球
+838@blastoderm@n. 胚盘
+839@blastocyst@n. 胚泡
+840@blastocoel@囊胚腔,卵裂腔
+841@blacksmith@n. 铁匠
+842@blab@v. 泄密；胡扯 n. 瞎说乱谈的人；喋喋不休
+843@bithorax@
+844@biopsy@n. 活组织检查；活组织切片检查；切片检查法
+845@binormal@n. 副法线
+846@binocular@adj. 双眼的；两眼用的 n. 双筒望远镜；双目镜
+847@bilaminar@二层的
+848@bicoid@
+849@beagle@n. （一种猎兔用）小猎犬；密探；警官 vi. 打探消息；由小猎犬指引追猎
+850@barnacle@n. 藤壶；茗荷介；难以摆脱的人；[鸟]黑雁
+851@axillary@adj. 腋窝的；腋生的；叶腋的 n. 腋羽
+852@auxiliary@n. 助动词；辅助物；帮助者 adj. 辅助的；附加的
+853@autosome@n. 正染色体，常染色体
+854@autophagy@n. (细胞的)自我吞噬(作用)
+855@atypical@adj. 非典型的；不合规则的
+856@attribute@v. 把…归因于；认为…是由于 n. 特性；特质；属性
+857@atrium@n. [医]心房；[建]中庭，天井前厅
+858@atria@n. 心房；前庭；门廊；天井（atrium的复数）
+859@astrocyte@n. 星细胞；星形细胞；星形胶质细胞
+860@astigmatism@n. 散光
+861@assertive@adj. 断定的；自信的
+862@ascertain@vt. 弄清, 确定, 查明
+863@aryl@adj. 芳基的 n. 芳基
+864@arthropod@n. 节肢动物 adj. 节肢动物的
+865@arthopod@
+866@artery@n. 动脉；干道；主流
+867@arterial@adj. 动脉的；干线的；像动脉的
+868@aromatic@adj. 芳香的，芬芳的；芳香族的 n. 芳香剂；芳香植物
+869@arid@adj. 干旱的；不毛的，荒芜的
+870@archipelago@n. 群岛,列岛 多岛屿的海
+871@archenteron@消化道,原肠
+872@Arabidopsis thaliana@[植]拟南芥；阿拉伯芥；鼠耳芥
+873@arabidopsis@
+874@aquatic@adj. 水生的；水栖的；[体]在水中或水面进行的 n. 水生植物或动物；水上运动
+875@aprotic@adj. 质子惰性的
+876@applicability@n. 适用性；适应性
+877@appendage@n. 附属物 依附的人 附属器官,附属肢体(如臂、腿、尾等)
+878@apical@adj. 顶上的, 顶点的
+879@aphid@n. 蚜虫
+880@aperture@n. 孔，穴；缝隙；（照相机，望远镜等的）光圈，孔径
+881@aortic@adj. 大动脉的
+882@aorta@n. 主动脉
+883@anus@n. 肛门
+884@antiseptic@n. 杀菌剂；防腐剂 adj. 杀菌的；防腐的；极为干净整洁的；冷漠的
+885@antirrhinum@n. 金鱼草属之一种
+886@anthrax@n. 炭疽，炭疽热
+887@anther@n. 花药；花粉囊
+888@anterior@adj. 前面的；先前的
+889@antennae@n. 天线（等于aerial）；[动]触须；[植]蕊喙；[喻]直觉
+890@antagonist@n. 敌手；对手；[医]对抗剂，拮抗剂 ；[生]对抗肌
+891@antacid@n. 抗酸剂，解酸药 adj. 中和酸的
+892@annihilation@n. 歼灭,灭绝 (粒子与反粒子的)湮灭,湮没
+893@anisotropy@n. 各向异性
+894@anionic@adj. 阴离子的，带负电荷的离子的
+895@aniline@n. 苯胺 adj. 苯胺的
+896@angiotensin@n. 血管紧缩素
+897@angiosperm@n. 被子植物
+898@anew@adv. 重新；再
+899@anesthetize@vt. 使麻醉；使麻木
+900@anesthetic@n. 麻醉剂；麻药 adj. 麻醉的；无知觉的
+901@androgens@雄激素
+902@anatomy@n. 解剖学；剖析；[医]解剖；骨骼
+903@anatomical@adj. 结构(上)的; 解剖的
+904@amygdala@n. 杏仁核；扁桃腺；苦巴旦杏
+905@amplexus@n. 抱合（指雌的蛙或蟾产卵于水时雄的蛙或蟾抱合排精的求偶行动） adj. 环抱的
+906@amphoteric@adj. 两性的(酸与碱)
+907@amphibian@adj. 两栖类的；水陆两用的 n. 两栖动物；水陆两用飞机；水陆两用车
+908@amorphous@adj. 无定形的；杂乱的；非结晶的
+909@amoeba@n. [动]阿米巴；变形虫（单细胞生物）
+910@amniotic@adj. 羊膜的
+911@amnion@n. [解]羊膜
+912@amniocyte@羊水细胞
+913@ammonium@n. 铵；氨盐基
+914@amenable@adj. 有责任的，应服从的；有义务的；经得起检验的
+915@ambient@adj. 周围的；环绕的；外界的 n. 周围环境
+916@alveolar@adj. 肺泡的；齿槽的 n. 齿槽音
+917@almond@n. 杏仁；扁桃；巴旦木，巴旦杏
+918@allylic@adj. 烯丙基的
+919@allyl@n. [化]烯丙基 adj. [化]烯丙基的
+920@allotrope@n. 同素异形体
+921@allopatry@异域分布
+922@allopatric@adj. 在不同地区发生的,单独地发生的
+923@alleviate@vt. 减轻；使 ... 缓和
+924@allene@n. [化]丙二烯
+925@alkyne@n. [化]炔属烃
+926@alkoxide@n. [化]醇盐；[化]酚盐
+927@alkaloid@n. 生物碱；植物碱基
+928@alkaline@adj. [化]碱性的，碱的
+929@aliquot@n. 能整除的数 adj. 能整除的；[化]等分试样
+930@alimentary@adj. 食物的,营养的
+931@aldosterone@n. 醛固酮
+932@aldehyde@n. [化]乙醛；醛
+933@alanine@n. [化]丙氨酸
+934@agrochemical@n. 农用化学品；农药 adj. 农用化学品的
+935@agonist@n. 收缩筋
+936@afferent@adj. 传入的，输入的
+937@adrenergic@adj. 肾上腺素的；释放肾上腺素的
+938@adrenaline@n. 肾上腺素(使激动兴奋等)
+939@adrenalin@n. 肾上腺素
+940@adrenal@adj. 肾上腺的 n. 肾上腺
+941@adiabatic@adj. 绝热的；隔热的
+942@adhesome@
+943@acrosome@n. [医]顶体精子
+944@acrocentric@adj.,n. (染色体)近端着丝(的)
+945@acorn@n. 橡子；橡实
+946@acidity@n. 酸度；酸性；酸过多；胃酸过多
+947@acetylcholine@n. 乙酰胆碱
+948@acetylation@n. 乙酰化作用
+949@acetonitrile@n. [化]乙腈；氰甲烷
+950@aceto-carmine@醋酸洋红
+951@acetanilide@n. 退热冰
+952@acetaldehyde@n. 乙醛；醋醛
+953@aberration@n. 偏差; 越轨 差错; 毛病
+954@abdominal@adj. 腹部的
+955@abdomen@n. 腹部；下腹；腹腔

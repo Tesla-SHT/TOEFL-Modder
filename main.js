@@ -1,42 +1,51 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 const fs = require('fs')
-
+//词书的信息
 const NOTE_PATH = path.join(__dirname, './data/notes.json')
 if (!fs.existsSync(NOTE_PATH)) {
     fs.mkdirSync(path.join(__dirname, './data'))
     fs.writeFileSync(NOTE_PATH, '[]')
 }
 const getNotesData = () => JSON.parse(fs.readFileSync(NOTE_PATH))
-
+//收藏夹
 const COLLECT_PATH = path.join(__dirname, './data/collection.json')
 
-//改成判断是否有collection.json这个文件而不   是判断是否有这个路径
 if (!fs.existsSync(COLLECT_PATH)) {
     fs.writeFileSync(COLLECT_PATH, '[]')
 }
 else {
-    // 判断内容是否为空
     const fileContent = fs.readFileSync(COLLECT_PATH, 'utf8');
     if (fileContent.trim() === '') {
         fs.writeFileSync(COLLECT_PATH, '[]');
     }
 }
 const getCollectionData = () => JSON.parse(fs.readFileSync(COLLECT_PATH))
-
+//回收站
 const DELETE_PATH = path.join(__dirname, './data/bin.json')
 if (!fs.existsSync(DELETE_PATH)) {
     fs.writeFileSync(DELETE_PATH, '[]')
 }
 else {
-    // 判断内容是否为空
     const fileContent = fs.readFileSync(DELETE_PATH, 'utf8');
     if (fileContent.trim() === '') {
-        console.log('true empty');
         fs.writeFileSync(DELETE_PATH, '[]');
     }
 }
 const getBinData = () => JSON.parse(fs.readFileSync(DELETE_PATH))
+//设置
+const SETTING_PATH = path.join(__dirname, './data/setting.json')
+if (!fs.existsSync(SETTING_PATH)) {
+    fs.writeFileSync(SETTING_PATH, '[]')
+}
+else {
+    const fileContent = fs.readFileSync(SETTING_PATH, 'utf8');
+    if (fileContent.trim() === '') {
+        fs.writeFileSync(SETTING_PATH, '{}');
+    }
+}
+const getSettingData = () => JSON.parse(fs.readFileSync(SETTING_PATH))
+
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -63,12 +72,28 @@ const createWindow = () => {
     ipcMain.on('update-time', (event, index, time) => {
         let notesData = getNotesData();
         notesData[index].time.push(time)
-        notesData[index].learnday +=1;
+        notesData[index].learnday += 1;
         fs.writeFileSync(NOTE_PATH, JSON.stringify(notesData))
-        
+
+    })
+    ipcMain.on('create-review', (event, title) => {
+
+        const REVIEW_PATH = path.join(__dirname, './data/review/' + title + '.json');
+        fs.writeFileSync(path.join(__dirname, './data/review/test.json'), REVIEW_PATH);
+        //改成判断是否有collection.json这个文件而不是判断是否有这个路径
+        if (!fs.existsSync(REVIEW_PATH)) {
+            fs.writeFileSync(REVIEW_PATH, '[]');
+        }
+        else {
+            // 判断内容是否为空
+            const fileContent = fs.readFileSync(REVIEW_PATH, 'utf8');
+            if (fileContent.trim() === '') {
+                fs.writeFileSync(REVIEW_PATH, '[]');
+            }
+        }
     })
     ipcMain.handle('get-notes-data', () => getNotesData())
-    ipcMain.on('insert-note', (event, data) => {
+    /*ipcMain.on('insert-note', (event, data) => {
         let notesData = getNotesData()
         notesData.unshift(data)
         fs.writeFileSync(NOTE_PATH, JSON.stringify(notesData))
@@ -82,7 +107,7 @@ const createWindow = () => {
         let notesData = getNotesData()
         notesData.splice(index, 1)
         fs.writeFileSync(NOTE_PATH, JSON.stringify(notesData))
-    })
+    })*/
     //Collection
     ipcMain.handle('get-collection-data', () => getCollectionData())
     ipcMain.on('add-to-collection', (event, word) => {
@@ -113,7 +138,13 @@ const createWindow = () => {
             fs.writeFileSync(DELETE_PATH, JSON.stringify(binData))
         }
     })
-
+    //Settiing
+    ipcMain.handle('get-setting-data', () => getSettingData())
+    ipcMain.on('update-word-number', (event, number) => {
+        let settingData = getSettingData()
+        settingData.wordnumber = number
+        fs.writeFileSync(SETTING_PATH, JSON.stringify(settingData))
+    })
     ipcMain.on('window-close', () => {
         win.close()
     })

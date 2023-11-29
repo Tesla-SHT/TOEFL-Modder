@@ -11,17 +11,24 @@ export default {
 
         const note = reactive({ title: '', content: '', definition: '', example: '' })
         const wordsData = reactive([])
+        let wordnumber = 0;
+        let wordnumberRemain = 0;
         const options = ref([]);
         let collection = []
         let bin = []
+        let wordArrange = []
+
         onMounted(async function () {
             if (index === -1) return
             const data = (await $data.getNotes())[index]
             note.title = data.title
             try {
+                //get wordbook's words
                 const response = await fetch(`../../data/dicts/${note.title}.json`);
                 const jsonData = await response.json();
                 wordsData.push(...jsonData);
+                wordnumber = (await $setting.getSettingData()).wordnumber;
+                //get reviewing words
                 await $collect.getCollectionList().then(result => {
                     ExposeCollection(result)
                 });
@@ -29,76 +36,105 @@ export default {
                     ExposeBin(result)
                 });
 
+
+                wordnumberRemain = wordnumber;
+                for (let i = 0; i < wordsData.length; i++) {wordArrange.push(i);}
+                wordArrange = getRandomElements(wordArrange, wordArrange.length);//arrange shuffle
+                wordArrange.push(-1);//end of arrange
                 showNextWord(); // 显示第一个单词
+
             } catch (error) {
                 console.error(error)
             }
 
-
         })
         let currentWordIndex = 0
+        let currentIndex = 0
 
         let collectflag = false
         function ExposeCollection(result) {
             collection = result
         }
 
-        let deleteflag = false
+        let validflag = false
         function ExposeBin(result) {
             bin = result
         }
         //console.log(collection)
         function showCurrentWord() {
-            if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
-                return wordsData[currentWordIndex].Words
-            }
-            return ''
+            //if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
+            return wordsData[currentWordIndex].Words
+            //}
+            //return ''
         }
 
         function showCurrentDefinition() {
             // console.log(currentWordIndex);
-            if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
-                return wordsData[currentWordIndex].Definitions
-            }
-            return ''
+            //if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
+            return wordsData[currentWordIndex].Definitions
+            //}
+            //return ''
         }
 
         function showCurrentExample() {
-            if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
-                return wordsData[currentWordIndex].Example
-            }
-            return ''
+            //if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
+            return wordsData[currentWordIndex].Example
+            //}
+            //return ''
         }
-        let correctIndex = 0;
         function showNextWord() {
-            deleteflag = false;
-            while (!deleteflag) {
-                currentWordIndex++;
-                note.content = showCurrentWord();
-                note.definition = showCurrentDefinition();
-                note.example = showCurrentExample();
-                deleteflag = true
-                for (let i = 0; i < bin.length; i++) {
-                    if (bin[i] == note.content) {
-                        deleteflag = false;
+            setTimeout(() => {
+                console.log(wordnumber, wordnumberRemain);
+                if (wordnumberRemain <= 0) {
+                    console.log(wordnumber);
+                    router.back();
+                    wordnumberRemain = wordnumber;
+                }
+                wordnumberRemain--;
+                validflag = false;
+                while (!validflag) {
+                    //currentWordIndex++;
+                    currentIndex++;
+                    currentWordIndex = wordArrange[currentIndex];
+                    if (currentWordIndex < 0) {
+                        console.log("end of dictionary");
                         break;
                     }
+                    validflag = true
+                    let tempWord = showCurrentWord();
+                    for (let i = 0; i < bin.length; i++) {
+                        if (bin[i] == tempWord) {
+                            validflag = false;
+                            break;
+                        }
+                    }
                 }
-            }
-            collectflag = false;
-            //console.log(collection);
-            for (let i = 0; i < collection.length; i++) {
-                if (collection[i] == note.content) {
-                    //console.log("check" + collectflag);
-                    collectflag = true;
-                    break;
+                if (validflag) {
+                    note.content = showCurrentWord();
+                    note.definition = showCurrentDefinition();
+                    note.example = showCurrentExample();
+                } else {
+                    note.content = '';
+                    note.definition = '';
+                    note.example = '';
+                    router.back;
+                    currentIndex = 0;
                 }
-            }      // Generate options
-            const allOptions = wordsData.map(word => word.Definitions).flat();
-            const randomOptions = getRandomElements(allOptions, 6);
-            const randomIndex = Math.floor(Math.random() * randomOptions.length);
-            randomOptions[randomIndex] = note.definition;
-            options.value = randomOptions;
+                collectflag = false;
+                //console.log(collection);
+                for (let i = 0; i < collection.length; i++) {
+                    if (collection[i] == note.content) {
+                        //console.log("check" + collectflag);
+                        collectflag = true;
+                        break;
+                    }
+                }      // Generate options
+                const allOptions = wordsData.map(word => word.Definitions).flat();
+                const randomOptions = getRandomElements(allOptions, 6);
+                const randomIndex = Math.floor(Math.random() * randomOptions.length);
+                randomOptions[randomIndex] = note.definition;
+                options.value = randomOptions;
+            }, 200);
         }
 
         function getRandomElements(array, count) {
@@ -111,7 +147,7 @@ export default {
             currentWordIndex,
             showNextWord,
             collectflag,
-            deleteflag,
+            validflag,
             options,
         }
     },
@@ -120,7 +156,8 @@ export default {
             collecting: this.collectflag, // Flag to track if the collect button is being clicked
             deleting: false, // Flag to track if the delete button is being clicked
             audioBaseUrl: 'http://dict.youdao.com/dictvoice?type=2&audio=',
-            audioword: this.note.content
+            audioword: this.note.content,
+            answercolor: true
         }
     },
     computed: {
@@ -161,21 +198,23 @@ export default {
             }
         },
         refreshIcon(event) {
+            setTimeout(() => {
+                const choice = document.getElementsByClassName('word-choice');
+                choice[0].classList.remove('conceal');
+                choice[0].classList.add('reveal');
 
-            const choice = document.getElementsByClassName('word-choice');
-            choice[0].classList.remove('conceal');
-            choice[0].classList.add('reveal');
-
-            const detail = document.getElementsByClassName('word-detail');
-            detail[0].classList.remove('reveal');
-            detail[0].classList.add('conceal');
-            console.log(this.collection)
-            this.collecting = this.collectflag
-            console.log(this.collecting)
-            this.deleting = false
+                const detail = document.getElementsByClassName('word-detail');
+                detail[0].classList.remove('reveal');
+                detail[0].classList.add('conceal');
+                console.log(this.collection)
+                this.collecting = this.collectflag
+                console.log(this.collecting)
+                this.deleting = false
+            }, 200)
         },
         checkAnswer(event, correct, answer) {
             if (correct === answer) {
+                this.answercolor = true;
                 this.$nextTick(() => {
                     const buttons = document.getElementsByClassName('word-option');
                     for (let i = 0; i < buttons.length; i++) {
@@ -199,10 +238,11 @@ export default {
                             buttons[i].classList.remove('correct');
                             buttons[i].classList.remove('incorrect');
                         }
-                    }, 2000);
+                    }, 500);
                 })
             }
             else {
+                this.answercolor = false;
                 // Set the button's class to 'incorrect' to change the border color to red
                 this.$nextTick(() => {
                     const buttons = document.getElementsByClassName('word-option');
@@ -233,9 +273,12 @@ export default {
                             buttons[i].classList.remove('correct');
                             buttons[i].classList.remove('incorrect');
                         }
-                    }, 1000);
+                    }, 800);
                 });
             }
+        },
+        isAnswerCorrect(event) {
+            return this.answercolor;
         }
     }
 }
@@ -291,7 +334,7 @@ export default {
                 <div class="word-choice">
                     <n-grid cols="1 500:2" :x-gap="12" :y-gap="16">
                         <n-gi v-for="option in options" :key="option">
-                            <n-button class="word-option" @click="checkAnswer(event, note.definition, option)" size="large"
+                            <n-button class="word-option" @click="checkAnswer(event, note.definition, option);" size="large"
                                 strong secondary>
                                 {{ option }}
                             </n-button>
@@ -299,9 +342,15 @@ export default {
                     </n-grid>
                 </div>
                 <div class="word-detail">
-                    <p style="font-size:16px">{{ note.definition }}</p>
-                    <p style="font-size:14px">{{ note.example }}</p>
-                    <button @click="showNextWord(); refreshIcon(event)">Next Word</button>
+                    <n-h5 prefix="bar" :type="isAnswerCorrect() ? 'success' : 'error'">
+                        {{ note.definition }}
+                    </n-h5>
+                    <n-h6 prefix="bar" :type="isAnswerCorrect() ? 'success' : 'error'">
+                        {{ note.example }}
+                    </n-h6>
+                    <n-button @click="showNextWord($store.state.wordNumber); refreshIcon(event)"
+                        :type="isAnswerCorrect() ? 'success' : 'error'" dashed>Next Word</n-button>
+
                 </div>
             </div>
         </n-card>
@@ -403,6 +452,7 @@ button.deleted .kill-icon path {
 
 .word-detail {
     display: none;
+    padding-bottom: 10px;
 }
 
 .correct {

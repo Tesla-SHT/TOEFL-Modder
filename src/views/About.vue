@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <div>
+    <div style="height:100%">
         <div class="icon-container">
             <svg t="1672459372819" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
                 p-id="1377" width="85" height="85">
@@ -24,15 +24,41 @@
                 <path d="M0.118 963.552v60.33h60.33z" fill="#656D78" p-id="1384"></path>
             </svg>
         </div>
-        <h1 class="title">随心便签</h1>
-        <p class="description">by Azite</p>
+        <div class="about-container">
+            <p class="description">Expand your vocabulary with TOEFL-modder, a word recitation software designed to help
+                you improve your English skills.</p>
+            <div class="team-info">
+                <h2 class="team-title">Development Team</h2>
+                <n-grid x-gap="12" cols="5" >
+                    <n-grid-item>
+                        <div>沈皓天</div>
+                    </n-grid-item>
+                    <n-grid-item>
+                        <div>姜林楚</div>
+                    </n-grid-item>
+                    <n-grid-item>
+                        <div>蔡贺丞</div>
+                    </n-grid-item>
+                    <n-grid-item>
+                        <div>胡烁怡</div>
+                    </n-grid-item>
+                    <n-grid-item>
+                        <div>翁歌华</div>
+                    </n-grid-item>
+                </n-grid>
+            </div>
+            <p class="contact">Contact us: <a href="https://github.com/Tesla-SHT/TOEFL-Modder" target="_blank">Github</a> </p>
+        </div>
+        <footer style="font-size:12px;bottom:0;margin-top:auto">
+            <p class="copyright">© 2023 TOEFL-Modder. All rights reserved.</p>
+        </footer>
     </div>
 </template>
 
 <style scoped>
 .icon-container {
     text-align: center;
-    margin-top: 70px;
+    margin-top: 20px;
 }
 
 .icon {
@@ -49,6 +75,42 @@
 }
 
 .description {
+    font-size: 14px;
     text-align: center;
 }
+
+
+.about-container {
+    text-align: center;
+    padding: 20px;
+    align-items: center;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+.team-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.team-members {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.team-members li {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.copyright{
+    text-align: center;
+}
+/* Add more styles as needed */
 </style>

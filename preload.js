@@ -15,6 +15,9 @@ contextBridge.exposeInMainWorld('$data', {
     updateTime(index, time){
       ipcRenderer.send('update-time', index, time)
     },
+    createReview(index, title) {
+      ipcRenderer.send('create-review', title)
+    },
     getNotes: () => ipcRenderer.invoke('get-notes-data'),
     updateOne(index, data) {
       ipcRenderer.send('update-note', index, data)
@@ -44,5 +47,12 @@ contextBridge.exposeInMainWorld('$delete', {
   },
   deleteFromBin(word) {
     ipcRenderer.send('delete-from-bin', word)
+  }
+})
+
+contextBridge.exposeInMainWorld('$setting', {
+  getSettingData: () => ipcRenderer.invoke('get-setting-data'),
+  updateWordNumber(number) {
+    ipcRenderer.send('update-word-number', number)
   }
 })

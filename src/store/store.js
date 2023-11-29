@@ -5,10 +5,8 @@ export default createStore({
   state: {
     fontSize: 100, // 初始字号为16
     zoomLevel: 100,
+    wordNumber:50
 
-
-    collectionList: [], // State for the collection list
-    wordList: [] // State for the word list
   },
   mutations: {
     setFontSize(state, newSize) {
@@ -16,6 +14,9 @@ export default createStore({
     },
     ZoomSize(state, newZoom) {
       state.zoomLevel = newZoom;
+    },
+    setWordNumber(state, newNumber) {
+      state.wordNumber = newNumber;
     },
     addToCollection(state, word) {
       state.collectionList.push(word)
