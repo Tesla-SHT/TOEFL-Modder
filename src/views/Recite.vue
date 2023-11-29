@@ -12,9 +12,12 @@ export default {
         const note = reactive({ title: '', content: '', definition: '', example: '' })
         const wordsData = reactive([])
         let wordnumber = 0;
+        let wordnumberRemain = 0;
         const options = ref([]);
         let collection = []
         let bin = []
+        let wordArrange = []
+
         onMounted(async function () {
             if (index === -1) return
             const data = (await $data.getNotes())[index]
@@ -38,61 +41,83 @@ export default {
                 console.error(error)
             }
 
+            wordnumberRemain = wordnumber;
+            for (let i = 0; i < wordsData.length; i++) wordArrange.add(i);
+            let wordArrange = getRandomElements(wordArrange, wordArrange.length);//arrange shuffle
+            wordArrange.add(-1);//end of arrange
 
         })
         let currentWordIndex = 0
+        let currentIndex = 0
 
         let collectflag = false
         function ExposeCollection(result) {
             collection = result
         }
 
-        let deleteflag = false
+        let validflag = false
         function ExposeBin(result) {
             bin = result
         }
         //console.log(collection)
         function showCurrentWord() {
-            if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
+            //if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
                 return wordsData[currentWordIndex].Words
-            }
-            return ''
+            //}
+            //return ''
         }
 
         function showCurrentDefinition() {
             // console.log(currentWordIndex);
-            if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
+            //if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
                 return wordsData[currentWordIndex].Definitions
-            }
-            return ''
+            //}
+            //return ''
         }
 
         function showCurrentExample() {
-            if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
+            //if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
                 return wordsData[currentWordIndex].Example
-            }
-            return ''
+            //}
+            //return ''
         }
         function showNextWord() {
             setTimeout(() => {
-                console.log(wordnumber,currentWordIndex);
-                if (currentWordIndex >= wordnumber) {
+                console.log(wordnumber,wordnumberRemain);
+                if (wordnumberRemain<=0) {
                     console.log(wordnumber);
-                    router.back()
+                    router.back();
+                    wordnumberRemain = wordnumber;
                 }
-                deleteflag = false;
-                while (!deleteflag) {
-                    currentWordIndex++;
-                    note.content = showCurrentWord();
-                    note.definition = showCurrentDefinition();
-                    note.example = showCurrentExample();
-                    deleteflag = true
+                wordnumberRemain--;
+                validflag = false;
+                while (!validflag) {
+                    //currentWordIndex++;
+                    currentIndex++;
+                    currentWordIndex = wordArrange[currentIndex];
+                    if (currentWordIndex < 0) {
+                        console.log("end of dictionary");
+                        break;
+                    }
+                    validflag = true
+                    let tempWord = showCurrentWord();
                     for (let i = 0; i < bin.length; i++) {
-                        if (bin[i] == note.content) {
-                            deleteflag = false;
+                        if (bin[i] == tempWord) {
+                            validflag = false;
                             break;
                         }
                     }
+                }
+                if (validflag) {
+                    note.content = showCurrentWord();
+                    note.definition = showCurrentDefinition();
+                    note.example = showCurrentExample();
+                } else {
+                    note.content = '';
+                    note.definition = '';
+                    note.example = '';
+                    router.back;
+                    currentIndex = 0;
                 }
                 collectflag = false;
                 //console.log(collection);
@@ -121,7 +146,7 @@ export default {
             currentWordIndex,
             showNextWord,
             collectflag,
-            deleteflag,
+            validflag,
             options,
         }
     },
