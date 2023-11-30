@@ -1,6 +1,7 @@
 <!-- Setting.vue -->
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref } from "vue"; 
+import axios from 'axios';
 export default {
 
   setup() {
@@ -19,17 +20,25 @@ export default {
       }
     };
   },
-
+  created() {
+    axios.get('../../data/setting.json')
+      .then(response => {
+        this.newWordNumber = response.data.wordnumber; // 假设设置文件中有一个名为wordCount的字段
+      })
+      .catch(error => {
+        console.error('Failed to fetch setting data:', error);
+      });
+  },
   data() {
     return {
-      newwordNumber: 50,
-      reviewwordNumber: 150
+      newWordNumber: 50,
+      reviewWordNumber: 150
     }
   },
   methods: {
     updateWordNumber(event) {
-      console.log(this.wordNumber)
-      $setting.updateWordNumber(this.wordNumber)
+      console.log(this.newWordNumber)
+      $setting.updateWordNumber(this.newWordNumber)
     }
   }
 }
@@ -43,7 +52,7 @@ export default {
         <h4>New Word Number</h4>
       </n-gi>
       <n-gi :span="7">
-        <n-slider v-model:value="newwordNumber" :min="10" :max="200" :step="10" style="padding-top:9px"
+        <n-slider v-model:value="newWordNumber" :min="10" :max="200" :step="10" style="padding-top:9px"
           @click="updateWordNumber(event)" />
       </n-gi>
     </n-grid>
@@ -53,7 +62,7 @@ export default {
         <h4>Reviewing Word Number</h4>
       </n-gi>
       <n-gi :span="7">
-        <n-slider v-model:value="reviewwordNumber" :min="10" :max="200" :step="10" style="padding-top:9px"
+        <n-slider v-model:value="reviewWordNumber" :min="10" :max="200" :step="10" style="padding-top:9px"
           @click="updateWordNumber(event)" />
       </n-gi>
     </n-grid>
@@ -64,7 +73,7 @@ export default {
       </n-gi>
       <n-gi :span="7">
         <n-space>
-          <n-radio :checked="checkedAccent=== 'American Accent'" value="American Accent" name="basic-demo"
+          <n-radio :checked="checkedAccent === 'American Accent'" value="American Accent" name="basic-demo"
             @change="handleAccent">
             American Accent
           </n-radio>
@@ -98,7 +107,7 @@ export default {
         <h4>Display Scale</h4>
       </n-gi>
       <n-gi :span="7">
-        <h4>Zoom in: Ctrl/Shift/+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zoom out: Ctrl/-</h4>
+        <h4>Zoom in: Ctrl/Shift/+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zoom out: Ctrl/-</h4>
         <h4></h4>
       </n-gi>
     </n-grid>

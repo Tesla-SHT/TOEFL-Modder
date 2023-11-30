@@ -11,6 +11,7 @@
     "start": "electron ."
   },
   "dependencies": {
+    "axios": "^1.6.2",
     "vue": "^3.2.45",
     "vuex": "^4.1.0"
   },
