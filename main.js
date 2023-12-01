@@ -45,18 +45,6 @@ else {
     }
 }
 const getSettingData = () => JSON.parse(fs.readFileSync(SETTING_PATH))
-//records
-const RECORDS_PATH = path.join(__dirname, './data/records.json')
-if (!fs.existsSync(RECORDS_PATH)) {
-    fs.writeFileSync(RECORDS_PATH, '[]')
-}
-else {
-    const fileContent = fs.readFileSync(RECORDS_PATH, 'utf8');
-    if (fileContent.trim() === '') {
-        fs.writeFileSync(RECORDS_PATH, '{}');
-    }
-}
-const getRecords = () => JSON.parse(fs.readFileSync(RECORDS_PATH))
 
 
 const createWindow = () => {
@@ -156,87 +144,6 @@ const createWindow = () => {
         settingData.wordnumber = number
         fs.writeFileSync(SETTING_PATH, JSON.stringify(settingData))
     })
-
-    //record
-    ipcMain.handle('get-records-data', () => getRecords())
-    ipcMain.handle('gen-arrange',async(event,dict,total,num)=>{
-        let records = getRecords()
-        var flag_i=false
-        var i
-        var arrange=[]
-        for(i in records){
-            if(records[i].dict==dict){
-                flag_i=true
-                break
-            }
-        }
-        if(!flag_i){records.push({"dict":dict})
-            for(i in records){
-                if(records[i].dict==dict){
-                    break
-                }
-            }
-        }
-        let dict_record=records[i]
-        var j
-        for(j in dict_record){
-            if(dict_record[j].time<Date.now()-1000*600|dict_record[j].acc<0.6){
-                arrange.push(dict_record[j].index)
-            }
-            if(arrange.length>=num)break
-        }
-        for(j=arrange.length;j<num;j+=1){
-            var new_ind
-            while(true){
-                new_ind=int(Math.random()*total)
-                if(arrange.find(function(elem)return elem==new_ind)==undefined)break
-            }
-            arrange.push(new_ind)
-        }
-        arrange.push(-1)
-        return arrange
-    })
-    ipcMain.on('new-record', (event, dict,index,color) => {
-        let records = getRecords()
-        var flag_i=false
-        var i
-        for(i in records){
-            if(records[i].dict==dict){
-                flag_i=true
-                break
-            }
-        }
-        if(!flag_i){records.push({"dict":dict})
-            for(i in records){
-                if(records[i].dict==dict){
-                    break
-                }
-            }
-        }
-        let dict_record=records[i]
-        var flag_j=false
-        var j
-        for(j in dict_record){
-            if(dict_record[j].index==index){
-                flag_j=true
-                break
-            }
-        }
-        if(!flag_j){dict_record.push({"index":index,"last_time"=0,"try_num":0.0,"acc"=1.0})
-            for(j in dict_record){
-                if(records[j].index==index){
-                    break
-                }
-            }
-        }
-        let word=dict_record[j]
-        word.last_time=Date.now()
-        word.acc=(word.acc*word.try_num+color?1.0:0.0)/(word.try_num+1)
-        word.try_num+=1        
-        dict_record[j]=word
-        records[i]=dict_record
-        fs.writeFileSync(RECORDS_PATH, JSON.stringify(records))
-    })    
     ipcMain.on('window-close', () => {
         win.close()
     })

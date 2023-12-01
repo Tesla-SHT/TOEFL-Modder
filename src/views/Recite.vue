@@ -38,10 +38,9 @@ export default {
 
 
                 wordnumberRemain = wordnumber;
-                //for (let i = 0; i < wordsData.length; i++) {wordArrange.push(i);}
-                //wordArrange = getRandomElements(wordArrange, wordArrange.length);//arrange shuffle
-                //wordArrange.push(-1);//end of arrange
-                wordArrange=(await $record.load_arrange(note.title,wordsData.length,wordnumber))
+                for (let i = 0; i < wordsData.length; i++) {wordArrange.push(i);}
+                wordArrange = getRandomElements(wordArrange, wordArrange.length);//arrange shuffle
+                wordArrange.push(-1);//end of arrange
                 showNextWord(); // 显示第一个单词
 
             } catch (error) {
@@ -142,9 +141,7 @@ export default {
             const shuffled = array.sort(() => 0.5 - Math.random());
             return shuffled.slice(0, count);
         }
-        function recordAnswer() {
-            $record.record(note.title,currentWordIndex,this.answercolor)
-        }
+
         return {
             note,
             currentWordIndex,
@@ -279,7 +276,6 @@ export default {
                     }, 800);
                 });
             }
-            recordAnswer()
         },
         isAnswerCorrect(event) {
             return this.answercolor;
