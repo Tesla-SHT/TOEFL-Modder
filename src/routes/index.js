@@ -24,6 +24,11 @@ const routes = [
         name: 'recite',
         path: '/editor/:index',
         component: () => import('../views/Recite.vue')
+    },
+    {
+        name: 'collection',
+        path: '/collection',
+        component: () => import('../views/Collection.vue'),
     }
 ];
 
