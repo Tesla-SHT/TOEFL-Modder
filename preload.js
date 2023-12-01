@@ -56,3 +56,13 @@ contextBridge.exposeInMainWorld('$setting', {
     ipcRenderer.send('update-word-number', number)
   }
 })
+
+contextBridge.exposeInMainWorld('$record', {
+  getRecords: () => ipcRenderer.invoke('get-records-data'),
+  record(dict,index,color) {
+    ipcRenderer.send('new-record', dict,index,color)
+  }
+  load_arrange:()=>ipcRenderer.invoke('gen-arrange',dict,total,num){
+    ipcRenderer.send('gen-arrange',dict,total,num)
+  }
+})
