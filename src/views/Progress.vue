@@ -31,17 +31,12 @@ export default {
     setup: () => {
         const option = ref({
             title: {
-                text: "Traffic Sources",
+                text: "Monthly Progress",
                 left: "center"
             },
             tooltip: {
                 trigger: "item",
                 formatter: "{a} <br/>{b} : {c} ({d}%)"
-            },
-            legend: {
-                orient: "vertical",
-                left: "left",
-                data: ["Direct", "Email", "Ad Networks", "Video Ads", "Search Engines"]
             },
             series: [
                 {
@@ -118,11 +113,6 @@ export default {
                 </div>
             </n-card>
             <n-card style="margin:5% 3%;width:50%;height:350px; margin-top: 5px;" hoverable>
-                <n-grid :cols="1">
-                    <n-gi :span="8">
-                        <h3 align="center">Monthly Progress</h3>
-                    </n-gi>
-                </n-grid>
                 <v-chart class="chart" :option="option" />
                 <n-grid :cols="1">
                     <n-gi :span="8">
