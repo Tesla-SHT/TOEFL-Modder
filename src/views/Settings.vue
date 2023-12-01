@@ -168,10 +168,10 @@ export default {
         <n-space>
           <n-radio :checked="checkedBackground === 'DayView'" value="DayView" name="basic-demo"
             @change="handleBackground">
-            DayView
+            Light Mode
           </n-radio>
           <n-radio :checked="checkedBackground === 'NightView'" value="NightView" name="basic-demo" @change="handleBackground">
-            NightView
+            Dark Mode
           </n-radio>
           <n-radio :checked="checkedBackground === 'Eye-Protection Mode'" value="Eye-Protection Mode" name="basic-demo"
             @change="handleBackground">
