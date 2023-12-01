@@ -7,16 +7,26 @@ export default {
   setup() {
     const checkedValueRef1 = ref(null);
     const checkedValueRef2 = ref(null);
+    const checkedValueRef3 = ref(null);
+    const checkedValueRef4 = ref(null);
 
     return {
       disabled: ref(true),
       checkedAccent: checkedValueRef1,
       checkedSequence: checkedValueRef2,
+      checkedPre: checkedValueRef3,
+      checkedBackground: checkedValueRef4,
       handleAccent(e) {
         checkedValueRef1.value = e.target.value;
       },
       handleSequence(e) {
         checkedValueRef2.value = e.target.value;
+      },
+      handlePre(e) {
+        checkedValueRef3.value = e.target.value;
+      },
+      handleBackground(e) {
+        checkedValueRef4.value = e.target.value;
       }
     };
   },
@@ -99,6 +109,22 @@ export default {
           </n-radio></n-space>
       </n-gi>
     </n-grid>
+    <br>
+    <n-grid :cols="12">
+      <n-gi :span="5">
+        <h4>Study Order</h4>
+      </n-gi>
+      <n-gi :span="7">
+        <n-space>
+          <n-radio :checked="checkedPre === 'Review First'" value="Review First" name="basic-demo"
+            @change="handlePre">
+            Review First
+          </n-radio>
+          <n-radio :checked="checkedPre === 'New Word First'" value="New Word First" name="basic-demo" @change="handlePre">
+            New Word First
+          </n-radio></n-space>
+      </n-gi>
+    </n-grid>
   </n-card>
   <h2>&nbsp;&nbsp; General Display</h2>
   <n-card style="margin:5% 3%;width:94%">
@@ -111,9 +137,29 @@ export default {
         <h4></h4>
       </n-gi>
     </n-grid>
+    <br>
+    <n-grid :cols="12">
+      <n-gi :span="5">
+        <h4>Background</h4>
+      </n-gi>
+      <n-gi :span="7">
+        <n-space>
+          <n-radio :checked="checkedBackground === 'DayView'" value="DayView" name="basic-demo"
+            @change="handleBackground">
+            DayView
+          </n-radio>
+          <n-radio :checked="checkedBackground === 'NightView'" value="NightView" name="basic-demo" @change="handleBackground">
+            NightView
+          </n-radio>
+          <n-radio :checked="checkedBackground === 'Eye-Protection Mode'" value="Eye-Protection Mode" name="basic-demo"
+            @change="handleBackground">
+            Eye-Protection Mode
+          </n-radio></n-space>
+      </n-gi>
+    </n-grid>
   </n-card>
-  <span style="white-space: pre-line">blank</span>
-  <span style="white-space: pre-line">blank</span>
+  <span style="white-space: pre-line">&nbsp;</span>
+  <span style="white-space: pre-line">&nbsp;</span>
 </template>
 <style>
 h4 {
