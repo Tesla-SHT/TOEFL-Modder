@@ -9,6 +9,7 @@ export default {
     const checkedValueRef2 = ref(null);
     const checkedValueRef3 = ref(null);
     const checkedValueRef4 = ref(null);
+    const checkedValueRef5 = ref(null);
 
     return {
       disabled: ref(true),
@@ -16,6 +17,7 @@ export default {
       checkedSequence: checkedValueRef2,
       checkedPre: checkedValueRef3,
       checkedBackground: checkedValueRef4,
+      checkedAuto: checkedValueRef5,
       handleAccent(e) {
         checkedValueRef1.value = e.target.value;
       },
@@ -27,6 +29,9 @@ export default {
       },
       handleBackground(e) {
         checkedValueRef4.value = e.target.value;
+      },
+      handleAuto(e) {
+        checkedValueRef5.value = e.target.value;
       }
     };
   },
@@ -96,6 +101,23 @@ export default {
     <br>
     <n-grid :cols="12">
       <n-gi :span="5">
+        <h4>Automatic Pronunciation</h4>
+      </n-gi>
+      <n-gi :span="7">
+        <n-space>
+          <n-radio :checked="checkedAuto === 'Enabled'" value="Enabled" name="basic-demo"
+            @change="handleAuto">
+            Enabled
+          </n-radio>
+          <n-radio :checked="checkedAuto === 'Disabled'" value="Disabled" name="basic-demo"
+            @change="handleAuto">
+            Disabled
+          </n-radio></n-space>
+      </n-gi>
+    </n-grid>
+    <br>
+    <n-grid :cols="12">
+      <n-gi :span="5">
         <h4>Word Order</h4>
       </n-gi>
       <n-gi :span="7">
@@ -146,10 +168,10 @@ export default {
         <n-space>
           <n-radio :checked="checkedBackground === 'DayView'" value="DayView" name="basic-demo"
             @change="handleBackground">
-            DayView
+            Light Mode
           </n-radio>
           <n-radio :checked="checkedBackground === 'NightView'" value="NightView" name="basic-demo" @change="handleBackground">
-            NightView
+            Dark Mode
           </n-radio>
           <n-radio :checked="checkedBackground === 'Eye-Protection Mode'" value="Eye-Protection Mode" name="basic-demo"
             @change="handleBackground">
