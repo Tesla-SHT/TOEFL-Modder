@@ -61,8 +61,8 @@ export default {
                 }
             ]
         });
-
-        return { option };
+        const numberAnimationInstRef = ref(null);
+        return {numberAnimationInstRef, option };
     },
     data() {
         return {
@@ -97,7 +97,17 @@ export default {
     <n-card style="margin:5% 3%;width:94%;" hoverable>
         <n-grid :cols="6">
             <n-gi :span="6">
-                <h3 align="center">You Have Met TOEFL-Modder for _ Days!</h3>
+                <h3 align="center">
+                    <n-statistic  tabular-nums>
+                    <template #prefix>
+                        You have met TOEFL-Modder for 
+                    </template>
+                    <n-number-animation ref="numberAnimationInstRef" :from="0" :to="100" />
+                    <template #suffix>
+                        days!
+                    </template>
+                    </n-statistic>
+                </h3>
             </n-gi>
         </n-grid>
     </n-card>
