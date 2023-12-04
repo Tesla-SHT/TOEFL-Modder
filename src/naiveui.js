@@ -32,8 +32,9 @@ import {
     NThing,
     NTag,
     NListItem,
+    NConfigProvider,
+    zhCN, dateZhCN
 } from 'naive-ui';
-import { useThemeClass } from 'naive-ui/es/_mixins';
 
 const naive = create({
     components:
@@ -57,11 +58,13 @@ const naive = create({
             NList,
             NThing,
             NTag,
-            NListItem,],
+            NListItem,NConfigProvider],
     setup() {
         return {
             fontSize: this.$store.state.fontSize,
-            large, tiny, small, medium, largeSize, smallSize, mediumSize
+            large, tiny, small, medium, largeSize, smallSize, mediumSize,
+            zhCN,
+            dateZhCN
 
         };
     }

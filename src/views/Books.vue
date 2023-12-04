@@ -1,4 +1,4 @@
-<script setup>
+<script>
 import { ref, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -6,52 +6,91 @@ import Search from '../components/Search.vue'
 import NotesList from '../components/NotesList.vue'
 import RoundButton from '../components/RoundButton.vue'
 
-const router = useRouter()
+import { zhCN, dateZhCN, darkTheme } from 'naive-ui'
+import axios from 'axios';
+export default {
+    components: {
 
-const notesData = ref([])
+        NotesList,
+        Search,
+        RoundButton,
+    },
+    setup() {
+        const router = useRouter()
 
-var completeData = []
-async function refresh() {
-    completeData = (await $data.getNotes()).map((item, index) => Object({ ...item, index })) // 给每条数据加上下标索引
-    notesData.value = JSON.parse(JSON.stringify(completeData)) // 这里需要进行深拷贝
-}
+        const notesData = ref([])
 
-onMounted(refresh)
-
-const selected = (event, index) => {
-    index = notesData.value[index].index
-    if (event.target.tagName == 'path' || event.target.tagName == 'svg') { // 判断点击目标是否为删除按钮
-        if (confirm("确认删除？")) {
-            $data.deleteOne(index)
-            refresh() // 直接刷新页面会导致闪屏，所以得手动刷新数据
+        var completeData = []
+        async function refresh() {
+            completeData = (await $data.getNotes()).map((item, index) => Object({ ...item, index })) // 给每条数据加上下标索引
+            notesData.value = JSON.parse(JSON.stringify(completeData)) // 这里需要进行深拷贝
         }
-    } else {
-        router.push('/editor/' + index)
-    }
-}
 
-const newNote = () => {
-    router.push('/editor/-1')
-}
+        onMounted(refresh)
 
-const keyword = ref('')
+        const selected = (event, index) => {
+            index = notesData.value[index].index
+            if (event.target.tagName == 'path' || event.target.tagName == 'svg') { // 判断点击目标是否为删除按钮
+                if (confirm("确认删除？")) {
+                    $data.deleteOne(index)
+                    refresh() // 直接刷新页面会导致闪屏，所以得手动刷新数据
+                }
+            } else {
+                router.push('/editor/' + index)
+            }
+        }
 
-// 监听搜索框输入，搜索便签
-watch(keyword, async function () {
-    notesData.value = []
-    if (keyword.value == '') {
-        notesData.value = JSON.parse(JSON.stringify(completeData))
-        return;
-    }
-    for (let index in completeData) {
-        if (completeData[index].title.includes(keyword.value)) {
-            notesData.value.push(completeData[index])
+        const newNote = () => {
+            router.push('/editor/-1')
+        }
+
+        const keyword = ref('')
+
+        // 监听搜索框输入，搜索便签
+        watch(keyword, async function () {
+            notesData.value = []
+            if (keyword.value == '') {
+                notesData.value = JSON.parse(JSON.stringify(completeData))
+                return;
+            }
+            for (let index in completeData) {
+                if (completeData[index].title.includes(keyword.value)) {
+                    notesData.value.push(completeData[index])
+                }
+            }
+        })
+        return {
+            selected,
+            newNote,
+            keyword,
+            notesData,
+            zhCN,
+            dateZhCN,
+            darkTheme,
+        }
+    },created() {
+        axios.get('../../data/setting.json')
+            .then(response => {
+                this.theme = response.data.checkedBackground === 'Dark'?darkTheme:null;
+            })
+            .catch(error => {
+                console.error('Failed to fetch setting data:', error);
+            });
+    },
+    data() {
+        return {
+            zhCN,
+            dateZhCN,
+            darkTheme,
+            checkedBackground: null,
+            theme: null
         }
     }
-})
+}
 </script>
 
 <template>
+    <n-config-provider :theme="theme" :locate="zhCN">
     <div class="container">
 
         <div class="placeholder"></div>
@@ -61,6 +100,7 @@ watch(keyword, async function () {
         <RoundButton class="new-note-button" icon="add" color="#fcc000" selectedColor="#d4a827" iconColor="white" size="50"
             @click="newNote"></RoundButton>
     </div>
+    </n-config-provider>
 </template>
 
 <style scoped>
