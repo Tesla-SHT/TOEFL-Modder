@@ -54,6 +54,11 @@ contextBridge.exposeInMainWorld('$setting', {
   getSettingData: () => ipcRenderer.invoke('get-setting-data'),
   updateWordNumber(number) {
     ipcRenderer.send('update-word-number', number)
+  },
+  
+  
+  updateBackground(background) {
+    ipcRenderer.send('update-checkedBackground', background)
   }
 })
 
@@ -62,11 +67,4 @@ contextBridge.exposeInMainWorld('$record', {
     ipcRenderer.send('new-record', dict,index,color)
   },
   load_arrange:(dict,total,num)=>ipcRenderer.invoke('gen-arrange',dict,total,num)
-})
-
-contextBridge.exposeInIsolatedWorld("$settingBackground", {
-  getSettingBackground: () => ipcRenderer.invoke('get-setting-background'),
-  updateSettingBackground(background) {
-    ipcRenderer.send('update-setting-background', background)
-  }
 })

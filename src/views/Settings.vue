@@ -1,6 +1,6 @@
 <!-- Setting.vue -->
 <script>
-import { defineComponent, ref } from "vue"; 
+import { defineComponent, ref } from "vue";
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 import axios from 'axios';
@@ -41,7 +41,7 @@ export default {
     axios.get('../../data/setting.json')
       .then(response => {
         this.newWordNumber = response.data.wordnumber; // 假设设置文件中有一个名为wordCount的字段
-        this.background = response.data.checkedBackground;
+        this.checkedBackground = response.data.checkedBackground;
       })
       .catch(error => {
         console.error('Failed to fetch setting data:', error);
@@ -51,7 +51,6 @@ export default {
     return {
       newWordNumber: 50,
       reviewWordNumber: 150,
-      checkedBackground: 'Light',
     }
   },
   methods: {
@@ -59,9 +58,10 @@ export default {
       console.log(this.newWordNumber)
       $setting.updateWordNumber(this.newWordNumber)
     },
-    handleBackground(event) {
-      console.log(this.checkedBackground)
-      $settingBackground.updateBackground(this.checkedBackground)
+    handleBackground(event, background) {
+      console.log(background)
+      this.checkedBackground = background;
+      $setting.updateBackground(background)
     },
   }
 }
@@ -113,12 +113,10 @@ export default {
       </n-gi>
       <n-gi :span="7">
         <n-space>
-          <n-radio :checked="checkedAuto === 'Enabled'" value="Enabled" name="basic-demo"
-            @change="handleAuto">
+          <n-radio :checked="checkedAuto === 'Enabled'" value="Enabled" name="basic-demo" @change="handleAuto">
             Enabled
           </n-radio>
-          <n-radio :checked="checkedAuto === 'Disabled'" value="Disabled" name="basic-demo"
-            @change="handleAuto">
+          <n-radio :checked="checkedAuto === 'Disabled'" value="Disabled" name="basic-demo" @change="handleAuto">
             Disabled
           </n-radio></n-space>
       </n-gi>
@@ -146,11 +144,11 @@ export default {
       </n-gi>
       <n-gi :span="7">
         <n-space>
-          <n-radio :checked="checkedPre === 'Review First'" value="Review First" name="basic-demo"
-            @change="handlePre">
+          <n-radio :checked="checkedPre === 'Review First'" value="Review First" name="basic-demo" @change="handlePre">
             Review First
           </n-radio>
-          <n-radio :checked="checkedPre === 'New Word First'" value="New Word First" name="basic-demo" @change="handlePre">
+          <n-radio :checked="checkedPre === 'New Word First'" value="New Word First" name="basic-demo"
+            @change="handlePre">
             New Word First
           </n-radio></n-space>
       </n-gi>
@@ -175,14 +173,15 @@ export default {
       <n-gi :span="7">
         <n-space>
           <n-radio :checked="checkedBackground === 'Light'" value="Light" name="basic-demo"
-            @change="handleBackground">
+            @change="handleBackground(event, 'Light')">
             Light Mode
           </n-radio>
-          <n-radio :checked="checkedBackground === 'Dark'" value="Dark" name="basic-demo" @change="handleBackground">
+          <n-radio :checked="checkedBackground === 'Dark'" value="Dark" name="basic-demo"
+            @change="handleBackground(event, 'Dark')">
             Dark Mode
           </n-radio>
-          <n-radio :checked="checkedBackground === 'Eye'" value="Eye" name="basic-demo"
-            @change="handleBackground">
+          <n-radio :checked="checkedBackground === 'Eye'" :value="Eye" name="basic-demo"
+            @change="handleBackground(event, 'Eye')">
             Eye-Protection Mode
           </n-radio></n-space>
       </n-gi>
@@ -194,5 +193,4 @@ export default {
 <style>
 h4 {
   margin: 0;
-}
-</style>
+}</style>

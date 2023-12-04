@@ -158,7 +158,7 @@ const createWindow = () => {
     })
     ipcMain.on('update-checkedBackground', (event, checked) => {
         let settingData = getSettingData()
-        settingData.checkedBackground = checkedBackground
+        settingData.checkedBackground = checked
         fs.writeFileSync(SETTING_PATH, JSON.stringify(settingData))
     })
 
