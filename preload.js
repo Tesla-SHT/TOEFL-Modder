@@ -32,11 +32,11 @@ contextBridge.exposeInMainWorld('$data', {
 
 contextBridge.exposeInMainWorld('$collect', {
   getCollectionList: () => ipcRenderer.invoke('get-collection-data'),
-  addToCollection(word) {
-    ipcRenderer.send('add-to-collection', word)
+  addToCollection(word, definition, example) {
+    ipcRenderer.send('add-to-collection', word, definition, example)
   },
-  deleteFromCollection(word) {
-    ipcRenderer.send('delete-from-collection', word)
+  deleteFromCollection(word, definition, example) {
+    ipcRenderer.send('delete-from-collection', word, definition, example)
   }
 })
 

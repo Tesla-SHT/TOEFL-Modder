@@ -173,18 +173,18 @@ export default {
             const audioElement = this.$refs.audioPlayer
             audioElement.play()
         },
-        collectWord(event, word) {
+        collectWord(event, word, definition, example) {
 
             //console.log("collectWord")
             if (!this.collecting) {
                 console.log("add to collection")
                 this.collecting = true
-                $collect.addToCollection(word)
+                $collect.addToCollection(word, definition, example)
             }
             else {
                 console.log("delete from collection")
                 this.collecting = false
-                $collect.deleteFromCollection(word)
+                $collect.deleteFromCollection(word, definition, example)
             }
         },
         deleteWord(event, word) {
@@ -292,7 +292,7 @@ export default {
     <div class="container">
         <n-card class="WordCard" hoverable>
             <div class="icon-bar">
-                <button :class="{ 'collected': collecting }" class="icon-button" @click="collectWord(event, note.content)">
+                <button :class="{ 'collected': collecting }" class="icon-button" @click="collectWord(event, note.content, note.definition, note.example)">
                     <svg class="collect-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                         viewBox="0 0 12 12">
                         <g fill="none">
