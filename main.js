@@ -53,7 +53,7 @@ if (!fs.existsSync(RECORDS_PATH)) {
 else {
     const fileContent = fs.readFileSync(RECORDS_PATH, 'utf8');
     if (fileContent.trim() === '') {
-        fs.writeFileSync(RECORDS_PATH, '{}');
+        fs.writeFileSync(RECORDS_PATH, '[]');
     }
 }
 const getRecords = () => JSON.parse(fs.readFileSync(RECORDS_PATH))
@@ -158,9 +158,14 @@ const createWindow = () => {
     })
 
     //record
-    ipcMain.handle('get-records-data', () => getRecords())
+    // ipcMain.handle('get-records-data', () => getRecords())
     ipcMain.handle('gen-arrange',async(event,dict,total,num)=>{
-        let records = getRecords()
+        const arrange=await genArrange(dict,total,num)
+        return arrange
+    })
+    function genArrange(dict,total,num){
+        let records = []
+        recrods=getRecords()
         var flag_i=false
         var i
         var arrange=[]
@@ -170,71 +175,67 @@ const createWindow = () => {
                 break
             }
         }
-        if(!flag_i){records.push({"dict":dict})
+        if(!flag_i){
+            records.push({"dict":dict,"words":[]})
+            fs.writeFileSync(RECORDS_PATH, JSON.stringify(records))
             for(i in records){
                 if(records[i].dict==dict){
                     break
                 }
             }
         }
-        let dict_record=records[i]
+        let words=records[i].words
         var j
-        for(j in dict_record){
-            if(dict_record[j].time<Date.now()-1000*600|dict_record[j].acc<0.6){
-                arrange.push(dict_record[j].index)
+        for(j =0; j<words.length;j+=1){
+            if(words[j].time<Date.now()-1000*600|words[j].acc<0.6){
+                arrange.push(words[j].index)
             }
             if(arrange.length>=num)break
         }
         for(j=arrange.length;j<num;j+=1){
             var new_ind
             while(true){
-                new_ind=int(Math.random()*total)
-                if(arrange.find(function(elem)return elem==new_ind)==undefined)break
+                new_ind=Math.floor(Math.random()*total)
+                if(arrange.find(function(elem){
+                    return elem==new_ind
+                })==undefined)break
             }
             arrange.push(new_ind)
         }
         arrange.push(-1)
         return arrange
-    })
-    ipcMain.on('new-record', (event, dict,index,color) => {
+    }
+    ipcMain.on('new-record', (event, dict,ind,color) => {
+        console.log(ind)
         let records = getRecords()
         var flag_i=false
         var i
-        for(i in records){
+        for(i=0;i<records.length;i+=1){
             if(records[i].dict==dict){
                 flag_i=true
                 break
             }
         }
-        if(!flag_i){records.push({"dict":dict})
-            for(i in records){
-                if(records[i].dict==dict){
-                    break
-                }
-            }
+        if(!flag_i){
+            records.push({"dict":dict,"words":[]})
         }
-        let dict_record=records[i]
+        let words=records[i].words
         var flag_j=false
         var j
-        for(j in dict_record){
-            if(dict_record[j].index==index){
+        for(j =0; j<words.length;j+=1){
+            if(words[j].index==ind){
                 flag_j=true
                 break
             }
         }
-        if(!flag_j){dict_record.push({"index":index,"last_time"=0,"try_num":0.0,"acc"=1.0})
-            for(j in dict_record){
-                if(records[j].index==index){
-                    break
-                }
-            }
+        if(!flag_j){words.push({"index":ind,"last_time":0,"try_num":0.0,"acc":1.0})
         }
-        let word=dict_record[j]
+        let word=words[j]
         word.last_time=Date.now()
         word.acc=(word.acc*word.try_num+color?1.0:0.0)/(word.try_num+1)
         word.try_num+=1        
-        dict_record[j]=word
-        records[i]=dict_record
+        words[j]=word
+        records[i].words=words
         fs.writeFileSync(RECORDS_PATH, JSON.stringify(records))
     })    
     ipcMain.on('window-close', () => {
