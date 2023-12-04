@@ -1,6 +1,8 @@
 <!-- Setting.vue -->
 <script>
 import { defineComponent, ref } from "vue"; 
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 import axios from 'axios';
 export default {
 
@@ -39,6 +41,7 @@ export default {
     axios.get('../../data/setting.json')
       .then(response => {
         this.newWordNumber = response.data.wordnumber; // 假设设置文件中有一个名为wordCount的字段
+        this.background = response.data.checkedBackground;
       })
       .catch(error => {
         console.error('Failed to fetch setting data:', error);
@@ -47,14 +50,19 @@ export default {
   data() {
     return {
       newWordNumber: 50,
-      reviewWordNumber: 150
+      reviewWordNumber: 150,
+      checkedBackground: 'Light',
     }
   },
   methods: {
     updateWordNumber(event) {
       console.log(this.newWordNumber)
       $setting.updateWordNumber(this.newWordNumber)
-    }
+    },
+    handleBackground(event) {
+      console.log(this.checkedBackground)
+      $settingBackground.updateBackground(this.checkedBackground)
+    },
   }
 }
 </script>
@@ -166,14 +174,14 @@ export default {
       </n-gi>
       <n-gi :span="7">
         <n-space>
-          <n-radio :checked="checkedBackground === 'DayView'" value="DayView" name="basic-demo"
+          <n-radio :checked="checkedBackground === 'Light'" value="Light" name="basic-demo"
             @change="handleBackground">
             Light Mode
           </n-radio>
-          <n-radio :checked="checkedBackground === 'NightView'" value="NightView" name="basic-demo" @change="handleBackground">
+          <n-radio :checked="checkedBackground === 'Dark'" value="Dark" name="basic-demo" @change="handleBackground">
             Dark Mode
           </n-radio>
-          <n-radio :checked="checkedBackground === 'Eye-Protection Mode'" value="Eye-Protection Mode" name="basic-demo"
+          <n-radio :checked="checkedBackground === 'Eye'" value="Eye" name="basic-demo"
             @change="handleBackground">
             Eye-Protection Mode
           </n-radio></n-space>

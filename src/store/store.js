@@ -6,7 +6,7 @@ export default createStore({
     fontSize: 100, // 初始字号为16
     zoomLevel: 100,
     wordNumber:50
-
+    
   },
   mutations: {
     setFontSize(state, newSize) {

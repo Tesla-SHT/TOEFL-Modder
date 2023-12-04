@@ -45,7 +45,7 @@ const closeWindow = () => {
 </script>
 
 <template>
-  <div class="container">
+  <div class="container Allbackground">
     <div class="side-panel">
       <h1 class="app-title" style="margin-bottom:70px">TOEFL &nbsp; Modder</h1>
       <Navigator class="navigator" :pages="pages" :defaultIndex="defaultIndex" @selected="changePage"></Navigator>
@@ -79,8 +79,6 @@ const closeWindow = () => {
 
   height: 100%;
   width: 200px;
-
-  background-color: #f3f3f3;
 
   -webkit-app-region: drag;
   /* 允许用户进行窗口拖动 */

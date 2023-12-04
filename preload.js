@@ -63,3 +63,10 @@ contextBridge.exposeInMainWorld('$record', {
   },
   load_arrange:(dict,total,num)=>ipcRenderer.invoke('gen-arrange',dict,total,num)
 })
+
+contextBridge.exposeInIsolatedWorld("$settingBackground", {
+  getSettingBackground: () => ipcRenderer.invoke('get-setting-background'),
+  updateSettingBackground(background) {
+    ipcRenderer.send('update-setting-background', background)
+  }
+})

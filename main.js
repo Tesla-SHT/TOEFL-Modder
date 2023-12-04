@@ -156,6 +156,11 @@ const createWindow = () => {
         settingData.wordnumber = number
         fs.writeFileSync(SETTING_PATH, JSON.stringify(settingData))
     })
+    ipcMain.on('update-checkedBackground', (event, checked) => {
+        let settingData = getSettingData()
+        settingData.checkedBackground = checkedBackground
+        fs.writeFileSync(SETTING_PATH, JSON.stringify(settingData))
+    })
 
     //record
     // ipcMain.handle('get-records-data', () => getRecords())
