@@ -354,14 +354,13 @@ export default {
                     <n-h6 prefix="bar" :type="isAnswerCorrect() ? 'success' : 'error'">
                         {{ note.example }}
                     </n-h6>
-                    <n-button @click="showNextWord($store.state.wordNumber); refreshIcon(event)"
+                    <n-button @click="showNextWord(); refreshIcon(event)"
                         :type="isAnswerCorrect() ? 'success' : 'error'" dashed>Next Word</n-button>
 
                 </div>
             </div>
         </n-card>
     </div>
-    <div>{{ currentWordIndex }}</div>
 </template>
 
 <style scoped>
