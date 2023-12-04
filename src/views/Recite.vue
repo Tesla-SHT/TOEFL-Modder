@@ -17,6 +17,8 @@ export default {
         let collection = []
         let bin = []
         let wordArrange = []
+        let currentWordIndex = ref(0);
+        let currentIndex = 0
 
         onMounted(async function () {
             if (index === -1) return
@@ -38,9 +40,10 @@ export default {
 
 
                 wordnumberRemain = wordnumber;
-                for (let i = 0; i < wordsData.length; i++) {wordArrange.push(i);}
-                wordArrange = getRandomElements(wordArrange, wordArrange.length);//arrange shuffle
-                wordArrange.push(-1);//end of arrange
+                //for (let i = 0; i < wordsData.length; i++) {wordArrange.push(i);}
+                //wordArrange = getRandomElements(wordArrange, wordArrange.length);//arrange shuffle
+                //wordArrange.push(-1);//end of arrange
+                wordArrange=await $record.load_arrange(note.title,wordsData.length,wordnumber)
                 showNextWord(); // 显示第一个单词
 
             } catch (error) {
@@ -48,8 +51,6 @@ export default {
             }
 
         })
-        let currentWordIndex = 0
-        let currentIndex = 0
 
         let collectflag = false
         function ExposeCollection(result) {
@@ -63,7 +64,7 @@ export default {
         //console.log(collection)
         function showCurrentWord() {
             //if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
-            return wordsData[currentWordIndex].Words
+            return wordsData[currentWordIndex.value].Words
             //}
             //return ''
         }
@@ -71,14 +72,14 @@ export default {
         function showCurrentDefinition() {
             // console.log(currentWordIndex);
             //if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
-            return wordsData[currentWordIndex].Definitions
+            return wordsData[currentWordIndex.value].Definitions
             //}
             //return ''
         }
 
         function showCurrentExample() {
             //if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
-            return wordsData[currentWordIndex].Example
+            return wordsData[currentWordIndex.value].Example
             //}
             //return ''
         }
@@ -95,8 +96,9 @@ export default {
                 while (!validflag) {
                     //currentWordIndex++;
                     currentIndex++;
-                    currentWordIndex = wordArrange[currentIndex];
-                    if (currentWordIndex < 0) {
+                    currentWordIndex.value = wordArrange[currentIndex];
+                    console.log(currentWordIndex.value);
+                    if (currentWordIndex.value < 0) {
                         console.log("end of dictionary");
                         break;
                     }
@@ -141,7 +143,6 @@ export default {
             const shuffled = array.sort(() => 0.5 - Math.random());
             return shuffled.slice(0, count);
         }
-
         return {
             note,
             currentWordIndex,
@@ -212,7 +213,7 @@ export default {
                 this.deleting = false
             }, 200)
         },
-        checkAnswer(event, correct, answer) {
+        checkAnswer(event, correct, answer, wordindex) {
             if (correct === answer) {
                 this.answercolor = true;
                 this.$nextTick(() => {
@@ -276,6 +277,8 @@ export default {
                     }, 800);
                 });
             }
+            $record.record(this.note.title,wordindex ,this.answercolor)
+            console.log(this.note.content,wordindex)
         },
         isAnswerCorrect(event) {
             return this.answercolor;
@@ -334,7 +337,7 @@ export default {
                 <div class="word-choice">
                     <n-grid cols="1 500:2" :x-gap="12" :y-gap="16">
                         <n-gi v-for="option in options" :key="option">
-                            <n-button class="word-option" @click="checkAnswer(event, note.definition, option);" size="large"
+                            <n-button class="word-option" @click="checkAnswer(event, note.definition, option, currentWordIndex);" size="large"
                                 strong secondary>
                                 {{ option }}
                             </n-button>
@@ -348,7 +351,7 @@ export default {
                     <n-h6 prefix="bar" :type="isAnswerCorrect() ? 'success' : 'error'">
                         {{ note.example }}
                     </n-h6>
-                    <n-button @click="showNextWord($store.state.wordNumber); refreshIcon(event)"
+                    <n-button @click="showNextWord(); refreshIcon(event)"
                         :type="isAnswerCorrect() ? 'success' : 'error'" dashed>Next Word</n-button>
 
                 </div>

@@ -1,0 +1,19 @@
+[
+    {
+        "dict": "College Vocabulary",
+        "words": [
+            {
+                "index": 42,
+                "last_time": 1701686240155,
+                "try_num": 2,
+                "acc": 0
+            },
+            {
+                "index": 166,
+                "last_time": 1701686244867,
+                "try_num": 1,
+                "acc": 0
+            }
+        ]
+    }
+]
