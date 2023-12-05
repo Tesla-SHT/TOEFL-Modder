@@ -1,40 +1,42 @@
 <template>
     <div>
         <div style="display: flex; width:100%; justify-content: space-between;">
-            <n-button class="leftsidebar" :class="{ 'is-button': isLeftExpanded, 'that-button': thatRightclick }" hoverable
-                @click="expandLeftSidebar">
-                <div v-if="!isDivHidden" style="font-size: 24px; color: #d4a827;">
-                    Q <br> U<br> I<br> C<br> K<br> <br> R<br> E<br> V<br>I<br>E<br>W
-                </div>
-                <div class="list-container">
-                    <div v-if="isDivVisible">
-                        <div>
-                            <div v-for="(item, index) in listItems" :key="index" class="list-item">
-                                <div class="thing" :style="{ 'margin-top': '10px' }">
-                                    <div class="thing-title">{{ item.title }}</div>
-                                    <div style="text-align:left">
-                                        <p v-for="(tag, tagIndex) in item.tags" :key="tagIndex" class="tag"
-                                            style="text-align:left">
-                                            {{ tag }}
-                                        </p>
-                                    </div>
-                                    <div class="description"></div>
-                                    <div class="thing-content" :style="{ 'margin-top': '10px', 'margin-bottom': '10px' }">
-                                        {{ item.content }}
-                                    </div>
-                                </div>
+
+            <div class="list-container">
+                <n-button v-if="!isButtonHidden" style="padding:0!important" class="leftsidebar"
+                    :class="{ 'is-button': isLeftExpanded, 'that-button': thatRightclick, }" @click="expandLeftSidebar">
+                    <div v-if="!isDivHidden" style="font-size: 24px; color: #d4a827;">
+                        Q <br> U<br> I<br> C<br> K<br> <br> R<br> E<br> V<br>I<br>E<br>W
+                    </div>
+                </n-button>
+                <div v-if="isDivVisible" class="words">
+                    <div v-for="(item, index) in listItems" :key="index" class="list-item">
+                        <div class="thing" :style="{ 'margin-top': '10px' }">
+                            <div class="thing-title">{{ item.title }}</div>
+                            <div style="text-align:left">
+                                <p v-for="(tag, tagIndex) in item.tags" :key="tagIndex" class="tag" style="text-align:left">
+                                    {{ tag }}
+                                </p>
+                            </div>
+                            <div class="description"></div>
+                            <div class="thing-content" :style="{ 'margin-top': '10px', 'margin-bottom': '10px' }">
+                                {{ item.content }}
                             </div>
                         </div>
                     </div>
                 </div>
-            </n-button>
+            </div>
             <n-button class="rightsidebar" :class="{ 'is-button': isRightExpanded, 'that-button': thatLeftclick }" hoverable
                 @click="expandRightSidebar">
                 <div v-if="!isdivHidden" style="font-size: 24px; color: #d4a827;">
-                    I <br> M<br> M<br> E<br> R<br> S<br> E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>E
+                    I <br> M<br> M<br> E<br> R<br> S<br> E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>E I <br> M<br> M<br>
+                    E<br> R<br> S<br> E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>E I <br> M<br> M<br> E<br> R<br> S<br>
+                    E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>E
                 </div>
-                <div v-if="isdivVisible">
-                    666666666
+                <div v-if="isdivVisible" style="overflow-y: auto;">
+                    I <br> M<br> M<br> E<br> R<br> S<br> E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>EI <br> M<br> M<br>
+                    E<br> R<br> S<br> E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>EI <br> M<br> M<br> E<br> R<br> S<br>
+                    E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>E
                 </div>
             </n-button>
         </div>
@@ -64,15 +66,6 @@ use([
 
 
 export default {
-    components: {
-        NButton,
-        NIcon,
-        VChart,
-        NList,
-        NThing,
-        NTag,
-        NListItem,
-    },
     data() {
         return {
             isLeftExpanded: false,
@@ -83,6 +76,7 @@ export default {
             isdivHidden: false,
             isDivVisible: false,
             isdivVisible: false,
+            isButtonHidden: false,
 
             listItems: [
                 {
@@ -137,6 +131,9 @@ export default {
             if (!this.isDivHidden) {
                 this.isDivHidden = true;
             }
+            if (!this.isButtonHidden) {
+                this.isButtonHidden = true;
+            }
             if (!this.isdivHidden) {
                 this.isdivHidden = true;
             }
@@ -156,6 +153,7 @@ export default {
             }
             this.isdivVisible = !this.isdivVisible;
             this.isDivVisible = false;
+            this.isButtonHidden = false;
         }
     }
 };
@@ -165,8 +163,8 @@ export default {
 <style scoped>
 .leftsidebar {
     height: 70vh;
-    margin-top: 10vh;
-    width: 30%;
+    width: 50%;
+    margin-top: 7%;
     margin-left: 7%;
     margin-right: auto;
     overflow: hidden;
@@ -174,23 +172,27 @@ export default {
     cursor: pointer;
     transition: background-color 0.3s, border-color 0.3s, width 0.3s;
     /* 添加过渡效果 */
+    --n-color-hover: none !important;
+    --n-border-hover: none !important;
+    --n-text-color: none !important;
 }
 
 .leftsidebar.is-button {
     width: 80%;
     border-radius: 10px;
-    /* 添加禁止悬停样式 */
-    pointer-events: none;
-    /* 这会禁用元素的鼠标事件，包括悬停 */
     /* 边框宽度和颜色 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     /* 阴影样式，可以根据需要调整参数 */
+    overflow-y: auto;
+    /* 允许垂直滚动 */
+
 }
 
 .leftsidebar.that-button {
-    width: 5%;
+    width: 50%;
     border-color: #F09C20;
     background-color: #faedc7;
+    margin-top: 30px;
 }
 
 .leftsidebar:hover {
@@ -222,6 +224,12 @@ export default {
     /* 悬停时显示竖线 */
 }
 
+.leftsidebar.that-button:hover {
+    background-color: inherit;
+    border: none;
+    cursor: default;
+}
+
 .rightsidebar {
     height: 70vh;
     margin-top: 10vh;
@@ -233,17 +241,22 @@ export default {
     cursor: pointer;
     transition: background-color 0.3s, border-color 0.3s, width 0.3s;
     /* 添加过渡效果 */
+    overflow-y: auto;
+    /* 允许垂直滚动 */
+
+    --n-color-hover: none !important;
+    --n-border-hover: none !important;
+    --n-text-color: none !important;
 }
 
 .rightsidebar.is-button {
     width: 80%;
     border-radius: 10px;
-    /* 添加禁止悬停样式 */
-    pointer-events: none;
-    /* 这会禁用元素的鼠标事件，包括悬停 */
     /* 边框宽度和颜色 */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     /* 阴影样式，可以根据需要调整参数 */
+    overflow-y: auto;
+    /* 允许垂直滚动 */
 }
 
 .rightsidebar.that-button {
@@ -283,8 +296,13 @@ export default {
 
 .list-container {
     overflow-y: auto;
-    max-height: calc(70vh);
-    height: calc(70vh); /* 添加此行以设置固定高度 */
+    max-height: calc(80vh);
+    height: calc(80vh);
+    /* 添加此行以设置固定高度 */
+    margin-top: 5vh;
+    width: 85%;
+    margin-left: 3%;
+    margin-right: auto;
 }
 
 
@@ -293,14 +311,20 @@ export default {
     padding: 10px;
     background-color: #f9f9f9;
     margin-bottom: 0;
-    margin-top: -10px;
+    margin-top: 0px;
     border-left: none;
     /* 添加这一行，使左边框消失 */
     border-right: none;
-    width: 90%;
+    width: 100%;
     /* 新增样式以限定边框并在内容超过宽度时换行 */
     word-wrap: break-word;
     word-break: break-all;
+}
+
+.list-item:hover {
+    box-shadow: inset 0 5px 50px -5px rgba(0, 0, 0, 0.2),
+        inset 0 -5px 5px -5px rgba(0, 0, 0, 0.2);
+
 }
 
 .thing {
@@ -338,4 +362,18 @@ export default {
     background-color: #4CAF50;
     color: #fff;
     border-radius: 4px;
-}</style>
+}
+
+.words {
+    margin-top: 1%;
+    margin-left: 1%;
+    height: 97%;
+    width: 97%;
+    border-radius: 10px;
+    /* 边框宽度和颜色 */
+    box-shadow: 0 0 10px rgba(0.3, 0, 0, 0.3);
+    /* 阴影样式，可以根据需要调整参数 */
+    overflow-y: auto;
+    /* 允许垂直滚动 */
+}
+</style>
