@@ -1,6 +1,8 @@
 <script>
 import { reactive, onMounted, ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { zhCN, dateZhCN, darkTheme } from 'naive-ui'
+import axios from 'axios'; 
 export default {
     setup() {
 
@@ -43,7 +45,7 @@ export default {
                 //for (let i = 0; i < wordsData.length; i++) {wordArrange.push(i);}
                 //wordArrange = getRandomElements(wordArrange, wordArrange.length);//arrange shuffle
                 //wordArrange.push(-1);//end of arrange
-                wordArrange=await $record.load_arrange(note.title,wordsData.length,wordnumber)
+                wordArrange = await $record.load_arrange(note.title, wordsData.length, wordnumber)
                 showNextWord(); // 显示第一个单词
 
             } catch (error) {
@@ -149,8 +151,17 @@ export default {
             showNextWord,
             collectflag,
             validflag,
-            options,
+            options, zhCN,
+            dateZhCN, darkTheme
         }
+    }, created() {
+        axios.get('../../data/setting.json')
+            .then(response => {
+                this.theme = response.data.checkedBackground === 'Dark'?darkTheme:null;
+            })
+            .catch(error => {
+                console.error('Failed to fetch setting data:', error);
+            });
     },
     data() {
         return {
@@ -158,7 +169,8 @@ export default {
             deleting: false, // Flag to track if the delete button is being clicked
             audioBaseUrl: 'http://dict.youdao.com/dictvoice?type=2&audio=',
             audioword: this.note.content,
-            answercolor: true
+            answercolor: true,
+            theme: null
         }
     },
     computed: {
@@ -277,8 +289,8 @@ export default {
                     }, 800);
                 });
             }
-            $record.record(this.note.title,wordindex ,this.answercolor)
-            console.log(this.note.content,wordindex)
+            $record.record(this.note.title, wordindex, this.answercolor)
+            console.log(this.note.content, wordindex)
         },
         isAnswerCorrect(event) {
             return this.answercolor;
@@ -289,75 +301,79 @@ export default {
 </script>
 
 <template>
-    <div class="container">
-        <n-card class="WordCard" hoverable>
-            <div class="icon-bar">
-                <button :class="{ 'collected': collecting }" class="icon-button" @click="collectWord(event, note.content, note.definition, note.example)">
-                    <svg class="collect-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        viewBox="0 0 12 12">
-                        <g fill="none">
-                            <path
-                                d="M5.283 1.546a.8.8 0 0 1 1.435 0L7.83 3.798l2.486.361a.8.8 0 0 1 .443 1.365L8.96 7.277l.425 2.476a.8.8 0 0 1-1.16.844L6 9.427l-2.224 1.17a.8.8 0 0 1-1.16-.844l.424-2.476l-1.799-1.753a.8.8 0 0 1 .444-1.365l2.486-.36l1.111-2.253z"
-                                fill="currentColor"></path>
-                        </g>
-                    </svg>
-                </button>
-                <button :class="{ 'deleted': deleting }" class="icon-button" @click="deleteWord(event, note.content)"
-                    style="float: right;">
-                    <svg class="kill-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        viewBox="0 0 24 24">
-                        <g>
-                            <path
-                                d="M21.5 6a1 1 0 0 1-.883.993L20.5 7h-.845l-1.231 12.52A2.75 2.75 0 0 1 15.687 22H8.313a2.75 2.75 0 0 1-2.737-2.48L4.345 7H3.5a1 1 0 0 1 0-2h5a3.5 3.5 0 1 1 7 0h5a1 1 0 0 1 1 1zm-7.25 3.25a.75.75 0 0 0-.743.648L13.5 10v7l.007.102a.75.75 0 0 0 1.486 0L15 17v-7l-.007-.102a.75.75 0 0 0-.743-.648zm-4.5 0a.75.75 0 0 0-.743.648L9 10v7l.007.102a.75.75 0 0 0 1.486 0L10.5 17v-7l-.007-.102a.75.75 0 0 0-.743-.648zM12 3.5A1.5 1.5 0 0 0 10.5 5h3A1.5 1.5 0 0 0 12 3.5z"
-                                fill="currentColor"></path>
-                        </g>
-                    </svg>
-                </button>
-            </div>
-            <div class="word-title">
-                <h1>{{ note.content }}</h1>
-
-                <div>
-                    <svg @click="playAudio(note.content)" xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1024 1024"
-                        style="height:1.5em;width:1.5em;">
-                        <path
-                            d="M625.9 115c-5.9 0-11.9 1.6-17.4 5.3L254 352H90c-8.8 0-16 7.2-16 16v288c0 8.8 7.2 16 16 16h164l354.5 231.7c5.5 3.6 11.6 5.3 17.4 5.3c16.7 0 32.1-13.3 32.1-32.1V147.1c0-18.8-15.4-32.1-32.1-32.1zM586 803L293.4 611.7l-18-11.7H146V424h129.4l17.9-11.7L586 221v582zm348-327H806c-8.8 0-16 7.2-16 16v40c0 8.8 7.2 16 16 16h128c8.8 0 16-7.2 16-16v-40c0-8.8-7.2-16-16-16zm-41.9 261.8l-110.3-63.7a15.9 15.9 0 0 0-21.7 5.9l-19.9 34.5c-4.4 7.6-1.8 17.4 5.8 21.8L856.3 800a15.9 15.9 0 0 0 21.7-5.9l19.9-34.5c4.4-7.6 1.7-17.4-5.8-21.8zM760 344a15.9 15.9 0 0 0 21.7 5.9L892 286.2c7.6-4.4 10.2-14.2 5.8-21.8L878 230a15.9 15.9 0 0 0-21.7-5.9L746 287.8a15.99 15.99 0 0 0-5.8 21.8L760 344z"
-                            fill="currentColor"></path>
-                    </svg>
-                    <audio ref="audioPlayer" :src="audioLink"></audio>
+    <n-config-provider :theme="theme" :locate="zhCN">
+        <div class="container">
+            <n-card class="WordCard" hoverable>
+                <div class="icon-bar">
+                    <button :class="{ 'collected': collecting }" class="icon-button"
+                        @click="collectWord(event, note.content, note.definition, note.example)">
+                        <svg class="collect-icon" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 12 12">
+                            <g fill="none">
+                                <path
+                                    d="M5.283 1.546a.8.8 0 0 1 1.435 0L7.83 3.798l2.486.361a.8.8 0 0 1 .443 1.365L8.96 7.277l.425 2.476a.8.8 0 0 1-1.16.844L6 9.427l-2.224 1.17a.8.8 0 0 1-1.16-.844l.424-2.476l-1.799-1.753a.8.8 0 0 1 .444-1.365l2.486-.36l1.111-2.253z"
+                                    fill="currentColor"></path>
+                            </g>
+                        </svg>
+                    </button>
+                    <button :class="{ 'deleted': deleting }" class="icon-button" @click="deleteWord(event, note.content)"
+                        style="float: right;">
+                        <svg class="kill-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 24 24">
+                            <g>
+                                <path
+                                    d="M21.5 6a1 1 0 0 1-.883.993L20.5 7h-.845l-1.231 12.52A2.75 2.75 0 0 1 15.687 22H8.313a2.75 2.75 0 0 1-2.737-2.48L4.345 7H3.5a1 1 0 0 1 0-2h5a3.5 3.5 0 1 1 7 0h5a1 1 0 0 1 1 1zm-7.25 3.25a.75.75 0 0 0-.743.648L13.5 10v7l.007.102a.75.75 0 0 0 1.486 0L15 17v-7l-.007-.102a.75.75 0 0 0-.743-.648zm-4.5 0a.75.75 0 0 0-.743.648L9 10v7l.007.102a.75.75 0 0 0 1.486 0L10.5 17v-7l-.007-.102a.75.75 0 0 0-.743-.648zM12 3.5A1.5 1.5 0 0 0 10.5 5h3A1.5 1.5 0 0 0 12 3.5z"
+                                    fill="currentColor"></path>
+                            </g>
+                        </svg>
+                    </button>
                 </div>
+                <div class="word-title">
+                    <h1>{{ note.content }}</h1>
 
-                <!--<p>{{ note.definition }}</p>
+                    <div>
+                        <svg @click="playAudio(note.content)" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1024 1024"
+                            style="height:1.5em;width:1.5em;">
+                            <path
+                                d="M625.9 115c-5.9 0-11.9 1.6-17.4 5.3L254 352H90c-8.8 0-16 7.2-16 16v288c0 8.8 7.2 16 16 16h164l354.5 231.7c5.5 3.6 11.6 5.3 17.4 5.3c16.7 0 32.1-13.3 32.1-32.1V147.1c0-18.8-15.4-32.1-32.1-32.1zM586 803L293.4 611.7l-18-11.7H146V424h129.4l17.9-11.7L586 221v582zm348-327H806c-8.8 0-16 7.2-16 16v40c0 8.8 7.2 16 16 16h128c8.8 0 16-7.2 16-16v-40c0-8.8-7.2-16-16-16zm-41.9 261.8l-110.3-63.7a15.9 15.9 0 0 0-21.7 5.9l-19.9 34.5c-4.4 7.6-1.8 17.4 5.8 21.8L856.3 800a15.9 15.9 0 0 0 21.7-5.9l19.9-34.5c4.4-7.6 1.7-17.4-5.8-21.8zM760 344a15.9 15.9 0 0 0 21.7 5.9L892 286.2c7.6-4.4 10.2-14.2 5.8-21.8L878 230a15.9 15.9 0 0 0-21.7-5.9L746 287.8a15.99 15.99 0 0 0-5.8 21.8L760 344z"
+                                fill="currentColor"></path>
+                        </svg>
+                        <audio ref="audioPlayer" :src="audioLink"></audio>
+                    </div>
+
+                    <!--<p>{{ note.definition }}</p>
                 <p>{{ note.example }}</p>-->
-            </div>
-            <br>
-            <n-divider />
-            <div class="word-content">
-                <div class="word-choice">
-                    <n-grid cols="1 500:2" :x-gap="12" :y-gap="16">
-                        <n-gi v-for="option in options" :key="option">
-                            <n-button class="word-option" @click="checkAnswer(event, note.definition, option, currentWordIndex);" size="large"
-                                strong secondary>
-                                {{ option }}
-                            </n-button>
-                        </n-gi>
-                    </n-grid>
                 </div>
-                <div class="word-detail">
-                    <n-h5 prefix="bar" :type="isAnswerCorrect() ? 'success' : 'error'">
-                        {{ note.definition }}
-                    </n-h5>
-                    <n-h6 prefix="bar" :type="isAnswerCorrect() ? 'success' : 'error'">
-                        {{ note.example }}
-                    </n-h6>
-                    <n-button @click="showNextWord(); refreshIcon(event)"
-                        :type="isAnswerCorrect() ? 'success' : 'error'" dashed>Next Word</n-button>
+                <br>
+                <n-divider />
+                <div class="word-content">
+                    <div class="word-choice">
+                        <n-grid cols="1 500:2" :x-gap="12" :y-gap="16">
+                            <n-gi v-for="option in options" :key="option">
+                                <n-button class="word-option"
+                                    @click="checkAnswer(event, note.definition, option, currentWordIndex);" size="large"
+                                    strong secondary>
+                                    {{ option }}
+                                </n-button>
+                            </n-gi>
+                        </n-grid>
+                    </div>
+                    <div class="word-detail">
+                        <n-h5 prefix="bar" :type="isAnswerCorrect() ? 'success' : 'error'">
+                            {{ note.definition }}
+                        </n-h5>
+                        <n-h6 prefix="bar" :type="isAnswerCorrect() ? 'success' : 'error'">
+                            {{ note.example }}
+                        </n-h6>
+                        <n-button @click="showNextWord(); refreshIcon(event)"
+                            :type="isAnswerCorrect() ? 'success' : 'error'" dashed>Next Word</n-button>
 
+                    </div>
                 </div>
-            </div>
-        </n-card>
-    </div>
+            </n-card>
+        </div>
+    </n-config-provider>
 </template>
 
 <style scoped>
@@ -370,7 +386,6 @@ export default {
     height: 80%;
     margin: 5% 5%;
     border-radius: 10px;
-    background-color: white;
 
 }
 
@@ -384,7 +399,6 @@ export default {
     border: none;
     outline: none;
     border-radius: 10px;
-    background-color: white;
 
 }
 
@@ -398,7 +412,6 @@ export default {
     border: none;
     outline: none;
     border-radius: 10px;
-    background-color: white;
     overflow-y: hidden;
     vertical-align: middle;
 }
