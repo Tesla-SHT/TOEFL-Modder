@@ -1,70 +1,107 @@
-<script setup>
+<script>
 import { reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 import Navigator from './components/Navigator.vue'
 import Icon from './components/Icon.vue'
 
-const router = useRouter()
-const back = () => {
-  router.back()
-}
-const pages = reactive([
-  {
-    name: 'Books',
-    icon: 'pencil',
-    path: '/'
+import { zhCN, dateZhCN, darkTheme } from 'naive-ui'
+import axios from 'axios';
+export default {
+  components: {
+    Navigator,
+    Icon
   },
-  {
-    name: 'Progress',
-    icon: 'progress',
-    path: '/progress'
+  setup() {
+    const router = useRouter()
+    const back = () => {
+      router.back()
+    }
+    const pages = reactive([
+      {
+        name: 'Books',
+        icon: 'pencil',
+        path: '/'
+      },
+      {
+        name: 'Progress',
+        icon: 'progress',
+        path: '/progress'
+      },
+      {
+        name: 'Setting',
+        icon: 'setting',
+        path: '/settings'
+      },
+      {
+        name: 'About',
+        icon: 'info',
+        path: '/about'
+      }
+    ])
+    const defaultIndex = 0
+
+    const changePage = (pageIndex) => {
+      router.push(pages[pageIndex].path)
+    }
+
+    const closeWindow = () => {
+      $app.close()
+    }
+    return {
+      pages,
+      defaultIndex,
+      changePage,
+      closeWindow,
+      back
+    }
   },
-  {
-    name: 'Setting',
-    icon: 'setting',
-    path: '/settings'
+  created() {
+    axios.get('../../data/setting.json')
+      .then(response => {
+        this.theme = response.data.checkedBackground === 'Dark' ? darkTheme : null;
+        this.darkcolor = response.data.checkedBackground === 'Dark' ? 'darkcolor' : null;
+        this.iconcolor = response.data.checkedBackground === 'Dark' ? 'white' : 'black';
+      })
+      .catch(error => {
+        console.error('Failed to fetch setting data:', error);
+      });
   },
-  {
-    name: 'About',
-    icon: 'info',
-    path: '/about'
+  data() {
+    return {
+      theme: null,
+      darkcolor: null,
+      iconcolor:null
+    }
   }
-])
-const defaultIndex = 0
-
-const changePage = (pageIndex) => {
-  router.push(pages[pageIndex].path)
 }
-
-const closeWindow = () => {
-  $app.close()
-}
-
-
 </script>
 
 <template>
-  <div class="container Allbackground">
-    <div class="side-panel">
-      <h1 class="app-title" style="margin-bottom:70px">TOEFL &nbsp; Modder</h1>
-      <Navigator class="navigator" :pages="pages" :defaultIndex="defaultIndex" @selected="changePage"></Navigator>
+  <div class="container Allbackground" :class="darkcolor">
+    <div class="side-panel" :class="darkcolor">
+      <h1 class="app-title" style="margin-bottom:70px" :class="darkcolor">TOEFL &nbsp; Modder</h1>
+      <Navigator class="navigator" :pages="pages" :defaultIndex="defaultIndex" @selected="changePage" :iconcolor="iconcolor"></Navigator>
     </div>
-    <div class="status-bar">
+    <div class="status-bar" :class="darkcolor">
       <svg class="backicon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-        viewBox="0 0 24 24" style="height:1.5em;width:3em;margin-top:15px;
+        viewBox="0 0 24 24" :color = "iconcolor" style="height:1.5em;width:3em;margin-top:15px;  
   -webkit-app-region: no-drag;" @click="back">
         <path d="M11.67 3.87L9.9 2.1L0 12l9.9 9.9l1.77-1.77L3.54 12z" fill="currentColor"></path>
       </svg>
-      <Icon class="close-button" name="close" color="black" selectedColor="red" @click="closeWindow"></Icon>
+      <Icon class="close-button" name="close" :color="iconcolor" selectedColor="red" @click="closeWindow"></Icon>
     </div>
-    <div class="content-panel">
+    <div class="content-panel" :class="darkcolor">
       <router-view></router-view>
     </div>
   </div>
 </template>
 
 <style scoped>
+.darkcolor{
+  background-color: black!important;
+  color : white!important;
+}
 .backicon:hover path {
   fill: #6cc6e4;
 }

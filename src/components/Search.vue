@@ -1,6 +1,6 @@
 <script setup>
 import Icon from './Icon.vue'
-
+    
 const { placeholder, modelValue } = defineProps(['placeholder', 'modelValue'])
 
 // 这里需要手动绑定一下v-model

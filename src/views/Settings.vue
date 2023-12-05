@@ -67,6 +67,7 @@ export default {
 
       this.checkedBackground = background; this.theme = this.checkedBackground === "Dark" ? darkTheme : null;
       $setting.updateBackground(background)
+      location.reload()
     },
   }
 }
@@ -187,10 +188,7 @@ export default {
               @change="handleBackground(event, 'Dark')">
               Dark Mode
             </n-radio>
-            <n-radio :checked="checkedBackground === 'Eye'" value="Eye" name="basic-demo"
-              @change="handleBackground(event, 'Eye')">
-              Eye-Protection Mode
-            </n-radio></n-space>
+          </n-space>
         </n-gi>
       </n-grid>
     </n-card>

@@ -68,10 +68,11 @@ export default {
             dateZhCN,
             darkTheme,
         }
-    },created() {
+    }, created() {
         axios.get('../../data/setting.json')
             .then(response => {
-                this.theme = response.data.checkedBackground === 'Dark'?darkTheme:null;
+                this.theme = response.data.checkedBackground === 'Dark' ? darkTheme : null;
+                this.darkcolor = response.data.checkedBackground === 'Dark' ? 'darkcolor' : null;
             })
             .catch(error => {
                 console.error('Failed to fetch setting data:', error);
@@ -83,7 +84,8 @@ export default {
             dateZhCN,
             darkTheme,
             checkedBackground: null,
-            theme: null
+            theme: null,
+            darkcolor: null,
         }
     }
 }
@@ -91,19 +93,23 @@ export default {
 
 <template>
     <n-config-provider :theme="theme" :locate="zhCN">
-    <div class="container">
+        <div class="container">
 
-        <div class="placeholder"></div>
-        <NotesList class="notes-list" :data="notesData" @selected="selected"></NotesList>
-        <div class="mask"></div>
-        <Search class="search-bar" placeholder="搜索..." v-model="keyword"></Search>
-        <RoundButton class="new-note-button" icon="add" color="#fcc000" selectedColor="#d4a827" iconColor="white" size="50"
-            @click="newNote"></RoundButton>
-    </div>
+            <div class="placeholder"></div>
+            <NotesList class="notes-list" :data="notesData" @selected="selected"></NotesList>
+            <div class="mask" :class="darkcolor"></div>
+            <Search class="search-bar" placeholder="搜索..." v-model="keyword" :class="darkcolor"></Search>
+            <RoundButton class="new-note-button" icon="add" color="#fcc000" selectedColor="#d4a827" iconColor="white"
+                size="50" @click="newNote"></RoundButton>
+        </div>
     </n-config-provider>
 </template>
 
 <style scoped>
+.darkcolor {
+    background-color: black !important;
+}
+
 .search-bar {
     left: 220px;
     right: 20px;
