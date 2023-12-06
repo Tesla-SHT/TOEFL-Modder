@@ -169,6 +169,7 @@ const createWindow = () => {
     ipcMain.handle('clear-data', () => {
         fs.writeFileSync(DELETE_PATH, '[]')
         fs.writeFileSync(COLLECT_PATH, '[]')
+        fs.writeFileSync(RECORDS_PATH, '[]')
         let notesData = getNotesData();
         for (let i = 0; i < notesData.length; i += 1) {
             notesData[i].time = [];
@@ -184,8 +185,8 @@ const createWindow = () => {
         return arrange
     })
     function genArrange(dict, total, num) {
-        let records = []
-        recrods = getRecords()
+        let records= getRecords()
+        console.log(records)
         var flag_i = false
         var i
         var arrange = []
