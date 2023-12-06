@@ -57,7 +57,9 @@ else {
     }
 }
 const getRecords = () => JSON.parse(fs.readFileSync(RECORDS_PATH))
-
+//dict
+const DICT_PATH = path.join(__dirname, './data/dicts/')
+function getDictData(title) { return JSON.parse(fs.readFileSync(DICT_PATH + title + '.json'))}
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -132,7 +134,6 @@ const createWindow = () => {
     })
     ipcMain.on('delete-from-collection', (event, word, definition, example) => {
         let collectionData = getCollectionData();
-        console.log(collectionData);
         const index = collectionData.findIndex(item => item.word === word);
         if (index !== -1) {
             collectionData.splice(index, 1);
@@ -153,6 +154,17 @@ const createWindow = () => {
             binData.splice(index, 1)
             fs.writeFileSync(DELETE_PATH, JSON.stringify(binData))
         }
+    })
+    ipcMain.on('add-word-number', (event, title)=>{
+        let notesData = getNotesData();
+        var l;
+        for (l = 0; l < notesData.length; l += 1) {
+            if (notesData[l].title == title)
+                notesData[l].learnword += 1
+                notesData[l].unlearned -= 1
+        }
+        fs.writeFileSync(NOTE_PATH, JSON.stringify(notesData))
+
     })
     //Settiing
     ipcMain.handle('get-setting-data', () => getSettingData())
@@ -179,6 +191,9 @@ const createWindow = () => {
         for (let i = 0; i < notesData.length; i += 1) {
             notesData[i].time = [];
             notesData[i].learnday = 0;
+            notesData[i].learnword = 0;
+            let dictData = getDictData(notesData[i].title);
+            notesData[i].unlearned = dictData.length;
         }
         fs.writeFileSync(NOTE_PATH, JSON.stringify(notesData))
 
@@ -190,8 +205,7 @@ const createWindow = () => {
         return arrange
     })
     function genArrange(dict, total, num) {
-        let records= getRecords()
-        console.log(records)
+        let records = getRecords()
         var flag_i = false
         var i
         var arrange = []
@@ -232,7 +246,7 @@ const createWindow = () => {
         return arrange
     }
     ipcMain.on('new-record', (event, dict, ind, color) => {
-        console.log(ind)
+        
         let records = getRecords()
         var flag_i = false
         var i
@@ -264,6 +278,16 @@ const createWindow = () => {
         words[j] = word
         records[i].words = words
         fs.writeFileSync(RECORDS_PATH, JSON.stringify(records))
+
+        //update booklist data
+        let notesData = getNotesData();
+        var l;
+        for (l = 0; l < notesData.length; l += 1) {
+            if (notesData[l].title == records[i].dict)
+                notesData[l].learnword += 1
+                notesData[l].unlearned -= 1
+        }
+        fs.writeFileSync(NOTE_PATH, JSON.stringify(notesData))
     })
     ipcMain.on('window-close', () => {
         win.close()

@@ -38,7 +38,7 @@ function updateday(event, tdata, index, title) {
                 <n-layout style="margin-top:20px">
                     <p class="learn-day">{{ "You have learnt " + item.learnday + " days, " + item.learnword + " words, " }}
                     </p>
-                    <p class="learn-word">{{ item.learnword }}</p>
+                    <p class="learn-word">{{ item.unlearned + " words unlearned" }}</p>
                     <!--<Icon class="delete-icon" name="delete" color="black" selectedColor="#cc0000"></Icon>-->
                 </n-layout>
             </n-layout>

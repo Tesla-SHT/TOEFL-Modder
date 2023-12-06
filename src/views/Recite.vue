@@ -203,11 +203,11 @@ export default {
                 $collect.deleteFromCollection(word, definition, example)
             }
         },
-        deleteWord(event, word) {
+        deleteWord(event, word, title) {
             if (!this.deleting) {
                 this.deleting = true
                 $delete.addToBin(word)
-                $record.addWordNumber()
+                $record.addWordNumber(title)
                 console.log("delete " + this.deleting)
             }
             else {
@@ -321,7 +321,7 @@ export default {
                             </g>
                         </svg>
                     </button>
-                    <button :class="{ 'deleted': deleting }" class="icon-button" @click="deleteWord(event, note.content);showNextWord();refreshIcon(event)"
+                    <button :class="{ 'deleted': deleting }" class="icon-button" @click="deleteWord(event, note.content, note.title);showNextWord();refreshIcon(event)"
                         style="float: right;">
                         <svg class="kill-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                             viewBox="0 0 24 24">
