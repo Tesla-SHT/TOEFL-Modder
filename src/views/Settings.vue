@@ -44,6 +44,7 @@ export default {
         this.newWordNumber = response.data.wordnumber; // 假设设置文件中有一个名为wordCount的字段
         this.checkedBackground = response.data.checkedBackground;
         this.theme = this.checkedBackground === "Dark" ? darkTheme : null;
+        this.checkedAccent = response.data.accent;
       })
       .catch(error => {
         console.error('Failed to fetch setting data:', error);
@@ -54,24 +55,31 @@ export default {
       newWordNumber: 50,
 
       reviewWordNumber: 150,
-      theme: null
+      theme: null,
+      checkedAccent: "American Accent",
+      checkedAuto: "Disabled",
+      checkedSequence: "Shuffled",
+      checkedPre: "Review First",
+
     }
   },
   methods: {
     updateWordNumber(event) {
-      console.log(this.newWordNumber)
       $setting.updateWordNumber(this.newWordNumber)
     },
     handleBackground(event, background) {
       console.log(background)
-
       this.checkedBackground = background; this.theme = this.checkedBackground === "Dark" ? darkTheme : null;
       $setting.updateBackground(background)
       location.reload()
     },
-    clearData(event){
+    clearData(event) {
       $setting.clearData()
-    }
+    },
+    handleAccent(event, accent) {
+      this.checkedAccent = (accent === '2') ? "American Accent" : "English Accent";
+      $setting.updateAccent(accent)
+    },
   }
 }
 </script>
@@ -80,7 +88,7 @@ export default {
   <n-config-provider :theme="theme" :locate="zhCN">
     <n-card :bordered="false" style="background:transparent">
       <n-collapse arrow-placement="right" :default-expanded-names="['2', '1']">
-        <n-collapse-item name="1" >
+        <n-collapse-item name="1">
           <template #header>
             <n-h2 style="margin:0;">
               <b>Study Preference</b>
@@ -115,11 +123,11 @@ export default {
               <n-gi :span="7">
                 <n-space>
                   <n-radio :checked="checkedAccent === 'American Accent'" value="American Accent" name="basic-demo"
-                    @change="handleAccent">
+                    @change="handleAccent(event, '2')">
                     American Accent
                   </n-radio>
                   <n-radio :checked="checkedAccent === 'English Accent'" value="English Accent" name="basic-demo"
-                    @change="handleAccent">
+                    @change="handleAccent(event, '1')">
                     English Accent
                   </n-radio></n-space>
               </n-gi>
@@ -175,7 +183,7 @@ export default {
             </n-grid>
           </n-card>
         </n-collapse-item>
-        <n-collapse-item name="2" style="padding-bottom:0;">
+        <n-collapse-item name="2" style="margin-bottom:50px;">
           <template #header>
             <n-h2 style="margin:0;">
               <b> General Display</b>
@@ -215,14 +223,20 @@ export default {
               <n-gi :span="5" style="display:flex; align-items: center">
                 <h4>Clear Progress Data</h4>
               </n-gi>
-              <n-gi :span="7"><n-space ><n-button size="small" @click="clearData">Clear</n-button></n-space></n-gi>
+              <n-gi :span="7">
+                <n-space>
+                    <n-popconfirm @positive-click="clearData" positive-text="Confirm" negative-text="Cancel" :show-icon="false">
+                      <template #trigger>
+                        <n-button size="small">Clear</n-button>
+                      </template>
+                    </n-popconfirm>
+                </n-space>
+              </n-gi>
             </n-grid>
           </n-card>
         </n-collapse-item>
       </n-collapse>
     </n-card>
-    <span style="white-space: pre-line">&nbsp;</span>
-    <span style="white-space: pre-line">&nbsp;</span>
   </n-config-provider>
 </template>
 <style>

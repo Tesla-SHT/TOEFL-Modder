@@ -159,6 +159,7 @@ export default {
             .then(response => {
                 this.theme = response.data.checkedBackground === 'Dark' ? darkTheme : null;
                 this.iconcolor = response.data.checkedBackground === 'Dark' ? 'white' : 'black';
+                this.audioaccent = response.data.accent;
             })
             .catch(error => {
                 console.error('Failed to fetch setting data:', error);
@@ -168,8 +169,9 @@ export default {
         return {
             collecting: this.collectflag, // Flag to track if the collect button is being clicked
             deleting: false, // Flag to track if the delete button is being clicked
-            audioBaseUrl: 'http://dict.youdao.com/dictvoice?type=2&audio=',
+            audioBaseUrl: 'http://dict.youdao.com/dictvoice?type=',
             audioword: this.note.content,
+            audioaccent : "1",
             answercolor: true,
             theme: null,
             iconcolor: null
@@ -177,8 +179,8 @@ export default {
     },
     computed: {
         audioLink() {
-            //console.log( this.audioBaseUrl + this.audioword)
-            return this.audioBaseUrl + this.audioword
+            console.log(this.audioBaseUrl + this.audioaccent + '&audio=' + this.audioword)
+            return this.audioBaseUrl + this.audioaccent + '&audio=' + this.audioword
         }
     },
     methods: {
@@ -205,6 +207,7 @@ export default {
             if (!this.deleting) {
                 this.deleting = true
                 $delete.addToBin(word)
+                $record.addWordNumber()
                 console.log("delete " + this.deleting)
             }
             else {

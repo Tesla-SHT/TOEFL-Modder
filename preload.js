@@ -58,6 +58,9 @@ contextBridge.exposeInMainWorld('$setting', {
   updateBackground(background) {
     ipcRenderer.send('update-checkedBackground', background)
   },
+  updateAccent(accent){
+    ipcRenderer.send('update-accent', accent)
+  },
   clearData:() => ipcRenderer.invoke('clear-data')
 })
 

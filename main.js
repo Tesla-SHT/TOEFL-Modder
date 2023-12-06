@@ -166,6 +166,11 @@ const createWindow = () => {
         settingData.checkedBackground = checked
         fs.writeFileSync(SETTING_PATH, JSON.stringify(settingData))
     })
+    ipcMain.on('update-accent', (event, accent) => {
+        let settingData = getSettingData()
+        settingData.accent = accent
+        fs.writeFileSync(SETTING_PATH, JSON.stringify(settingData))
+    })
     ipcMain.handle('clear-data', () => {
         fs.writeFileSync(DELETE_PATH, '[]')
         fs.writeFileSync(COLLECT_PATH, '[]')
