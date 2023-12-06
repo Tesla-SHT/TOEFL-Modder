@@ -82,17 +82,9 @@ export default {
         axios.get('../../data/notes.json')
             .then(response => {
                 const notes = response.data;
-
-                // 提取每个词书的时间记录
                 const timeRecords = notes.map(book => book.time);
-
-                // 将时间记录合并为一个数组，并去除重复的时间
                 const allTimes = Array.from(new Set(timeRecords.flat()));
-
-                // 计算用户总学习天数
                 this.totaldays = allTimes.length;
-
-                console.log(`用户总共学习了 ${totalDays} 天。`);
             })
             .catch(error => {
                 console.error('获取时间记录出错：', error);
@@ -101,11 +93,11 @@ export default {
     data() {
         return {
             buttonStyle: {
-                width: '195px',
+                width: '100%',
                 height: '310px',
                 borderRadius: '8px',
                 color: '#FFD700', // 初始颜色，例如黄色
-                borderColor: '#FFD700',
+                borderColor: 'transparent!important',
                 fontSize: '24px',
                 borderWidth: '16px', // 设置边框宽度，例如2像素
             },

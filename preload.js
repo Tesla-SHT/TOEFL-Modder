@@ -55,11 +55,10 @@ contextBridge.exposeInMainWorld('$setting', {
   updateWordNumber(number) {
     ipcRenderer.send('update-word-number', number)
   },
-  
-  
   updateBackground(background) {
     ipcRenderer.send('update-checkedBackground', background)
-  }
+  },
+  clearData:() => ipcRenderer.invoke('clear-data')
 })
 
 contextBridge.exposeInMainWorld('$record', {

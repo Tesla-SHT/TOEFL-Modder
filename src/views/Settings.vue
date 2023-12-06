@@ -69,14 +69,18 @@ export default {
       $setting.updateBackground(background)
       location.reload()
     },
+    clearData(event){
+      $setting.clearData()
+    }
   }
 }
 </script>
 
 <template>
-  <n-config-provider :theme="theme" :locate="zhCN"><n-card :bordered="false" style="background:transparent">
-      <n-collapse arrow-placement="right" style="padding">
-        <n-collapse-item name="1" style="padding-bottom:0;">
+  <n-config-provider :theme="theme" :locate="zhCN">
+    <n-card :bordered="false" style="background:transparent">
+      <n-collapse arrow-placement="right" :default-expanded-names="['2', '1']">
+        <n-collapse-item name="1" >
           <template #header>
             <n-h2 style="margin:0;">
               <b>Study Preference</b>
@@ -204,6 +208,14 @@ export default {
                   </n-radio>
                 </n-space>
               </n-gi>
+            </n-grid>
+            <br>
+
+            <n-grid :cols="12">
+              <n-gi :span="5" style="display:flex; align-items: center">
+                <h4>Clear Progress Data</h4>
+              </n-gi>
+              <n-gi :span="7"><n-space ><n-button size="small" @click="clearData">Clear</n-button></n-space></n-gi>
             </n-grid>
           </n-card>
         </n-collapse-item>

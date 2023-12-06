@@ -166,7 +166,17 @@ const createWindow = () => {
         settingData.checkedBackground = checked
         fs.writeFileSync(SETTING_PATH, JSON.stringify(settingData))
     })
+    ipcMain.handle('clear-data', () => {
+        fs.writeFileSync(DELETE_PATH, '[]')
+        fs.writeFileSync(COLLECT_PATH, '[]')
+        let notesData = getNotesData();
+        for (let i = 0; i < notesData.length; i += 1) {
+            notesData[i].time = [];
+            notesData[i].learnday = 0;
+        }
+        fs.writeFileSync(NOTE_PATH, JSON.stringify(notesData))
 
+    })
     //record
     // ipcMain.handle('get-records-data', () => getRecords())
     ipcMain.handle('gen-arrange', async (event, dict, total, num) => {
