@@ -315,7 +315,7 @@ export default {
     border-left: none;
     /* 添加这一行，使左边框消失 */
     border-right: none;
-    width: 100%;
+    width: 96.5%;
     /* 新增样式以限定边框并在内容超过宽度时换行 */
     word-wrap: break-word;
     word-break: break-all;
