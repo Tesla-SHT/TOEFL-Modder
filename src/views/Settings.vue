@@ -225,11 +225,15 @@ export default {
               </n-gi>
               <n-gi :span="7">
                 <n-space>
-                    <n-popconfirm @positive-click="clearData" positive-text="Confirm" negative-text="Cancel" :show-icon="false">
-                      <template #trigger>
-                        <n-button size="small">Clear</n-button>
-                      </template>
-                    </n-popconfirm>
+                  <n-popconfirm @positive-click="clearData" positive-text="Confirm" negative-text="Cancel">
+                    <template #trigger>
+                      <n-button size="small">Clear</n-button>
+                    </template>
+                    <div style="color:rgb(223, 0, 0)">
+                      Warning!!! If you confirm this button, all data recording your recition would be deleted<br> and you
+                      need to restart your learning progress.
+                    </div>
+                  </n-popconfirm>
                 </n-space>
               </n-gi>
             </n-grid>
