@@ -12,22 +12,22 @@ contextBridge.exposeInMainWorld('$app', {
 })
 
 contextBridge.exposeInMainWorld('$data', {
-    updateTime(index, time){
-      ipcRenderer.send('update-time', index, time)
-    },
-    createReview(index, title) {
-      ipcRenderer.send('create-review', title)
-    },
-    getNotes: () => ipcRenderer.invoke('get-notes-data'),
-    updateOne(index, data) {
-      ipcRenderer.send('update-note', index, data)
-    },
-    deleteOne(index) {
-      ipcRenderer.send('delete-note', index)
-    },
-    insertOne(data) {
-      ipcRenderer.send('insert-note', data)
-    }
+  updateTime(index, time) {
+    ipcRenderer.send('update-time', index, time)
+  },
+  createReview(index, title) {
+    ipcRenderer.send('create-review', title)
+  },
+  getNotes: () => ipcRenderer.invoke('get-notes-data'),
+  updateOne(index, data) {
+    ipcRenderer.send('update-note', index, data)
+  },
+  deleteOne(index) {
+    ipcRenderer.send('delete-note', index)
+  },
+  insertOne(data) {
+    ipcRenderer.send('insert-note', data)
+  }
 })
 
 contextBridge.exposeInMainWorld('$collect', {
@@ -55,16 +55,19 @@ contextBridge.exposeInMainWorld('$setting', {
   updateWordNumber(number) {
     ipcRenderer.send('update-word-number', number)
   },
-  
-  
   updateBackground(background) {
     ipcRenderer.send('update-checkedBackground', background)
-  }
+  },
+  updateAccent(accent) {
+    ipcRenderer.send('update-accent', accent)
+  },
+  clearData: () => ipcRenderer.invoke('clear-data')
 })
 
 contextBridge.exposeInMainWorld('$record', {
-  record(dict,index,color) {
-    ipcRenderer.send('new-record', dict,index,color)
+  record(dict, index, color) {
+    ipcRenderer.send('new-record', dict, index, color)
   },
-  load_arrange:(dict,total,num)=>ipcRenderer.invoke('gen-arrange',dict,total,num)
+  load_arrange: (dict, total, num) => ipcRenderer.invoke('gen-arrange', dict, total, num),
+  addWordNumber(title) { ipcRenderer.send('add-word-number', title) }
 })

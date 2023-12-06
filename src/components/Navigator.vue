@@ -41,7 +41,7 @@ const changeIndex = (index) => {
     margin: 5px;
     margin-top: 10px;
     height: 40px;
-    border: 1px solid white;
+    border: 1px solid #f5f5f5;
     border-top:0px;
     border-bottom:0px;
     border-radius: 7px;

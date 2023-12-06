@@ -68,7 +68,7 @@ export default {
             numberAnimationInstRef, option,
             zhCN,
             dateZhCN,
-            darkTheme, 
+            darkTheme,
         };
     }, created() {
         axios.get('../../data/setting.json')
@@ -78,15 +78,26 @@ export default {
             .catch(error => {
                 console.error('Failed to fetch setting data:', error);
             });
+
+        axios.get('../../data/notes.json')
+            .then(response => {
+                const notes = response.data;
+                const timeRecords = notes.map(book => book.time);
+                const allTimes = Array.from(new Set(timeRecords.flat()));
+                this.totaldays = allTimes.length;
+            })
+            .catch(error => {
+                console.error('获取时间记录出错：', error);
+            });
     },
     data() {
         return {
             buttonStyle: {
-                width: '195px',
+                width: '100%',
                 height: '310px',
                 borderRadius: '8px',
                 color: '#FFD700', // 初始颜色，例如黄色
-                borderColor: '#FFD700',
+                borderColor: 'transparent!important',
                 fontSize: '24px',
                 borderWidth: '16px', // 设置边框宽度，例如2像素
             },
@@ -95,7 +106,8 @@ export default {
                 borderColor: '#FFD700',
                 borderWidth: '16px', // 设置悬停状态下的边框宽度，例如4像素
             },
-            theme: null
+            theme: null,
+            totaldays:0
         }
     },
     methods: {
@@ -119,7 +131,7 @@ export default {
                             <template #prefix>
                                 You have met TOEFL-Modder for
                             </template>
-                            <n-number-animation ref="numberAnimationInstRef" :from="0" :to="100" />
+                            <n-number-animation ref="numberAnimationInstRef" :from="0" :to="totaldays" />
                             <template #suffix>
                                 days!
                             </template>

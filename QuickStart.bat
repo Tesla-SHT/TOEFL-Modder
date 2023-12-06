@@ -1,15 +1,10 @@
 @echo off
+cd /d %~dp0
 
-REM 打开一个命令提示符窗口并执行 npm run dev
-start cmd /k "cd /d %~dp0 && npm install && npm run dev"
+start /wait cmd /c "npm install"
+echo.
 
-REM 等待 npm run dev 完成
-:WAIT_DEV
-timeout /t 3
-tasklist /FI "WINDOWTITLE eq Administrator: npm install" | findstr /i "cmd.exe" >nul
-if not errorlevel 1 (
-    goto WAIT_DEV
-)
+start cmd /c "npm run dev"
+timeout /t 3 >nul
 
-REM 打开另一个命令提示符窗口并执行 npm start
-start cmd /k "cd /d %~dp0 && npm start"
+start cmd /c "npm start"

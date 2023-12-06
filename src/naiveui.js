@@ -1,5 +1,5 @@
 
-import { useMessage } from 'naive-ui'
+import {  useMessage } from 'naive-ui'
 import {
     // create naive ui
     create,
@@ -33,6 +33,8 @@ import {
     NTag,
     NListItem,
     NConfigProvider,
+    NCollapse,
+    NCollapseItem,NPopconfirm,
     zhCN, dateZhCN
 } from 'naive-ui';
 
@@ -58,7 +60,9 @@ const naive = create({
             NList,
             NThing,
             NTag,
-            NListItem,NConfigProvider],
+            NListItem, NConfigProvider,
+            NCollapse,
+            NCollapseItem,NPopconfirm],
     setup() {
         return {
             fontSize: this.$store.state.fontSize,
