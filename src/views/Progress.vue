@@ -68,7 +68,7 @@ export default {
             numberAnimationInstRef, option,
             zhCN,
             dateZhCN,
-            darkTheme, 
+            darkTheme,
         };
     }, created() {
         axios.get('../../data/setting.json')
@@ -77,6 +77,25 @@ export default {
             })
             .catch(error => {
                 console.error('Failed to fetch setting data:', error);
+            });
+
+        axios.get('../../data/notes.json')
+            .then(response => {
+                const notes = response.data;
+
+                // 提取每个词书的时间记录
+                const timeRecords = notes.map(book => book.time);
+
+                // 将时间记录合并为一个数组，并去除重复的时间
+                const allTimes = Array.from(new Set(timeRecords.flat()));
+
+                // 计算用户总学习天数
+                this.totaldays = allTimes.length;
+
+                console.log(`用户总共学习了 ${totalDays} 天。`);
+            })
+            .catch(error => {
+                console.error('获取时间记录出错：', error);
             });
     },
     data() {
@@ -95,7 +114,8 @@ export default {
                 borderColor: '#FFD700',
                 borderWidth: '16px', // 设置悬停状态下的边框宽度，例如4像素
             },
-            theme: null
+            theme: null,
+            totaldays:0
         }
     },
     methods: {
@@ -119,7 +139,7 @@ export default {
                             <template #prefix>
                                 You have met TOEFL-Modder for
                             </template>
-                            <n-number-animation ref="numberAnimationInstRef" :from="0" :to="100" />
+                            <n-number-animation ref="numberAnimationInstRef" :from="0" :to="totaldays" />
                             <template #suffix>
                                 days!
                             </template>

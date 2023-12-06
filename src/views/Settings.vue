@@ -74,123 +74,140 @@ export default {
 </script>
 
 <template>
-  <n-config-provider :theme="theme" :locate="zhCN">
-    <h2>&nbsp;&nbsp; Study Preference</h2>
-    <n-card style="margin:5% 3%;width:94%">
-      <n-grid :cols="12">
-        <n-gi :span="5">
-          <h4>New Word Number</h4>
-        </n-gi>
-        <n-gi :span="7">
-          <n-slider v-model:value="newWordNumber" :min="10" :max="200" :step="10" style="padding-top:9px"
-            @click="updateWordNumber(event)" />
-        </n-gi>
-      </n-grid>
-      <br>
-      <n-grid :cols="12">
-        <n-gi :span="5">
-          <h4>Reviewing Word Number</h4>
-        </n-gi>
-        <n-gi :span="7">
-          <n-slider v-model:value="reviewWordNumber" :min="10" :max="200" :step="10" style="padding-top:9px"
-            @click="updateWordNumber(event)" />
-        </n-gi>
-      </n-grid>
-      <br>
-      <n-grid :cols="12">
-        <n-gi :span="5">
-          <h4>Pronunciation</h4>
-        </n-gi>
-        <n-gi :span="7">
-          <n-space>
-            <n-radio :checked="checkedAccent === 'American Accent'" value="American Accent" name="basic-demo"
-              @change="handleAccent">
-              American Accent
-            </n-radio>
-            <n-radio :checked="checkedAccent === 'English Accent'" value="English Accent" name="basic-demo"
-              @change="handleAccent">
-              English Accent
-            </n-radio></n-space>
-        </n-gi>
-      </n-grid>
-      <br>
-      <n-grid :cols="12">
-        <n-gi :span="5">
-          <h4>Automatic Pronunciation</h4>
-        </n-gi>
-        <n-gi :span="7">
-          <n-space>
-            <n-radio :checked="checkedAuto === 'Enabled'" value="Enabled" name="basic-demo" @change="handleAuto">
-              Enabled
-            </n-radio>
-            <n-radio :checked="checkedAuto === 'Disabled'" value="Disabled" name="basic-demo" @change="handleAuto">
-              Disabled
-            </n-radio></n-space>
-        </n-gi>
-      </n-grid>
-      <br>
-      <n-grid :cols="12">
-        <n-gi :span="5">
-          <h4>Word Order</h4>
-        </n-gi>
-        <n-gi :span="7">
-          <n-space>
-            <n-radio :checked="checkedSequence === 'Alphabet Sequence'" value="Alphabet Sequence" name="basic-demo"
-              @change="handleSequence">
-              Alphabet Sequence
-            </n-radio>
-            <n-radio :checked="checkedSequence === 'Shuffled'" value="Shuffled" name="basic-demo"
-              @change="handleSequence">
-              Shuffled
-            </n-radio></n-space>
-        </n-gi>
-      </n-grid>
-      <br>
-      <n-grid :cols="12">
-        <n-gi :span="5">
-          <h4>Study Order</h4>
-        </n-gi>
-        <n-gi :span="7">
-          <n-space>
-            <n-radio :checked="checkedPre === 'Review First'" value="Review First" name="basic-demo" @change="handlePre">
-              Review First
-            </n-radio>
-            <n-radio :checked="checkedPre === 'New Word First'" value="New Word First" name="basic-demo"
-              @change="handlePre">
-              New Word First
-            </n-radio></n-space>
-        </n-gi>
-      </n-grid>
-    </n-card>
-    <h2>&nbsp;&nbsp; General Display</h2>
-    <n-card style="margin:5% 3%;width:94%">
-      <n-grid :cols="12">
-        <n-gi :span="5">
-          <h4>Display Scale</h4>
-        </n-gi>
-        <n-gi :span="7">
-          <h4>Zoom in: Ctrl/Shift/+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zoom out: Ctrl/-</h4>
-          <h4></h4>
-        </n-gi>
-      </n-grid>
-      <br>
-      <n-grid :cols="12">
-        <n-gi :span="5">
-          <h4>Background</h4>
-        </n-gi>
-        <n-gi :span="7">
-          <n-space>
-            <n-radio :checked="checkedBackground === 'Light'" value="Light" name="basic-demo"
-              @change="handleBackground(event, 'Light')">
-              Light Mode
-            </n-radio>
-            <n-radio :checked="checkedBackground === 'Dark'" value="Dark" name="basic-demo"
-              @change="handleBackground(event, 'Dark')">
-              Dark Mode
-            </n-radio>
-          </n-space>
-        </n-gi>
-      </n-grid>
+  <n-config-provider :theme="theme" :locate="zhCN"><n-card :bordered="false" style="background:transparent">
+      <n-collapse arrow-placement="right" style="padding">
+        <n-collapse-item name="1" style="padding-bottom:0;">
+          <template #header>
+            <n-h2 style="margin:0;">
+              <b>Study Preference</b>
+            </n-h2>
+          </template>
+          <n-card>
+
+            <n-grid :cols="12">
+              <n-gi :span="5">
+                <h4>New Word Number</h4>
+              </n-gi>
+              <n-gi :span="7">
+                <n-slider v-model:value="newWordNumber" :min="10" :max="200" :step="10" style="padding-top:9px"
+                  @click="updateWordNumber(event)" />
+              </n-gi>
+            </n-grid>
+            <br>
+            <n-grid :cols="12">
+              <n-gi :span="5">
+                <h4>Reviewing Word Number</h4>
+              </n-gi>
+              <n-gi :span="7">
+                <n-slider v-model:value="reviewWordNumber" :min="10" :max="200" :step="10" style="padding-top:9px"
+                  @click="updateWordNumber(event)" />
+              </n-gi>
+            </n-grid>
+            <br>
+            <n-grid :cols="12">
+              <n-gi :span="5">
+                <h4>Pronunciation</h4>
+              </n-gi>
+              <n-gi :span="7">
+                <n-space>
+                  <n-radio :checked="checkedAccent === 'American Accent'" value="American Accent" name="basic-demo"
+                    @change="handleAccent">
+                    American Accent
+                  </n-radio>
+                  <n-radio :checked="checkedAccent === 'English Accent'" value="English Accent" name="basic-demo"
+                    @change="handleAccent">
+                    English Accent
+                  </n-radio></n-space>
+              </n-gi>
+            </n-grid>
+            <br>
+            <n-grid :cols="12">
+              <n-gi :span="5">
+                <h4>Automatic Pronunciation</h4>
+              </n-gi>
+              <n-gi :span="7">
+                <n-space>
+                  <n-radio :checked="checkedAuto === 'Enabled'" value="Enabled" name="basic-demo" @change="handleAuto">
+                    Enabled
+                  </n-radio>
+                  <n-radio :checked="checkedAuto === 'Disabled'" value="Disabled" name="basic-demo" @change="handleAuto">
+                    Disabled
+                  </n-radio></n-space>
+              </n-gi>
+            </n-grid>
+            <br>
+            <n-grid :cols="12">
+              <n-gi :span="5">
+                <h4>Word Order</h4>
+              </n-gi>
+              <n-gi :span="7">
+                <n-space>
+                  <n-radio :checked="checkedSequence === 'Alphabet Sequence'" value="Alphabet Sequence" name="basic-demo"
+                    @change="handleSequence">
+                    Alphabet Sequence
+                  </n-radio>
+                  <n-radio :checked="checkedSequence === 'Shuffled'" value="Shuffled" name="basic-demo"
+                    @change="handleSequence">
+                    Shuffled
+                  </n-radio></n-space>
+              </n-gi>
+            </n-grid>
+            <br>
+            <n-grid :cols="12">
+              <n-gi :span="5">
+                <h4>Study Order</h4>
+              </n-gi>
+              <n-gi :span="7">
+                <n-space>
+                  <n-radio :checked="checkedPre === 'Review First'" value="Review First" name="basic-demo"
+                    @change="handlePre">
+                    Review First
+                  </n-radio>
+                  <n-radio :checked="checkedPre === 'New Word First'" value="New Word First" name="basic-demo"
+                    @change="handlePre">
+                    New Word First
+                  </n-radio></n-space>
+              </n-gi>
+            </n-grid>
+          </n-card>
+        </n-collapse-item>
+        <n-collapse-item name="2" style="padding-bottom:0;">
+          <template #header>
+            <n-h2 style="margin:0;">
+              <b> General Display</b>
+            </n-h2>
+          </template>
+          <n-card>
+            <n-grid :cols="12">
+              <n-gi :span="5">
+                <h4>Display Scale</h4>
+              </n-gi>
+              <n-gi :span="7">
+                <h4>Zoom in: Ctrl/Shift/+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zoom out: Ctrl/-</h4>
+                <h4></h4>
+              </n-gi>
+            </n-grid>
+            <br>
+            <n-grid :cols="12">
+              <n-gi :span="5">
+                <h4>Background</h4>
+              </n-gi>
+              <n-gi :span="7">
+                <n-space>
+                  <n-radio :checked="checkedBackground === 'Light'" value="Light" name="basic-demo"
+                    @change="handleBackground(event, 'Light')">
+                    Light Mode
+                  </n-radio>
+                  <n-radio :checked="checkedBackground === 'Dark'" value="Dark" name="basic-demo"
+                    @change="handleBackground(event, 'Dark')">
+                    Dark Mode
+                  </n-radio>
+                </n-space>
+              </n-gi>
+            </n-grid>
+          </n-card>
+        </n-collapse-item>
+      </n-collapse>
     </n-card>
     <span style="white-space: pre-line">&nbsp;</span>
     <span style="white-space: pre-line">&nbsp;</span>

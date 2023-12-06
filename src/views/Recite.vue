@@ -2,7 +2,7 @@
 import { reactive, onMounted, ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { zhCN, dateZhCN, darkTheme } from 'naive-ui'
-import axios from 'axios'; 
+import axios from 'axios';
 export default {
     setup() {
 
@@ -157,7 +157,8 @@ export default {
     }, created() {
         axios.get('../../data/setting.json')
             .then(response => {
-                this.theme = response.data.checkedBackground === 'Dark'?darkTheme:null;
+                this.theme = response.data.checkedBackground === 'Dark' ? darkTheme : null;
+                this.iconcolor = response.data.checkedBackground === 'Dark' ? 'white' : 'black';
             })
             .catch(error => {
                 console.error('Failed to fetch setting data:', error);
@@ -170,7 +171,8 @@ export default {
             audioBaseUrl: 'http://dict.youdao.com/dictvoice?type=2&audio=',
             audioword: this.note.content,
             answercolor: true,
-            theme: null
+            theme: null,
+            iconcolor: null
         }
     },
     computed: {
@@ -312,18 +314,18 @@ export default {
                             <g fill="none">
                                 <path
                                     d="M5.283 1.546a.8.8 0 0 1 1.435 0L7.83 3.798l2.486.361a.8.8 0 0 1 .443 1.365L8.96 7.277l.425 2.476a.8.8 0 0 1-1.16.844L6 9.427l-2.224 1.17a.8.8 0 0 1-1.16-.844l.424-2.476l-1.799-1.753a.8.8 0 0 1 .444-1.365l2.486-.36l1.111-2.253z"
-                                    fill="currentColor"></path>
+                                    :fill="iconcolor"></path>
                             </g>
                         </svg>
                     </button>
-                    <button :class="{ 'deleted': deleting }" class="icon-button" @click="deleteWord(event, note.content)"
+                    <button :class="{ 'deleted': deleting }" class="icon-button" @click="deleteWord(event, note.content);showNextWord();refreshIcon(event)"
                         style="float: right;">
                         <svg class="kill-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                             viewBox="0 0 24 24">
                             <g>
                                 <path
                                     d="M21.5 6a1 1 0 0 1-.883.993L20.5 7h-.845l-1.231 12.52A2.75 2.75 0 0 1 15.687 22H8.313a2.75 2.75 0 0 1-2.737-2.48L4.345 7H3.5a1 1 0 0 1 0-2h5a3.5 3.5 0 1 1 7 0h5a1 1 0 0 1 1 1zm-7.25 3.25a.75.75 0 0 0-.743.648L13.5 10v7l.007.102a.75.75 0 0 0 1.486 0L15 17v-7l-.007-.102a.75.75 0 0 0-.743-.648zm-4.5 0a.75.75 0 0 0-.743.648L9 10v7l.007.102a.75.75 0 0 0 1.486 0L10.5 17v-7l-.007-.102a.75.75 0 0 0-.743-.648zM12 3.5A1.5 1.5 0 0 0 10.5 5h3A1.5 1.5 0 0 0 12 3.5z"
-                                    fill="currentColor"></path>
+                                    :fill="iconcolor"></path>
                             </g>
                         </svg>
                     </button>
