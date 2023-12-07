@@ -87,19 +87,12 @@ export default {
         }
         function showNextWord() {
             setTimeout(() => {
-                console.log(wordnumber, wordnumberRemain);
-                if (wordnumberRemain <= 0) {
-                    console.log(wordnumber);
-                    router.back();
-                    wordnumberRemain = wordnumber;
-                }
                 wordnumberRemain--;
                 validflag = false;
                 while (!validflag) {
                     //currentWordIndex++;
-                    currentIndex++;
                     currentWordIndex.value = wordArrange[currentIndex];
-                    console.log(currentWordIndex.value);
+                    //console.log(currentWordIndex.value);
                     if (currentWordIndex.value < 0) {
                         console.log("end of dictionary");
                         break;
@@ -112,8 +105,15 @@ export default {
                             break;
                         }
                     }
+                    currentIndex++;
                 }
-                if (validflag) {
+                console.log(wordnumber, wordnumberRemain);
+                if (wordnumberRemain <= 0) {
+                    console.log(wordnumber);
+                    router.back();
+                    wordnumberRemain = wordnumber;
+                }
+                                if (validflag) {
                     note.content = showCurrentWord();
                     note.definition = showCurrentDefinition();
                     note.example = showCurrentExample();
@@ -135,9 +135,17 @@ export default {
                 }      // Generate options
                 const allOptions = wordsData.map(word => word.Definitions).flat();
                 const randomOptions = getRandomElements(allOptions, 6);
-                const randomIndex = Math.floor(Math.random() * randomOptions.length);
-                randomOptions[randomIndex] = note.definition;
-                options.value = randomOptions;
+                {
+                    let existflag=false
+                    for(let i in randomOptions){
+                        if(i==note.definition)existflag=true
+                    }
+                    if(!existflag){
+                        const randomIndex = Math.floor(Math.random() * randomOptions.length);
+                        randomOptions[randomIndex] = note.definition;
+                        options.value = randomOptions;
+                    }
+                }
             }, 200);
         }
 
@@ -295,7 +303,7 @@ export default {
                 });
             }
             $record.record(this.note.title, wordindex, this.answercolor)
-            console.log(this.note.content, wordindex)
+            console.log(this.note.content, wordindex, this.answercolor)
         },
         isAnswerCorrect(event) {
             return this.answercolor;

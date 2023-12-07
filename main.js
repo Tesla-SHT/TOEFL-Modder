@@ -208,7 +208,6 @@ const createWindow = () => {
         let records = getRecords()
         var flag_i = false
         var i
-        var arrange = []
         for (i in records) {
             if (records[i].dict == dict) {
                 flag_i = true
@@ -226,8 +225,10 @@ const createWindow = () => {
         }
         let words = records[i].words
         var j
+        var arrange = []
         for (j = 0; j < words.length; j += 1) {
-            if (words[j].time < Date.now() - 1000 * 600 | words[j].acc < 0.6) {
+            console.log(j+"a")
+            if (words[j].time < Date.now() - 1000 * 600 | words[j].acc < 0.5) {
                 arrange.push(words[j].index)
             }
             if (arrange.length >= num) break
@@ -269,11 +270,11 @@ const createWindow = () => {
             }
         }
         if (!flag_j) {
-            words.push({ "index": ind, "last_time": 0, "try_num": 0.0, "acc": 1.0 })
+            words.push({ "index": ind, "last_time": 0, "try_num": 0, "acc": 1.0 })
         }
         let word = words[j]
         word.last_time = Date.now()
-        word.acc = (word.acc * word.try_num + color ? 1.0 : 0.0) / (word.try_num + 1)
+        word.acc = (word.try_num<1?0: word.acc) *0.6 + (color ? 1.0 : 0.0) *0.4
         word.try_num += 1
         words[j] = word
         records[i].words = words
