@@ -1,5 +1,6 @@
 <template>
-    <div>
+    
+    <n-config-provider :theme="theme" :locate="zhCN">
         <div style="display: flex; width:100%; justify-content: space-between;">
 
             <div class="list-container">
@@ -10,13 +11,13 @@
                     </div>
                 </n-button>
                 <div v-if="isDivVisible" class="words">
-                    <div v-for="(item, index) in listItems" :key="index" class="list-item">
+                    <div v-for="(item, index) in listItems" :key="index" class="list-item" :class="getmode">
                         <div class="thing" :style="{ 'margin-top': '10px' }">
                             <div class="thing-title">{{ item.title }}</div>
                             <div style="text-align:left">
-                                <p v-for="(tag, tagIndex) in item.tags" :key="tagIndex" class="tag" style="text-align:left">
+                                <n-h5 v-for="(tag, tagIndex) in item.tags" :key="tagIndex" class="tag" style="text-align:left">
                                     {{ tag }}
-                                </p>
+                                </n-h5>
                             </div>
                             <div class="description"></div>
                             <div class="thing-content" :style="{ 'margin-top': '10px', 'margin-bottom': '10px' }">
@@ -40,7 +41,7 @@
                 </div>
             </n-button>
         </div>
-    </div>
+    </n-config-provider>
 </template>
 
 <script>
@@ -56,6 +57,8 @@ import {
 import VChart, { THEME_KEY } from "vue-echarts";
 import { ref, defineComponent } from "vue";
 
+import axios from 'axios';
+import { zhCN, dateZhCN, darkTheme } from 'naive-ui'
 use([
     CanvasRenderer,
     PieChart,
@@ -120,7 +123,24 @@ export default {
                     tags: ["环形公路", "潜水艇司机"],
                 },
             ],
+            
+            zhCN,
+            dateZhCN,
+            darkTheme,
+            checkedBackground: null,
+            theme: null,
+            darkcolor: null,
         };
+    }, created() {
+        axios.get('../../data/setting.json')
+            .then(response => {
+                this.checkedBackground = response.data.checkedBackground;
+                this.theme = this.checkedBackground === "Dark" ? darkTheme : null;
+                this.darkcolor = response.data.checkedBackground === 'Dark' ? 'darkcolor' : null;
+            })
+            .catch(error => {
+                console.error('Failed to fetch setting data:', error);
+            });
     },
     methods: {
         expandLeftSidebar() {
@@ -154,6 +174,11 @@ export default {
             this.isdivVisible = !this.isdivVisible;
             this.isDivVisible = false;
             this.isButtonHidden = false;
+        }
+    },
+    computed: {
+        getmode(){
+            return this.checkedBackground === "Dark" ? "list-item-2" : "list-item-1";
         }
     }
 };
@@ -309,7 +334,6 @@ export default {
 .list-item {
     border: 1px solid #e0e0e0;
     padding: 10px;
-    background-color: #f9f9f9;
     margin-bottom: 0;
     margin-top: 0px;
     border-left: none;
@@ -321,12 +345,15 @@ export default {
     word-break: break-all;
 }
 
-.list-item:hover {
+.list-item-1:hover {
     box-shadow: inset 0 5px 50px -5px rgba(0, 0, 0, 0.2),
         inset 0 -5px 5px -5px rgba(0, 0, 0, 0.2);
 
 }
-
+.list-item-2:hover{
+    box-shadow: inset 0 5px 50px -5px rgba(255,255,255, 0.4),
+        inset 0 -5px 5px -5px rgba(255,255,255, 0.4);
+}
 .thing {
     font-family: 'Arial', sans-serif;
 }
@@ -334,7 +361,6 @@ export default {
 .thing-title {
     font-size: 18px;
     font-weight: bold;
-    color: #333;
     margin-bottom: 8px;
     text-align: left;
     /* 添加这一行，使标题文本居左 */
@@ -342,7 +368,6 @@ export default {
 
 .thing-content {
     font-size: 14px;
-    color: #555;
     text-align: left;
     /* 添加这一行，使内容文本居左 */
     white-space: pre-wrap;

@@ -230,8 +230,8 @@ export default {
                       <n-button size="small">Clear</n-button>
                     </template>
                     <div style="color:rgb(223, 0, 0)">
-                      Warning!!! If you confirm this button, all data recording your recition would be deleted<br> and you
-                      need to restart your learning progress.
+                      If you confirm this button, all learning data would be deleted<br> and you
+                      need to restart your learning progress!
                     </div>
                   </n-popconfirm>
                 </n-space>
