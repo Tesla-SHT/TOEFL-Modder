@@ -10,37 +10,33 @@
                     </div>
                 </n-button>
                 <div v-if="isDivVisible" class="words">
-                    <n-list hoverable clickable>
-                        <n-collapse>
-                        <n-list-item>
-                            <n-collapse-item title="相见恨晚" content-style="margin-top: 10px;">
-                            <n-thing >
-                                <template #description>
-                                    <n-space size="small" style="margin-top: 4px">
-                                        <n-tag :bordered="false" type="info" size="small">
-                                            暑夜
-                                        </n-tag>
-                                        <n-tag :bordered="false" type="info" size="small">
-                                            晚春
-                                        </n-tag>
-                                    </n-space>
-                                </template>
-                                奋勇呀然后休息呀<br>
-                                完成你伟大的人生
-                            </n-thing>
-                        </n-collapse-item>
-                        </n-list-item>
-                    </n-collapse>
+                    <n-list clickable>
+                        <n-collapse hoverable>
+                            <n-list-item>
+                                <n-collapse-item v-for="(item) in listItems" 
+                                    content-style="margin-top: 10px;" >
+                                    <template #header>
+                                        {{item.word}}
+                                    </template>
+                                    <n-thing style="margin-top: 4px; margin-left: 25px">
+                                        <template #description>
+                                            <n-space size="small" style="margin-top: 4px; margin-left: 0px">
+                                                <n-tag :bordered="false" type="info" size="small">
+                                                    {{ item.definition }}
+                                                </n-tag>
+                                            </n-space>
+                                        </template>
+                                        {{ item.example }}
+                                    </n-thing>
+                                </n-collapse-item>
+                            </n-list-item>
+                        </n-collapse>
                     </n-list>
 
                     <div v-for="(item, index) in listItems" :key="index" class="list-item" :class="getmode">
                         <div class="thing" :style="{ 'margin-top': '10px' }">
-                            <div class="thing-title">{{ item.title }}</div>
+                            <div class="thing-title">{{ item.word }}</div>
                             <div style="text-align:left">
-                                <n-h5 v-for="(tag, tagIndex) in item.tags" :key="tagIndex" class="tag"
-                                    style="text-align:left">
-                                    {{ tag }}
-                            </n-h5>
                             </div>
                             <div class="description"></div>
                             <div class="thing-content" :style="{ 'margin-top': '10px', 'margin-bottom': '10px' }">
@@ -50,7 +46,7 @@
                                 {{ item.example }}
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
             <n-button class="rightsidebar" :class="{ 'is-button': isRightExpanded, 'that-button': thatLeftclick }" hoverable
@@ -107,20 +103,6 @@ export default {
             isdivVisible: false,
             isButtonHidden: false,
 
-            listItems: [
-                {
-                    title: "相见恨晚",
-                    content: "奋勇呀然后休息呀 完成你伟大的人生",
-                    tags: ["暑夜", "晚春"],
-                },
-                {
-                    title: "他在时间门外",
-                    content: "最新的打印机 复制着彩色傀儡 早上好我的罐头先生 让他带你去被工厂敲击66666666",
-                    tags: ["环形公路", "潜水艇司机"],
-                },
-
-            ],
-
             zhCN,
             dateZhCN,
             darkTheme,
@@ -139,12 +121,13 @@ export default {
                 console.error('Failed to fetch setting data:', error);
             });
         //下面获取所有的字典，从而查找收藏的单词在哪些字典中出现过
-        
+
         axios.get('../../data/collection.json')
             .then(response => {
                 this.listItems = response.data;
+                console.log(this.listItems)
             })
-            
+
             .catch(error => {
                 console.error('Failed to fetch setting data:', error);
             });

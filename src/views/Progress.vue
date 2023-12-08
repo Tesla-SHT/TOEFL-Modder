@@ -42,17 +42,11 @@ export default {
             },
             series: [
                 {
-                    name: "Traffic Sources",
+                    name: "Dictionary",
                     type: "pie",
                     radius: "55%",
                     center: ["50%", "60%"],
-                    data: [
-                        { value: 335, name: "Direct" },
-                        { value: 310, name: "Email" },
-                        { value: 234, name: "Ad Networks" },
-                        { value: 135, name: "Video Ads" },
-                        { value: 1548, name: "Search Engines" }
-                    ],
+                    data: [ ],
                     emphasis: {
                         itemStyle: {
                             shadowBlur: 10,
@@ -89,6 +83,26 @@ export default {
             .catch(error => {
                 console.error('获取时间记录出错：', error);
             });
+        axios.get('../../data/records.json')
+            .then(response => {
+                const records = response.data;
+                var i;
+                var bookName = {};
+                //获取每个词书中单词的数量
+                for (i = 0; i < records.length; i++) {
+                    if (bookName.hasOwnProperty(records[i].dict)) {
+                        bookName[records[i].dict] += 1;
+                    } else {
+                        bookName[records[i].dict] = 1;
+                    }
+                }
+                console.log(this.option.series[0].data);
+                //将词书名和单词数量转化为echarts所需的格式
+                for (var key in bookName) {
+                    this.option.series[0].data.push({ name: key, value: bookName[key] });
+                }
+                console.log(this.option.series[0].data);
+            })
     },
     data() {
         return {
@@ -107,7 +121,7 @@ export default {
                 borderWidth: '16px', // 设置悬停状态下的边框宽度，例如4像素
             },
             theme: null,
-            totaldays:0
+            totaldays: 0
         }
     },
     methods: {
