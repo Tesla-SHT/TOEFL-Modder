@@ -10,14 +10,37 @@
                     </div>
                 </n-button>
                 <div v-if="isDivVisible" class="words">
+                    <n-list hoverable clickable>
+                        <n-collapse>
+                        <n-list-item>
+                            <n-collapse-item title="相见恨晚" content-style="margin-top: 10px;">
+                            <n-thing >
+                                <template #description>
+                                    <n-space size="small" style="margin-top: 4px">
+                                        <n-tag :bordered="false" type="info" size="small">
+                                            暑夜
+                                        </n-tag>
+                                        <n-tag :bordered="false" type="info" size="small">
+                                            晚春
+                                        </n-tag>
+                                    </n-space>
+                                </template>
+                                奋勇呀然后休息呀<br>
+                                完成你伟大的人生
+                            </n-thing>
+                        </n-collapse-item>
+                        </n-list-item>
+                    </n-collapse>
+                    </n-list>
+
                     <div v-for="(item, index) in listItems" :key="index" class="list-item" :class="getmode">
                         <div class="thing" :style="{ 'margin-top': '10px' }">
                             <div class="thing-title">{{ item.title }}</div>
                             <div style="text-align:left">
-                                <h6 v-for="(tag, tagIndex) in item.tags" :key="tagIndex" class="tag"
+                                <n-h5 v-for="(tag, tagIndex) in item.tags" :key="tagIndex" class="tag"
                                     style="text-align:left">
                                     {{ tag }}
-                                </h6>
+                            </n-h5>
                             </div>
                             <div class="description"></div>
                             <div class="thing-content" :style="{ 'margin-top': '10px', 'margin-bottom': '10px' }">
@@ -27,7 +50,7 @@
                                 {{ item.example }}
                             </div>
                         </div>
-                    </div>
+                    </div> 
                 </div>
             </div>
             <n-button class="rightsidebar" :class="{ 'is-button': isRightExpanded, 'that-button': thatLeftclick }" hoverable
