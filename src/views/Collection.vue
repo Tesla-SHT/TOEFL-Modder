@@ -1,5 +1,4 @@
 <template>
-    
     <n-config-provider :theme="theme" :locate="zhCN">
         <div style="display: flex; width:100%; justify-content: space-between;">
 
@@ -15,13 +14,17 @@
                         <div class="thing" :style="{ 'margin-top': '10px' }">
                             <div class="thing-title">{{ item.title }}</div>
                             <div style="text-align:left">
-                                <n-h5 v-for="(tag, tagIndex) in item.tags" :key="tagIndex" class="tag" style="text-align:left">
+                                <h6 v-for="(tag, tagIndex) in item.tags" :key="tagIndex" class="tag"
+                                    style="text-align:left">
                                     {{ tag }}
-                                </n-h5>
+                                </h6>
                             </div>
                             <div class="description"></div>
                             <div class="thing-content" :style="{ 'margin-top': '10px', 'margin-bottom': '10px' }">
-                                {{ item.content }}
+                                {{ item.definition }}
+                            </div>
+                            <div class="thing-content" :style="{ 'margin-top': '10px', 'margin-bottom': '10px' }">
+                                {{ item.example }}
                             </div>
                         </div>
                     </div>
@@ -92,38 +95,9 @@ export default {
                     content: "最新的打印机 复制着彩色傀儡 早上好我的罐头先生 让他带你去被工厂敲击66666666",
                     tags: ["环形公路", "潜水艇司机"],
                 },
-                {
-                    title: "他在时间门外",
-                    content: "最新的打印机 复制着彩色傀儡 早上好我的罐头先生 让他带你去被工厂敲击66666666",
-                    tags: ["环形公路", "潜水艇司机"],
-                },
-                {
-                    title: "他在时间门外",
-                    content: "最新的打印机 复制着彩色傀儡 早上好我的罐头先生 让他带你去被工厂敲击66666666",
-                    tags: ["环形公路", "潜水艇司机"],
-                },
-                {
-                    title: "他在时间门外",
-                    content: "最新的打印机 复制着彩色傀儡 早上好我的罐头先生 让他带你去被工厂敲击66666666",
-                    tags: ["环形公路", "潜水艇司机"],
-                },
-                {
-                    title: "他在时间门外",
-                    content: "最新的打印机 复制着彩色傀儡 早上好我的罐头先生 让他带你去被工厂敲击66666666",
-                    tags: ["环形公路", "潜水艇司机"],
-                },
-                {
-                    title: "他在时间门外",
-                    content: "最新的打印机 复制着彩色傀儡 早上好我的罐头先生 让他带你去被工厂敲击66666666",
-                    tags: ["环形公路", "潜水艇司机"],
-                },
-                {
-                    title: "他在时间门外",
-                    content: "最新的打印机 复制着彩色傀儡 早上好我的罐头先生 让他带你去被工厂敲击66666666",
-                    tags: ["环形公路", "潜水艇司机"],
-                },
+
             ],
-            
+
             zhCN,
             dateZhCN,
             darkTheme,
@@ -138,6 +112,16 @@ export default {
                 this.theme = this.checkedBackground === "Dark" ? darkTheme : null;
                 this.darkcolor = response.data.checkedBackground === 'Dark' ? 'darkcolor' : null;
             })
+            .catch(error => {
+                console.error('Failed to fetch setting data:', error);
+            });
+        //下面获取所有的字典，从而查找收藏的单词在哪些字典中出现过
+        
+        axios.get('../../data/collection.json')
+            .then(response => {
+                this.listItems = response.data;
+            })
+            
             .catch(error => {
                 console.error('Failed to fetch setting data:', error);
             });
@@ -177,7 +161,7 @@ export default {
         }
     },
     computed: {
-        getmode(){
+        getmode() {
             return this.checkedBackground === "Dark" ? "list-item-2" : "list-item-1";
         }
     }
@@ -335,6 +319,8 @@ export default {
     border: 1px solid #e0e0e0;
     padding: 10px;
     margin-bottom: 0;
+    padding-bottom: 0;
+    margin-top: 0px;
     margin-top: 0px;
     border-left: none;
     /* 添加这一行，使左边框消失 */
@@ -350,10 +336,12 @@ export default {
         inset 0 -5px 5px -5px rgba(0, 0, 0, 0.2);
 
 }
-.list-item-2:hover{
-    box-shadow: inset 0 5px 50px -5px rgba(255,255,255, 0.4),
-        inset 0 -5px 5px -5px rgba(255,255,255, 0.4);
+
+.list-item-2:hover {
+    box-shadow: inset 0 5px 50px -5px rgba(255, 255, 255, 0.4),
+        inset 0 -5px 5px -5px rgba(255, 255, 255, 0.4);
 }
+
 .thing {
     font-family: 'Arial', sans-serif;
 }
@@ -361,7 +349,7 @@ export default {
 .thing-title {
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 8px;
+    margin-bottom: 0px;
     text-align: left;
     /* 添加这一行，使标题文本居左 */
 }
@@ -381,8 +369,8 @@ export default {
 .tag {
     display: inline-block;
     margin-right: 6px;
-    margin-bottom: 6px;
-    margin-top: 6px;
+    margin-bottom: 0px;
+    margin-top: 0px;
     padding: 4px 8px;
     background-color: #4CAF50;
     color: #fff;

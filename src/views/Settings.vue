@@ -19,22 +19,7 @@ export default {
       checkedSequence: checkedValueRef2,
       checkedPre: checkedValueRef3,
       checkedBackground: checkedValueRef4,
-      checkedAuto: checkedValueRef5,
-      handleAccent(e) {
-        checkedValueRef1.value = e.target.value;
-      },
-      handleSequence(e) {
-        checkedValueRef2.value = e.target.value;
-      },
-      handlePre(e) {
-        checkedValueRef3.value = e.target.value;
-      },
-      handleBackground(e) {
-        checkedValueRef4.value = e.target.value;
-      },
-      handleAuto(e) {
-        checkedValueRef5.value = e.target.value;
-      }, zhCN,
+      checkedAuto: checkedValueRef5, zhCN,
       dateZhCN, darkTheme
     };
   },
@@ -44,7 +29,7 @@ export default {
         this.newWordNumber = response.data.wordnumber; // 假设设置文件中有一个名为wordCount的字段
         this.checkedBackground = response.data.checkedBackground;
         this.theme = this.checkedBackground === "Dark" ? darkTheme : null;
-        this.checkedAccent = response.data.accent;
+        this.checkedAccent = response.data.accent==="2"?"American Accent":"English Accent";
       })
       .catch(error => {
         console.error('Failed to fetch setting data:', error);
@@ -56,10 +41,6 @@ export default {
 
       reviewWordNumber: 150,
       theme: null,
-      checkedAccent: "American Accent",
-      checkedAuto: "Disabled",
-      checkedSequence: "Shuffled",
-      checkedPre: "Review First",
 
     }
   },
