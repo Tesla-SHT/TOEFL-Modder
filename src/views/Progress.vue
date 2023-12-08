@@ -33,7 +33,7 @@ export default {
     setup: () => {
         const option = ref({
             title: {
-                text: "Monthly Progress",
+                text: "Total Progress",
                 left: "center"
             },
             tooltip: {
@@ -46,7 +46,7 @@ export default {
                     type: "pie",
                     radius: "55%",
                     center: ["50%", "60%"],
-                    data: [ ],
+                    data: [],
                     emphasis: {
                         itemStyle: {
                             shadowBlur: 10,
@@ -86,22 +86,21 @@ export default {
         axios.get('../../data/records.json')
             .then(response => {
                 const records = response.data;
-                var i;
-                var bookName = {};
-                //获取每个词书中单词的数量
-                for (i = 0; i < records.length; i++) {
-                    if (bookName.hasOwnProperty(records[i].dict)) {
-                        bookName[records[i].dict] += 1;
-                    } else {
-                        bookName[records[i].dict] = 1;
-                    }
-                }
-                console.log(this.option.series[0].data);
                 //将词书名和单词数量转化为echarts所需的格式
-                for (var key in bookName) {
-                    this.option.series[0].data.push({ name: key, value: bookName[key] });
+                for (var i = 0; i < records.length; i++) {
+                    this.option.series[0].data.push({ name: records[i].dict, value: 0 });
                 }
-                console.log(this.option.series[0].data);
+
+                axios.get('../../data/notes.json')
+                    .then(response => {
+                        const note = response.data;
+                        const word = this.option.series[0].data
+                        for (var j = 0; j < word.length; j++) {
+                            for (var i = 0; i < note.length; i++) {
+                                if (note[i].title == word[j].name) { word[j].value = note[i].learnword; break; }
+                            }
+                        }
+                    })
             })
     },
     data() {
