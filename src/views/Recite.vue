@@ -87,7 +87,6 @@ export default {
         }
         function showNextWord() {
             setTimeout(() => {
-                wordnumberRemain--;
                 validflag = false;
                 while (!validflag) {
                     //currentWordIndex++;
@@ -113,7 +112,8 @@ export default {
                     router.back();
                     wordnumberRemain = wordnumber;
                 }
-                                if (validflag) {
+                wordnumberRemain--;       
+                if (validflag) {
                     note.content = showCurrentWord();
                     note.definition = showCurrentDefinition();
                     note.example = showCurrentExample();
