@@ -226,10 +226,13 @@ const createWindow = () => {
         let words = records[i].words
         var j
         var arrange = []
+        var star=[]
         for (j = 0; j < words.length; j += 1) {
-            console.log(j+"a")
+            //console.log(j+"a")
+            //console.log(words[j].last_time)
             if (words[j].time < Date.now() - 1000 * 600 | words[j].acc < 0.5) {
                 arrange.push(words[j].index)
+                star.push(words[j].try_num)
             }
             if (arrange.length >= num) break
         }
@@ -244,7 +247,7 @@ const createWindow = () => {
             arrange.push(new_ind)
         }
         arrange.push(-1)
-        return arrange
+        return [arrange,star]
     }
     ipcMain.on('new-record', (event, dict, ind, color) => {
         
