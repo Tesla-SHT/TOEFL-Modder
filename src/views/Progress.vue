@@ -24,11 +24,11 @@ use([
 
 export default {
     components: {
-    NButton,
-    NIcon,
-    VChart,
-    NHr
-},
+        NButton,
+        NIcon,
+        VChart,
+        NHr
+    },
     setup: () => {
 
         const option = ref({
@@ -162,9 +162,7 @@ export default {
                 </n-gi>
             </n-grid>
             <n-divider></n-divider>
-            <n-calendar v-model:value="value" :default=null :default-value=null>
-                <n-gradient-text type="error">?</n-gradient-text>words
-            </n-calendar>
+
         </n-card>
         <div>
             <div style="display: flex;">
@@ -193,6 +191,11 @@ export default {
                 </n-card>
             </div>
         </div>
+        <n-card style="margin:1% 3%;width:94%;" hoverable>
+            <n-calendar v-model:value="value" :default=null :default-value=null>
+                <n-gradient-text type="error">?</n-gradient-text>words
+            </n-calendar>
+        </n-card>
         <n-card style="margin:5% 3%;width:94%; margin-top: 5px;" hoverable>
             <n-grid :cols="17">
                 <n-gi :span="8">
