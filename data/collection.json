@@ -1,1 +1,47 @@
-[{"word":"inevitable","definition":"incapable of being avoided or prevented","example":"I need the wherewithal, as Emerson did, to say what’s on my mind and to take the inevitable hits."},{"word":"suppress","definition":"put down by force or authority","example":"You may find your own suppressed and rejected thoughts flowing back to you with an “alienated majesty."},{"word":"cultivate","definition":"adapt something wild to the environment","example":"The reason to read Blake and Dickinson and Freud and Dickens is not to become more cultivated, or more articulate, or to be someone who, at a cocktail party, is never embarrassed (or who can embarrass others)."},{"word":"fundamental","definition":"serving as an essential component","example":"No matter what anyone says this work has precious little to do with the fundamentals of teaching"},{"word":"prognosticate","definition":"make a prediction about; tell in advance","example":"And all of those teachers and counselors and friends—and the prognosticating uncles, the dithering aunts, the fathers and mothers with their hopes for your fulfillment—or their fulfillment in you—should not necessarily be cast aside or ignored."},{"word":"prone","definition":"having a tendency","example":"It’s just that smart people are prone to look into matters to see how they might go about buttering their toast"},{"word":"content","definition":"satisfied or showing satisfaction with things as they are","example":"The idea that a university education really should have no substantial content, should not be about what John Keats was disposed to call Soul-making, is one that you might think professors and university presidents would be discreet about."},{"word":"touchstone","definition":"a basis for comparison","example":"Brodhead, an impressive, articulate man, seems to take as his educational touchstone the Duke of Wellington’s precept that the Battle of Waterloo was won on the playing fields of Eton."}]
+[
+    {
+        "word": "inevitable",
+        "definition": "incapable of being avoided or prevented",
+        "example": "I need the wherewithal, as Emerson did, to say what’s on my mind and to take the inevitable hits."
+    },
+    {
+        "word": "suppress",
+        "definition": "put down by force or authority",
+        "example": "You may find your own suppressed and rejected thoughts flowing back to you with an “alienated majesty."
+    },
+    {
+        "word": "cultivate",
+        "definition": "adapt something wild to the environment",
+        "example": "The reason to read Blake and Dickinson and Freud and Dickens is not to become more cultivated, or more articulate, or to be someone who, at a cocktail party, is never embarrassed (or who can embarrass others)."
+    },
+    {
+        "word": "fundamental",
+        "definition": "serving as an essential component",
+        "example": "No matter what anyone says this work has precious little to do with the fundamentals of teaching"
+    },
+    {
+        "word": "prognosticate",
+        "definition": "make a prediction about; tell in advance",
+        "example": "And all of those teachers and counselors and friends—and the prognosticating uncles, the dithering aunts, the fathers and mothers with their hopes for your fulfillment—or their fulfillment in you—should not necessarily be cast aside or ignored."
+    },
+    {
+        "word": "prone",
+        "definition": "having a tendency",
+        "example": "It’s just that smart people are prone to look into matters to see how they might go about buttering their toast"
+    },
+    {
+        "word": "content",
+        "definition": "satisfied or showing satisfaction with things as they are",
+        "example": "The idea that a university education really should have no substantial content, should not be about what John Keats was disposed to call Soul-making, is one that you might think professors and university presidents would be discreet about."
+    },
+    {
+        "word": "touchstone",
+        "definition": "a basis for comparison",
+        "example": "Brodhead, an impressive, articulate man, seems to take as his educational touchstone the Duke of Wellington’s precept that the Battle of Waterloo was won on the playing fields of Eton."
+    },
+    {
+        "word": "",
+        "definition": "",
+        "example": ""
+    }
+]
