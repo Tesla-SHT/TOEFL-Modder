@@ -4,7 +4,7 @@ set "installerPath=%USERPROFILE%\Downloads\node-v20.10.0-x64.msi
 
 start "" "%installerURL%"
 
-timeout /t 1
+timeout /t 12
 
 start "" "%USERPROFILE%\Downloads\node-v20.10.0-x64.msi"
 pause
