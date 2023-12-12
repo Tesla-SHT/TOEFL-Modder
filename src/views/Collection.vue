@@ -2,7 +2,7 @@
     <n-config-provider :theme="theme" :locate="zhCN">
         <div style="display: flex; width:100%; justify-content: space-between;">
 
-            <div class="list-container">
+            <div class="list-container" :class="{ 'expanded': isLeftExpanded, 'narrowed': isRightExpanded }">
                 <n-button v-if="!isButtonHidden" style="padding:0!important" class="leftsidebar"
                     :class="{ 'is-button': isLeftExpanded, 'that-button': thatRightclick, }" @click="expandLeftSidebar">
                     <div v-if="!isDivHidden" style="font-size: 24px; color: #d4a827;">
@@ -13,10 +13,9 @@
                     <n-list clickable>
                         <n-collapse hoverable>
                             <n-list-item>
-                                <n-collapse-item v-for="(item) in listItems" 
-                                    content-style="margin-top: 10px;" >
+                                <n-collapse-item v-for="(item) in listItems" content-style="margin-top: 10px;">
                                     <template #header>
-                                        {{item.word}}
+                                        {{ item.word }}
                                     </template>
                                     <n-thing style="margin-top: 4px; margin-left: 25px">
                                         <template #description>
@@ -32,36 +31,23 @@
                             </n-list-item>
                         </n-collapse>
                     </n-list>
-
-                    <div v-for="(item, index) in listItems" :key="index" class="list-item" :class="getmode">
-                        <div class="thing" :style="{ 'margin-top': '10px' }">
-                            <div class="thing-title">{{ item.word }}</div>
-                            <div style="text-align:left">
-                            </div>
-                            <div class="description"></div>
-                            <div class="thing-content" :style="{ 'margin-top': '10px', 'margin-bottom': '10px' }">
-                                {{ item.definition }}
-                            </div>
-                            <div class="thing-content" :style="{ 'margin-top': '10px', 'margin-bottom': '10px' }">
-                                {{ item.example }}
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
-            <n-button class="rightsidebar" :class="{ 'is-button': isRightExpanded, 'that-button': thatLeftclick }" hoverable
-                @click="expandRightSidebar">
-                <div v-if="!isdivHidden" style="font-size: 24px; color: #d4a827;">
-                    I <br> M<br> M<br> E<br> R<br> S<br> E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>E I <br> M<br> M<br>
-                    E<br> R<br> S<br> E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>E I <br> M<br> M<br> E<br> R<br> S<br>
-                    E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>E
-                </div>
-                <div v-if="isdivVisible" style="overflow-y: auto;">
+            <div class="container" :class="{ 'narrowed': isLeftExpanded, 'expanded': isRightExpanded }">
+                <n-button v-if="!isbuttonHidden" class="rightsidebar"
+                    :class="{ 'is-button': isRightExpanded, 'that-button': thatLeftclick }" @click="expandRightSidebar">
+                    <div v-if="!isdivHidden" style="font-size: 24px; color: #d4a827;">
+                        I <br> M<br> M<br> E<br> R<br> S<br> E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>E I <br> M<br> M<br>
+                        E<br> R<br> S<br> E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>E I <br> M<br> M<br> E<br> R<br> S<br>
+                        E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>E
+                    </div>
+                </n-button>
+                <div v-if="isdivVisible" class="showncard">
                     I <br> M<br> M<br> E<br> R<br> S<br> E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>EI <br> M<br> M<br>
                     E<br> R<br> S<br> E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>EI <br> M<br> M<br> E<br> R<br> S<br>
                     E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>E
                 </div>
-            </n-button>
+            </div>
         </div>
     </n-config-provider>
 </template>
@@ -102,6 +88,7 @@ export default {
             isDivVisible: false,
             isdivVisible: false,
             isButtonHidden: false,
+            isbuttonHidden: false,
 
             zhCN,
             dateZhCN,
@@ -149,6 +136,7 @@ export default {
             }
             this.isDivVisible = !this.isDivVisible;
             this.isdivVisible = false;
+            this.isbuttonHidden = false;
         },
         expandRightSidebar() {
             this.isLeftExpanded = false;
@@ -157,6 +145,9 @@ export default {
             this.thatLeftclick = false;
             if (!this.isDivHidden) {
                 this.isDivHidden = true;
+            }
+            if (!this.isbuttonHidden) {
+                this.isbuttonHidden = true;
             }
             if (!this.isdivHidden) {
                 this.isdivHidden = true;
@@ -204,7 +195,7 @@ export default {
 }
 
 .leftsidebar.that-button {
-    width: 50%;
+    width: 85%;
     border-color: #F09C20;
     background-color: #faedc7;
     margin-top: 30px;
@@ -247,8 +238,8 @@ export default {
 
 .rightsidebar {
     height: 70vh;
-    margin-top: 10vh;
-    width: 30%;
+    width: 50%;
+    margin-top: 7%;
     margin-right: 7%;
     margin-left: auto;
     overflow: hidden;
@@ -256,9 +247,6 @@ export default {
     cursor: pointer;
     transition: background-color 0.3s, border-color 0.3s, width 0.3s;
     /* 添加过渡效果 */
-    overflow-y: auto;
-    /* 允许垂直滚动 */
-
     --n-color-hover: none !important;
     --n-border-hover: none !important;
     --n-text-color: none !important;
@@ -275,9 +263,10 @@ export default {
 }
 
 .rightsidebar.that-button {
-    width: 5%;
+    width: 50%;
     border-color: #F09C20;
     background-color: #faedc7;
+    margin-top: 30px;
 }
 
 .rightsidebar:hover {
@@ -309,6 +298,12 @@ export default {
     /* 悬停时显示竖线 */
 }
 
+.leftsidebar.that-button:hover {
+    background-color: inherit;
+    border: none;
+    cursor: default;
+}
+
 .list-container {
     overflow-y: auto;
     max-height: calc(80vh);
@@ -318,8 +313,18 @@ export default {
     width: 85%;
     margin-left: 3%;
     margin-right: auto;
+    transition: width 0.3s ease;
+    /* 添加过渡效果 */
 }
 
+.list-container.expanded {
+    width: 85%;
+    /* 设置扩大后的宽度 */
+}
+
+.list-container.narrowed {
+    width: 5%;
+}
 
 .list-item {
     border: 1px solid #e0e0e0;
@@ -384,6 +389,41 @@ export default {
 }
 
 .words {
+    margin-top: 1%;
+    margin-left: 1%;
+    height: 97%;
+    width: 97%;
+    border-radius: 10px;
+    /* 边框宽度和颜色 */
+    box-shadow: 0 0 10px rgba(0.3, 0, 0, 0.3);
+    /* 阴影样式，可以根据需要调整参数 */
+    overflow-y: auto;
+    /* 允许垂直滚动 */
+}
+
+.container {
+    overflow-y: auto;
+    max-height: calc(80vh);
+    height: calc(80vh);
+    /* 添加此行以设置固定高度 */
+    margin-top: 5vh;
+    width: 85%;
+    margin-right: 3%;
+    margin-left: auto;
+    transition: width 0.3s ease;
+    /* 添加过渡效果 */
+}
+
+.container.narrowed {
+    width: 5%;
+}
+
+.container.expanded {
+    width: 85%;
+    /* 设置扩大后的宽度 */
+}
+
+.showncard {
     margin-top: 1%;
     margin-left: 1%;
     height: 97%;
