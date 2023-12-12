@@ -10,9 +10,9 @@
                     </div>
                 </n-button>
                 <div v-if="isDivVisible" class="words">
-                    <n-list clickable>
+                    <n-list class="WordCard" style="padding: 2% 3%;" clickable>
                         <n-collapse hoverable>
-                            <n-list-item>
+                            <n-list-item >
                                 <n-collapse-item v-for="(item) in listItems" content-style="margin-top: 10px;">
                                     <template #header>
                                         {{ item.word }}
@@ -37,9 +37,7 @@
                 <n-button v-if="!isbuttonHidden" class="rightsidebar"
                     :class="{ 'is-button': isRightExpanded, 'that-button': thatLeftclick }" @click="expandRightSidebar">
                     <div v-if="!isdivHidden" style="font-size: 24px; color: #d4a827;">
-                        I <br> M<br> M<br> E<br> R<br> S<br> E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>E I <br> M<br> M<br>
-                        E<br> R<br> S<br> E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>E I <br> M<br> M<br> E<br> R<br> S<br>
-                        E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>E
+                        I <br> M<br> M<br> E<br> R<br> S<br> E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>E 
                     </div>
                 </n-button>
                 <div v-if="isdivVisible" class="showncard">
@@ -212,6 +210,7 @@ export default {
     --n-color-hover: none !important;
     --n-border-hover: none !important;
     --n-text-color: none !important;
+    box-shadow: 0 0 10px 3px rgba(0.3, 0, 0, 0.3);
 }
 
 .leftsidebar.is-button {
@@ -271,8 +270,8 @@ export default {
     height: 70vh;
     width: 50%;
     margin-top: 7%;
-    margin-right: 7%;
-    margin-left: auto;
+    margin-left: 7%;
+    margin-right: auto;
     overflow: hidden;
     border-radius: 40px;
     cursor: pointer;
@@ -281,6 +280,7 @@ export default {
     --n-color-hover: none !important;
     --n-border-hover: none !important;
     --n-text-color: none !important;
+    box-shadow: 0 2px 10px 3px rgba(0.3, 0, 0, 0.3);
 }
 
 .rightsidebar.is-button {
@@ -468,11 +468,11 @@ export default {
 }
 
 .WordCard {
-    width: 90%;
-    height: 80%;
-    margin: 5% 5%;
+    width: 98%;
+    height: 98%;
+    margin: 1% 1%;
     border-radius: 10px;
-
+    box-shadow: 0 0 10px #619163;
 }
 
 .word-title {
@@ -485,7 +485,7 @@ export default {
     border: none;
     outline: none;
     border-radius: 10px;
-
+    margin-top: 10%;
 }
 
 .word-content {

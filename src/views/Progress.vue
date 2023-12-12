@@ -145,7 +145,7 @@ export default {
 </script>
 <template>
     <n-config-provider :theme="theme" :locate="zhCN">
-        <n-card style="margin:1% 3%;width:94%;" hoverable>
+        <n-card style="margin:1% 3%;width:94%;" hoverable class="card">
             <n-grid :cols="6">
                 <n-gi :span="6">
                     <h3 align="center">
@@ -165,8 +165,8 @@ export default {
 
         </n-card>
         <div>
-            <div style="display: flex;">
-                <n-card style="margin:5% 3%;width:35%;height:350px; margin-top: 5px;" hoverable>
+            <div style="display: flex;" >
+                <n-card style="margin:5% 3%;width:35%;height:350px; margin-top: 5px;" hoverable class="card" :embedded="true">
                     <div>
                         <n-button :style="buttonStyle" :hover-style="hoverStyle" @click="navigateToNewPage">
                             <n-icon name="heart" />
@@ -181,7 +181,7 @@ export default {
                         </n-button>
                     </div>
                 </n-card>
-                <n-card style="margin:5% 3%;width:50%;height:350px; margin-top: 5px;" hoverable>
+                <n-card style="margin:5% 3%;width:50%;height:350px; margin-top: 5px;" hoverable class="card">
                     <v-chart class="chart" :option="option" />
                     <n-grid :cols="1">
                         <n-gi :span="8">
@@ -224,5 +224,9 @@ export default {
 
 .n-calendar {
     height: 450px !important;
+}
+
+.card{
+    border-color:blue;
 }
 </style>
