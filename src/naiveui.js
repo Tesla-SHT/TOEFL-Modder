@@ -1,5 +1,6 @@
 
 import {  useMessage } from 'naive-ui'
+import 'date-fns/esm/index.js';
 import {
     // create naive ui
     create,
@@ -35,7 +36,9 @@ import {
     NConfigProvider,
     NCollapse,
     NCollapseItem,NPopconfirm,
-    zhCN, dateZhCN
+    zhCN, dateZhCN,
+    NMessageProvider,NGradientText
+    
 } from 'naive-ui';
 
 const naive = create({
@@ -62,7 +65,7 @@ const naive = create({
             NTag,
             NListItem, NConfigProvider,
             NCollapse,
-            NCollapseItem,NPopconfirm],
+            NCollapseItem,NPopconfirm,NMessageProvider,NGradientText],
     setup() {
         return {
             fontSize: this.$store.state.fontSize,
