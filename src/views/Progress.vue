@@ -1,8 +1,9 @@
 <script>
-import { NButton, NIcon } from 'naive-ui'
+import { NButton, NHr, NIcon, useMessage } from "naive-ui";
 import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { PieChart } from "echarts/charts";
+import { isYesterday, addDays } from "date-fns/esm";
 import {
     TitleComponent,
     TooltipComponent,
@@ -23,14 +24,13 @@ use([
 
 export default {
     components: {
-        NButton,
-        NIcon,
-        VChart,
-    },
-    ////provide: {
-    //    [THEME_KEY]: "dark"
-    //},
+    NButton,
+    NIcon,
+    VChart,
+    NHr
+},
     setup: () => {
+
         const option = ref({
             title: {
                 text: "Monthly Progress",
@@ -46,7 +46,7 @@ export default {
                     type: "pie",
                     radius: "55%",
                     center: ["50%", "60%"],
-                    data: [ ],
+                    data: [],
                     emphasis: {
                         itemStyle: {
                             shadowBlur: 10,
@@ -63,6 +63,14 @@ export default {
             zhCN,
             dateZhCN,
             darkTheme,
+
+            //value: ref(addDays(Date.now(), 1).valueOf()),
+            /*isDateDisabled(timestamp) {
+                if (isYesterday(timestamp)) {
+                    return true;
+                }
+                return false;
+            }*/
         };
     }, created() {
         axios.get('../../data/setting.json')
@@ -137,7 +145,7 @@ export default {
 </script>
 <template>
     <n-config-provider :theme="theme" :locate="zhCN">
-        <n-card style="margin:5% 3%;width:94%;" hoverable>
+        <n-card style="margin:1% 3%;width:94%;" hoverable>
             <n-grid :cols="6">
                 <n-gi :span="6">
                     <h3 align="center">
@@ -153,6 +161,10 @@ export default {
                     </h3>
                 </n-gi>
             </n-grid>
+            <n-divider></n-divider>
+            <n-calendar v-model:value="value" :default=null :default-value=null>
+                <n-gradient-text type="error">?</n-gradient-text>words
+            </n-calendar>
         </n-card>
         <div>
             <div style="display: flex;">
@@ -205,5 +217,9 @@ export default {
 <style>
 .chart {
     height: 200px;
+}
+
+.n-calendar {
+    height: 450px !important;
 }
 </style>
