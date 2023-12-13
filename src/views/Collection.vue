@@ -10,16 +10,16 @@
                     </div>
                 </n-button>
                 <div v-if="isDivVisible" class="words">
-                    <n-list class="WordCard" style="padding: 2% 3%;" clickable>
+                    <n-list class="WordCard" style="padding: 0% 0%;" clickable>
                         <n-collapse hoverable>
                             <n-list-item >
-                                <n-collapse-item v-for="(item) in listItems" content-style="margin-top: 10px;">
+                                <n-collapse-item v-for="(item) in listItems" style="margin-top: 10px;margin-left:10px">
                                     <template #header>
                                         {{ item.word }}
                                     </template>
                                     <n-thing style="margin-top: 4px; margin-left: 25px">
                                         <template #description>
-                                            <n-space size="small" style="margin-top: 4px; margin-left: 0px">
+                                            <n-space size="small" style="margin-top: 0px; margin-left: 0px">
                                                 <n-tag :bordered="false" type="info" size="small">
                                                     {{ item.definition }}
                                                 </n-tag>
@@ -196,6 +196,9 @@ export default {
 </script>
 
 <style scoped>
+.n-collapse .n-collapse-item .n-collapse-item__content-wrapper .n-collapse-item__content-inner{
+    padding-top:100px!important;
+}
 .leftsidebar {
     height: 70vh;
     width: 50%;
@@ -358,7 +361,7 @@ export default {
 }
 
 .list-item {
-    border: 1px solid #e0e0e0;
+    /*border: 1px solid #e0e0e0;*/
     padding: 10px;
     margin-bottom: 0;
     padding-bottom: 0;
@@ -424,9 +427,9 @@ export default {
     margin-left: 1%;
     height: 97%;
     width: 97%;
-    border-radius: 10px;
+    /*border-radius: 10px;*/
     /* 边框宽度和颜色 */
-    box-shadow: 0 0 10px rgba(0.3, 0, 0, 0.3);
+    /*box-shadow: 0 0 10px rgba(0.3, 0, 0, 0.3);*/
     /* 阴影样式，可以根据需要调整参数 */
     overflow-y: auto;
     /* 允许垂直滚动 */
@@ -459,9 +462,9 @@ export default {
     margin-left: 1%;
     height: 97%;
     width: 97%;
-    border-radius: 10px;
+    /*border-radius: 10px;
     /* 边框宽度和颜色 */
-    box-shadow: 0 0 10px rgba(0.3, 0, 0, 0.3);
+    /*box-shadow: 0 0 10px rgba(0.3, 0, 0, 0.3);
     /* 阴影样式，可以根据需要调整参数 */
     overflow-y: auto;
     /* 允许垂直滚动 */

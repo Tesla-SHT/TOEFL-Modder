@@ -29,27 +29,31 @@
                 you improve your English skills.</p>
             <div class="team-info">
                 <h2 class="team-title">Development Team</h2>
-                <n-grid x-gap="12" cols="5" >
-                    <n-grid-item>
+                <n-grid x-gap="12" cols="12"      >
+                    <n-grid-item span="2" offset="1">
                         <div>沈皓天</div>
                     </n-grid-item>
-                    <n-grid-item>
+                    <n-grid-item span="2">
                         <div>姜林楚</div>
                     </n-grid-item>
-                    <n-grid-item>
+                    <n-grid-item span="2">
                         <div>蔡贺丞</div>
                     </n-grid-item>
-                    <n-grid-item>
+                    <n-grid-item span="2">
                         <div>胡烁怡</div>
                     </n-grid-item>
-                    <n-grid-item>
+                    <n-grid-item span="2">
                         <div>翁歌华</div>
                     </n-grid-item>
                 </n-grid>
             </div>
-            <p class="contact">Contact us: <a href="https://github.com/Tesla-SHT/TOEFL-Modder" target="_blank">Github</a> </p>
+            
         </div>
+        <br>
+        <br>
+        <br>
         <footer style="font-size:12px;bottom:0;margin-top:auto">
+            <p class="contact">Contact us: <a href="https://github.com/Tesla-SHT/TOEFL-Modder" target="_blank">Github</a> </p>
             <p class="copyright">© 2023 TOEFL-Modder. All rights reserved.</p>
         </footer>
     </div>
@@ -77,6 +81,7 @@
 .description {
     font-size: 14px;
     text-align: center;
+    padding:0 10%;
 }
 
 
@@ -110,6 +115,10 @@
 }
 
 .copyright{
+    text-align: center;
+}
+.contact{
+    
     text-align: center;
 }
 /* Add more styles as needed */

@@ -153,7 +153,8 @@ export default {
                             <template #prefix>
                                 You have met TOEFL-Modder for
                             </template>
-                            <n-number-animation ref="numberAnimationInstRef" :from="0" :to="totaldays" />
+                            <n-gradient-text type="warning"><n-number-animation ref="numberAnimationInstRef" :from="0"
+                                    :to="totaldays" /></n-gradient-text>
                             <template #suffix>
                                 days!
                             </template>
@@ -161,25 +162,25 @@ export default {
                     </h3>
                 </n-gi>
             </n-grid>
-            <n-divider></n-divider>
-
+            <n-grid :cols="6">
+                <n-gi :span="3" style="text-align:center">Total Accuracy:{{ }}</n-gi>
+                <n-gi :span="3" style="text-align:center">Continuous Study Day:{{  }}</n-gi>
+            </n-grid>
         </n-card>
         <div>
-            <div style="display: flex;" >
-                <n-card style="margin:5% 3%;width:35%;height:350px; margin-top: 5px;" hoverable class="card" :embedded="true">
-                    <div>
-                        <n-button :style="buttonStyle" :hover-style="hoverStyle" @click="navigateToNewPage">
-                            <n-icon name="heart" />
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                viewBox="0 0 12 12">
-                                <g fill="none">
-                                    <path
-                                        d="M5.283 1.546a.8.8 0 0 1 1.435 0L7.83 3.798l2.486.361a.8.8 0 0 1 .443 1.365L8.96 7.277l.425 2.476a.8.8 0 0 1-1.16.844L6 9.427l-2.224 1.17a.8.8 0 0 1-1.16-.844l.424-2.476l-1.799-1.753a.8.8 0 0 1 .444-1.365l2.486-.36l1.111-2.253z"
-                                        fill="currentColor"></path>
-                                </g>
-                            </svg> Collection
-                        </n-button>
-                    </div>
+            <div style="display: flex;">
+                <n-card style="margin:5% 3%;width:35%;height:350px; margin-top: 5px;" hoverable class="card">
+                    <n-button :style="buttonStyle" :hover-style="hoverStyle" @click="navigateToNewPage">
+                        <n-icon name="heart" />
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 12 12">
+                            <g fill="none">
+                                <path
+                                    d="M5.283 1.546a.8.8 0 0 1 1.435 0L7.83 3.798l2.486.361a.8.8 0 0 1 .443 1.365L8.96 7.277l.425 2.476a.8.8 0 0 1-1.16.844L6 9.427l-2.224 1.17a.8.8 0 0 1-1.16-.844l.424-2.476l-1.799-1.753a.8.8 0 0 1 .444-1.365l2.486-.36l1.111-2.253z"
+                                    fill="currentColor"></path>
+                            </g>
+                        </svg> Collection
+                    </n-button>
                 </n-card>
                 <n-card style="margin:5% 3%;width:50%;height:350px; margin-top: 5px;" hoverable class="card">
                     <v-chart class="chart" :option="option" />
@@ -196,7 +197,7 @@ export default {
                 <n-gradient-text type="error">?</n-gradient-text>words
             </n-calendar>
         </n-card>
-        <n-card style="margin:5% 3%;width:94%; margin-top: 5px;" hoverable>
+        <!--<n-card style="margin:5% 3%;width:94%; margin-top: 5px;" hoverable>
             <n-grid :cols="17">
                 <n-gi :span="8">
                     <h3 align="center">Accuracy</h3>
@@ -209,12 +210,10 @@ export default {
                     <h3>Continuous Study Day </h3>
                 </n-gi>
             </n-grid>
-        </n-card>
-        <div>
-            6
-            66
-
-        </div>
+        </n-card>-->
+        <br>
+        <br>
+        <br>
     </n-config-provider>
 </template>
 <style>
@@ -226,7 +225,7 @@ export default {
     height: 450px !important;
 }
 
-.card{
-    border-color:blue;
+.card {
+    border-color: blue;
 }
 </style>
