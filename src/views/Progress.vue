@@ -95,13 +95,12 @@ export default {
             .then(response => {
                 const records = response.data;
                 var i;
+                var j;
                 var bookName = {};
                 //获取每个词书中单词的数量
                 for (i = 0; i < records.length; i++) {
-                    if (bookName.hasOwnProperty(records[i].dict)) {
-                        bookName[records[i].dict] += 1;
-                    } else {
-                        bookName[records[i].dict] = 1;
+                    bookName[records[i].dict] = records[i].words.length;
+                    for (j = 0; j < records[i].words.length; j++) {
                     }
                 }
                 console.log(this.option.series[0].data);
@@ -164,7 +163,7 @@ export default {
             </n-grid>
             <n-grid :cols="6">
                 <n-gi :span="3" style="text-align:center">Total Accuracy:{{ }}</n-gi>
-                <n-gi :span="3" style="text-align:center">Continuous Study Day:{{  }}</n-gi>
+                <n-gi :span="3" style="text-align:center">Continuous Study Day:{{ }}</n-gi>
             </n-grid>
         </n-card>
         <div>
@@ -193,8 +192,8 @@ export default {
             </div>
         </div>
         <n-card style="margin:1% 3%;width:94%;" hoverable>
-            <n-calendar v-model:value="value" :default=null :default-value=null>
-                <n-gradient-text type="error">?</n-gradient-text>words
+            <n-calendar v-model:value="value" :default=null :default-value=null #="{ year, month, date }">
+                <n-gradient-text type="error">{{ }}</n-gradient-text>words
             </n-calendar>
         </n-card>
         <!--<n-card style="margin:5% 3%;width:94%; margin-top: 5px;" hoverable>

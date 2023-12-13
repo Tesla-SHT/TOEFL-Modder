@@ -1,6 +1,5 @@
 
 import {  useMessage } from 'naive-ui'
-import 'date-fns/esm/index.js';
 import {
     // create naive ui
     create,

@@ -1,1 +1,30 @@
-[]
+[
+    {
+        "dict": "College Vocabulary",
+        "words": [
+            {
+                "index": 130,
+                "last_time": 1702470453185,
+                "try_num": 3,
+                "acc": 0
+            },
+            {
+                "index": 105,
+                "last_time": 1702470455488,
+                "try_num": 1,
+                "acc": 0
+            }
+        ]
+    },
+    {
+        "dict": "GRE Warm-up",
+        "words": [
+            {
+                "index": 24,
+                "last_time": 1702470286882,
+                "try_num": 1,
+                "acc": 0
+            }
+        ]
+    }
+]
