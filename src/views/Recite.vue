@@ -398,6 +398,7 @@ export default {
     width: 90%;
     height: 80%;
     margin: 5% 5%;
+    margin-top:2%;
     border-radius: 10px;
 
 }

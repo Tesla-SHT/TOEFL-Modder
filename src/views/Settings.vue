@@ -44,6 +44,11 @@ export default {
 
     }
   },
+  watch: {
+    newWordNumber(newVal){
+      this. updateWordNumber(event);
+    }
+  },
   methods: {
     updateWordNumber(event) {
       $setting.updateWordNumber(this.newWordNumber)
