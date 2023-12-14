@@ -32,12 +32,12 @@ export default {
 
         const option = ref({
             title: {
-                text: "Monthly Progress",
+                text: "Total Progress",
                 left: "center"
             },
             tooltip: {
                 trigger: "item",
-                formatter: "{a} <br/>{b} : {c} ({d}%)"
+                formatter: "{b} : {c} ({d}%)"
             },
             series: [
                 {
@@ -84,8 +84,27 @@ export default {
             .then(response => {
                 const notes = response.data;
                 const timeRecords = notes.map(book => book.time);
-                const allTimes = Array.from(new Set(timeRecords.flat()));
+                var allTimes = Array.from(new Set(timeRecords.flat()));
                 this.totaldays = allTimes.length;
+                var todayDate = new Date(); //今天
+                var nowDataArr = [todayDate.getFullYear(), todayDate.getMonth() + 1, todayDate.getDate()] //今天的 年 月 日
+                for (var k = 0; k < allTimes.length; k++) {
+                var flag = false;
+                    for (var i = 0; i < allTimes.length; i++) {
+                        let activeArr = allTimes[i].split('/');
+                        console.log(activeArr);
+                        if (nowDataArr[0] == activeArr[0] && nowDataArr[1] == activeArr[1] && nowDataArr[2] == activeArr[2]) {
+                            this.continuous++;
+                            flag = true;
+                            break;
+                        }
+
+                    }
+                    if (!flag) break;
+                    todayDate = new Date(todayDate.setTime(todayDate.getTime() - 24 * 60 * 60 * 1000))
+                    nowDataArr = [todayDate.getFullYear(), todayDate.getMonth() + 1, todayDate.getDate()]
+                    console.log(nowDataArr);
+                }
             })
             .catch(error => {
                 console.error('获取时间记录出错：', error);
@@ -97,12 +116,16 @@ export default {
                 var j;
                 var bookName = {};
                 //获取每个词书中单词的数量
+                var ans = 0;
                 for (i = 0; i < records.length; i++) {
                     bookName[records[i].dict] = records[i].words.length;
                     for (j = 0; j < records[i].words.length; j++) {
+                        this.totalaccuracy += records[i].words[j].acc;
+                        ans++;
                     }
                 }
-                console.log(this.option.series[0].data);
+                if (ans > 0)
+                    this.totalaccuracy = (this.totalaccuracy / ans * 100).toFixed(10);
                 //将词书名和单词数量转化为echarts所需的格式
                 for (var key in bookName) {
                     this.option.series[0].data.push({ name: key, value: bookName[key] });
@@ -127,7 +150,9 @@ export default {
                 borderWidth: '16px', // 设置悬停状态下的边框宽度，例如4像素
             },
             theme: null,
-            totaldays: 0
+            totaldays: 0,
+            totalaccuracy: 0,
+            continuous: 0
         }
     },
     methods: {
@@ -160,10 +185,10 @@ export default {
                     </h3>
                 </n-gi>
             </n-grid>
-            <n-grid :cols="6">
-                <n-gi :span="3" style="text-align:center">Total Accuracy:{{ }}</n-gi>
+            <!--<n-grid :cols="6">
+                <n-gi :span="3" style="text-align:center">Total Accuracy:</n-gi>
                 <n-gi :span="3" style="text-align:center">Continuous Study Day:{{ }}</n-gi>
-            </n-grid>
+            </n-grid>-->
         </n-card>
         <div>
             <div style="display: flex;">
@@ -184,9 +209,14 @@ export default {
                     <v-chart class="chart" :option="option" />
                     <n-grid :cols="1">
                         <n-gi :span="8">
-                            <h3 align="center">Weekly Progress</h3>
+                            <h3 align="center">Total Accuracy: <n-gradient-text type="warning"><n-number-animation
+                                        ref="numberAnimationInstRef" :from="0" :to="totalaccuracy"
+                                        :precision="2" />%</n-gradient-text></h3>
+                            <h3 align="center">Continuous Study Day: <n-gradient-text type="warning"><n-number-animation
+                                        ref="numberAnimationInstRef" :from="0" :to="continuous" /></n-gradient-text></h3>
                         </n-gi>
                     </n-grid>
+
                 </n-card>
             </div>
         </div>
