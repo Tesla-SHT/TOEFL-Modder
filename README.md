@@ -24,7 +24,9 @@
    - Open cmd under the root folder
    - npm install (if too slow, input "npm install -g cnpm --registry=https://registry.npm.taobao.org" and "cnpm install")
    - Click QuickStart.bat under the root folder
-2. Daily Use
+     
+   - Or you can just try QuickSetup.bat, but you may need to try again for the evitable error.
+1. Daily Use
    
    Just Click **QuickStart.bat**!
 
