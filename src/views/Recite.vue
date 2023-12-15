@@ -47,7 +47,7 @@ export default {
                 //wordArrange = getRandomElements(wordArrange, wordArrange.length);//arrange shuffle
                 //wordArrange.push(-1);//end of arrange
                 [wordArrange, star] = await $record.load_arrange(note.title, wordsData.length, wordnumber)
-                showNextWord(); // 显示第一个单词
+                showNextWord(1); // 显示第一个单词
 
             } catch (error) {
                 console.error(error)
@@ -86,8 +86,9 @@ export default {
             //}
             //return ''
         }
-        function showNextWord() {
-            setTimeout(() => {
+        function showNextWord(flag) {
+            if (flag) {
+
                 validflag = false;
                 while (!validflag) {
                     //currentWordIndex++;
@@ -152,7 +153,76 @@ export default {
                         options.value = randomOptions;
                     }
                 }
-            }, 200);
+            }
+            else {
+                setTimeout(() => {
+
+                    validflag = false;
+                    while (!validflag) {
+                        //currentWordIndex++;
+                        currentWordIndex.value = wordArrange[currentIndex];
+                        //console.log(currentWordIndex.value);
+                        if (currentIndex < star.length) {
+                            stars.value = star[currentIndex];
+                        }
+                        else stars.value = 0;
+                        if (currentWordIndex.value < 0) {
+                            console.log("end of dictionary");
+                            break;
+                        }
+                        validflag = true
+                        let tempWord = showCurrentWord();
+                        for (let i = 0; i < bin.length; i++) {
+                            if (bin[i] == tempWord) {
+                                validflag = false;
+                                break;
+                            }
+                        }
+                        currentIndex++;
+                    }
+                    //console.log(wordnumber, wordnumberRemain);
+                    if (wordnumberRemain <= 0) {
+                        console.log(wordnumber);
+                        router.back();
+                        wordnumberRemain = wordnumber;
+                    }
+                    wordnumberRemain--;
+                    if (validflag) {
+                        note.content = showCurrentWord();
+                        note.definition = showCurrentDefinition();
+                        note.example = showCurrentExample();
+                    } else {
+                        note.content = '';
+                        note.definition = '';
+                        note.example = '';
+                        router.back;
+                        currentIndex = 0;
+                    }
+                    collectflag = false;
+                    //console.log(collection);
+                    for (let i = 0; i < collection.length; i++) {
+                        if (collection[i] == note.content) {
+                            //console.log("check" + collectflag);
+                            collectflag = true;
+                            break;
+                        }
+                    }      // Generate options
+                    const allOptions = wordsData.map(word => word.Definitions).flat();
+                    const randomOptions = getRandomElements(allOptions, 6);
+                    {
+                        let existflag = false
+                        for (let i = 0; i < randomOptions.length; i++) {
+                            if (randomOptions[i] === note.definition) existflag = true;
+                        }
+                        if (!existflag) {
+                            console.log("No right answer");
+                            const randomIndex = Math.floor(Math.random() * randomOptions.length);
+                            randomOptions[randomIndex] = note.definition;
+                            options.value = randomOptions;
+                        }
+                    }
+                }, 200);
+            }
         }
 
         function getRandomElements(array, count) {
@@ -340,7 +410,7 @@ export default {
                         </svg>
                     </button>
                     <button :class="{ 'deleted': deleting }" class="icon-button"
-                        @click="deleteWord(event, note.content, note.title, stars); showNextWord(); refreshIcon(event)"
+                        @click="deleteWord(event, note.content, note.title, stars); showNextWord(0); refreshIcon(event)"
                         style="float: right;">
                         <svg class="kill-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                             viewBox="0 0 24 24">
@@ -398,7 +468,7 @@ export default {
                         <n-h6 prefix="bar" :type="isAnswerCorrect() ? 'success' : 'error'">
                             {{ note.example }}
                         </n-h6>
-                        <n-button @click="showNextWord(); refreshIcon(event)"
+                        <n-button @click="showNextWord(0); refreshIcon(event)"
                             :type="isAnswerCorrect() ? 'success' : 'error'" dashed>Next Word</n-button>
 
                     </div>
