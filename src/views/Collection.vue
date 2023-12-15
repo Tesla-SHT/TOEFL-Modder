@@ -54,23 +54,19 @@
                     </div>
                 </n-button>
                 <div v-if="isdivVisible" class="showncard">
-                    <n-card class="WordCard" v-if="word && word.length > 0">
-                        <div class="word-title" v-for="(word) in word">
-                            <h1>{{ word.word }}</h1>
+                    <n-card class="WordCard" v-if="words && words.length > 0">
+                        <div class="word-title">
+                            <h1>{{ currentWord.word }}</h1>
                         </div>
                         <div class="word-content">
-                            <div class="word-detail" v-for="(word) in word">
-                                <n-h5 prefix="bar">
-                                    {{ word.definition }}
-                                </n-h5>
-                                <n-h6 prefix="bar">
-                                    {{ word.example }}
-                                </n-h6>
+                            <div class="word-detail">
+                                <n-h5 prefix="bar">{{ currentWord.definition }}</n-h5>
+                                <n-h6 prefix="bar">{{ currentWord.example }}</n-h6>
                             </div>
                             <n-button @click="showNextWord">Next Word</n-button>
                         </div>
                     </n-card>
-                    <n-card v-else :bordered="false"  class="WordCard">
+                    <n-card v-else :bordered="false" class="WordCard">
                         <n-grid :cols="1">
                             <n-gi :span="8">
                                 <h3 align="center" style="margin-top: 20%;">There is no collection yet. </h3>
@@ -132,7 +128,8 @@ export default {
             theme: null,
             darkcolor: null,
 
-            currentIndex: 0, // 添加一个变量用于跟踪当前选择的对象索引
+            words: [],  // 你的单词数组
+            currentIndex: 0,  // 当前显示的单词索引
         };
     }, created() {
         axios.get('../../data/setting.json')
@@ -148,18 +145,20 @@ export default {
 
         axios.get('../../data/collection.json')
             .then(response => {
-                this.listItems = response.data;
-                console.log(this.listItems)
-            })
+                // 根据某个属性去重，这里假设每个对象有一个名为 'id' 的属性
+                const uniqueItems = Array.from(new Map(response.data.map(item => [item.word, item])).values());
 
+                this.listItems = uniqueItems;
+                console.log(this.listItems);
+            })
             .catch(error => {
                 console.error('Failed to fetch setting data:', error);
             });
         axios.get('../../data/collection.json')
             .then(response => {
                 // 选择第一个对象或者根据需求选择其他对象
-                this.word = response.data;
-                console.log(this.word)
+                this.words = response.data;
+                console.log(this.words)
             })
 
             .catch(error => {
@@ -204,16 +203,18 @@ export default {
             this.isButtonHidden = false;
         },
         showNextWord() {
-            // 根据 currentIndex 更新 word 中的数据
-            this.currentIndex = (this.currentIndex + 1) % this.listItems.length;
-            this.updateWord();
-            this.word = [this.listItems[this.currentIndex]];
+            // 点击按钮时，将索引加1
+            this.currentIndex = (this.currentIndex + 1) % this.words.length;
         },
     },
     computed: {
         getmode() {
             return this.checkedBackground === "Dark" ? "list-item-2" : "list-item-1";
-        }
+        },
+        currentWord() {
+            // 根据当前索引获取当前显示的单词
+            return this.words.length > 0 ? this.words[this.currentIndex] : {};
+        },
     }
 };
 
