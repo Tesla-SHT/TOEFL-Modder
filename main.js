@@ -115,18 +115,21 @@ const createWindow = () => {
         });
 
         const filePath = result.filePaths[0];
-        console.log( decodeURIComponent(__dirname)+"!");
-        console.log(filePath); 
+        //console.log(decodeURIComponent(__dirname) + "!");
+        //console.log(filePath);
         // 复制文件到static文件夹和run.cmd所在的目录
-        const staticFolderPath = path.join(__dirname, '../static/csv2json');
+        const staticFolderPath = path.join(__dirname, 'static/csv2json');
+        //console.log(staticFolderPath + "!staticfolderpath")
         const staticFilePath = path.join(staticFolderPath, path.basename(filePath));
+        //console.log(staticFilePath + "!staticfilepath")
         fs.copyFileSync(filePath, staticFilePath);
 
-        const runCmdPath = path.join(__dirname, '../run.cmd');
+        const runCmdPath = path.join(__dirname, 'static/csv2json/run.cmd');
+        //console.log(runCmdPath)
         const runCmdFolderPath = path.dirname(runCmdPath);
         const runCmdFilePath = path.join(runCmdFolderPath, path.basename(filePath));
         fs.copyFileSync(filePath, runCmdFilePath);
-
+        console.log(runCmdFilePath + "!runcmdfilepath")
         // 运行run.cmd文件生成JSON词典
         const { exec } = require('child_process');
         exec('run.cmd', { cwd: runCmdFolderPath }, (error, stdout, stderr) => {
@@ -139,15 +142,19 @@ const createWindow = () => {
                 return;
             }
 
-            // 移动生成的JSON词典到data/dicts文件夹
-            const generatedDictPath = path.join(runCmdFolderPath, 'generatedDict.json');
-            const dictsFolderPath = path.join(__dirname, '../data/dicts');
-            const dictFilePath = path.join(dictsFolderPath, 'customDict.json');
-            fs.renameSync(generatedDictPath, dictFilePath);
-
-            // 发送上传成功的消息给Vue组件
-            event.reply('dictionary-uploaded', true);
         })
+
+        // 移动生成的JSON词典到data/dicts文件夹
+        const generatedDictPath = runCmdFilePath.replace('.csv', '.json');
+        const dictsFolderPath = path.join(__dirname, 'data/dicts');
+        const dictFilePath = path.join(dictsFolderPath, path.basename(generatedDictPath));
+        //console.log(dictFilePath + "!dictfilepath" )
+        fs.renameSync(generatedDictPath, dictFilePath);
+        let notes = getNotesData();
+        notes.push({ "title": path.basename(generatedDictPath, '.json'), "time": [], "learnday": 0, "learnword": 0, "unlearned": 0 })
+        fs.writeFileSync(NOTE_PATH, JSON.stringify(notes))
+        win.reload();
+        // 发送上传成功的消息给Vue组件
     })
     /*ipcMain.on('insert-note', (event, data) => {
         let notesData = getNotesData()
