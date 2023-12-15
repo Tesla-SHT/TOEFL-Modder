@@ -121,21 +121,6 @@ export default {
             <br>
             <n-grid :cols="12">
               <n-gi :span="5">
-                <h4>Automatic Pronunciation</h4>
-              </n-gi>
-              <n-gi :span="7">
-                <n-space>
-                  <n-radio :checked="checkedAuto === 'Enabled'" value="Enabled" name="basic-demo" @change="handleAuto">
-                    Enabled
-                  </n-radio>
-                  <n-radio :checked="checkedAuto === 'Disabled'" value="Disabled" name="basic-demo" @change="handleAuto">
-                    Disabled
-                  </n-radio></n-space>
-              </n-gi>
-            </n-grid>
-            <br>
-            <n-grid :cols="12">
-              <n-gi :span="5">
                 <h4>Word Order</h4>
               </n-gi>
               <n-gi :span="7">

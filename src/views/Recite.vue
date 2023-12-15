@@ -142,7 +142,7 @@ export default {
                 const randomOptions = getRandomElements(allOptions, 6);
                 {
                     let existflag = false
-                    for (let i=0; i<randomOptions.length; i++) {
+                    for (let i = 0; i < randomOptions.length; i++) {
                         if (randomOptions[i] === note.definition) existflag = true;
                     }
                     if (!existflag) {
@@ -221,11 +221,11 @@ export default {
                 $collect.deleteFromCollection(word, definition, example)
             }
         },
-        deleteWord(event, word, title) {
+        deleteWord(event, word, title, star) {
             if (!this.deleting) {
                 this.deleting = true
                 $delete.addToBin(word)
-                $record.addWordNumber(title)
+                if (star == 0) $record.addWordNumber(title)
                 console.log("delete " + this.deleting)
             }
             else {
@@ -340,7 +340,7 @@ export default {
                         </svg>
                     </button>
                     <button :class="{ 'deleted': deleting }" class="icon-button"
-                        @click="deleteWord(event, note.content, note.title); showNextWord(); refreshIcon(event)"
+                        @click="deleteWord(event, note.content, note.title, stars); showNextWord(); refreshIcon(event)"
                         style="float: right;">
                         <svg class="kill-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                             viewBox="0 0 24 24">
@@ -358,17 +358,20 @@ export default {
                         <div style="align-items: center;text-align:center;">
                             <h1 style="align-items: center;text-align:center;">{{ note.content }}
                                 <svg @click="playAudio(note.content)" xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-100 -100 1024 1024"
-                                style="height:1em;width:1em;margin-top:0px;">
-                                <path
-                                    d="M625.9 115c-5.9 0-11.9 1.6-17.4 5.3L254 352H90c-8.8 0-16 7.2-16 16v288c0 8.8 7.2 16 16 16h164l354.5 231.7c5.5 3.6 11.6 5.3 17.4 5.3c16.7 0 32.1-13.3 32.1-32.1V147.1c0-18.8-15.4-32.1-32.1-32.1zM586 803L293.4 611.7l-18-11.7H146V424h129.4l17.9-11.7L586 221v582zm348-327H806c-8.8 0-16 7.2-16 16v40c0 8.8 7.2 16 16 16h128c8.8 0 16-7.2 16-16v-40c0-8.8-7.2-16-16-16zm-41.9 261.8l-110.3-63.7a15.9 15.9 0 0 0-21.7 5.9l-19.9 34.5c-4.4 7.6-1.8 17.4 5.8 21.8L856.3 800a15.9 15.9 0 0 0 21.7-5.9l19.9-34.5c4.4-7.6 1.7-17.4-5.8-21.8zM760 344a15.9 15.9 0 0 0 21.7 5.9L892 286.2c7.6-4.4 10.2-14.2 5.8-21.8L878 230a15.9 15.9 0 0 0-21.7-5.9L746 287.8a15.99 15.99 0 0 0-5.8 21.8L760 344z"
-                                    fill="currentColor"></path>
-                            </svg>
-                            <audio ref="audioPlayer" :src="audioLink"></audio>
-                            </h1> 
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-100 -100 1024 1024"
+                                    style="height:1em;width:1em;margin-top:0px;">
+                                    <path
+                                        d="M625.9 115c-5.9 0-11.9 1.6-17.4 5.3L254 352H90c-8.8 0-16 7.2-16 16v288c0 8.8 7.2 16 16 16h164l354.5 231.7c5.5 3.6 11.6 5.3 17.4 5.3c16.7 0 32.1-13.3 32.1-32.1V147.1c0-18.8-15.4-32.1-32.1-32.1zM586 803L293.4 611.7l-18-11.7H146V424h129.4l17.9-11.7L586 221v582zm348-327H806c-8.8 0-16 7.2-16 16v40c0 8.8 7.2 16 16 16h128c8.8 0 16-7.2 16-16v-40c0-8.8-7.2-16-16-16zm-41.9 261.8l-110.3-63.7a15.9 15.9 0 0 0-21.7 5.9l-19.9 34.5c-4.4 7.6-1.8 17.4 5.8 21.8L856.3 800a15.9 15.9 0 0 0 21.7-5.9l19.9-34.5c4.4-7.6 1.7-17.4-5.8-21.8zM760 344a15.9 15.9 0 0 0 21.7 5.9L892 286.2c7.6-4.4 10.2-14.2 5.8-21.8L878 230a15.9 15.9 0 0 0-21.7-5.9L746 287.8a15.99 15.99 0 0 0-5.8 21.8L760 344z"
+                                        fill="currentColor"></path>
+                                </svg>
+                                <audio ref="audioPlayer" :src="audioLink"></audio>
+                            </h1>
                         </div>
-                        <div>Try Times:
-                            <n-rate readonly :value="stars" :count="countstar" style="padding-left:10px;padding-top:10px" />
+                        <div class="vertical">
+                            <span style="text-align: center;">Try Times:</span>
+                                <n-rate readonly :value="stars" :count="countstar"
+                                    style="padding-left:10px;" />
+                            
                         </div>
                     </div>
 
@@ -407,6 +410,12 @@ export default {
 </template>
 
 <style scoped>
+.vertical{
+    display:flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
 .container {
     overflow-y: hidden;
 }
@@ -596,5 +605,4 @@ button {
 }
 #save:hover {
     background-color: #d4a827;
-}*/
-</style>
+}*/</style>

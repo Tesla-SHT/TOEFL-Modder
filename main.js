@@ -336,7 +336,7 @@ const createWindow = () => {
         let notesData = getNotesData();
         var l;
         for (l = 0; l < notesData.length; l += 1) {
-            if (notesData[l].title == records[i].dict)
+            if ((notesData[l].title == records[i].dict)&&(records[i].words[j].try_num==1))
                 notesData[l].learnword += 1
             notesData[l].unlearned -= 1
         }
