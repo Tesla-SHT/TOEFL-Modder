@@ -63,7 +63,7 @@
                                 <n-h5 prefix="bar">{{ currentWord.definition }}</n-h5>
                                 <n-h6 prefix="bar">{{ currentWord.example }}</n-h6>
                             </div>
-                            <n-button @click="showNextWord">Next Word</n-button>
+                            <n-button class="fixed-button" @click="showNextWord">Next Word</n-button>
                         </div>
                     </n-card>
                     <n-card v-else :bordered="false" class="WordCard">
@@ -602,8 +602,9 @@ button.deleted .kill-icon path {
     display: block
 }
 
-.nonecard {
-    display: flex;
-    align-items: center;
+.fixed-button {
+  position: absolute;
+  bottom: 15%; /* 调整按钮距离底部的距离 */
+  right:40.5%;
 }
 </style>
