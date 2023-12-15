@@ -87,6 +87,11 @@ export default {
             theme: null,
             darkcolor: null,
         }
+    },
+    methods:{
+        uploadDictionary() {
+            $data.insertOne();
+        }
     }
 }
 </script>
@@ -100,7 +105,7 @@ export default {
             <div class="mask" :class="darkcolor"></div>
             <Search class="search-bar" placeholder="搜索..." v-model="keyword" :class="darkcolor"></Search>
             <RoundButton class="new-note-button" icon="add" color="#fcc000" selectedColor="#d4a827" iconColor="white"
-                size="50" @click="newNote"></RoundButton>
+                size="50" @click="uploadDictionary"></RoundButton>
         </div>
     </n-config-provider>
 </template>
