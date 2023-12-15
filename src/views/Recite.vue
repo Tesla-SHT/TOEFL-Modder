@@ -325,7 +325,7 @@ export default {
 
 <template>
     <n-config-provider :theme="theme" :locate="zhCN" style="height:100%!important">
-        <div class="container" style="height:100%!important">
+        <div v-if="note.definition" class="container" style="height:100%!important">
             <n-card class="WordCard" hoverable>
                 <div class="icon-bar">
                     <button :class="{ 'collected': collecting }" class="icon-button"
@@ -369,9 +369,8 @@ export default {
                         </div>
                         <div class="vertical">
                             <span style="text-align: center;">Try Times:</span>
-                                <n-rate readonly :value="stars" :count="countstar"
-                                    style="padding-left:10px;" />
-                            
+                            <n-rate readonly :value="stars" :count="countstar" style="padding-left:10px;" />
+
                         </div>
                     </div>
 
@@ -406,18 +405,39 @@ export default {
                 </div>
             </n-card>
         </div>
+        <n-card v-else :bordered="false" class="noWordCard">
+            <n-grid :cols="1">
+                <n-gi :span="8">
+                    <h3 align="center" style="margin-top: 24%;">This .csv file cannot be read successfully. </h3>
+                    <br>
+                    <h3 align="center" style="margin-left: 10%;margin-right: 10%;">
+
+                        Please read the readme file carefully to ensure that the .csv file you upload meets our
+                        requirements. </h3>
+                </n-gi>
+            </n-grid>
+        </n-card>
     </n-config-provider>
 </template>
 
 <style scoped>
-.vertical{
-    display:flex;
+.vertical {
+    display: flex;
     align-items: center;
     text-align: center;
     justify-content: center;
 }
+
 .container {
     overflow-y: hidden;
+}
+
+.noWordCard {
+    width: 90%;
+    height: 80%;
+    margin: 5% 5%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #619163;
 }
 
 .WordCard {
@@ -606,4 +626,5 @@ button {
 }
 #save:hover {
     background-color: #d4a827;
-}*/</style>
+}*/
+</style>

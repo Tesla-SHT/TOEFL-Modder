@@ -1,1 +1,17 @@
-[]
+[
+    {
+        "word": "lecture",
+        "definition": "a speech that is open to the public",
+        "example": "The world wants him to write more, lecture, travel more, and will pay him for his efforts, and he likes this a good deal."
+    },
+    {
+        "word": "provoke",
+        "definition": "provide the needed stimulus for",
+        "example": "Freud has something challenging and provoking to say about virtually every human aspiration"
+    },
+    {
+        "word": "publication",
+        "definition": "the act of issuing printed materials",
+        "example": "The proof is that virtually no undergraduate students can read and understand their professors’ scholarly publications"
+    }
+]
