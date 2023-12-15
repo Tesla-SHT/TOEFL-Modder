@@ -193,7 +193,7 @@ export default {
         <div>
             <div style="display: flex;">
                 <n-card style="margin:5% 3%;width:35%;height:350px; margin-top: 5px;" hoverable class="card">
-                    <n-button :style="buttonStyle" :hover-style="hoverStyle" @click="navigateToNewPage">
+                    <n-button :style="buttonStyle" :hover-style="hoverStyle" @click="navigateToNewPage" type="warning" ghost >
                         <n-icon name="heart" />
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                             viewBox="0 0 12 12">
