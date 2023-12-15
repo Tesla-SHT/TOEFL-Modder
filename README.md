@@ -23,7 +23,7 @@ TOEFL-Modder is built using the most popular PC software development technologie
 
 2. Progress: Display the learning data and some analysis:
 
-<img src = "https://github.com/Tesla-SHT/TOEFL-Modder/assets/109467147/fe099637-a86f-44af-984a-21d7089d93e6" alt = "Progress" width="50%">
+   <img src = "https://github.com/Tesla-SHT/TOEFL-Modder/assets/109467147/fe099637-a86f-44af-984a-21d7089d93e6" alt = "Progress" width="50%">
 
    Collection button will direct to the collected word list
 
@@ -35,8 +35,8 @@ TOEFL-Modder is built using the most popular PC software development technologie
    <img src = "https://github.com/Tesla-SHT/TOEFL-Modder/assets/109467147/c2f61d95-5411-427a-8216-ce5bf70f74c2" alt = "Seting" width="50%">
 
 4. About: Basic information about our software
-5. 
- <img src = "https://github.com/Tesla-SHT/TOEFL-Modder/assets/109467147/9a8d01e1-7b3d-4efd-a3b0-f1522ef61d3c" alt = "About" width="50%">
+
+   <img src = "https://github.com/Tesla-SHT/TOEFL-Modder/assets/109467147/9a8d01e1-7b3d-4efd-a3b0-f1522ef61d3c" alt = "About" width="50%">
 
 ### Requirements
 1. Setup
@@ -57,4 +57,4 @@ TOEFL-Modder is built using the most popular PC software development technologie
 ### Tips
 1. How can users upload their own dictionaries?
 2. What is our future plan for the database?
-3. 
+3. Any comment or advice? Feel free to contact us!
