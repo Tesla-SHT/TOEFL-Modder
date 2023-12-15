@@ -12,7 +12,7 @@
                 <div v-if="isDivVisible" class="words">
                     <n-list class="WordCard" style="padding: 0% 0%;" clickable>
                         <n-collapse hoverable>
-                            <n-list-item >
+                            <n-list-item v-if="listItems && listItems.length > 0">
                                 <n-collapse-item v-for="(item) in listItems" style="margin-top: 10px;margin-left:10px">
                                     <template #header>
                                         {{ item.word }}
@@ -29,19 +29,32 @@
                                     </n-thing>
                                 </n-collapse-item>
                             </n-list-item>
+
+                            <n-card v-else :bordered="false">
+                                <n-grid :cols="1">
+                                    <n-gi :span="8">
+                                        <h3 align="center" style="margin-top: 20%;">There is no collection yet. </h3>
+                                        <br>
+                                        <h3 align="center" style="margin-left: 10%;margin-right: 10%;">
+                                            Go for it! Find the words that belong to you and create your own vocabulary
+                                            book! </h3>
+                                    </n-gi>
+                                </n-grid>
+                            </n-card>
                         </n-collapse>
                     </n-list>
+
                 </div>
             </div>
             <div class="container" :class="{ 'narrowed': isLeftExpanded, 'expanded': isRightExpanded }">
                 <n-button v-if="!isbuttonHidden" class="rightsidebar"
                     :class="{ 'is-button': isRightExpanded, 'that-button': thatLeftclick }" @click="expandRightSidebar">
                     <div v-if="!isdivHidden" style="font-size: 24px; color: #d4a827;">
-                        I <br> M<br> M<br> E<br> R<br> S<br> E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>E 
+                        I <br> M<br> M<br> E<br> R<br> S<br> E<br> D<br> <br>R<br>E<br>C<br>I<br>T<br>E
                     </div>
                 </n-button>
                 <div v-if="isdivVisible" class="showncard">
-                    <n-card class="WordCard">
+                    <n-card class="WordCard" v-if="word && word.length > 0">
                         <div class="word-title" v-for="(word) in word">
                             <h1>{{ word.word }}</h1>
                         </div>
@@ -56,6 +69,17 @@
                             </div>
                             <n-button @click="showNextWord">Next Word</n-button>
                         </div>
+                    </n-card>
+                    <n-card v-else :bordered="false"  class="WordCard">
+                        <n-grid :cols="1">
+                            <n-gi :span="8">
+                                <h3 align="center" style="margin-top: 20%;">There is no collection yet. </h3>
+                                <br>
+                                <h3 align="center" style="margin-left: 10%;margin-right: 10%;">
+                                    Go for it! Find the words that belong to you and create your own vocabulary
+                                    book! </h3>
+                            </n-gi>
+                        </n-grid>
                     </n-card>
                 </div>
             </div>
@@ -134,7 +158,7 @@ export default {
         axios.get('../../data/collection.json')
             .then(response => {
                 // 选择第一个对象或者根据需求选择其他对象
-                this.word = [response.data[0]];
+                this.word = response.data;
                 console.log(this.word)
             })
 
@@ -196,9 +220,10 @@ export default {
 </script>
 
 <style scoped>
-.n-collapse .n-collapse-item .n-collapse-item__content-wrapper .n-collapse-item__content-inner{
-    padding-top:100px!important;
+.n-collapse .n-collapse-item .n-collapse-item__content-wrapper .n-collapse-item__content-inner {
+    padding-top: 100px !important;
 }
+
 .leftsidebar {
     height: 70vh;
     width: 50%;
@@ -574,5 +599,10 @@ button.deleted .kill-icon path {
 
 .reveal {
     display: block
+}
+
+.nonecard {
+    display: flex;
+    align-items: center;
 }
 </style>
