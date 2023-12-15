@@ -11,6 +11,20 @@ TOEFL-Modder is built using the most popular PC software development technologie
 - Vite: A build tool for web applications that offers fast development and optimized production builds
 - Naive UI: A Vue-based UI library that provides a set of customizable components for building desktop applications
 - SQLite: A lightweight, serverless, self-contained, and embeddable database engine
+
+  ### Requirements
+1. Setup
+   - Download Nodejs
+   - Open cmd under the root folder
+   - npm install (if too slow, input "npm install -g cnpm --registry=https://registry.npm.taobao.org" and "cnpm install")
+   - Click QuickStart.bat under the root folder
+   - 
+
+   - Or you can just try QuickSetup.bat, but you may need to try again for the evitable error.
+2. Daily Use
+   
+   Just Click **QuickStart.bat**!
+   
 ### Description
 1. Books: Users can choose the book to learn
    
@@ -38,18 +52,6 @@ TOEFL-Modder is built using the most popular PC software development technologie
 
    <img src = "https://github.com/Tesla-SHT/TOEFL-Modder/assets/109467147/9a8d01e1-7b3d-4efd-a3b0-f1522ef61d3c" alt = "About" width="50%">
 
-### Requirements
-1. Setup
-   - Download Nodejs
-   - Open cmd under the root folder
-   - npm install (if too slow, input "npm install -g cnpm --registry=https://registry.npm.taobao.org" and "cnpm install")
-   - Click QuickStart.bat under the root folder
-   - 
-
-   - Or you can just try QuickSetup.bat, but you may need to try again for the evitable error.
-1. Daily Use
-   
-   Just Click **QuickStart.bat**!
 
 ### Weekly Journal
 [Link to our journal in Notion](https://www.notion.so/77f99992c04b4985bba37d818bcd17b7?v=5ca4aee77cf440c0b3d5acf09f4c8a8a)
