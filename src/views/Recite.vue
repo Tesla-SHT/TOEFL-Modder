@@ -324,8 +324,8 @@ export default {
 </script>
 
 <template>
-    <n-config-provider :theme="theme" :locate="zhCN">
-        <div class="container">
+    <n-config-provider :theme="theme" :locate="zhCN" style="height:100%!important">
+        <div class="container" style="height:100%!important">
             <n-card class="WordCard" hoverable>
                 <div class="icon-bar">
                     <button :class="{ 'collected': collecting }" class="icon-button"
@@ -526,6 +526,7 @@ button.deleted .kill-icon path {
 .reveal {
     display: block
 }
+
 
 /*.title-container {
     margin-top: 5px;
