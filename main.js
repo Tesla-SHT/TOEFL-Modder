@@ -129,7 +129,7 @@ const createWindow = () => {
         const runCmdFolderPath = path.dirname(runCmdPath);
         const runCmdFilePath = path.join(runCmdFolderPath, path.basename(filePath));
         fs.copyFileSync(filePath, runCmdFilePath);
-        console.log(runCmdFilePath + "!runcmdfilepath")
+        //console.log(runCmdFilePath + "!runcmdfilepath")
         // 运行run.cmd文件生成JSON词典
         const { exec } = require('child_process');
         exec('run.cmd', { cwd: runCmdFolderPath }, (error, stdout, stderr) => {
@@ -278,7 +278,7 @@ const createWindow = () => {
         var arrange = []
         var star = []
         for (j = 0; j < words.length; j += 1) {
-            console.log(j + "a")
+            //console.log(j + "a")
             if (words[j].time < Date.now() - 1000 * 600 | words[j].acc < 0.5) {
                 arrange.push(words[j].index)
                 star.push(words[j].try_num)
@@ -347,7 +347,7 @@ const createWindow = () => {
     })
 
     ipcMain.on('log', (event, text) => {
-        console.log(text)
+        //console.log(text)
     })
 
     // win.webContents.openDevTools()

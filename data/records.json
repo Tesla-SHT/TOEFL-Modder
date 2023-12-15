@@ -1,1 +1,106 @@
-[{"dict":"College Vocabulary","words":[{"index":136,"last_time":1702650093127,"try_num":2,"acc":0}]},{"dict":"GRE Warm-up","words":[{"index":186,"last_time":1702653691451,"try_num":2,"acc":0.4},{"index":231,"last_time":1702653692674,"try_num":1,"acc":0},{"index":65,"last_time":1702653694435,"try_num":1,"acc":0}]},{"dict":"GRE Vocabulary","words":[{"index":39,"last_time":1702653716404,"try_num":2,"acc":0},{"index":6,"last_time":1702653718327,"try_num":2,"acc":0},{"index":48,"last_time":1702653720468,"try_num":2,"acc":0},{"index":47,"last_time":1702653710104,"try_num":1,"acc":0}]},{"dict":"TOEFL Vocabulary","words":[{"index":373,"last_time":1702653756882,"try_num":2,"acc":0},{"index":106,"last_time":1702653761403,"try_num":2,"acc":0.24},{"index":404,"last_time":1702653765162,"try_num":2,"acc":0},{"index":531,"last_time":1702653736750,"try_num":1,"acc":0},{"index":440,"last_time":1702653738648,"try_num":1,"acc":0.4},{"index":634,"last_time":1702653740411,"try_num":1,"acc":0}]}]
+[
+    {
+        "dict": "College Vocabulary",
+        "words": [
+            {
+                "index": 136,
+                "last_time": 1702650093127,
+                "try_num": 2,
+                "acc": 0
+            }
+        ]
+    },
+    {
+        "dict": "GRE Warm-up",
+        "words": [
+            {
+                "index": 186,
+                "last_time": 1702653691451,
+                "try_num": 2,
+                "acc": 0.4
+            },
+            {
+                "index": 231,
+                "last_time": 1702223692674,
+                "try_num": 1,
+                "acc": 0
+            },
+            {
+                "index": 65,
+                "last_time": 1702653694435,
+                "try_num": 1,
+                "acc": 0
+            }
+        ]
+    },
+    {
+        "dict": "GRE Vocabulary",
+        "words": [
+            {
+                "index": 39,
+                "last_time": 1702653716404,
+                "try_num": 2,
+                "acc": 0
+            },
+            {
+                "index": 6,
+                "last_time": 1702653718327,
+                "try_num": 2,
+                "acc": 0
+            },
+            {
+                "index": 48,
+                "last_time": 1702653720468,
+                "try_num": 2,
+                "acc": 0
+            },
+            {
+                "index": 47,
+                "last_time": 1702653710104,
+                "try_num": 1,
+                "acc": 0
+            }
+        ]
+    },
+    {
+        "dict": "TOEFL Vocabulary",
+        "words": [
+            {
+                "index": 373,
+                "last_time": 1702653756882,
+                "try_num": 2,
+                "acc": 0
+            },
+            {
+                "index": 106,
+                "last_time": 1702653761403,
+                "try_num": 2,
+                "acc": 0.24
+            },
+            {
+                "index": 404,
+                "last_time": 1702653765162,
+                "try_num": 2,
+                "acc": 0
+            },
+            {
+                "index": 531,
+                "last_time": 1702653736750,
+                "try_num": 1,
+                "acc": 0
+            },
+            {
+                "index": 440,
+                "last_time": 1702653738648,
+                "try_num": 1,
+                "acc": 0.4
+            },
+            {
+                "index": 634,
+                "last_time": 1702653740411,
+                "try_num": 1,
+                "acc": 0
+            }
+        ]
+    }
+]
