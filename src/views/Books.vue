@@ -109,7 +109,7 @@ export default {
             <RoundButton class="new-note-button" icon="add" color="#fcc000" selectedColor="#d4a827" iconColor="white"
                 size="50" @click="uploadDictionary"></RoundButton>
                 </template>
-                <span>或许不想知道你的花园长得咋样</span>
+                <span>Input your own dictionary! <br> (only <span style="color: red;">.csv</span> files are allowed)</span>
             </n-popover>
         </div>
     </n-config-provider>
