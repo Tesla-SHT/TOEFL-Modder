@@ -1,1 +1,34 @@
-[{"title":"College Vocabulary","time":["2023/12/15"],"learnday":1,"learnword":3,"unlearned":250,"unreviewed":0},{"title":"GRE Warm-up","time":["2023/12/15"],"learnday":1,"learnword":3,"unlearned":216,"unreviewed":0},{"title":"TOEFL Vocabulary","time":["2023/12/15"],"learnday":1,"learnword":6,"unlearned":976,"unreviewed":0},{"title":"GRE Vocabulary","time":["2023/12/15"],"learnday":1,"learnword":4,"unlearned":31,"unreviewed":0},{"title":"Exchange and Study Abroad Program Information-Students-Nov. 2023 (1)","time":["2023/12/15"],"learnday":1,"learnword":0,"unlearned":-22}]
+[
+    {
+        "title": "College Vocabulary",
+        "time": [],
+        "learnday": 0,
+        "learnword": 0,
+        "unlearned": 274,
+        "unreviewed": 0
+    },
+    {
+        "title": "GRE Warm-up",
+        "time": [],
+        "learnday": 0,
+        "learnword": 0,
+        "unlearned": 240,
+        "unreviewed": 0
+    },
+    {
+        "title": "TOEFL Vocabulary",
+        "time": [],
+        "learnday": 0,
+        "learnword": 0,
+        "unlearned": 1000,
+        "unreviewed": 0
+    },
+    {
+        "title": "GRE Vocabulary",
+        "time": [],
+        "learnday": 0,
+        "learnword": 0,
+        "unlearned": 55,
+        "unreviewed": 0
+    }
+]

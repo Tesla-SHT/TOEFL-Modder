@@ -59,7 +59,13 @@ else {
 const getRecords = () => JSON.parse(fs.readFileSync(RECORDS_PATH))
 //dict
 const DICT_PATH = path.join(__dirname, './data/dicts/')
-function getDictData(title) { return JSON.parse(fs.readFileSync(DICT_PATH + title + '.json')) }
+function getDictData(title) {
+    const filePath = DICT_PATH + title + '.json';
+    if (fs.existsSync(filePath) && fs.statSync(filePath).size > 0) {
+        const fileContent = fs.readFileSync(filePath);
+        return JSON.parse(fileContent);
+    } else { return '[]' }
+}
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -242,8 +248,14 @@ const createWindow = () => {
             notesData[i].time = [];
             notesData[i].learnday = 0;
             notesData[i].learnword = 0;
+            //console.log(notesData[i].title);
             let dictData = getDictData(notesData[i].title);
-            notesData[i].unlearned = dictData.length;
+            if (dictData == undefined) {
+                notesData[i].unlearned = 0;
+            }
+            else {
+                notesData[i].unlearned = dictData.length;
+            }  
         }
         fs.writeFileSync(NOTE_PATH, JSON.stringify(notesData))
 
@@ -336,7 +348,7 @@ const createWindow = () => {
         let notesData = getNotesData();
         var l;
         for (l = 0; l < notesData.length; l += 1) {
-            if ((notesData[l].title == records[i].dict)&&(records[i].words[j].try_num==1))
+            if ((notesData[l].title == records[i].dict) && (records[i].words[j].try_num == 1))
                 notesData[l].learnword += 1
             notesData[l].unlearned -= 1
         }
