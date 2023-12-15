@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, dialog } = require('electron')
 const path = require('path')
 const fs = require('fs')
 //词书的信息
@@ -59,7 +59,7 @@ else {
 const getRecords = () => JSON.parse(fs.readFileSync(RECORDS_PATH))
 //dict
 const DICT_PATH = path.join(__dirname, './data/dicts/')
-function getDictData(title) { return JSON.parse(fs.readFileSync(DICT_PATH + title + '.json'))}
+function getDictData(title) { return JSON.parse(fs.readFileSync(DICT_PATH + title + '.json')) }
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -106,6 +106,49 @@ const createWindow = () => {
         }
     })
     ipcMain.handle('get-notes-data', () => getNotesData())
+    ipcMain.handle('insert-book', async (event) => {
+
+        // 打开文件选择对话框
+        const result = await dialog.showOpenDialog({
+            properties: ['openFile'],
+            filters: [{ name: 'Dictionary Files', extensions: ['csv'] }],
+        });
+
+        const filePath = result.filePaths[0];
+        console.log( decodeURIComponent(__dirname)+"!");
+        console.log(filePath); 
+        // 复制文件到static文件夹和run.cmd所在的目录
+        const staticFolderPath = path.join(__dirname, '../static/csv2json');
+        const staticFilePath = path.join(staticFolderPath, path.basename(filePath));
+        fs.copyFileSync(filePath, staticFilePath);
+
+        const runCmdPath = path.join(__dirname, '../run.cmd');
+        const runCmdFolderPath = path.dirname(runCmdPath);
+        const runCmdFilePath = path.join(runCmdFolderPath, path.basename(filePath));
+        fs.copyFileSync(filePath, runCmdFilePath);
+
+        // 运行run.cmd文件生成JSON词典
+        const { exec } = require('child_process');
+        exec('run.cmd', { cwd: runCmdFolderPath }, (error, stdout, stderr) => {
+            if (error) {
+                console.error(`Error executing run.cmd: ${error.message}`);
+                return;
+            }
+            if (stderr) {
+                console.error(`run.cmd stderr: ${stderr}`);
+                return;
+            }
+
+            // 移动生成的JSON词典到data/dicts文件夹
+            const generatedDictPath = path.join(runCmdFolderPath, 'generatedDict.json');
+            const dictsFolderPath = path.join(__dirname, '../data/dicts');
+            const dictFilePath = path.join(dictsFolderPath, 'customDict.json');
+            fs.renameSync(generatedDictPath, dictFilePath);
+
+            // 发送上传成功的消息给Vue组件
+            event.reply('dictionary-uploaded', true);
+        })
+    })
     /*ipcMain.on('insert-note', (event, data) => {
         let notesData = getNotesData()
         notesData.unshift(data)
@@ -155,13 +198,13 @@ const createWindow = () => {
             fs.writeFileSync(DELETE_PATH, JSON.stringify(binData))
         }
     })
-    ipcMain.on('add-word-number', (event, title)=>{
+    ipcMain.on('add-word-number', (event, title) => {
         let notesData = getNotesData();
         var l;
         for (l = 0; l < notesData.length; l += 1) {
             if (notesData[l].title == title)
                 notesData[l].learnword += 1
-                notesData[l].unlearned -= 1
+            notesData[l].unlearned -= 1
         }
         fs.writeFileSync(NOTE_PATH, JSON.stringify(notesData))
 
@@ -226,9 +269,9 @@ const createWindow = () => {
         let words = records[i].words
         var j
         var arrange = []
-        var star=[]
+        var star = []
         for (j = 0; j < words.length; j += 1) {
-            console.log(j+"a")
+            console.log(j + "a")
             if (words[j].time < Date.now() - 1000 * 600 | words[j].acc < 0.5) {
                 arrange.push(words[j].index)
                 star.push(words[j].try_num)
@@ -246,10 +289,10 @@ const createWindow = () => {
             arrange.push(new_ind)
         }
         arrange.push(-1)
-        return [arrange,star]
+        return [arrange, star]
     }
     ipcMain.on('new-record', (event, dict, ind, color) => {
-        
+
         let records = getRecords()
         var flag_i = false
         var i
@@ -276,7 +319,7 @@ const createWindow = () => {
         }
         let word = words[j]
         word.last_time = Date.now()
-        word.acc = (word.try_num<1?0: word.acc) *0.6 + (color ? 1.0 : 0.0) *0.4
+        word.acc = (word.try_num < 1 ? 0 : word.acc) * 0.6 + (color ? 1.0 : 0.0) * 0.4
         word.try_num += 1
         words[j] = word
         records[i].words = words
@@ -288,7 +331,7 @@ const createWindow = () => {
         for (l = 0; l < notesData.length; l += 1) {
             if (notesData[l].title == records[i].dict)
                 notesData[l].learnword += 1
-                notesData[l].unlearned -= 1
+            notesData[l].unlearned -= 1
         }
         fs.writeFileSync(NOTE_PATH, JSON.stringify(notesData))
     })

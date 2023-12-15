@@ -25,9 +25,7 @@ contextBridge.exposeInMainWorld('$data', {
   deleteOne(index) {
     ipcRenderer.send('delete-note', index)
   },
-  insertOne(data) {
-    ipcRenderer.send('insert-note', data)
-  }
+  insertOne: () => ipcRenderer.invoke('insert-book')
 })
 
 contextBridge.exposeInMainWorld('$collect', {

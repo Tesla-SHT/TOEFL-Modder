@@ -142,10 +142,11 @@ export default {
                 const randomOptions = getRandomElements(allOptions, 6);
                 {
                     let existflag = false
-                    for (let i in randomOptions) {
-                        if (i == note.definition) existflag = true
+                    for (let i=0; i<randomOptions.length; i++) {
+                        if (randomOptions[i] === note.definition) existflag = true;
                     }
                     if (!existflag) {
+                        console.log("No right answer");
                         const randomIndex = Math.floor(Math.random() * randomOptions.length);
                         randomOptions[randomIndex] = note.definition;
                         options.value = randomOptions;
@@ -177,7 +178,7 @@ export default {
             })
             .catch(error => {
                 console.error('Failed to fetch setting data:', error);
-            });
+            })
     },
     data() {
         return {

@@ -92,7 +92,7 @@ export default {
                 var flag = false;
                     for (var i = 0; i < allTimes.length; i++) {
                         let activeArr = allTimes[i].split('/');
-                        console.log(activeArr);
+                        //console.log(activeArr);
                         if (nowDataArr[0] == activeArr[0] && nowDataArr[1] == activeArr[1] && nowDataArr[2] == activeArr[2]) {
                             this.continuous++;
                             flag = true;
