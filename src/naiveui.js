@@ -36,7 +36,7 @@ import {
     NCollapse,
     NCollapseItem,NPopconfirm,
     zhCN, dateZhCN,
-    NMessageProvider,NGradientText
+    NMessageProvider,NGradientText,NRate
     
 } from 'naive-ui';
 
@@ -64,7 +64,7 @@ const naive = create({
             NTag,
             NListItem, NConfigProvider,
             NCollapse,
-            NCollapseItem,NPopconfirm,NMessageProvider,NGradientText],
+            NCollapseItem,NPopconfirm,NMessageProvider,NGradientText,NRate],
     setup() {
         return {
             fontSize: this.$store.state.fontSize,

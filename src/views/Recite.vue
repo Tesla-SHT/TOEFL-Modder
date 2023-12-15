@@ -21,7 +21,8 @@ export default {
         let wordArrange = []
         let currentWordIndex = ref(0);
         let currentIndex = 0
-
+        let stars = ref(0);
+        let star = []
         onMounted(async function () {
             if (index === -1) return
             const data = (await $data.getNotes())[index]
@@ -45,7 +46,7 @@ export default {
                 //for (let i = 0; i < wordsData.length; i++) {wordArrange.push(i);}
                 //wordArrange = getRandomElements(wordArrange, wordArrange.length);//arrange shuffle
                 //wordArrange.push(-1);//end of arrange
-                wordArrange = await $record.load_arrange(note.title, wordsData.length, wordnumber)
+                [wordArrange, star] = await $record.load_arrange(note.title, wordsData.length, wordnumber)
                 showNextWord(); // 显示第一个单词
 
             } catch (error) {
@@ -92,6 +93,10 @@ export default {
                     //currentWordIndex++;
                     currentWordIndex.value = wordArrange[currentIndex];
                     //console.log(currentWordIndex.value);
+                    if (currentIndex < star.length) {
+                        stars.value = star[currentIndex];
+                    }
+                    else stars.value = 0;
                     if (currentWordIndex.value < 0) {
                         console.log("end of dictionary");
                         break;
@@ -106,13 +111,13 @@ export default {
                     }
                     currentIndex++;
                 }
-                console.log(wordnumber, wordnumberRemain);
+                //console.log(wordnumber, wordnumberRemain);
                 if (wordnumberRemain <= 0) {
                     console.log(wordnumber);
                     router.back();
                     wordnumberRemain = wordnumber;
                 }
-                wordnumberRemain--;       
+                wordnumberRemain--;
                 if (validflag) {
                     note.content = showCurrentWord();
                     note.definition = showCurrentDefinition();
@@ -136,11 +141,11 @@ export default {
                 const allOptions = wordsData.map(word => word.Definitions).flat();
                 const randomOptions = getRandomElements(allOptions, 6);
                 {
-                    let existflag=false
-                    for(let i in randomOptions){
-                        if(i==note.definition)existflag=true
+                    let existflag = false
+                    for (let i in randomOptions) {
+                        if (i == note.definition) existflag = true
                     }
-                    if(!existflag){
+                    if (!existflag) {
                         const randomIndex = Math.floor(Math.random() * randomOptions.length);
                         randomOptions[randomIndex] = note.definition;
                         options.value = randomOptions;
@@ -160,7 +165,8 @@ export default {
             collectflag,
             validflag,
             options, zhCN,
-            dateZhCN, darkTheme
+            dateZhCN, darkTheme,
+            stars
         }
     }, created() {
         axios.get('../../data/setting.json')
@@ -179,7 +185,7 @@ export default {
             deleting: false, // Flag to track if the delete button is being clicked
             audioBaseUrl: 'http://dict.youdao.com/dictvoice?type=',
             audioword: this.note.content,
-            audioaccent : "1",
+            audioaccent: "1",
             answercolor: true,
             theme: null,
             iconcolor: null
@@ -187,8 +193,11 @@ export default {
     },
     computed: {
         audioLink() {
-            console.log(this.audioBaseUrl + this.audioaccent + '&audio=' + this.audioword)
+            //console.log(this.audioBaseUrl + this.audioaccent + '&audio=' + this.audioword)
             return this.audioBaseUrl + this.audioaccent + '&audio=' + this.audioword
+        },
+        countstar() {//取star和1的最大值
+            return Math.max(this.stars, 1)
         }
     },
     methods: {
@@ -329,7 +338,8 @@ export default {
                             </g>
                         </svg>
                     </button>
-                    <button :class="{ 'deleted': deleting }" class="icon-button" @click="deleteWord(event, note.content, note.title);showNextWord();refreshIcon(event)"
+                    <button :class="{ 'deleted': deleting }" class="icon-button"
+                        @click="deleteWord(event, note.content, note.title); showNextWord(); refreshIcon(event)"
                         style="float: right;">
                         <svg class="kill-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                             viewBox="0 0 24 24">
@@ -342,17 +352,23 @@ export default {
                     </button>
                 </div>
                 <div class="word-title">
-                    <h1>{{ note.content }}</h1>
 
                     <div>
-                        <svg @click="playAudio(note.content)" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1024 1024"
-                            style="height:1.5em;width:1.5em;">
-                            <path
-                                d="M625.9 115c-5.9 0-11.9 1.6-17.4 5.3L254 352H90c-8.8 0-16 7.2-16 16v288c0 8.8 7.2 16 16 16h164l354.5 231.7c5.5 3.6 11.6 5.3 17.4 5.3c16.7 0 32.1-13.3 32.1-32.1V147.1c0-18.8-15.4-32.1-32.1-32.1zM586 803L293.4 611.7l-18-11.7H146V424h129.4l17.9-11.7L586 221v582zm348-327H806c-8.8 0-16 7.2-16 16v40c0 8.8 7.2 16 16 16h128c8.8 0 16-7.2 16-16v-40c0-8.8-7.2-16-16-16zm-41.9 261.8l-110.3-63.7a15.9 15.9 0 0 0-21.7 5.9l-19.9 34.5c-4.4 7.6-1.8 17.4 5.8 21.8L856.3 800a15.9 15.9 0 0 0 21.7-5.9l19.9-34.5c4.4-7.6 1.7-17.4-5.8-21.8zM760 344a15.9 15.9 0 0 0 21.7 5.9L892 286.2c7.6-4.4 10.2-14.2 5.8-21.8L878 230a15.9 15.9 0 0 0-21.7-5.9L746 287.8a15.99 15.99 0 0 0-5.8 21.8L760 344z"
-                                fill="currentColor"></path>
-                        </svg>
-                        <audio ref="audioPlayer" :src="audioLink"></audio>
+                        <div style="align-items: center;text-align:center;">
+                            <h1 style="align-items: center;text-align:center;">{{ note.content }}
+                                <svg @click="playAudio(note.content)" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-100 -100 1024 1024"
+                                style="height:1em;width:1em;margin-top:0px;">
+                                <path
+                                    d="M625.9 115c-5.9 0-11.9 1.6-17.4 5.3L254 352H90c-8.8 0-16 7.2-16 16v288c0 8.8 7.2 16 16 16h164l354.5 231.7c5.5 3.6 11.6 5.3 17.4 5.3c16.7 0 32.1-13.3 32.1-32.1V147.1c0-18.8-15.4-32.1-32.1-32.1zM586 803L293.4 611.7l-18-11.7H146V424h129.4l17.9-11.7L586 221v582zm348-327H806c-8.8 0-16 7.2-16 16v40c0 8.8 7.2 16 16 16h128c8.8 0 16-7.2 16-16v-40c0-8.8-7.2-16-16-16zm-41.9 261.8l-110.3-63.7a15.9 15.9 0 0 0-21.7 5.9l-19.9 34.5c-4.4 7.6-1.8 17.4 5.8 21.8L856.3 800a15.9 15.9 0 0 0 21.7-5.9l19.9-34.5c4.4-7.6 1.7-17.4-5.8-21.8zM760 344a15.9 15.9 0 0 0 21.7 5.9L892 286.2c7.6-4.4 10.2-14.2 5.8-21.8L878 230a15.9 15.9 0 0 0-21.7-5.9L746 287.8a15.99 15.99 0 0 0-5.8 21.8L760 344z"
+                                    fill="currentColor"></path>
+                            </svg>
+                            <audio ref="audioPlayer" :src="audioLink"></audio>
+                            </h1> 
+                        </div>
+                        <div>Try Times:
+                            <n-rate readonly :value="stars" :count="countstar" style="padding-left:10px;padding-top:10px" />
+                        </div>
                     </div>
 
                     <!--<p>{{ note.definition }}</p>
@@ -398,7 +414,7 @@ export default {
     width: 90%;
     height: 80%;
     margin: 5% 5%;
-    margin-top:2%;
+    margin-top: 2%;
     border-radius: 10px;
 
 }
