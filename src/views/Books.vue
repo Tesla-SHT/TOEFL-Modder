@@ -104,8 +104,13 @@ export default {
             <NotesList class="notes-list" :data="notesData" @selected="selected"></NotesList>
             <div class="mask" :class="darkcolor"></div>
             <Search class="search-bar" placeholder="搜索..." v-model="keyword" :class="darkcolor"></Search>
+            <n-popover trigger="hover">
+                <template #trigger>
             <RoundButton class="new-note-button" icon="add" color="#fcc000" selectedColor="#d4a827" iconColor="white"
                 size="50" @click="uploadDictionary"></RoundButton>
+                </template>
+                <span>或许不想知道你的花园长得咋样</span>
+            </n-popover>
         </div>
     </n-config-provider>
 </template>
