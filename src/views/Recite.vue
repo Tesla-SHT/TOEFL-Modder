@@ -80,71 +80,76 @@ export default {
         }
         function showNextWord(flag) {//是否是第一次显示
             if (flag) {
-                    //console.log(currentIndex);
-                    validflag = false;
-                    while (!validflag) {
-                        //currentWordIndex++;
-                        currentWordIndex.value = wordArrange[currentIndex];
-                        //console.log(currentWordIndex.value);
-                        if (currentIndex < star.length) {
-                            stars.value = star[currentIndex];
-                        }
-                        else stars.value = 0;
-                        if (currentWordIndex.value < 0) {
-                            console.log("end of dictionary");
+                //console.log(currentIndex);
+                validflag = false;
+                while (!validflag) {
+                    //currentWordIndex++;
+                    currentWordIndex.value = wordArrange[currentIndex];
+                    //console.log(currentWordIndex.value);
+                    if (currentIndex < star.length) {
+                        stars.value = star[currentIndex];
+                    }
+                    else stars.value = 0;
+                    if (currentWordIndex.value < 0) {
+                        console.log("end of dictionary");
+                        break;
+                    }
+                    validflag = true
+                    let tempWord = showCurrentWord();
+                    for (let i = 0; i < bin.length; i++) {
+                        if (bin[i] == tempWord) {
+                            console.log(tempWord)
+                            validflag = false;
                             break;
                         }
-                        validflag = true
-                        let tempWord = showCurrentWord();
-                        for (let i = 0; i < bin.length; i++) {
-                            if (bin[i] == tempWord) {
-                                console.log(tempWord)
-                                validflag = false;
-                                break;
-                            }
-                        }
-                        currentIndex++;
                     }
-                    //console.log(wordnumber, wordnumberRemain);
-                    if (currentWordIndex.value < 0 || wordnumberRemain <= 0) {
-                        console.log(wordnumber);
-                        router.back();
-                        wordnumberRemain = wordnumber;
+                    currentIndex++;
+                }
+                //console.log(wordnumber, wordnumberRemain);
+                if (currentWordIndex.value < 0 || wordnumberRemain <= 0) {
+                    console.log(wordnumber);
+                    this.showModal = true;
+                    
+                    setTimeout(() => {
+                            router.back();
+                        }, 1500);
+                    wordnumberRemain = wordnumber;
+                }
+                
+                wordnumberRemain--;
+                if (validflag) {
+                    note.content = showCurrentWord();
+                    note.definition = showCurrentDefinition();
+                    note.example = showCurrentExample();
+                } else {
+                    note.content = '';
+                    note.definition = '';
+                    note.example = '';
+                    currentIndex = 0;
+                }
+                collectflag = false;
+                //console.log(collection);
+                for (let i = 0; i < collection.length; i++) {
+                    if (collection[i] == note.content) {
+                        //console.log("check" + collectflag);
+                        collectflag = true;
+                        break;
                     }
-                    wordnumberRemain--;
-                    if (validflag) {
-                        note.content = showCurrentWord();
-                        note.definition = showCurrentDefinition();
-                        note.example = showCurrentExample();
-                    } else {
-                        note.content = '';
-                        note.definition = '';
-                        note.example = '';
-                        currentIndex = 0;
+                }      // Generate options
+                const allOptions = wordsData.map(word => word.Definitions).flat();
+                const randomOptions = getRandomElements(allOptions, 6);
+                {
+                    let existflag = false
+                    for (let i = 0; i < randomOptions.length; i++) {
+                        if (randomOptions[i] === note.definition) existflag = true;
                     }
-                    collectflag = false;
-                    //console.log(collection);
-                    for (let i = 0; i < collection.length; i++) {
-                        if (collection[i] == note.content) {
-                            //console.log("check" + collectflag);
-                            collectflag = true;
-                            break;
-                        }
-                    }      // Generate options
-                    const allOptions = wordsData.map(word => word.Definitions).flat();
-                    const randomOptions = getRandomElements(allOptions, 6);
-                    {
-                        let existflag = false
-                        for (let i = 0; i < randomOptions.length; i++) {
-                            if (randomOptions[i] === note.definition) existflag = true;
-                        }
-                        if (!existflag) {
-                            //console.log("No right answer");
-                            const randomIndex = Math.floor(Math.random() * randomOptions.length);
-                            randomOptions[randomIndex] = note.definition;
-                            options.value = randomOptions;
-                        }
+                    if (!existflag) {
+                        //console.log("No right answer");
+                        const randomIndex = Math.floor(Math.random() * randomOptions.length);
+                        randomOptions[randomIndex] = note.definition;
+                        options.value = randomOptions;
                     }
+                }
             }
             else {
                 setTimeout(() => {
@@ -174,8 +179,10 @@ export default {
                     }
                     //console.log(wordnumber, wordnumberRemain);
                     if (currentWordIndex.value < 0 || wordnumberRemain <= 0) {
-                        console.log(wordnumber);
-                        router.back();
+                        console.log(wordnumber); this.showModal = true;
+                        setTimeout(() => {
+                            router.back();
+                        }, 1500);
                         wordnumberRemain = wordnumber;
                     }
                     wordnumberRemain--;
@@ -228,7 +235,8 @@ export default {
             validflag,
             options, zhCN,
             dateZhCN, darkTheme,
-            stars
+            stars,
+            showModal: ref(false)
         }
     }, created() {
         axios.get('../../data/setting.json')
@@ -487,6 +495,8 @@ export default {
                 </n-gi>
             </n-grid>
         </n-card>
+        <n-modal v-model:show="showModal" preset="dialog" title="You have completed today's task!" content=" "
+            @positive-click="onPositiveClick" @negative-click="onNegativeClick" />
     </n-config-provider>
 </template>
 
