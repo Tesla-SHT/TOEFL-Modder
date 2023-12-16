@@ -54,6 +54,7 @@ TOEFL-Modder is built using the most popular PC software development technologie
 
 
 ### Weekly Journal
+For better inter-group communication, we created one notion page for recording the weekly progress. Since different person are in charge of different part of the work, the potential blocks and bugs of the program are also recorded for more efficient debugging. And also, this notion page enabled us to check each persons contribution to the project.
 [Link to our journal in Notion](https://www.notion.so/77f99992c04b4985bba37d818bcd17b7?v=5ca4aee77cf440c0b3d5acf09f4c8a8a)
 
 ### Tips
