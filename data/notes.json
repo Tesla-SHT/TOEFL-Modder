@@ -1,1 +1,44 @@
-[{"title":"College Vocabulary","time":["2023/12/16"],"learnday":1,"learnword":4,"unlearned":258,"unreviewed":0},{"title":"GRE Warm-up","time":["2023/12/16"],"learnday":1,"learnword":5,"unlearned":224,"unreviewed":0},{"title":"TOEFL Vocabulary","time":["2023/12/16"],"learnday":1,"learnword":3,"unlearned":984,"unreviewed":0},{"title":"GRE Vocabulary","time":["2023/12/16"],"learnday":1,"learnword":4,"unlearned":39,"unreviewed":0},{"title":"Bio Vocabulary","time":[],"learnday":0,"learnword":0,"unlearned":163,"unreviewed":0}]
+[
+    {
+        "title": "College Vocabulary",
+        "time": [
+            "2023/12/16"
+        ],
+        "learnday": 1,
+        "learnword": 31,
+        "unlearned": 237,
+        "unreviewed": 0
+    },
+    {
+        "title": "GRE Warm-up",
+        "time": [],
+        "learnday": 0,
+        "learnword": 0,
+        "unlearned": 203,
+        "unreviewed": 0
+    },
+    {
+        "title": "TOEFL Vocabulary",
+        "time": [],
+        "learnday": 0,
+        "learnword": 0,
+        "unlearned": 963,
+        "unreviewed": 0
+    },
+    {
+        "title": "GRE Vocabulary",
+        "time": [],
+        "learnday": 0,
+        "learnword": 0,
+        "unlearned": 18,
+        "unreviewed": 0
+    },
+    {
+        "title": "Bio Vocabulary",
+        "time": [],
+        "learnday": 0,
+        "learnword": 0,
+        "unlearned": 142,
+        "unreviewed": 0
+    }
+]
