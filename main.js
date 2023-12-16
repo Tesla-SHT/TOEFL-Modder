@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron')
 const path = require('path')
 const fs = require('fs')
+const { get } = require('http')
 //词书的信息
 const NOTE_PATH = path.join(__dirname, './data/notes.json')
 if (!fs.existsSync(NOTE_PATH)) {
@@ -229,6 +230,11 @@ const createWindow = () => {
         settingData.wordnumber = number
         fs.writeFileSync(SETTING_PATH, JSON.stringify(settingData))
     })
+    ipcMain.on('update-review-number', (event, number) => {
+        let settingData = getSettingData()
+        settingData.reviewnumber = number
+        fs.writeFileSync(SETTING_PATH, JSON.stringify(settingData))
+    })
     ipcMain.on('update-checkedBackground', (event, checked) => {
         let settingData = getSettingData()
         settingData.checkedBackground = checked
@@ -237,6 +243,16 @@ const createWindow = () => {
     ipcMain.on('update-accent', (event, accent) => {
         let settingData = getSettingData()
         settingData.accent = accent
+        fs.writeFileSync(SETTING_PATH, JSON.stringify(settingData))
+    })
+    ipcMain.on('update-sequence', (event, sequence) => {
+        let settingData = getSettingData()
+        settingData.sequence = sequence
+        fs.writeFileSync(SETTING_PATH, JSON.stringify(settingData))
+    })
+    ipcMain.on('update-pre', (event, pre) => {
+        let settingData = getSettingData()
+        settingData.order = pre
         fs.writeFileSync(SETTING_PATH, JSON.stringify(settingData))
     })
     ipcMain.handle('clear-data', () => {
@@ -255,18 +271,18 @@ const createWindow = () => {
             }
             else {
                 notesData[i].unlearned = dictData.length;
-            }  
+            }
         }
         fs.writeFileSync(NOTE_PATH, JSON.stringify(notesData))
 
     })
     //record
     // ipcMain.handle('get-records-data', () => getRecords())
-    ipcMain.handle('gen-arrange', async (event, dict, total, num) => {
-        const arrange = await genArrange(dict, total, num)
+    ipcMain.handle('gen-arrange', async (event, dict, total, num, review) => {
+        const arrange = await genArrange(dict, total, num, review)
         return arrange
     })
-    function genArrange(dict, total, num) {
+    function genArrange(dict, total, num, review) {
         let records = getRecords()
         var flag_i = false
         var i
@@ -289,23 +305,53 @@ const createWindow = () => {
         var j
         var arrange = []
         var star = []
+        const seq = getSettingData().sequence;
+        const order = getSettingData().order;
+        const bin  = getBinData();
+        let dictData = getDictData(dict);
+        var inbin;
         for (j = 0; j < words.length; j += 1) {
             //console.log(j + "a")
+            inbin = false;
+            for (var k = 0; k< bin.length; k+=1){
+                if (dictData[words[j].index].Words == bin[k]){
+                    //console.log("Succeed Inbin!")
+                    inbin=true;
+                    break
+                }
+            }
+            if (inbin) continue;
             if (words[j].time < Date.now() - 1000 * 600 | words[j].acc < 0.5) {
                 arrange.push(words[j].index)
                 star.push(words[j].try_num)
             }
-            if (arrange.length >= num) break
+            if (arrange.length >= review) break
         }
-        for (j = arrange.length; j < num; j += 1) {
+        const l_r = arrange.length + num;
+        var number = 0;
+        for (j = arrange.length; j < l_r; j += 1) {
             var new_ind
-            while (true) {
-                new_ind = Math.floor(Math.random() * total)
+            while (number < total) {
+                new_ind = seq === "S" ? (Math.floor(Math.random() * total)) : number;
+                inbin = false;
+                for (var k = 0; k< bin.length; k+=1){
+                    if (dictData[number].Words == bin[k]){
+                        inbin=true;
+                        break
+                    }
+                }
+                number += 1;
+                if (inbin) continue;
                 if (arrange.find(function (elem) {
                     return elem == new_ind
                 }) == undefined) break
             }
-            arrange.push(new_ind)
+            if (order === "R") {
+                arrange.push(new_ind)
+                star.push(0)
+            }
+            else { arrange.unshift(new_ind); star.unshift(0) }
+
         }
         arrange.push(-1)
         return [arrange, star]

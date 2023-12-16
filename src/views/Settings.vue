@@ -7,19 +7,17 @@ import axios from 'axios';
 import { zhCN, dateZhCN, darkTheme } from 'naive-ui'
 export default {
   setup() {
-    const checkedValueRef1 = ref(null);
-    const checkedValueRef2 = ref(null);
-    const checkedValueRef3 = ref(null);
-    const checkedValueRef4 = ref(null);
-    const checkedValueRef5 = ref(null);
 
     return {
       disabled: ref(true),
-      checkedAccent: checkedValueRef1,
-      checkedSequence: checkedValueRef2,
-      checkedPre: checkedValueRef3,
-      checkedBackground: checkedValueRef4,
-      checkedAuto: checkedValueRef5, zhCN,
+      checkedAccent: ref(null),
+      checkedSequence: ref(null),
+      checkedPre: ref(null),
+      checkedBackground: ref(null),
+      newWordNumber : ref(null),
+      reviewNumber : ref(null),
+      theme: ref(null),
+      checkedAuto: ref(null), zhCN,
       dateZhCN, darkTheme
     };
   },
@@ -27,9 +25,12 @@ export default {
     axios.get('../../data/setting.json')
       .then(response => {
         this.newWordNumber = response.data.wordnumber; // 假设设置文件中有一个名为wordCount的字段
+        this.reviewNumber = response.data.reviewnumber;
         this.checkedBackground = response.data.checkedBackground;
         this.theme = this.checkedBackground === "Dark" ? darkTheme : null;
         this.checkedAccent = response.data.accent==="2"?"American Accent":"English Accent";
+        this.checkedSequence = response.data.sequence==="A"?"Alphabet Sequence":"Shuffled";
+        this.checkedPre = response.data.order==="R"?"Review First":"New Word First";
       })
       .catch(error => {
         console.error('Failed to fetch setting data:', error);
@@ -37,9 +38,6 @@ export default {
   },
   data() {
     return {
-      newWordNumber: 50,
-
-      reviewWordNumber: 150,
       theme: null,
 
     }
@@ -47,11 +45,17 @@ export default {
   watch: {
     newWordNumber(newVal){
       this. updateWordNumber(event);
+    },
+    reviewNumber(newVal){
+      this. updateReviewNumber(event);
     }
   },
   methods: {
     updateWordNumber(event) {
       $setting.updateWordNumber(this.newWordNumber)
+    },
+    updateReviewNumber(event) {
+      $setting.updateReviewNumber(this.reviewNumber)
     },
     handleBackground(event, background) {
       console.log(background)
@@ -66,6 +70,14 @@ export default {
       this.checkedAccent = (accent === '2') ? "American Accent" : "English Accent";
       $setting.updateAccent(accent)
     },
+    handleSequence(event, sequence){
+      this.checkedSequence = (sequence === 'A') ? "Alphabet Sequence" : "Shuffled";
+      $setting.updateSequence(sequence)
+    },
+    handlePre(event, pre){
+      this.checkedPre = (pre === 'R') ? "Review First" : "New Word First";
+      $setting.updatePre(pre)
+    }
   }
 }
 </script>
@@ -87,7 +99,7 @@ export default {
                 <h4>New Word Number</h4>
               </n-gi>
               <n-gi :span="7">
-                <n-slider v-model:value="newWordNumber" :min="10" :max="200" :step="10" style="padding-top:9px"
+                <n-slider v-model:value="newWordNumber" :min="5" :max="200" :step="10" style="padding-top:9px"
                   @click="updateWordNumber(event)" />
               </n-gi>
             </n-grid>
@@ -97,8 +109,8 @@ export default {
                 <h4>Reviewing Word Number</h4>
               </n-gi>
               <n-gi :span="7">
-                <n-slider v-model:value="reviewWordNumber" :min="10" :max="200" :step="10" style="padding-top:9px"
-                  @click="updateWordNumber(event)" />
+                <n-slider v-model:value="reviewNumber" :min="5" :max="200" :step="10" style="padding-top:9px"
+                  @click="updateReviewNumber(event)" />
               </n-gi>
             </n-grid>
             <br>
@@ -126,11 +138,11 @@ export default {
               <n-gi :span="7">
                 <n-space>
                   <n-radio :checked="checkedSequence === 'Alphabet Sequence'" value="Alphabet Sequence" name="basic-demo"
-                    @change="handleSequence">
+                    @change="handleSequence(event, 'A')">
                     Alphabet Sequence
                   </n-radio>
                   <n-radio :checked="checkedSequence === 'Shuffled'" value="Shuffled" name="basic-demo"
-                    @change="handleSequence">
+                    @change="handleSequence(event, 'S')">
                     Shuffled
                   </n-radio></n-space>
               </n-gi>
@@ -143,11 +155,11 @@ export default {
               <n-gi :span="7">
                 <n-space>
                   <n-radio :checked="checkedPre === 'Review First'" value="Review First" name="basic-demo"
-                    @change="handlePre">
+                    @change="handlePre(event, 'R')">
                     Review First
                   </n-radio>
                   <n-radio :checked="checkedPre === 'New Word First'" value="New Word First" name="basic-demo"
-                    @change="handlePre">
+                    @change="handlePre(event, 'N')">
                     New Word First
                   </n-radio></n-space>
               </n-gi>

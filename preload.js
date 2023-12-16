@@ -59,13 +59,22 @@ contextBridge.exposeInMainWorld('$setting', {
   updateAccent(accent) {
     ipcRenderer.send('update-accent', accent)
   },
-  clearData: () => ipcRenderer.invoke('clear-data')
+  clearData: () => ipcRenderer.invoke('clear-data'),
+  updateReviewNumber(number) {
+    ipcRenderer.send('update-review-number', number)
+  },
+  updateSequence(sequence) {
+    ipcRenderer.send('update-sequence', sequence)
+  },
+  updatePre(number) {
+    ipcRenderer.send('update-pre', number)
+  }
 })
 
 contextBridge.exposeInMainWorld('$record', {
   record(dict, index, color) {
     ipcRenderer.send('new-record', dict, index, color)
   },
-  load_arrange: (dict, total, num) => ipcRenderer.invoke('gen-arrange', dict, total, num),
+  load_arrange: (dict, total, num,review) => ipcRenderer.invoke('gen-arrange', dict, total, num,review),
   addWordNumber(title) { ipcRenderer.send('add-word-number', title) }
 })

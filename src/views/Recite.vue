@@ -15,6 +15,7 @@ export default {
         const wordsData = reactive([])
         let wordnumber = 0;
         let wordnumberRemain = 0;
+        let reviewnumber = 0;
         const options = ref([]);
         let collection = []
         let bin = []
@@ -33,6 +34,10 @@ export default {
                 const jsonData = await response.json();
                 wordsData.push(...jsonData);
                 wordnumber = (await $setting.getSettingData()).wordnumber;
+                reviewnumber = (await $setting.getSettingData()).reviewnumber;
+                //console.log(reviewnumber);
+                //seq = (await $setting.getSettingData()).sequence;
+                //pre = (await $setting.getSettingData()).pre;
                 //get reviewing words
                 await $collect.getCollectionList().then(result => {
                     ExposeCollection(result)
@@ -42,11 +47,12 @@ export default {
                 });
 
 
-                wordnumberRemain = wordnumber;
+                wordnumberRemain = wordnumber + reviewnumber;
                 //for (let i = 0; i < wordsData.length; i++) {wordArrange.push(i);}
                 //wordArrange = getRandomElements(wordArrange, wordArrange.length);//arrange shuffle
                 //wordArrange.push(-1);//end of arrange
-                [wordArrange, star] = await $record.load_arrange(note.title, wordsData.length, wordnumber)
+                [wordArrange, star] = await $record.load_arrange(note.title, wordsData.length, wordnumber, reviewnumber)
+                console.log(wordArrange, star)
                 showNextWord(1); // 显示第一个单词
 
             } catch (error) {
@@ -54,109 +60,95 @@ export default {
             }
 
         })
-
         let collectflag = false
         function ExposeCollection(result) {
             collection = result
         }
-
         let validflag = false
         function ExposeBin(result) {
             bin = result
         }
         //console.log(collection)
         function showCurrentWord() {
-            //if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
             return wordsData[currentWordIndex.value].Words
-            //}
-            //return ''
         }
-
         function showCurrentDefinition() {
-            // console.log(currentWordIndex);
-            //if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
             return wordsData[currentWordIndex.value].Definitions
-            //}
-            //return ''
         }
-
         function showCurrentExample() {
-            //if (currentWordIndex >= 0 && currentWordIndex < wordsData.length) {
             return wordsData[currentWordIndex.value].Example
-            //}
-            //return ''
         }
-        function showNextWord(flag) {
+        function showNextWord(flag) {//是否是第一次显示
             if (flag) {
-
-                validflag = false;
-                while (!validflag) {
-                    //currentWordIndex++;
-                    currentWordIndex.value = wordArrange[currentIndex];
-                    //console.log(currentWordIndex.value);
-                    if (currentIndex < star.length) {
-                        stars.value = star[currentIndex];
-                    }
-                    else stars.value = 0;
-                    if (currentWordIndex.value < 0) {
-                        console.log("end of dictionary");
-                        break;
-                    }
-                    validflag = true
-                    let tempWord = showCurrentWord();
-                    for (let i = 0; i < bin.length; i++) {
-                        if (bin[i] == tempWord) {
-                            validflag = false;
+                    //console.log(currentIndex);
+                    validflag = false;
+                    while (!validflag) {
+                        //currentWordIndex++;
+                        currentWordIndex.value = wordArrange[currentIndex];
+                        //console.log(currentWordIndex.value);
+                        if (currentIndex < star.length) {
+                            stars.value = star[currentIndex];
+                        }
+                        else stars.value = 0;
+                        if (currentWordIndex.value < 0) {
+                            console.log("end of dictionary");
                             break;
                         }
+                        validflag = true
+                        let tempWord = showCurrentWord();
+                        for (let i = 0; i < bin.length; i++) {
+                            if (bin[i] == tempWord) {
+                                console.log(tempWord)
+                                validflag = false;
+                                break;
+                            }
+                        }
+                        currentIndex++;
                     }
-                    currentIndex++;
-                }
-                //console.log(wordnumber, wordnumberRemain);
-                if (wordnumberRemain <= 0) {
-                    console.log(wordnumber);
-                    router.back();
-                    wordnumberRemain = wordnumber;
-                }
-                wordnumberRemain--;
-                if (validflag) {
-                    note.content = showCurrentWord();
-                    note.definition = showCurrentDefinition();
-                    note.example = showCurrentExample();
-                } else {
-                    note.content = '';
-                    note.definition = '';
-                    note.example = '';
-                    router.back;
-                    currentIndex = 0;
-                }
-                collectflag = false;
-                //console.log(collection);
-                for (let i = 0; i < collection.length; i++) {
-                    if (collection[i] == note.content) {
-                        //console.log("check" + collectflag);
-                        collectflag = true;
-                        break;
+                    //console.log(wordnumber, wordnumberRemain);
+                    if (currentWordIndex.value < 0 || wordnumberRemain <= 0) {
+                        console.log(wordnumber);
+                        router.back();
+                        wordnumberRemain = wordnumber;
                     }
-                }      // Generate options
-                const allOptions = wordsData.map(word => word.Definitions).flat();
-                const randomOptions = getRandomElements(allOptions, 6);
-                {
-                    let existflag = false
-                    for (let i = 0; i < randomOptions.length; i++) {
-                        if (randomOptions[i] === note.definition) existflag = true;
+                    wordnumberRemain--;
+                    if (validflag) {
+                        note.content = showCurrentWord();
+                        note.definition = showCurrentDefinition();
+                        note.example = showCurrentExample();
+                    } else {
+                        note.content = '';
+                        note.definition = '';
+                        note.example = '';
+                        currentIndex = 0;
                     }
-                    if (!existflag) {
-                        console.log("No right answer");
-                        const randomIndex = Math.floor(Math.random() * randomOptions.length);
-                        randomOptions[randomIndex] = note.definition;
-                        options.value = randomOptions;
+                    collectflag = false;
+                    //console.log(collection);
+                    for (let i = 0; i < collection.length; i++) {
+                        if (collection[i] == note.content) {
+                            //console.log("check" + collectflag);
+                            collectflag = true;
+                            break;
+                        }
+                    }      // Generate options
+                    const allOptions = wordsData.map(word => word.Definitions).flat();
+                    const randomOptions = getRandomElements(allOptions, 6);
+                    {
+                        let existflag = false
+                        for (let i = 0; i < randomOptions.length; i++) {
+                            if (randomOptions[i] === note.definition) existflag = true;
+                        }
+                        if (!existflag) {
+                            //console.log("No right answer");
+                            const randomIndex = Math.floor(Math.random() * randomOptions.length);
+                            randomOptions[randomIndex] = note.definition;
+                            options.value = randomOptions;
+                        }
                     }
-                }
             }
             else {
                 setTimeout(() => {
-
+                    //console.log(currentIndex);
                     validflag = false;
                     while (!validflag) {
                         //currentWordIndex++;
@@ -181,7 +173,7 @@ export default {
                         currentIndex++;
                     }
                     //console.log(wordnumber, wordnumberRemain);
-                    if (wordnumberRemain <= 0) {
+                    if (currentWordIndex.value < 0 || wordnumberRemain <= 0) {
                         console.log(wordnumber);
                         router.back();
                         wordnumberRemain = wordnumber;
@@ -195,7 +187,6 @@ export default {
                         note.content = '';
                         note.definition = '';
                         note.example = '';
-                        router.back;
                         currentIndex = 0;
                     }
                     collectflag = false;
@@ -215,7 +206,7 @@ export default {
                             if (randomOptions[i] === note.definition) existflag = true;
                         }
                         if (!existflag) {
-                            console.log("No right answer");
+                            //console.log("No right answer");
                             const randomIndex = Math.floor(Math.random() * randomOptions.length);
                             randomOptions[randomIndex] = note.definition;
                             options.value = randomOptions;
@@ -281,12 +272,12 @@ export default {
 
             //console.log("collectWord")
             if (!this.collecting) {
-                console.log("add to collection")
+                //console.log("add to collection")
                 this.collecting = true
                 $collect.addToCollection(word, definition, example)
             }
             else {
-                console.log("delete from collection")
+                //console.log("delete from collection")
                 this.collecting = false
                 $collect.deleteFromCollection(word, definition, example)
             }
@@ -296,7 +287,7 @@ export default {
                 this.deleting = true
                 $delete.addToBin(word)
                 if (star == 0) $record.addWordNumber(title)
-                console.log("delete " + this.deleting)
+                //console.log("delete " + this.deleting)
             }
             else {
                 this.deleting = false
@@ -306,15 +297,16 @@ export default {
         refreshIcon(event) {
             setTimeout(() => {
                 const choice = document.getElementsByClassName('word-choice');
+                console.log(choice[0])
                 choice[0].classList.remove('conceal');
                 choice[0].classList.add('reveal');
 
                 const detail = document.getElementsByClassName('word-detail');
                 detail[0].classList.remove('reveal');
                 detail[0].classList.add('conceal');
-                console.log(this.collection)
+                //console.log(this.collection)
                 this.collecting = this.collectflag
-                console.log(this.collecting)
+                //console.log(this.collecting)
                 this.deleting = false
             }, 200)
         },
@@ -383,7 +375,7 @@ export default {
                 });
             }
             $record.record(this.note.title, wordindex, this.answercolor)
-            console.log(this.note.content, wordindex, this.answercolor)
+            //console.log(this.note.content, wordindex, this.answercolor)
         },
         isAnswerCorrect(event) {
             return this.answercolor;
@@ -398,29 +390,37 @@ export default {
         <div v-if="note.definition" class="container" style="height:100%!important">
             <n-card class="WordCard" hoverable>
                 <div class="icon-bar">
-                    <button :class="{ 'collected': collecting }" class="icon-button"
-                        @click="collectWord(event, note.content, note.definition, note.example)">
-                        <svg class="collect-icon" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 12 12">
-                            <g fill="none">
-                                <path
-                                    d="M5.283 1.546a.8.8 0 0 1 1.435 0L7.83 3.798l2.486.361a.8.8 0 0 1 .443 1.365L8.96 7.277l.425 2.476a.8.8 0 0 1-1.16.844L6 9.427l-2.224 1.17a.8.8 0 0 1-1.16-.844l.424-2.476l-1.799-1.753a.8.8 0 0 1 .444-1.365l2.486-.36l1.111-2.253z"
-                                    :fill="iconcolor"></path>
-                            </g>
-                        </svg>
-                    </button>
-                    <button :class="{ 'deleted': deleting }" class="icon-button"
-                        @click="deleteWord(event, note.content, note.title, stars); showNextWord(0); refreshIcon(event)"
-                        style="float: right;">
-                        <svg class="kill-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                            viewBox="0 0 24 24">
-                            <g>
-                                <path
-                                    d="M21.5 6a1 1 0 0 1-.883.993L20.5 7h-.845l-1.231 12.52A2.75 2.75 0 0 1 15.687 22H8.313a2.75 2.75 0 0 1-2.737-2.48L4.345 7H3.5a1 1 0 0 1 0-2h5a3.5 3.5 0 1 1 7 0h5a1 1 0 0 1 1 1zm-7.25 3.25a.75.75 0 0 0-.743.648L13.5 10v7l.007.102a.75.75 0 0 0 1.486 0L15 17v-7l-.007-.102a.75.75 0 0 0-.743-.648zm-4.5 0a.75.75 0 0 0-.743.648L9 10v7l.007.102a.75.75 0 0 0 1.486 0L10.5 17v-7l-.007-.102a.75.75 0 0 0-.743-.648zM12 3.5A1.5 1.5 0 0 0 10.5 5h3A1.5 1.5 0 0 0 12 3.5z"
-                                    :fill="iconcolor"></path>
-                            </g>
-                        </svg>
-                    </button>
+                    <n-popover trigger="hover">
+                        <template #trigger>
+                            <button :class="{ 'collected': collecting }" class="icon-button"
+                                @click="collectWord(event, note.content, note.definition, note.example)">
+                                <svg class="collect-icon" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 12 12">
+                                    <g fill="none">
+                                        <path
+                                            d="M5.283 1.546a.8.8 0 0 1 1.435 0L7.83 3.798l2.486.361a.8.8 0 0 1 .443 1.365L8.96 7.277l.425 2.476a.8.8 0 0 1-1.16.844L6 9.427l-2.224 1.17a.8.8 0 0 1-1.16-.844l.424-2.476l-1.799-1.753a.8.8 0 0 1 .444-1.365l2.486-.36l1.111-2.253z"
+                                            :fill="iconcolor"></path>
+                                    </g>
+                                </svg>
+                            </button>
+                        </template><span>Collect it!</span>
+                    </n-popover>
+                    <n-popover trigger="hover">
+                        <template #trigger>
+                            <button :class="{ 'deleted': deleting }" class="icon-button"
+                                @click="deleteWord(event, note.content, note.title, stars); showNextWord(0); refreshIcon(event)"
+                                style="float: right;">
+                                <svg class="kill-icon" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24">
+                                    <g>
+                                        <path
+                                            d="M21.5 6a1 1 0 0 1-.883.993L20.5 7h-.845l-1.231 12.52A2.75 2.75 0 0 1 15.687 22H8.313a2.75 2.75 0 0 1-2.737-2.48L4.345 7H3.5a1 1 0 0 1 0-2h5a3.5 3.5 0 1 1 7 0h5a1 1 0 0 1 1 1zm-7.25 3.25a.75.75 0 0 0-.743.648L13.5 10v7l.007.102a.75.75 0 0 0 1.486 0L15 17v-7l-.007-.102a.75.75 0 0 0-.743-.648zm-4.5 0a.75.75 0 0 0-.743.648L9 10v7l.007.102a.75.75 0 0 0 1.486 0L10.5 17v-7l-.007-.102a.75.75 0 0 0-.743-.648zM12 3.5A1.5 1.5 0 0 0 10.5 5h3A1.5 1.5 0 0 0 12 3.5z"
+                                            :fill="iconcolor"></path>
+                                    </g>
+                                </svg>
+                            </button>
+                        </template><span>Delete it!</span>
+                    </n-popover>
                 </div>
                 <div class="word-title">
 
@@ -504,16 +504,16 @@ export default {
 
 .noWordCard {
     width: 90%;
-    height: 80%;
-    margin: 5% 5%;
+    height: 86%;
+    margin: 2% 5% 5% 5%;
     border-radius: 10px;
     box-shadow: 0 0 4px #619163;
 }
 
 .WordCard {
     width: 90%;
-    height: 80%;
-    margin: 5% 5%;
+    height: 86%;
+    margin: 2% 5% 5% 5%;
     border-radius: 10px;
 
 }
