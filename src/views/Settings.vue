@@ -38,8 +38,6 @@ export default {
   },
   data() {
     return {
-      theme: null,
-
     }
   },
   watch: {
