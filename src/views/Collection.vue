@@ -132,35 +132,24 @@ export default {
             currentIndex: 0,  // 当前显示的单词索引
         };
     }, created() {
-        axios.get('../../data/setting.json')
-            .then(response => {
-                this.checkedBackground = response.data.checkedBackground;
-                this.theme = this.checkedBackground === "Dark" ? darkTheme : null;
-                this.darkcolor = response.data.checkedBackground === 'Dark' ? 'darkcolor' : null;
-            })
+        $setting.getSettingData().then(val => {
+            this.checkedBackground = val.checkedBackground;
+            this.theme = this.checkedBackground === "Dark" ? darkTheme : null;
+            this.darkcolor = val.checkedBackground === 'Dark' ? 'darkcolor' : null;
+        })
             .catch(error => {
                 console.error('Failed to fetch setting data:', error);
             });
         //下面获取所有的字典，从而查找收藏的单词在哪些字典中出现过
+        $collect.getCollectionList().then(val => {
+            // 根据某个属性去重，这里假设每个对象有一个名为 'id' 的属性
+            const uniqueItems = Array.from(new Map(val.map(item => [item.word, item])).values());
 
-        axios.get('../../data/collection.json')
-            .then(response => {
-                // 根据某个属性去重，这里假设每个对象有一个名为 'id' 的属性
-                const uniqueItems = Array.from(new Map(response.data.map(item => [item.word, item])).values());
-
-                this.listItems = uniqueItems;
-                console.log(this.listItems);
-            })
-            .catch(error => {
-                console.error('Failed to fetch setting data:', error);
-            });
-        axios.get('../../data/collection.json')
-            .then(response => {
-                // 选择第一个对象或者根据需求选择其他对象
-                this.words = response.data;
-                console.log(this.words)
-            })
-
+            this.listItems = uniqueItems;
+            console.log(this.listItems);
+            this.words = val;
+            console.log(this.words)
+        })
             .catch(error => {
                 console.error('Failed to fetch setting data:', error);
             });
@@ -603,8 +592,9 @@ button.deleted .kill-icon path {
 }
 
 .fixed-button {
-  position: absolute;
-  bottom: 15%; /* 调整按钮距离底部的距离 */
-  right:40.5%;
+    position: absolute;
+    bottom: 15%;
+    /* 调整按钮距离底部的距离 */
+    right: 40.5%;
 }
 </style>

@@ -72,48 +72,44 @@ export default {
             }*/
         };
     }, created() {
-        axios.get('../../data/setting.json')
-            .then(response => {
-                this.theme = response.data.checkedBackground === 'Dark' ? darkTheme : null;
-            })
+        $setting.getSettingData().then(val => {
+            this.theme = val.checkedBackground === 'Dark' ? darkTheme : null;
+        })
             .catch(error => {
                 console.error('Failed to fetch setting data:', error);
             });
-
-        axios.get('../../data/notes.json')
-            .then(response => {
-                const notes = response.data;
-                const timeRecords = notes.map(book => book.time);
-                var allTimes = Array.from(new Set(timeRecords.flat()));
-                //total days
-                this.totaldays = allTimes.length;
-                //continuous days
-                var todayDate = new Date(); //今天
-                var nowDataArr = [todayDate.getFullYear(), todayDate.getMonth() + 1, todayDate.getDate()] //今天的 年 月 日
-                for (var k = 0; k < allTimes.length; k++) {
-                    var flag = false;
-                    for (var i = 0; i < allTimes.length; i++) {
-                        let activeArr = allTimes[i].split('/');
-                        //console.log(activeArr);
-                        if (nowDataArr[0] == activeArr[0] && nowDataArr[1] == activeArr[1] && nowDataArr[2] == activeArr[2]) {
-                            this.continuous++;
-                            flag = true;
-                            break;
-                        }
-
+        $data.getNotes().then(val => {
+            const notes = val;
+            const timeRecords = notes.map(book => book.time);
+            var allTimes = Array.from(new Set(timeRecords.flat()));
+            //total days
+            this.totaldays = allTimes.length;
+            //continuous days
+            var todayDate = new Date(); //今天
+            var nowDataArr = [todayDate.getFullYear(), todayDate.getMonth() + 1, todayDate.getDate()] //今天的 年 月 日
+            for (var k = 0; k < allTimes.length; k++) {
+                var flag = false;
+                for (var i = 0; i < allTimes.length; i++) {
+                    let activeArr = allTimes[i].split('/');
+                    //console.log(activeArr);
+                    if (nowDataArr[0] == activeArr[0] && nowDataArr[1] == activeArr[1] && nowDataArr[2] == activeArr[2]) {
+                        this.continuous++;
+                        flag = true;
+                        break;
                     }
-                    if (!flag) break;
-                    todayDate = new Date(todayDate.setTime(todayDate.getTime() - 24 * 60 * 60 * 1000))
-                    nowDataArr = [todayDate.getFullYear(), todayDate.getMonth() + 1, todayDate.getDate()]
-                    //console.log(nowDataArr);
+
                 }
-            })
-            .catch(error => {
-                console.error('获取时间记录出错：', error);
-            });
-        axios.get('../../data/records.json')
-            .then(response => {
-                const records = response.data;
+                if (!flag) break;
+                todayDate = new Date(todayDate.setTime(todayDate.getTime() - 24 * 60 * 60 * 1000))
+                nowDataArr = [todayDate.getFullYear(), todayDate.getMonth() + 1, todayDate.getDate()]
+                //console.log(nowDataArr);
+            }
+        }).catch(error => {
+            console.error('获取时间记录出错：', error);
+        });
+        $record.getRecords()
+            .then(val => {
+                const records = val;
                 var i;
                 var j;
                 var bookName = {};
@@ -232,7 +228,8 @@ export default {
         </div>
         <n-card style="margin:1% 3%;width:94%;" hoverable>
             <n-calendar v-model:value="value" :default=null :default-value=null #="{ year, month, date }">
-                <n-gradient-text type="error">{{ timeWord[(year - 2000) * 400 + month * 32 + date] }}</n-gradient-text><p style="margin:0px">words</p>
+                <n-gradient-text type="error">{{ timeWord[(year - 2000) * 400 + month * 32 + date] }}</n-gradient-text>
+                <p style="margin:0px">words</p>
             </n-calendar>
         </n-card>
         <!--<n-card style="margin:5% 3%;width:94%; margin-top: 5px;" hoverable>
@@ -258,8 +255,9 @@ export default {
 .chart {
     height: 200px;
 }
+
 .n-calendar {
-    height:580px!important
+    height: 580px !important
 }
 
 .card {

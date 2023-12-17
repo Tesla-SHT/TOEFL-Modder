@@ -43,7 +43,7 @@
                     </div>
                 </n-button>
                 <div v-if="isdivVisible" class="showncard">
-                    <n-card class="WordCard" >
+                    <n-card class="WordCard">
                         <div class="word-title" v-for="(item, index) in words" :key="index">
                             <h1>{{ word.word }}</h1>
                         </div>
@@ -283,40 +283,28 @@ export default {
             words: [], // 这里是一个数组
         };
     }, created() {
-        axios.get('../../data/setting.json')
-            .then(response => {
-                this.checkedBackground = response.data.checkedBackground;
-                this.theme = this.checkedBackground === "Dark" ? darkTheme : null;
-                this.darkcolor = response.data.checkedBackground === 'Dark' ? 'darkcolor' : null;
-            })
+        $setting.getSettingData().then(val => {
+            this.checkedBackground = val.checkedBackground;
+            this.theme = this.checkedBackground === "Dark" ? darkTheme : null;
+            this.darkcolor = val.checkedBackground === 'Dark' ? 'darkcolor' : null;
+        })
             .catch(error => {
                 console.error('Failed to fetch setting data:', error);
             });
         //下面获取所有的字典，从而查找收藏的单词在哪些字典中出现过
-
-        axios.get('../../data/collection.json')
-            .then(response => {
-                this.listItems = response.data;
-                console.log(this.listItems)
-            })
-
-            .catch(error => {
-                console.error('Failed to fetch setting data:', error);
-            });
-        axios.get('../../data/collection.json')
-            .then(response => {
-                const firstItem = response.data[0];
-                this.words = [{
-                    word: firstItem.word,
-                    definition: firstItem.definition,
-                    example: firstItem.example
-                }];
-                console.log(this.words);
-            })
-            .catch(error => {
-                console.error('Failed to fetch setting data:', error);
-            });
-
+        $collect.getCollectionList().then(val => {
+            this.listItems = val;
+            console.log(this.listItems)
+            const firstItem = val[0];
+            this.words = [{
+                word: firstItem.word,
+                definition: firstItem.definition,
+                example: firstItem.example
+            }];
+            console.log(this.words);
+        }).catch(error => {
+            console.error('Failed to fetch setting data:', error);
+        });
     },
     methods: {
         expandLeftSidebar() {
@@ -476,10 +464,10 @@ export default {
         getmode() {
             return this.checkedBackground === "Dark" ? "list-item-2" : "list-item-1";
         },
-       /* audioLink() {
-            console.log(this.audioBaseUrl + this.audioaccent + '&audio=' + this.audioword)
-            return this.audioBaseUrl + this.audioaccent + '&audio=' + this.audioword
-        }*/
+        /* audioLink() {
+             console.log(this.audioBaseUrl + this.audioaccent + '&audio=' + this.audioword)
+             return this.audioBaseUrl + this.audioaccent + '&audio=' + this.audioword
+         }*/
     }
 };
 

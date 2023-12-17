@@ -72,6 +72,7 @@ contextBridge.exposeInMainWorld('$setting', {
 })
 
 contextBridge.exposeInMainWorld('$record', {
+  getRecords: () => ipcRenderer.invoke('get-records-data'),
   record(dict, index, color) {
     ipcRenderer.send('new-record', dict, index, color)
   },

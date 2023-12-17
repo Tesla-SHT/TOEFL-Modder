@@ -281,7 +281,7 @@ const createWindow = () => {
 
     })
     //record
-    // ipcMain.handle('get-records-data', () => getRecords())
+    ipcMain.handle('get-records-data', () => getRecords())
     ipcMain.handle('gen-arrange', async (event, dict, total, num, review) => {
         const arrange = await genArrange(dict, total, num, review)
         return arrange

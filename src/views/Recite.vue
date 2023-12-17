@@ -109,13 +109,13 @@ export default {
                 if (currentWordIndex.value < 0 || wordnumberRemain <= 0) {
                     console.log(wordnumber);
                     this.showModal = true;
-                    
+
                     setTimeout(() => {
-                            router.back();
-                        }, 1500);
+                        router.back();
+                    }, 1500);
                     wordnumberRemain = wordnumber;
                 }
-                
+
                 wordnumberRemain--;
                 if (validflag) {
                     note.content = showCurrentWord();
@@ -239,15 +239,13 @@ export default {
             showModal: ref(false)
         }
     }, created() {
-        axios.get('../../data/setting.json')
-            .then(response => {
-                this.theme = response.data.checkedBackground === 'Dark' ? darkTheme : null;
-                this.iconcolor = response.data.checkedBackground === 'Dark' ? 'white' : 'black';
-                this.audioaccent = response.data.accent;
-            })
-            .catch(error => {
-                console.error('Failed to fetch setting data:', error);
-            })
+        $setting.getSettingData().then(val => {
+            this.theme = val.checkedBackground === 'Dark' ? darkTheme : null;
+            this.iconcolor = val.checkedBackground === 'Dark' ? 'white' : 'black';
+            this.audioaccent = val.accent;
+        }).catch(error => {
+            console.error('Failed to fetch setting data:', error);
+        })
     },
     data() {
         return {

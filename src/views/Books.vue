@@ -69,11 +69,10 @@ export default {
             darkTheme,
         }
     }, created() {
-        axios.get('../../data/setting.json')
-            .then(response => {
-                this.theme = response.data.checkedBackground === 'Dark' ? darkTheme : null;
-                this.darkcolor = response.data.checkedBackground === 'Dark' ? 'darkcolor' : null;
-            })
+        $setting.getSettingData().then(val => {
+            this.theme = val.checkedBackground === "Dark" ? darkTheme : null;
+            this.darkcolor = val.checkedBackground === 'Dark' ? 'darkcolor' : null;
+        })
             .catch(error => {
                 console.error('Failed to fetch setting data:', error);
             });
@@ -88,7 +87,7 @@ export default {
             darkcolor: null,
         }
     },
-    methods:{
+    methods: {
         uploadDictionary() {
             $data.insertOne();
         }
@@ -106,8 +105,8 @@ export default {
             <Search class="search-bar" placeholder="搜索..." v-model="keyword" :class="darkcolor"></Search>
             <n-popover trigger="hover">
                 <template #trigger>
-            <RoundButton class="new-note-button" icon="add" color="#fcc000" selectedColor="#d4a827" iconColor="white"
-                size="50" @click="uploadDictionary"></RoundButton>
+                    <RoundButton class="new-note-button" icon="add" color="#fcc000" selectedColor="#d4a827"
+                        iconColor="white" size="50" @click="uploadDictionary"></RoundButton>
                 </template>
                 <span>Input your own dictionary! <br> (only <span style="color: red;">.csv</span> files are allowed)</span>
             </n-popover>

@@ -57,7 +57,7 @@ export default {
     }
   },
   created() {
-    axios.get('../../data/setting.json')
+    /*axios.get('../../data/setting.json')
       .then(response => {
         this.theme = response.data.checkedBackground === 'Dark' ? darkTheme : null;
         this.darkcolor = response.data.checkedBackground === 'Dark' ? 'darkcolor' : null;
@@ -65,13 +65,21 @@ export default {
       })
       .catch(error => {
         console.error('Failed to fetch setting data:', error);
-      });
+      });*/
+    $setting.getSettingData().then(val => {
+      this.theme = val.checkedBackground === 'Dark' ? darkTheme : null;
+      this.darkcolor = val.checkedBackground === 'Dark' ? 'darkcolor' : null;
+      this.iconcolor = val.checkedBackground === 'Dark' ? 'white' : 'black';
+    })
+      .catch(error => {
+        console.error('Failed to fetch setting data:', error);
+      })
   },
   data() {
     return {
       theme: null,
       darkcolor: null,
-      iconcolor:null
+      iconcolor: null
     }
   }
 }
@@ -81,11 +89,12 @@ export default {
   <div class="container Allbackground" :class="darkcolor">
     <div class="side-panel" :class="darkcolor">
       <h1 class="app-title" style="margin-bottom:70px" :class="darkcolor">TOEFL &nbsp; Modder</h1>
-      <Navigator class="navigator" :pages="pages" :defaultIndex="defaultIndex" @selected="changePage" :iconcolor="iconcolor"></Navigator>
+      <Navigator class="navigator" :pages="pages" :defaultIndex="defaultIndex" @selected="changePage"
+        :iconcolor="iconcolor"></Navigator>
     </div>
     <div class="status-bar" :class="darkcolor">
       <svg class="backicon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-        viewBox="0 0 24 24" :color = "iconcolor" style="height:1.5em;width:3em;margin-top:15px;  
+        viewBox="0 0 24 24" :color="iconcolor" style="height:1.5em;width:3em;margin-top:15px;  
   -webkit-app-region: no-drag;" @click="back">
         <path d="M11.67 3.87L9.9 2.1L0 12l9.9 9.9l1.77-1.77L3.54 12z" fill="currentColor"></path>
       </svg>
@@ -98,10 +107,11 @@ export default {
 </template>
 
 <style scoped>
-.darkcolor{
-  background-color: black!important;
-  color : white!important;
+.darkcolor {
+  background-color: black !important;
+  color: white !important;
 }
+
 .backicon:hover path {
   fill: #6cc6e4;
 }

@@ -14,15 +14,15 @@ export default {
       checkedSequence: ref(null),
       checkedPre: ref(null),
       checkedBackground: ref(null),
-      newWordNumber : ref(null),
-      reviewNumber : ref(null),
+      newWordNumber: ref(null),
+      reviewNumber: ref(null),
       theme: ref(null),
       checkedAuto: ref(null), zhCN,
       dateZhCN, darkTheme
     };
   },
   created() {
-    axios.get('../../data/setting.json')
+    /*axios.get('../../data/setting.json')
       .then(response => {
         this.newWordNumber = response.data.wordnumber; // 假设设置文件中有一个名为wordCount的字段
         this.reviewNumber = response.data.reviewnumber;
@@ -34,18 +34,29 @@ export default {
       })
       .catch(error => {
         console.error('Failed to fetch setting data:', error);
-      });
+      });*/
+    $setting.getSettingData().then(val => {
+      this.newWordNumber = val.wordnumber; // 假设设置文件中有一个名为wordCount的字段
+      this.reviewNumber = val.reviewnumber;
+      this.checkedBackground = val.checkedBackground;
+      this.theme = this.checkedBackground === "Dark" ? darkTheme : null;
+      this.checkedAccent = val.accent === "2" ? "American Accent" : "English Accent";
+      this.checkedSequence = val.sequence === "A" ? "Alphabet Sequence" : "Shuffled";
+      this.checkedPre = val.order === "R" ? "Review First" : "New Word First";
+    }).catch(error => {
+      console.error('Failed to fetch setting data:', error);
+    });
   },
   data() {
     return {
     }
   },
   watch: {
-    newWordNumber(newVal){
-      this. updateWordNumber(event);
+    newWordNumber(newVal) {
+      this.updateWordNumber(event);
     },
-    reviewNumber(newVal){
-      this. updateReviewNumber(event);
+    reviewNumber(newVal) {
+      this.updateReviewNumber(event);
     }
   },
   methods: {
@@ -56,8 +67,9 @@ export default {
       $setting.updateReviewNumber(this.reviewNumber)
     },
     handleBackground(event, background) {
-      console.log(background)
-      this.checkedBackground = background; this.theme = this.checkedBackground === "Dark" ? darkTheme : null;
+      //console.log(background)
+      this.checkedBackground = background;
+      this.theme = this.checkedBackground === "Dark" ? darkTheme : null;
       $setting.updateBackground(background)
       location.reload()
     },
@@ -68,11 +80,11 @@ export default {
       this.checkedAccent = (accent === '2') ? "American Accent" : "English Accent";
       $setting.updateAccent(accent)
     },
-    handleSequence(event, sequence){
+    handleSequence(event, sequence) {
       this.checkedSequence = (sequence === 'A') ? "Alphabet Sequence" : "Shuffled";
       $setting.updateSequence(sequence)
     },
-    handlePre(event, pre){
+    handlePre(event, pre) {
       this.checkedPre = (pre === 'R') ? "Review First" : "New Word First";
       $setting.updatePre(pre)
     }
