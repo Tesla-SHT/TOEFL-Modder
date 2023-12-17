@@ -82,8 +82,12 @@ const createWindow = () => {
         }
     })
 
-    win.loadURL('http://localhost:5173/')
-    // win.loadFile(path.join(__dirname, './dist/index.html'))
+    if (app.isPackaged) {
+        win.loadFile(path.join(__dirname, './dist/index.html'))
+    }
+    else {
+        win.loadURL('http://localhost:5173/')
+    }
 
     win.on('ready-to-show', () => {
         win.show()
@@ -307,16 +311,16 @@ const createWindow = () => {
         var star = []
         const seq = getSettingData().sequence;
         const order = getSettingData().order;
-        const bin  = getBinData();
+        const bin = getBinData();
         let dictData = getDictData(dict);
         var inbin;
         for (j = 0; j < words.length; j += 1) {
             //console.log(j + "a")
             inbin = false;
-            for (var k = 0; k< bin.length; k+=1){
-                if (dictData[words[j].index].Words == bin[k]){
+            for (var k = 0; k < bin.length; k += 1) {
+                if (dictData[words[j].index].Words == bin[k]) {
                     //console.log("Succeed Inbin!")
-                    inbin=true;
+                    inbin = true;
                     break
                 }
             }
@@ -334,9 +338,9 @@ const createWindow = () => {
             while (number < total) {
                 new_ind = seq === "S" ? (Math.floor(Math.random() * total)) : number;
                 inbin = false;
-                for (var k = 0; k< bin.length; k+=1){
-                    if (dictData[number].Words == bin[k]){
-                        inbin=true;
+                for (var k = 0; k < bin.length; k += 1) {
+                    if (dictData[number].Words == bin[k]) {
+                        inbin = true;
                         break
                     }
                 }
