@@ -22,7 +22,7 @@ TOEFL-Modder is built using the most popular PC software development technologie
 
    - Or you can just try QuickSetup.bat, but you may need to try again for the evitable error.
 2. Daily Use
- 
+
    Just Click **QuickStart.bat**!
    
 ### Description
@@ -67,5 +67,15 @@ Check this page out by the link below:
 
 ### Tips
 1. How can users upload their own dictionaries?
+
+   First, the user should scratch a dictionary from the Internet and transform it to a csv file.
+
+   Second, the first row of the file should be Words, Definitions, Examples, and corresponding data should be list in three columns.
+
+   Finally, click “+” at the lower right of the books page and choose it!
+
 2. What is our future plan for the database?
+
+   We can let users to sign up various accounts, and each account will have a  set of json settings. So the database will manage these and overwrite the using json files with the specified user’s files. 
+
 3. Any comment or advice? Feel free to contact us!
