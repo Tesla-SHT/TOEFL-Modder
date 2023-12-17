@@ -23,7 +23,7 @@ function updateday(event, tdata, index, title) {
     if (!flag) {
         $data.updateTime(index, time.value);
     }
-    $data.createReview(index, title);
+    //$data.createReview(index, title);
 }
 </script>
 <template>
