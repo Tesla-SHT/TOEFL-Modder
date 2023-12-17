@@ -13,17 +13,24 @@ TOEFL-Modder is built using the most popular PC software development technologie
 - SQLite: A lightweight, serverless, self-contained, and embeddable database engine
 
 ### Requirements
-1. Setup
-   - Download Nodejs
-   - Open cmd under the root folder
-   - npm install (if too slow, input "npm install -g cnpm --registry=https://registry.npm.taobao.org" and "cnpm install")
-   - Click QuickStart.bat under the root folder
-   - 
+Github: https://github.com/Tesla-SHT/TOEFL-Modder
 
-   - Or you can just try QuickSetup.bat, but you may need to try again for the evitable error.
-2. Daily Use
+1.	Quick Start
+   
+      a)	Just install our released installation package
 
-   Just Click **QuickStart.bat**!
+2.	Used for further development
+      
+      a)	Download zip
+      
+      b)	Download Nodejs
+      
+      c)	npm install
+      
+      d)	npm run dev
+      
+      e)	npm run start (open in another cmd window)
+
    
 ### Description
 1. Books: 
