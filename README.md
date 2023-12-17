@@ -68,14 +68,14 @@ Check this page out by the link below:
 ### Tips
 1. How can users upload their own dictionaries?
 
-   First, the user should scratch a dictionary from the Internet and transform it to a csv file.
+   First, the user should scratch a dictionary from the Internet and transform it into a CSV file.
 
-   Second, the first row of the file should be Words, Definitions, Examples, and corresponding data should be list in three columns.
+   Second, the first row of the file should be Words, Definitions, Examples, and corresponding data should be listed in three columns.
 
-   Finally, click “+” at the lower right of the books page and choose it!
+   Finally, click “+” at the lower right of the books page and choose it (remember to place the file under no Chinese path)!
 
 2. What is our future plan for the database?
 
-   We can let users to sign up various accounts, and each account will have a  set of json settings. So the database will manage these and overwrite the using json files with the specified user’s files. 
+   We can let users sign up for various accounts, and each account will have a set of JSON settings. So the database will manage these and overwrite them using the specified user’s files. 
 
 3. Any comment or advice? Feel free to contact us!
