@@ -294,14 +294,14 @@ export default {
         //下面获取所有的字典，从而查找收藏的单词在哪些字典中出现过
         $collect.getCollectionList().then(val => {
             this.listItems = val;
-            console.log(this.listItems)
+            //console.log(this.listItems)
             const firstItem = val[0];
             this.words = [{
                 word: firstItem.word,
                 definition: firstItem.definition,
                 example: firstItem.example
             }];
-            console.log(this.words);
+            //console.log(this.words);
         }).catch(error => {
             console.error('Failed to fetch setting data:', error);
         });

@@ -146,9 +146,9 @@ export default {
             const uniqueItems = Array.from(new Map(val.map(item => [item.word, item])).values());
 
             this.listItems = uniqueItems;
-            console.log(this.listItems);
+            //console.log(this.listItems);
             this.words = val;
-            console.log(this.words)
+            //console.log(this.words)
         })
             .catch(error => {
                 console.error('Failed to fetch setting data:', error);

@@ -75,6 +75,7 @@ export default {
     },
     clearData(event) {
       $setting.clearData()
+      location.reload()
     },
     handleAccent(event, accent) {
       this.checkedAccent = (accent === '2') ? "American Accent" : "English Accent";
