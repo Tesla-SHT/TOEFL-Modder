@@ -4,7 +4,7 @@
 
 Mr. Cai, a student at Westlake University, is facing the TOEFL exam and feeling overwhelmed by the lack of effective English learning resources. Existing resources are limited, filled with advertisements, and lack a comprehensive approach. As his friends, we want to create an interactive English learning software that is tailored to Westlake University students, helping them improve their English skills anytime, anywhere. Our goal is to support Mr. Cai and other students in conquering the challenges of the TOEFL exam while uncovering its true nature.
 
-### Software Design 
+### Software Design
 TOEFL-Modder is built using the most popular PC software development technologies and frameworks:
 - `Electron` : A framework that allows developers to build cross-platform desktop applications
 - `Vue` : A progressive JavaScript framework that simplifies the development of user interfaces
@@ -85,4 +85,7 @@ Check this page out by the link below:
 
    We can let users sign up for various accounts, and each account will have a set of JSON settings. So the database will manage these and overwrite them using the specified user’s files. 
 
-3. Any comment or advice? Feel free to contact us!
+3. What's algorithm of the review words list?
+
+   $$A_{i}=A_{i-1}\cdot 0.51 +t_{i}\cdot 0.49$$, where $$t_{i}$$ is the $$i_{th}$$ result of that word, and the word is added to the review list when $$\Delta t>1$$ and $$A_{i}^{{\Delta t}^{0.3}}<0.5$$, or when $$A_{i}<0.5$$, where $$\Delta t$$ is the time after the most recent learn/review of this word.
+4. Any comment or advice? Feel free to contact us!

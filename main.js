@@ -333,7 +333,7 @@ const createWindow = () => {
                 }
             }
             if (inbin) continue;
-            if (words[j].time < Date.now() - 1000 * 600 | words[j].acc < 0.5) {
+            if ( (Date.now() - words[j].time - 1000 *86400)>0 &  Math.pow(words[j].acc,Math.pow((Date.now() - words[j].time)/86400/1000,0.3)) < 0.5 | words[j].acc < 0.5) {
                 arrange.push(words[j].index)
                 star.push(words[j].try_num)
             }
@@ -396,7 +396,7 @@ const createWindow = () => {
         }
         let word = words[j]
         word.last_time = Date.now()
-        word.acc = (word.try_num < 1 ? 0 : word.acc) * 0.6 + (color ? 1.0 : 0.0) * 0.4;
+        word.acc = (word.try_num < 1 ? 0 : word.acc) * 0.51 + (color ? 1.0 : 0.0) * 0.49;
         word.accuracy = (word.accuracy * word.try_num + (color ? 1.0 : 0.0)) / (word.try_num + 1)
         //console.log(word.accuracy)
         word.try_num += 1
