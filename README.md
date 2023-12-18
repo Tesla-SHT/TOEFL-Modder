@@ -6,11 +6,11 @@ Mr. Cai, a student at Westlake University, is facing the TOEFL exam and feeling 
 
 ### Software Design 
 TOEFL-Modder is built using the most popular PC software development technologies and frameworks:
-- Electron: A framework that allows developers to build cross-platform desktop applications
-- Vue: A progressive JavaScript framework that simplifies the development of user interfaces
-- Vite: A build tool for web applications that offers fast development and optimized production builds
-- Naive UI: A Vue-based UI library that provides a set of customizable components for building desktop applications
-- SQLite: A lightweight, serverless, self-contained, and embeddable database engine
+- `Electron` : A framework that allows developers to build cross-platform desktop applications
+- `Vue` : A progressive JavaScript framework that simplifies the development of user interfaces
+- `Vite` : A build tool for web applications that offers fast development and optimized production builds
+- `Naive UI` : A Vue-based UI library that provides a set of customizable components for building desktop applications
+- `SQLite` : A lightweight, serverless, self-contained, and embeddable database engine
 
 ### Requirements
 Github: https://github.com/Tesla-SHT/TOEFL-Modder
@@ -21,15 +21,15 @@ Github: https://github.com/Tesla-SHT/TOEFL-Modder
 
 2.	Used for further development
       
-      a)	Download zip
+      a)	Clone our repository
       
       b)	Download Nodejs
       
-      c)	npm install
+      c)	`npm install`
       
-      d)	npm run dev
+      d)	`npm run dev`
       
-      e)	npm run start (open in another cmd window)
+      e)	`npm run start` (open in another cmd window)
 
    
 ### Description
