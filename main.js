@@ -79,6 +79,7 @@ const createWindow = () => {
         maximizable: false,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
+            devTools: false
         }
     })
 
@@ -278,7 +279,14 @@ const createWindow = () => {
             }
         }
         fs.writeFileSync(NOTE_PATH, JSON.stringify(notesData))
-
+        let settingData = getSettingData()
+        settingData.wordnumber = 25
+        settingData.reviewnumber = 50
+        settingData.checkedBackground = "Light"
+        settingData.accent = "2"
+        settingData.sequence = "S"
+        settingData.order = "R"
+        fs.writeFileSync(SETTING_PATH, JSON.stringify(settingData))
     })
     //record
     ipcMain.handle('get-records-data', () => getRecords())
@@ -384,11 +392,13 @@ const createWindow = () => {
             }
         }
         if (!flag_j) {
-            words.push({ "index": ind, "last_time": 0, "try_num": 0, "acc": 1.0 })
+            words.push({ "index": ind, "last_time": 0, "try_num": 0, "acc": 1.0, "accuracy": 1.0})
         }
         let word = words[j]
         word.last_time = Date.now()
-        word.acc = (word.try_num < 1 ? 0 : word.acc) * 0.6 + (color ? 1.0 : 0.0) * 0.4
+        word.acc = (word.try_num < 1 ? 0 : word.acc) * 0.6 + (color ? 1.0 : 0.0) * 0.4;
+        word.accuracy = (word.accuracy * word.try_num + (color ? 1.0 : 0.0)) / (word.try_num + 1)
+        //console.log(word.accuracy)
         word.try_num += 1
         words[j] = word
         records[i].words = words

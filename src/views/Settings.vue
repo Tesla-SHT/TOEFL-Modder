@@ -75,6 +75,7 @@ export default {
     },
     clearData(event) {
       $setting.clearData()
+      location.reload()
     },
     handleAccent(event, accent) {
       this.checkedAccent = (accent === '2') ? "American Accent" : "English Accent";
@@ -109,7 +110,7 @@ export default {
                 <h4>New Word Number</h4>
               </n-gi>
               <n-gi :span="7">
-                <n-slider v-model:value="newWordNumber" :min="5" :max="200" :step="10" style="padding-top:9px"
+                <n-slider v-model:value="newWordNumber" :min="5" :max="200" :step="5" style="padding-top:9px"
                   @click="updateWordNumber(event)" />
               </n-gi>
             </n-grid>
@@ -119,7 +120,7 @@ export default {
                 <h4>Reviewing Word Number</h4>
               </n-gi>
               <n-gi :span="7">
-                <n-slider v-model:value="reviewNumber" :min="5" :max="200" :step="10" style="padding-top:9px"
+                <n-slider v-model:value="reviewNumber" :min="5" :max="200" :step="5" style="padding-top:9px"
                   @click="updateReviewNumber(event)" />
               </n-gi>
             </n-grid>

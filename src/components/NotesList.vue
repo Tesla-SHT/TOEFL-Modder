@@ -13,9 +13,9 @@ function updateday(event, tdata, index, title) {
     time.value = currenttime.toLocaleDateString();
     let flag = 0;
     for (let i = 0; i < timedata.length; i++) {
-        console.log(timedata[i])
+        //console.log(timedata[i])
         if (timedata[i] === time.value) {
-            console.log("已经有了");
+            //console.log("已经有了");
             flag = 1;
             break;
         }

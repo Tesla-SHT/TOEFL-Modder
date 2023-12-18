@@ -52,7 +52,7 @@ export default {
                 //wordArrange = getRandomElements(wordArrange, wordArrange.length);//arrange shuffle
                 //wordArrange.push(-1);//end of arrange
                 [wordArrange, star] = await $record.load_arrange(note.title, wordsData.length, wordnumber, reviewnumber)
-                console.log(wordArrange, star)
+                //console.log(wordArrange, star)
                 showNextWord(1); // 显示第一个单词
 
             } catch (error) {
@@ -91,14 +91,14 @@ export default {
                     }
                     else stars.value = 0;
                     if (currentWordIndex.value < 0) {
-                        console.log("end of dictionary");
+                        //console.log("end of dictionary");
                         break;
                     }
                     validflag = true
                     let tempWord = showCurrentWord();
                     for (let i = 0; i < bin.length; i++) {
                         if (bin[i] == tempWord) {
-                            console.log(tempWord)
+                            //console.log(tempWord)
                             validflag = false;
                             break;
                         }
@@ -107,7 +107,7 @@ export default {
                 }
                 //console.log(wordnumber, wordnumberRemain);
                 if (currentWordIndex.value < 0 || wordnumberRemain <= 0) {
-                    console.log(wordnumber);
+                    //console.log(wordnumber);
                     this.showModal = true;
 
                     setTimeout(() => {
@@ -164,7 +164,7 @@ export default {
                         }
                         else stars.value = 0;
                         if (currentWordIndex.value < 0) {
-                            console.log("end of dictionary");
+                            //console.log("end of dictionary");
                             break;
                         }
                         validflag = true
@@ -179,7 +179,7 @@ export default {
                     }
                     //console.log(wordnumber, wordnumberRemain);
                     if (currentWordIndex.value < 0 || wordnumberRemain <= 0) {
-                        console.log(wordnumber); this.showModal = true;
+                        //console.log(wordnumber); this.showModal = true;
                         setTimeout(() => {
                             router.back();
                         }, 1500);
@@ -303,7 +303,7 @@ export default {
         refreshIcon(event) {
             setTimeout(() => {
                 const choice = document.getElementsByClassName('word-choice');
-                console.log(choice[0])
+                //console.log(choice[0])
                 choice[0].classList.remove('conceal');
                 choice[0].classList.add('reveal');
 

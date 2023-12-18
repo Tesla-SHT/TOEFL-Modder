@@ -6,24 +6,31 @@ Mr. Cai, a student at Westlake University, is facing the TOEFL exam and feeling 
 
 ### Software Design 
 TOEFL-Modder is built using the most popular PC software development technologies and frameworks:
-- Electron: A framework that allows developers to build cross-platform desktop applications
-- Vue: A progressive JavaScript framework that simplifies the development of user interfaces
-- Vite: A build tool for web applications that offers fast development and optimized production builds
-- Naive UI: A Vue-based UI library that provides a set of customizable components for building desktop applications
-- SQLite: A lightweight, serverless, self-contained, and embeddable database engine
+- `Electron` : A framework that allows developers to build cross-platform desktop applications
+- `Vue` : A progressive JavaScript framework that simplifies the development of user interfaces
+- `Vite` : A build tool for web applications that offers fast development and optimized production builds
+- `Naive UI` : A Vue-based UI library that provides a set of customizable components for building desktop applications
+- `SQLite` : A lightweight, serverless, self-contained, and embeddable database engine
 
 ### Requirements
-1. Setup
-   - Download Nodejs
-   - Open cmd under the root folder
-   - npm install (if too slow, input "npm install -g cnpm --registry=https://registry.npm.taobao.org" and "cnpm install")
-   - Click QuickStart.bat under the root folder
-   - 
+Github: https://github.com/Tesla-SHT/TOEFL-Modder
 
-   - Or you can just try QuickSetup.bat, but you may need to try again for the evitable error.
-2. Daily Use
- 
-   Just Click **QuickStart.bat**!
+1.	Quick Start
+   
+      a)	Just install our released installation package
+
+2.	Used for further development
+      
+      a)	Clone our repository
+      
+      b)	Download Nodejs
+      
+      c)	`npm install`
+      
+      d)	`npm run dev`
+      
+      e)	`npm run start` (open in another cmd window)
+
    
 ### Description
 1. Books: 
@@ -67,5 +74,15 @@ Check this page out by the link below:
 
 ### Tips
 1. How can users upload their own dictionaries?
+
+   First, the user should scratch a dictionary from the Internet and transform it into a CSV file.
+
+   Second, the first row of the file should be Words, Definitions, Examples, and corresponding data should be listed in three columns.
+
+   Finally, click “+” at the lower right of the books page and choose it (remember to place the file under no Chinese path)!
+
 2. What is our future plan for the database?
+
+   We can let users sign up for various accounts, and each account will have a set of JSON settings. So the database will manage these and overwrite them using the specified user’s files. 
+
 3. Any comment or advice? Feel free to contact us!

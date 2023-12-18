@@ -120,7 +120,7 @@ export default {
                 for (i = 0; i < records.length; i++) {
                     bookName[records[i].dict] = records[i].words.length;
                     for (j = 0; j < records[i].words.length; j++) {
-                        this.totalaccuracy += records[i].words[j].acc;
+                        this.totalaccuracy += records[i].words[j].accuracy;
                         timestamp = new Date(records[i].words[j].last_time);
                         //console.log((timestamp.getFullYear()-2000)*400+(timestamp.getMonth()+1)*32+timestamp.getDate());
                         this.timeWord[(timestamp.getFullYear() - 2000) * 400 + (timestamp.getMonth() + 1) * 32 + timestamp.getDate()]++;
