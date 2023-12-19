@@ -87,5 +87,5 @@ Check this page out by the link below:
 
 3. What's algorithm of the review words list?
 
-   $$A_{i}=A_{i-1}\cdot 0.51 +t_{i}\cdot 0.49$$, where $$t_{i}$$ is the $$i_{th}$$ result of that word, and the word is added to the review list when $$\Delta t>1$$ and $$A_{i}^{{\Delta t}^{0.3}}<0.5$$, or when $$A_{i}<0.5$$, where $$\Delta t$$ is the time after the most recent learn/review of this word.
+   $A_{i}=A_{i-1}\cdot 0.51 +t_{i}\cdot 0.49$, where $t_{i}$ is the $i_{th}$ result of that word, and the word is added to the review list when $\Delta t>1$ and $A_{i}^{{\Delta t}^{0.3}}<0.5$, or when $A_{i}<0.5$, where $\Delta t$ is the time after the most recent learn/review of this word.
 4. Any comment or advice? Feel free to contact us!
