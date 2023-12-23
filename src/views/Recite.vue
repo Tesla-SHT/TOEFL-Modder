@@ -147,8 +147,8 @@ export default {
                         //console.log("No right answer");
                         const randomIndex = Math.floor(Math.random() * randomOptions.length);
                         randomOptions[randomIndex] = note.definition;
-                        options.value = randomOptions;
                     }
+                    options.value = randomOptions;
                 }
             }
             else {
@@ -179,7 +179,8 @@ export default {
                     }
                     //console.log(wordnumber, wordnumberRemain);
                     if (currentWordIndex.value < 0 || wordnumberRemain <= 0) {
-                        //console.log(wordnumber); this.showModal = true;
+                        //console.log(wordnumber); 
+                        this.showModal = true;
                         setTimeout(() => {
                             router.back();
                         }, 1500);
@@ -216,8 +217,8 @@ export default {
                             //console.log("No right answer");
                             const randomIndex = Math.floor(Math.random() * randomOptions.length);
                             randomOptions[randomIndex] = note.definition;
-                            options.value = randomOptions;
                         }
+                        options.value = randomOptions;
                     }
                 }, 200);
             }
@@ -493,8 +494,7 @@ export default {
                 </n-gi>
             </n-grid>
         </n-card>
-        <n-modal v-model:show="showModal" preset="dialog" title="You have completed today's task!" content=" "
-            @positive-click="onPositiveClick" @negative-click="onNegativeClick" />
+        <n-modal v-model:show="showModal" preset="dialog" title="You have completed today's task!" content=" " />
     </n-config-provider>
 </template>
 
